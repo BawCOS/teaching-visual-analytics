@@ -1,0 +1,97 @@
+# Introducing Visual Analytics {#Chpt1}
+
+This first chapter is meant to be an introduction to visual analytics.
+
+## Admin and Course Introduction {#L1}
+
+### Objectives
+
+1. Introduce the course  
+2. Understand classroom expectations  
+3. Use R for some basic computations
+
+Material discussed in class:
+
+Why stats and probability? 
+
+Math 377 course and purpose
+
+Look at syllabus and due dates
+
+### In Class Work
+
+Load and use swirl
+
+Demo R
+
+Load a library and explain installing versus loading:
+
+```{r eval=FALSE}
+library(fastR)
+```
+
+Look at the structure of a dataframe.
+
+```{r}
+str(students)
+```
+
+
+You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+
+```{r eval=FALSE}
+library(dplyr)
+library(htmlwidgets)
+library(rpivotTable)
+library(crosstalk)
+library(DT)
+library(leaflet)
+```
+
+
+```{r}
+DT::datatable(iris)
+```
+
+```{r eval=FALSE}
+library(ggplot2)
+library(plotly)
+```
+
+```{r}
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+            geom_bar(position = "dodge")
+ggplotly(p)
+```
+
+```{r}
+data(mtcars)
+rpivotTable(mtcars,rows="gear", cols=c("cyl","carb"),width="100%")
+```
+
+```{r eval=FALSE}
+devtools::install_github("jcheng5/d3scatter")
+```
+
+
+```{r}
+library(htmlwidgets)
+library(crosstalk)
+library(leaflet)
+library(DT)
+library(d3scatter)
+```
+
+```{r}
+shared_mtcars <- SharedData$new(mtcars)
+bscols(widths = c(3,NA,NA),
+  list(
+    filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE),
+    filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%"),
+    filter_select("auto", "Automatic", shared_mtcars, ~ifelse(am == 0, "Yes", "No"))
+  ),
+  d3scatter(shared_mtcars, ~wt, ~mpg, ~factor(cyl), width="100%", height=250),
+  d3scatter(shared_mtcars, ~hp, ~qsec, ~factor(cyl), width="100%", height=250)
+)
+```
+
