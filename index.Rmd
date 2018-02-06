@@ -28,7 +28,7 @@ output:
 documentclass: book
 nocite: | 
   @xie2015,@agresti2003categorical
-bibliography: [book.bib, article.bib, packages.bib]
+bibliography: [bibliography.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: BawCOS/undergraduate-statistics-notes
@@ -79,6 +79,8 @@ These notes make use of the following packages in R **knitr** [@R-knitr], **rmar
 I have been lucky to work with many faculty on this project but would like to thank Stephanie Bruce and Ken Horton for the willingness to use and experiment with these notes and for the sound feedback they have provided.  
 
 This book was written using the excellent **bookdown** package [@R-bookdown].
+
+Testing the reference [@Okabe-Ito-CUD]
 
 ![](./by-nc-sa.png)  
 
