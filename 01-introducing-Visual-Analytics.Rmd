@@ -1,97 +1,56 @@
 # Introducing Visual Analytics {#Chpt1}
 
-This first chapter is meant to be an introduction to visual analytics.
-
-## Admin and Course Introduction {#L1}
-
-### Objectives
-
-1. Introduce the course  
-2. Understand classroom expectations  
-3. Use R for some basic computations
-
-Material discussed in class:
-
-Why stats and probability? 
-
-Math 377 course and purpose
-
-Look at syllabus and due dates
-
-### In Class Work
-
-Load and use swirl
-
-Demo R
-
-Load a library and explain installing versus loading:
-
-```{r eval=FALSE}
-library(fastR)
-```
-
-Look at the structure of a dataframe.
-
-```{r}
-str(students)
-```
+This part is a short introduction to visual analytics. The remaining chapters give in-depth lessons into each of the three knowledge areas, analytic reasoning, visualization, and interaction. The depth that the instructor uses depends on how much time can be devoted to this lesson.  This lesson could be done in a little as 30 minutes or as much as three 50 minute lessons.  These notes are broken into sections.  Under each section are definitions, explanations, discussion ideas, and problems.
 
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+## Pre-Class Notes to Give to Students
 
-```{r eval=FALSE}
-library(dplyr)
-library(htmlwidgets)
-library(rpivotTable)
-library(crosstalk)
-library(DT)
-library(leaflet)
-```
+Objectives  
 
+After the training, participants will:
+ 
+1. be able to define and explain visual analytics
+2. be able to describe the three important components of visual analytics
+3. be able to discuss types of uniques insights that VA can provide
+  
+Preparation
 
-```{r}
-DT::datatable(iris)
-```
+Prior to class  
+1) [Watch the Beauty of Data Visualization - David McCandless](https://www.youtube.com/watch?v=5Zg-C8AAIGg)  
+2) [Watch TEDxWaterloo - Miriah Meyer - Information Visualization for Scientific Discovery](https://www.youtube.com/watch?v=Sua0xDCf8MA&feature=youtu.be)   
+3) [Read the article Visual Analytics: Definition, Process, and Challenges by Daniel Keim, Gennady Andrienko, Jean-Daniel Fekete, Carsten Gorg,Jorn Kohlhammer, and Guy Melan](https://hal-lirmm.ccsd.cnrs.fr/lirmm-00272779/document) 
 
-```{r eval=FALSE}
-library(ggplot2)
-library(plotly)
-```
+## Lesson Introduction
 
-```{r}
-p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
-            geom_bar(position = "dodge")
-ggplotly(p)
-```
+Sugestions to start the lesson are:
 
-```{r}
-data(mtcars)
-rpivotTable(mtcars,rows="gear", cols=c("cyl","carb"),width="100%")
-```
+1.  Start the lesson by having the participants discuss the videos and explain insights gained for the preparation work..
 
-```{r eval=FALSE}
-devtools::install_github("jcheng5/d3scatter")
-```
+2.  One of the objectives is to define and explain visual analytics.  A useful definition is (this can be given or developed by asking students for input): Visual analytics is the science of analytical reasoning facilitated by interactive visual interfaces.  
+
+3) Discussion ideas and points for this portion of the lesson include:    
+a) The goal of visual analytics is to create software systems that will support the analytical reasoning process.    
+b) Visual analytics can be broken down into a form of analytical reasoning that relies on visual displays that are interactive.    
+c) We must in turn explore and understand analytical reasoning, visual representation of data, and interactive interfaces.  This is a lead into the rest of this lesson.
 
 
-```{r}
-library(htmlwidgets)
-library(crosstalk)
-library(leaflet)
-library(DT)
-library(d3scatter)
-```
+## Analytic Reasoning  
 
-```{r}
-shared_mtcars <- SharedData$new(mtcars)
-bscols(widths = c(3,NA,NA),
-  list(
-    filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE),
-    filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%"),
-    filter_select("auto", "Automatic", shared_mtcars, ~ifelse(am == 0, "Yes", "No"))
-  ),
-  d3scatter(shared_mtcars, ~wt, ~mpg, ~factor(cyl), width="100%", height=250),
-  d3scatter(shared_mtcars, ~hp, ~qsec, ~factor(cyl), width="100%", height=250)
-)
-```
+1. Explain analytic reasoning.  Below are some ideas to help the instructor.
+
+The goal of analysis is to make a decision about a question.  This question can be part of a larger analysis problem with many questions.  Analytic reasoning requires reasoning logically with the support of numeric evidence.  The analyst must understand the limitations of the data and the assumptions of the data transformations and summaries.
+
+Many analytical reasoning tasks follow a process of
+• Information gathering
+• Re-representation of the information in a form that aids analysis
+• Development of insight through the manipulation of this representation
+• Creation of some knowledge product or direct action based on the knowledge
+insight.
+
+This is true of visual analytics except the representation will be visual and interactive.
+
+2. Use an example to highlight the ideas and principles.  
+
+We will use this example for the remainder of the lesson.  The example should be easy to understand and allow us to present important concepts of visual analytics.  The instructor can pick an example of their own, and some ideas are presented, but we will use the baseball example for the remainder of this part.   
+
 

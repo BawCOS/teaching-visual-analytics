@@ -72,7 +72,7 @@ I also include a project I have used in Appendix \@ref(AppB).
 
 To take my course, students are expected to have completed calculus up through and including multivariate calculus.  I don't assume they have any programming experience and thus I have used the swirl package to help them get started in R.  I have the students load and run R locally on their personal computers and we also use Rstudio as the IDE for our work.
 
-These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **fastR** [@R-fastR], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT].
+These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **fastR** [@R-fastR], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT],**crosstalk** [@R-crosstalk], **leaflet** [@R-leaflet], **plotly** [@R-plotly].
 
 ## Acknowledgements 
 
@@ -80,7 +80,7 @@ I have been lucky to work with many faculty on this project but would like to th
 
 This book was written using the excellent **bookdown** package [@R-bookdown].
 
-Testing the reference [@Okabe-Ito-CUD]
+
 
 ![](./by-nc-sa.png)  
 
@@ -89,7 +89,7 @@ This book is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown','fastR','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown','fastR','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly'
 ), 'packages.bib')
 ```
 
@@ -110,5 +110,6 @@ library(htmlwidgets)
 library(rpivotTable)
 library(crosstalk)
 library(leaflet)
+library(d3scatter)
 ```
 
