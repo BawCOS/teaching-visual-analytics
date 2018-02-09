@@ -99,6 +99,15 @@ We need data and a metric to help us answer the question of who is the better ba
 
 Discussion ideas:  Who is the better batter?  What concerns do you have with this summary and data transformation?  If we switched the two rows, would that lead to a different impression of the data (this is a lead into visualization)?
 
+```{r echo=FALSE}
+my_table<-matrix(c(12/48,104/411,183/582,45/140),nrow=2,dimnames = list(c("Jeter","Justice"),c(1995,1996)))
+my_table<-round(as.table(my_table),3)
+```
+
+```{r echo=FALSE}
+knitr::kable(my_table)
+```
+
 
 
 
