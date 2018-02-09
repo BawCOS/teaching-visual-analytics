@@ -3,7 +3,7 @@
 This part is a short introduction to visual analytics. The remaining chapters give in-depth lessons into each of the three knowledge areas, analytic reasoning, visualization, and interaction. The depth that the instructor uses depends on how much time can be devoted to this lesson.  This lesson could be done in a little as 30 minutes or as much as three 50 minute lessons.  These notes are broken into sections.  Under each section are definitions, explanations, discussion ideas, and problems.
 
 
-## Pre-Class Notes to Give to Students
+## Pre-Class Notes
 
 Objectives  
 
@@ -15,10 +15,11 @@ After the training, participants will:
   
 Preparation
 
-Prior to class  
-1) [Watch the Beauty of Data Visualization - David McCandless](https://www.youtube.com/watch?v=5Zg-C8AAIGg)  
-2) [Watch TEDxWaterloo - Miriah Meyer - Information Visualization for Scientific Discovery](https://www.youtube.com/watch?v=Sua0xDCf8MA&feature=youtu.be)   
-3) [Read the article Visual Analytics: Definition, Process, and Challenges by Daniel Keim, Gennady Andrienko, Jean-Daniel Fekete, Carsten Gorg,Jorn Kohlhammer, and Guy Melan](https://hal-lirmm.ccsd.cnrs.fr/lirmm-00272779/document) 
+Prior to class: 
+
+1. [Watch the Beauty of Data Visualization - David McCandless](https://www.youtube.com/watch?v=5Zg-C8AAIGg)  
+2. [Watch TEDxWaterloo - Miriah Meyer - Information Visualization for Scientific Discovery](https://www.youtube.com/watch?v=Sua0xDCf8MA&feature=youtu.be)   
+3. [Read the article Visual Analytics: Definition, Process, and Challenges by Daniel Keim, Gennady Andrienko, Jean-Daniel Fekete, Carsten Gorg,Jorn Kohlhammer, and Guy Melan](https://hal-lirmm.ccsd.cnrs.fr/lirmm-00272779/document) 
 
 ## Lesson Introduction
 
