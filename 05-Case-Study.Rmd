@@ -1,0 +1,26 @@
+# Case Study
+
+Kiel's Case Study
+
+Objectives:
+
+Students will:
+Appreciate the need for analytic reasoning related to data transformation
+Consider principles of visualization
+Explore the value of interactive visualizations
+
+
+Aircraft allocation across battlespace to provide adequate close air support coverage
+		
+
+Background
+
+You just arrived at your new deployed job in the Strategy Division Operations Assessment Team at the Combined Air Operation Center (CAOC).  The Operations Group mission planners have contacted your shop with a question about whether or not additional Close Air Support (CAS) F15E aircraft are needed, and if so, how many and at which airfield(s) they should be bedded to support which region(s) in Afghanistan.  Additional questions were raised concerning your team’s recommendation for how many F-15E aircraft should be dedicated to each of the five regions of the country along with a recommended flying schedule for each region based on recent data.  
+
+At the moment a fighter squadron is bedded at Airfield 1 and supports Region 1 and Region 4 using 16 F-15E aircraft.  Another fighter squadron is bedded at the Airfield 2 and supports Regions 2, 3, and 5 using 24 F-15E aircraft.  Each F-15E sortie departs and returns at the same time each day and consists of two F-15E aircraft providing six hours of CAS support.  Additionally, each of the five regions must have 24/7 CAS coverage and each F-15E sortie can only cover one region during a single mission.  Sustained 24/7 coverage over a region can therefore be provided by 8 F-15E aircraft as long as the alert aircraft (those scheduled to depart for the next sortie) are not called into action supporting the current sortie more than 25% of the time.  Air refueling requirements are being handled by another member of your team and are not to be considered for the purposes of this analysis.   
+
+Close Air Support (CAS) in Afghanistan largely centers on supporting Troops in Contact (TIC) events.  Whenever ground forces are attacked and want air support, they declare a TIC and aircraft are dispatched to support them.  For the purposes of this analysis assume each TIC is supported by a sortie of two F-15Es.  Due to transit time within a region, no more than two simultaneous TICs per can be reasonably handled by an F-15E sortie, and every TIC needs to be supported by F-15E aircraft either already airborne within each region or by the two (or more) F-15E aircraft sitting alert.  Airborne Warning and Control System (AWACS) serves to help coordinate CAS support to all TICs, especially those TICs that go “kinetic” (when supporting aircraft drop ordinance on targets).  
+
+Your boss needs to make a recommendation as to whether more air assets are needed for current operations.  We start with 200 recent close air support (CAS) events.  Each row of data represents a TIC event with a date, start/stop time, location (region), and whether munitions were employed.  Using this data, how do you present analysis regarding the deployment of air assets to cover close air support?  
+
+

@@ -1,5 +1,5 @@
-# Methods
+# Data Visualiztions {#Chpt3}
 
 We describe our methods in this chapter.
 
-Adding info to see what happens
+

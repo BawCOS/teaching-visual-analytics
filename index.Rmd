@@ -52,31 +52,21 @@ Use:  The first part is a stand alone module that could be used as one or two le
 
 ## Who is this book for?
 
-I designed these notes for the instructor who wants to adopt a course that combines elements of a traditional mathematical statistics course with more computational and programming emphasis.  My subsequent course is a machine learning course and this course has provided my students with a solid foundation to approach that next course.  I think these notes will aid any instructor in getting a course with Prium's book up and running in a short amount of time.
+
 
 ## Book Structure and How to Use It
 
-In Appendix \@ref(AppA), I have provided my syllabus as an example of how to use the notes.  This syllabus is based on 40 lessons each of 53 minutes long.  Obviously this will have to altered based on the length of course you want to run.
 
-I aligned these notes with the chapters in Prium's textbook.  Within each chapter there are subsections for each lesson.  These match the lessons in the syllabus in Appendix \@ref(AppA).
-
-Every lesson starts with administrative tasks to cover topics such as upcoming exams, points from previous class that need clarification, and homework questions.  For example, in one lesson I reviewed an RMarkdown cheat sheet, answered one homework questions, and answered a question on running swirl. In the notes I have excluded the admin section but be aware that I have one for each lesson.
-
-I have shortened chapter 5 to allow a brief introduction to linear regression in chapter 6.  The speed of the course is fast and I have had to make some difficult decisions about what to include and exclude.
-
-I typically include 4 exams in addition to a final.  I leave the lesson before the exam as a review and catch-up day.  Thus the 4 exams and 4 review lessons take 8 lessons.  The course is fast so I don't mind putting these extra lessons into the design.
-
-I also include a project I have used in Appendix \@ref(AppB).
 
 ## Prerequisites
 
-To take my course, students are expected to have completed calculus up through and including multivariate calculus.  I don't assume they have any programming experience and thus I have used the swirl package to help them get started in R.  I have the students load and run R locally on their personal computers and we also use Rstudio as the IDE for our work.
+WHY USE R what if you don't want to
 
 These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **fastR** [@R-fastR], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT],**crosstalk** [@R-crosstalk], **leaflet** [@R-leaflet], **plotly** [@R-plotly].
 
 ## Acknowledgements 
 
-I have been lucky to work with many faculty on this project but would like to thank Stephanie Bruce and Ken Horton for the willingness to use and experiment with these notes and for the sound feedback they have provided.  
+The workshop, GT, UCGA, Purdue, USAFA ....
 
 This book was written using the excellent **bookdown** package [@R-bookdown].
 

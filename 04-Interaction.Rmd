@@ -1,43 +1,4 @@
-# Introducing Visual Analytics {#Chpt6}
-
-This first chapter is meant to be an introduction to visual analytics.
-
-## Admin and Course Introduction
-
-### Objectives
-
-1. Introduce the course  
-2. Understand classroom expectations  
-3. Use R for some basic computations
-
-Material discussed in class:
-
-Why stats and probability? 
-
-Math 377 course and purpose
-
-Look at syllabus and due dates
-
-### In Class Work
-
-Load and use swirl
-
-Demo R
-
-Load a library and explain installing versus loading:
-
-```{r eval=FALSE}
-library(fastR)
-```
-
-Look at the structure of a dataframe.
-
-```{r}
-str(students)
-```
-
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+# Interactions {#Chpt4}
 
 ```{r eval=FALSE}
 library(dplyr)
