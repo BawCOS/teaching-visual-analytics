@@ -79,7 +79,7 @@ This book is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown','fastR','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown','fastR','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr'
 ), 'packages.bib')
 ```
 
@@ -101,5 +101,6 @@ library(rpivotTable)
 library(crosstalk)
 library(leaflet)
 library(d3scatter)
+library(tidyr)
 ```
 
