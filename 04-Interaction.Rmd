@@ -56,3 +56,7 @@ bscols(widths = c(3,NA,NA),
 )
 ```
 
+```{r}
+plot_ly(z = ~volcano)
+```
+
