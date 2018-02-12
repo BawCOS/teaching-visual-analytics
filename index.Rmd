@@ -37,8 +37,19 @@ description: "A set of lesson notes to accompany the book Foundations and Applic
 
 # Preface {-}
 
-![](Cover3.jpg)  
+![](./images/Teaching_Visual_Analytics.jpg)  
 
+
+
+
+
+
+
+## Who is this book for?
+
+
+
+## Book Structure and How to Use It
 
 Introduction:  This is a work is the result of an effort between the VACCINE lab at Purdue University and the United States Air Force Academy to develop a smaller set of lesson to introduce the field of visual analytics (VA).  Since many institutions do not have the resources to offer complete courses on VA, it was decided that standalone lessons plans have the potential for more use and dissemination.   
 
@@ -48,14 +59,6 @@ Explain and use design principles for visual analytics
 Use visual analytics to explore and reach a decision for a problem
 
 Use:  The first part is a stand alone module that could be used as one or two lessons.  The final part is a case study that …..
-
-
-## Who is this book for?
-
-
-
-## Book Structure and How to Use It
-
 
 
 ## Prerequisites
@@ -79,7 +82,7 @@ This book is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown','fastR','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown','fastR','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr','vcdExtra'
 ), 'packages.bib')
 ```
 
@@ -88,6 +91,7 @@ library(fastR)
 library(Hmisc)
 library(lattice)
 library(vcd)
+library(vcdExtra)
 require(ggplot2)
 library(MASS)
 library(TeachingDemos)

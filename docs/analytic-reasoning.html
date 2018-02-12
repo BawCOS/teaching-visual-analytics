@@ -27,7 +27,7 @@
 <meta name="author" content="Andrew Richardson">
 
 
-<meta name="date" content="2018-02-08">
+<meta name="date" content="2018-02-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -212,7 +212,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="discussion-ideas" class="section level4">
 <h4><span class="header-section-number">1.3.2.3</span> Discussion ideas:</h4>
-<p>There are many ways to try to answer this question. Someone might say that Jetter was paid more therefore he is better. Or someone would say that the Yankees are a better team and thus Jetter is better. This is known as butterfly reasoning</p>
+<p>There are many ways to try to answer this question. Someone might say that Jetter was paid more therefore he is better. Or someone would say that the Yankees are a better team and thus Jetter is better. This is known as <a href="http://changingminds.org/disciplines/argument/types_reasoning/butterfly_logic%20.htm">butterfly reasoning</a>. Typically students will not use an analytic reasoning process but more of an intuition or perhaps just a bias.</p>
 </div>
 </div>
 <div id="second-example" class="section level3">
@@ -239,7 +239,198 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="using-analytic-reasoning." class="section level3">
 <h3><span class="header-section-number">1.3.5</span> Using analytic reasoning.</h3>
-<p>We need data and a metric to help us answer the question of who is the better batter. Some data and background for this problem are here. In analytic reasoning, we often need to transform and summarize data. One approach is to use a decimal representation the fraction of the number of hits. We have two years of data, we could get more but we want to keep the example simple, and below is the transformation and summary of the data.</p>
+<p>We need data and a metric to help us answer the question of who is the better batter. There are many different ways to gather the data but this should be based on the metric we use. In sports analytics, there are many metrics that can be used to compare players, but for ease and the sake of an interesting analysis, we will use batting average. To make the problem even easier, we will provide he raw data from the years 1995 and 1996. Some students may object to this simplified data and you can use these objections as points of discussion on the importance of data that represents the question being asked.</p>
+<div id="information-gathering" class="section level4">
+<h4><span class="header-section-number">1.3.5.1</span> Information Gathering</h4>
+<p>Here is the code to generate the raw data for both batters. The information gathering and cleaning can often represent a signifcant time investment. This is often lost on students as data is presented to them in a clean format. This is done for the sake of class time. To give the students a sense of the work involved, generate the raw data using the code below, and then give the csv file to them to work with.</p>
+<p>First, we will generate a simple frequency form of the data, we are actually working backwards from how you would typically proceed in your analysis but this is done to save you time as an instructor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MLB_freq&lt;-<span class="kw">data.frame</span>(<span class="kw">expand.grid</span>(<span class="dt">Player=</span><span class="kw">c</span>(<span class="st">&quot;Derek Jetter&quot;</span>,<span class="st">&quot;David Justice&quot;</span>),
+                    <span class="dt">year=</span><span class="kw">c</span>(<span class="st">&quot;1995&quot;</span>,<span class="st">&quot;1996&quot;</span>),<span class="dt">Result=</span><span class="kw">c</span>(<span class="st">&quot;Hit&quot;</span>,<span class="st">&quot;Out&quot;</span>)),
+                <span class="dt">count=</span><span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">104</span>,<span class="dv">183</span>,<span class="dv">45</span>,<span class="dv">48</span><span class="op">-</span><span class="dv">12</span>,<span class="dv">411</span><span class="op">-</span><span class="dv">104</span>,<span class="dv">582</span><span class="op">-</span><span class="dv">183</span>,<span class="dv">140</span><span class="op">-</span><span class="dv">45</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(MLB_freq)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Player</th>
+<th align="left">year</th>
+<th align="left">Result</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Derek Jetter</td>
+<td align="left">1995</td>
+<td align="left">Hit</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">David Justice</td>
+<td align="left">1995</td>
+<td align="left">Hit</td>
+<td align="right">104</td>
+</tr>
+<tr class="odd">
+<td align="left">Derek Jetter</td>
+<td align="left">1996</td>
+<td align="left">Hit</td>
+<td align="right">183</td>
+</tr>
+<tr class="even">
+<td align="left">David Justice</td>
+<td align="left">1996</td>
+<td align="left">Hit</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">Derek Jetter</td>
+<td align="left">1995</td>
+<td align="left">Out</td>
+<td align="right">36</td>
+</tr>
+<tr class="even">
+<td align="left">David Justice</td>
+<td align="left">1995</td>
+<td align="left">Out</td>
+<td align="right">307</td>
+</tr>
+<tr class="odd">
+<td align="left">Derek Jetter</td>
+<td align="left">1996</td>
+<td align="left">Out</td>
+<td align="right">399</td>
+</tr>
+<tr class="even">
+<td align="left">David Justice</td>
+<td align="left">1996</td>
+<td align="left">Out</td>
+<td align="right">95</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MLB_long&lt;-<span class="kw">expand.dft</span>(MLB_freq,<span class="dt">freq=</span><span class="st">&quot;count&quot;</span>)
+<span class="kw">head</span>(MLB_long)</code></pre></div>
+<pre><code>##         Player year Result
+## 1 Derek Jetter 1995    Hit
+## 2 Derek Jetter 1995    Hit
+## 3 Derek Jetter 1995    Hit
+## 4 Derek Jetter 1995    Hit
+## 5 Derek Jetter 1995    Hit
+## 6 Derek Jetter 1995    Hit</code></pre>
+<p>Now let’s random shuffle to give the appearance of collected data. Note: we are using the dplyr package to complete this work.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(MLB_long<span class="op">$</span>year)</code></pre></div>
+<pre><code>## 
+## 1995 1996 
+##  459  722</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">81</span>)
+MLB_long&lt;-MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_frac</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(year)
+<span class="kw">head</span>(MLB_long)</code></pre></div>
+<pre><code>##          Player year Result
+## 1  Derek Jetter 1995    Hit
+## 2 David Justice 1995    Out
+## 3 David Justice 1995    Out
+## 4 David Justice 1995    Hit
+## 5 David Justice 1995    Out
+## 6 David Justice 1995    Out</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(MLB_long)</code></pre></div>
+<pre><code>## , , Result = Hit
+## 
+##                year
+## Player          1995 1996
+##   David Justice  104   45
+##   Derek Jetter    12  183
+## 
+## , , Result = Out
+## 
+##                year
+## Player          1995 1996
+##   David Justice  307   95
+##   Derek Jetter    36  399</code></pre>
+<p>Now to get the data to students you could use the write.csv function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(MLB_long,<span class="st">&quot;./data/batting.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="transformation-of-data" class="section level4">
+<h4><span class="header-section-number">1.3.5.2</span> Transformation of Data</h4>
+<p>The data is not in a form that will help make a decision. It is important to ask the students how they would transform the data to help make a decision. There are typically two responses. The first is to get the batting averages for the two players. The second is to summarize the batting averages by each player within each year. This then begs the question of how to aggreagrate the two years. At this point, try to steer the students to comparing the batting averages within each year. They will not that David Justice has the higher in each year. The next question is how to transform this information into a single metric of overall batting averages. First let’s get the average for each year.</p>
+<div id="discussion-idea" class="section level5">
+<h5><span class="header-section-number">1.3.5.2.1</span> Discussion Idea</h5>
+<p>How should we transform, summarize, the data in a manner that will help us make a decision?</p>
+</div>
+</div>
+<div id="code" class="section level4">
+<h4><span class="header-section-number">1.3.5.3</span> Code</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Player,year,Result) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Hits=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Result<span class="op">==</span><span class="st">&quot;Hit&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">group_by</span>(Player,year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">summarise</span>(<span class="dt">Total=</span><span class="kw">n</span>()),<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Player&quot;</span>,<span class="st">&quot;year&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Result) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Avg=</span><span class="kw">round</span>(Hits<span class="op">/</span>Total,<span class="dv">4</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Player,year,Avg) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(year))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Player</th>
+<th align="right">year</th>
+<th align="right">Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">David Justice</td>
+<td align="right">1995</td>
+<td align="right">0.2530</td>
+</tr>
+<tr class="even">
+<td align="left">Derek Jetter</td>
+<td align="right">1995</td>
+<td align="right">0.2500</td>
+</tr>
+<tr class="odd">
+<td align="left">David Justice</td>
+<td align="right">1996</td>
+<td align="right">0.3214</td>
+</tr>
+<tr class="even">
+<td align="left">Derek Jetter</td>
+<td align="right">1996</td>
+<td align="right">0.3144</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Player,Result) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Hits=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Result<span class="op">==</span><span class="st">&quot;Hit&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">group_by</span>(Player) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">summarise</span>(<span class="dt">Total=</span><span class="kw">n</span>()),<span class="dt">by=</span><span class="st">&quot;Player&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Result) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Avg=</span><span class="kw">round</span>(Hits<span class="op">/</span>Total,<span class="dv">4</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Player,Avg))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Player</th>
+<th align="right">Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">David Justice</td>
+<td align="right">0.2704</td>
+</tr>
+<tr class="even">
+<td align="left">Derek Jetter</td>
+<td align="right">0.3095</td>
+</tr>
+</tbody>
+</table>
 <p>Discussion ideas: Who is the better batter? What concerns do you have with this summary and data transformation? If we switched the two rows, would that lead to a different impression of the data (this is a lead into visualization)?</p>
 <table>
 <thead>
@@ -263,13 +454,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <p>1995 1996 Derek Jeter 0.250 0.314 David Justice 0.253 0.321</p>
-<p>This transformation loses too much information; that is the problem of using a decimal. We don’t know how many times each player batted. Here is a summary of the ratio of hits to at bats for each year.</p>
+<p>This transformation loses too much information; that is the problem of using a decimal. We don’t know how many times each player batted.</p>
+<p>You could export this data into a csv file using the following write.csv function in R.</p>
+<p>Here is a summary of the ratio of hits to at bats for each year.</p>
 <p>1995 1996 Derek Jeter 12/48 183/582 David Justice 104/411 45/140</p>
 <p>Discussion ideas: Who is the better batter? What are the advantages and disadvantages of this summary compared to the last?</p>
 <p>Now let’s look at combining years. One way that is tempting is to take a simple average of the the two years. This is wrong as the number of at bats is not the same. Below is the table for the combined years.</p>
 <p>Combined Average Derek Jeter 195/630 0.300 David Justice 149/551 0.270</p>
 <p>Discussion ideas: Now, based on average, it appears that Derek Jeter is the better batter. What happened? Who is the better batter and why?</p>
 <p>Let’s find another way to visualize the data besides counts in a table.</p>
+</div>
 </div>
 </div>
             </section>

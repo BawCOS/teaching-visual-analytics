@@ -72,7 +72,7 @@ Who was the better baseball player?  Take some time and discuss how to answer th
 
 #### Discussion ideas:  
 
-There are many ways to try to answer this question.  Someone might say that Jetter was paid more therefore he is better.  Or someone would say that the Yankees are a better team and thus Jetter is better.  This is known as butterfly reasoning 
+There are many ways to try to answer this question.  Someone might say that Jetter was paid more therefore he is better.  Or someone would say that the Yankees are a better team and thus Jetter is better.  This is known as [butterfly reasoning](http://changingminds.org/disciplines/argument/types_reasoning/butterfly_logic%20.htm). Typically students will not use an analytic reasoning process but more of an intuition or perhaps just a bias.
 
 ### Second Example  
 
@@ -95,7 +95,91 @@ iv) ...
 
 ### Using analytic reasoning.  
 
-We need data and a metric to help us answer the question of who is the better batter. Some data and background for this problem are here.  In analytic reasoning, we often need to transform and summarize data.  One approach is to use a decimal representation the fraction of the number of hits.  We have two years of data, we could get more but we want to keep the example simple, and below is the transformation and summary of the data.
+We need data and a metric to help us answer the question of who is the better batter. There are many different ways to gather the data but this should be based on the metric we use. In sports analytics, there are many metrics that can be used to compare players, but for ease and the sake of an interesting analysis, we will use batting average. To make the problem even easier, we will provide he raw data from the years 1995 and 1996. Some students may object to this simplified data and you can use these objections as points of discussion on the importance of data that represents the question being asked. 
+
+#### Information Gathering  
+
+Here is the code to generate the raw data for both batters. The information gathering and cleaning can often represent a signifcant time investment. This is often lost on students as data is presented to them in a clean format. This is done for the sake of class time. To give the students a sense of the work involved, generate the raw data using the code below, and then give the csv file to them to work with.
+
+First, we will generate a simple frequency form of the data, we are actually working backwards from how you would typically proceed in your analysis but this is done to save you time as an instructor.
+
+```{r}
+MLB_freq<-data.frame(expand.grid(Player=c("Derek Jetter","David Justice"),
+                    year=c("1995","1996"),Result=c("Hit","Out")),
+                count=c(12,104,183,45,48-12,411-104,582-183,140-45))
+```
+
+```{r}
+knitr::kable(MLB_freq)
+```
+
+
+```{r}
+MLB_long<-expand.dft(MLB_freq,freq="count")
+head(MLB_long)
+```
+
+Now let's random shuffle to give the appearance of collected data. Note: we are using the dplyr package to complete this work.
+
+```{r}
+table(MLB_long$year)
+set.seed(81)
+MLB_long<-MLB_long %>% 
+  sample_frac() %>% 
+  arrange(year)
+head(MLB_long)
+table(MLB_long)
+```
+
+
+Now to get the data to students you could use the write.csv function
+
+```{r eval=FALSE}
+write.csv(MLB_long,"./data/batting.csv")
+```
+
+#### Transformation of Data
+
+The data is not in a form that will help make a decision. It is important to ask the students how they would transform the data to help make a decision. There are typically two responses. The first is to get the batting averages for the two players. The second is to summarize the batting averages by each player within each year. This then begs the question of how to aggreagrate the two years. At this point, try to steer the students to comparing the batting averages within each year. They will not that David Justice has the higher in each year. The next question is how to transform this information into a single metric of overall batting averages. First let's get the average for each year.
+
+##### Discussion Idea  
+
+How should we transform, summarize, the data in a manner that will help us make a decision?
+
+#### Code 
+
+```{r}
+knitr::kable(MLB_long %>% 
+  group_by(Player,year,Result) %>% 
+  summarise(Hits=n()) %>% 
+  filter(Result=="Hit") %>%
+  left_join(MLB_long %>% 
+              group_by(Player,year) %>% 
+              summarise(Total=n()),by=c("Player","year")) %>%
+  select(-Result) %>%
+  mutate(Avg=round(Hits/Total,4)) %>%
+  select(Player,year,Avg) %>%
+  arrange(year))
+```
+
+
+
+
+```{r}
+knitr::kable(MLB_long %>% 
+  group_by(Player,Result) %>% 
+  summarise(Hits=n()) %>% 
+  filter(Result=="Hit") %>%
+  left_join(MLB_long %>% 
+              group_by(Player) %>% 
+              summarise(Total=n()),by="Player") %>%
+  select(-Result) %>%
+  mutate(Avg=round(Hits/Total,4)) %>%
+  select(Player,Avg))
+```
+
+
+
 
 Discussion ideas:  Who is the better batter?  What concerns do you have with this summary and data transformation?  If we switched the two rows, would that lead to a different impression of the data (this is a lead into visualization)?
 
@@ -122,7 +206,12 @@ David Justice
 0.253
 0.321
 
-This transformation loses too much information; that is the problem of using a decimal.  We don’t know how many times each player batted.  Here is a summary of the ratio of hits to at bats for each year.
+This transformation loses too much information; that is the problem of using a decimal.  We don’t know how many times each player batted.  
+
+
+You could export this data into a csv file using the following write.csv function in R.
+
+Here is a summary of the ratio of hits to at bats for each year.
 
 
 
