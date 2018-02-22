@@ -27,7 +27,7 @@
 <meta name="author" content="Andrew Richardson">
 
 
-<meta name="date" content="2018-02-12">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -146,7 +146,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="0.3" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.3</b> Prerequisites</a></li>
 <li class="chapter" data-level="0.4" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="Chpt1.html"><a href="Chpt1.html"><i class="fa fa-check"></i><b>1</b> Introducing Visual Analytics</a><ul>
+<li class="chapter" data-level="1" data-path="Chpt1.html"><a href="Chpt1.html"><i class="fa fa-check"></i><b>1</b> Introducing Visual Analytics - Emphasis on Analytic Reasoning</a><ul>
 <li class="chapter" data-level="1.1" data-path="pre-class-notes.html"><a href="pre-class-notes.html"><i class="fa fa-check"></i><b>1.1</b> Pre-Class Notes</a></li>
 <li class="chapter" data-level="1.2" data-path="lesson-introduction.html"><a href="lesson-introduction.html"><i class="fa fa-check"></i><b>1.2</b> Lesson Introduction</a></li>
 <li class="chapter" data-level="1.3" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html"><i class="fa fa-check"></i><b>1.3</b> Analytic Reasoning</a><ul>
@@ -156,7 +156,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.3.4" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#other-problem-ideas"><i class="fa fa-check"></i><b>1.3.4</b> Other problem ideas:</a></li>
 <li class="chapter" data-level="1.3.5" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#using-analytic-reasoning."><i class="fa fa-check"></i><b>1.3.5</b> Using analytic reasoning.</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="visualizing-data.html"><a href="visualizing-data.html"><i class="fa fa-check"></i><b>1.4</b> Visualizing data</a></li>
+<li class="chapter" data-level="1.4" data-path="visualizing-data.html"><a href="visualizing-data.html"><i class="fa fa-check"></i><b>1.4</b> Visualizing data</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="visualizing-data.html"><a href="visualizing-data.html#background-on-visualizing-data"><i class="fa fa-check"></i><b>1.4.1</b> Background on Visualizing Data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="visualizing-data.html"><a href="visualizing-data.html#using-problem"><i class="fa fa-check"></i><b>1.4.2</b> Using Problem</a></li>
+</ul></li>
 <li class="chapter" data-level="1.5" data-path="interaction.html"><a href="interaction.html"><i class="fa fa-check"></i><b>1.5</b> Interaction</a></li>
 <li class="chapter" data-level="1.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>1.6</b> Conclusion</a></li>
 </ul></li>
@@ -191,14 +194,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="visualizing-data" class="section level2">
 <h2><span class="header-section-number">1.4</span> Visualizing data</h2>
-<ol style="list-style-type: lower-roman">
-<li>Background information to help introduction the idea.</li>
-</ol>
+<p>The next phase of analytic reasoning is the development of insight through the manipulation of this representation. This really brings us to visualization and interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization both a table and a vector plot.</p>
+<div id="background-on-visualizing-data" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Background on Visualizing Data</h3>
 <p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, you as the creator must decide which ideas are important to communicate to the reader. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience not know them.” Finally, what kind of data is it, what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data?</p>
-<p>The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first. The design should understand how a reader picks up these preattentive attributes. Finally, the last point has you putting everything together. For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare.</p>
-<ol start="2" style="list-style-type: lower-roman">
-<li>Using ideas on our problem</li>
-</ol>
+<p>The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first. The designer should understand how a reader picks up these preattentive attributes. Finally, the last point has you putting everything together. For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare.</p>
+</div>
+<div id="using-problem" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Using Problem</h3>
 <p>In the batting average problem, we have compressed the results of individual bats into an average. There was also the choice to leave year as a separate variable or to compress further into a single summary. The compression to a batting average lost an important element of the data and that is the magnitude of number of bats. Understanding our reader, we should know that most people will compare the value of the batting averages equally, that is that assume that the number of at bats is approximately equal. Thus, in this example they will either compare Derek Jeter against David Justice each year or simply average the two years into a single number to make a decision on the better batter. In either case, the reader may conclude that David Justice is the better batter.</p>
 <p>Discussion ideas: The tables in the previous section are visual summaries but what are the limitations? What are the key idea(s) for this problem? How would you visualize this data?</p>
 <ol start="3" style="list-style-type: lower-roman">
@@ -208,6 +211,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This might be hard to see in the document so you can open it separately as pdf to see the design better. The link is <a href="http://bit.ly/2tP05tU" class="uri">http://bit.ly/2tP05tU</a></p>
 <p>Discussion question: What do you like about the plot? What are the strengths and weaknesses? What changes would you make? Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?</p>
 <p>Note for discussion: The angle is the batting average, should we use white space and put an explanation into the graph? What if we had three years, how would we represent them? The labels overlap the lines, should we move them? Hook to next lesson: interaction could help us by selecting a year and turning it off or make more transparent. This question will lead to interaction section.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
+<span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
+<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>,<span class="dt">asp=</span><span class="dv">1</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">200</span>,<span class="dv">50</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
+<span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
+<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">700</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">48</span>,<span class="dv">12</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">48</span>,<span class="dv">12</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>))</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
 </div>
             </section>
 

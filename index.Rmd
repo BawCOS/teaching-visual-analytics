@@ -40,7 +40,8 @@ description: "A set of lesson notes to accompany the book Foundations and Applic
 ![](./images/Teaching_Visual_Analytics.jpg)  
 
 
-
+http://socviz.co/lookatdata.html 
+http://serialmentor.com/dataviz/ 
 
 
 
@@ -58,7 +59,7 @@ Understand the definition and value of visual analytics
 Explain and use design principles for visual analytics
 Use visual analytics to explore and reach a decision for a problem
 
-Use:  The first part is a stand alone module that could be used as one or two lessons.  The final part is a case study that …..
+Use:  The first chapter is a short introduction to visual analytics. It starts with a question, which can be understood to be the analytic reasoning leg of the visual analytics cycle. The second chapter is also an introduction to visual analytics but it takes more of a hypothesis generating point of view and thus has more emphasis on visualization and interaction. The third chapter is an in-depth  chapters give in-depth lessons into each of the three knowledge areas, analytic reasoning, visualization, and interaction.
 
 
 ## Prerequisites
