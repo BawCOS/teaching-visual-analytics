@@ -3,7 +3,6 @@ title: "Lesson Modules for Teaching Visual Analytics"
 author: 
   - "Bradley Warner"
   - "David Ebert"
-  - "Andrew Richardson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
