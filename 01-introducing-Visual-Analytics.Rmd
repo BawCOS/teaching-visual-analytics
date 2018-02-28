@@ -13,7 +13,7 @@ After the training, participants will:
  
 1. be able to define and explain visual analytics
 2. be able to describe the three important components of visual analytics
-3. be able to discuss types of unique insights that VA can provide
+3. be able to discuss types of unique insights that visual analytics can provide
   
 Preparation
 
@@ -25,9 +25,9 @@ Prior to class:
 
 ## Lesson Introduction
 
-Suggestions to start the lesson are:
+Suggestions to start the lesson:
 
-1.  Start the lesson by having the participants discuss the videos and explain insights gained for the preparation work..
+1.  Have the participants discuss the videos and explain insights gained for the preparation work..
 
 2.  One of the objectives is to define and explain visual analytics.  A useful definition is (this can be given or developed by asking students for input): Visual analytics is the science of analytical reasoning facilitated by interactive visual interfaces.  
 
@@ -43,11 +43,9 @@ Below is a diagram of the visual analytics process. It is a cycle where any one 
 
 ## Analytic Reasoning  
 
-This section introduces the concept of analytics reasoning and then uses an example to illustrate the ideas.
+This section introduces the concept of analytic reasoning and then uses an example to illustrate the ideas.
 
 ### Analytic Reasoing Explained.
-
-This section contains some ideas to help the instructor introduce the topic of analytic reasoning.
 
 The goal of analysis is to make a decision about a question.  This question can be part of a larger analysis problem with many questions.  Analytic reasoning requires reasoning logically with the support of numeric evidence.  The analyst must understand the limitations of the data and the assumptions of the data transformations and summaries.
 
@@ -58,15 +56,15 @@ Many analytical reasoning tasks follow a process of
 • Creation of some knowledge product or direct action based on the knowledge
 insight.
 
-This is true of visual analytics except the representation will be visual and interactive.
+Visual analytics takes analytical reasoning further by taking advantages of a visual and interactive representation.
 
 ### Example
 
-We will an example to highlight the ideas and principles.  We will use this example for the remainder of the lesson.  The example should be easy to understand and allow us to present important concepts of visual analytics.  The instructor can pick an example of their own, and some ideas are presented later.   
+We will introduce an example to highlight the ideas and principles of analytic reasoining.  The example we selected is easy to understand and allows us to present some of the important concepts of visual analytics.  You can pick an example of your own, but remember to keep it simple and easy to understand.   
 
 #### Problem:  
 
-Often in baseball teams and fans want to compare players.  In the 1990s two extremely good players were Derek Jeter of the New York Yankees and David Justice of the Atlanta Braves.  
+Often in baseball, teams and fans want to compare players.  In the 1990s two extrodinary players were Derek Jeter of the New York Yankees and David Justice of the Atlanta Braves.  
 
 #### Question: 
 
@@ -74,11 +72,11 @@ Who was the better baseball player?  Take some time and discuss how to answer th
 
 #### Discussion ideas:  
 
-There are many ways to try to answer this question.  Someone might say that Jetter was paid more therefore he is better.  Or someone would say that the Yankees are a better team and thus Jetter is better.  This is known as [butterfly reasoning](http://changingminds.org/disciplines/argument/types_reasoning/butterfly_logic%20.htm). Typically students will not use an analytic reasoning process but more of an intuition or perhaps just a bias. We have forced the students into an intuitive answer which will likely be based on biases and not empirical evidence. Next we will guide the students further along the path of analytic reasoning.
+There are many ways to try to answer this question.  Someone might say that Jetter was paid more therefore he is better.  Or someone would say that the Yankees are a better team and thus Jetter is better.  This is known as [butterfly reasoning](http://changingminds.org/disciplines/argument/types_reasoning/butterfly_logic%20.htm). Typically students will not use an analytic reasoning process but more of an intuition or perhaps just a bias. We have forced the students into an intuitive answer which will likely be based on biases and not empirical evidence. Next we will guide the students further along the path of analytic reasoning by narrowing the scope of the problem and introducing data.
 
 ### Second Example  
 
-As another example but this time using a social context is the University of California - Berkeley admission bias question.  Running this as a lesson would look like this:
+As another example, but this time using a social context, is the University of California - Berkeley admission bias question.  Running this as a lesson would look like this:
 
 #### Problem:  
 
@@ -101,7 +99,7 @@ We need data and a metric to help us answer the question of who is the better ba
 
 #### Information Gathering  
 
-Here is the code to generate the raw data for both batters. The reason we are generating the data is that we simply have the summary data from the records and this is not how data is often obtained. The information gathering and cleaning can often represent a significant time investment. This is often lost on students as data is presented to them in a clean format because of class time concerns. To give the students a sense of the work involved, generate the raw data using the code below, and then give the csv file to them to work with. 
+Here is the code to generate the raw data for both batters. The reason we are generating the data is that we simply have the summary data from the records and this is not how data is often obtained. The information gathering and cleaning can often represent a significant time investment. This is often lost on students as data is presented to them in a clean format because of class time concerns. To give the students a sense of the work involved, generate the raw data using the code below, and then give the csv file to them. 
 
 First, we will generate a simple frequency form of the data, we are actually working backwards from how you would typically proceed in your analysis but this is done to save you time as an instructor. For this section we will need several packages; let's load them first.
 
@@ -221,21 +219,35 @@ Who is the better player?  Why did we get different results depending on the sum
 
 ## Visualizing data 
 
-The next phase of analytic reasoning is the development of insight through the manipulation of this representation. This really brings us to visualization and interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization both a table and a vector plot.
+The next phase of analytic reasoning is the development of insight through the manipulation of this representation. This really brings us to visualization and interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.
 
 ### Background on Visualizing Data
 
-Data visualization is a complicated and important subject.  You can get advanced degrees in the subject.  We will only give the basics principles and ideas in this section.  There are three things should always inform the visual summary that you select and/or design.  First, you as the creator must decide which ideas are important to communicate to the reader.  Second, what is the reader’s background and how will they understand or what will they take away from the visualization?  Tufte states that you should “respect your audience not know them.” Finally, what kind of data is it, what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data?
+Data visualization is a complicated and important subject.  You can get advanced degrees in the subject.  We will only give the basics principles and ideas in this section.  There are three things should always inform the visual summary that you select and/or design.  First, the creator of the visualization must decide which ideas are important to communicate to the reader.  Second, what is the reader’s background and how will they understand or what will they take away from the visualization?  Tufte states that you should “respect your audience not know them.” Finally, what kind of data is it, what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data?
 
-The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea.  A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first.  The designer should understand how a reader picks up these preattentive attributes.  Finally, the last point has you putting everything together.  For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables.  Length is good for continuous variables.  Area is difficult for readers to compare.  
+The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea.  A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first.  The designer should understand how a reader picks up these preattentive attributes.  Finally, the last point has you putting everything together.  For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables.  Length is good for continuous variables.  Area is difficult for readers to compare.  See Figure \@ref(FigViz) and \@ref(fig:fig1)
+
+```{r fig1, fig.cap="Test Caption"}
+knitr::include_graphics("./images/VisPurpose.png")
+```
+
+![Caption Test \label{FigViz}](./images/VisPurpose.png)  
 
 ### Using Problem
 
 In the batting average problem, we have compressed the results of individual bats into an average.  There was also the choice to leave year as a separate variable or to compress further into a single summary.  The compression to a batting average lost an important element of the data and that is the magnitude of number of bats.  Understanding our reader, we should know that most people will compare the value of the batting averages equally, that is that assume that the number of at bats is approximately equal.  Thus, in this example they will either compare Derek Jeter against David Justice each year or simply average the two years into a single number to make a decision on the better batter.  In either case, the reader may conclude that David Justice is the better batter.  
 
-Discussion ideas: The tables in the previous section are visual summaries but what are the limitations?  What are the key idea(s) for this problem?  How would you visualize this data?
+### Discussion ideas 
 
-iii) Visualization
+The tables in the previous section are visual summaries but what are the limitations?  What are the key idea(s) for this problem?  How would you visualize this data?
+
+### Visualization
+
+We will examine two ways to visualize the data in our batting average problem. First we will continue to look at the tables and then move to a visualization that utilizes vectors.
+
+#### Tables for Visualization  
+
+
 
 Since batting average is more a quantitative variable than a qualitative, we decided to use position to represent batting average.  The x-axis is the number of batting attempts and the y-axis is the number of hits.  The average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare.  We used color to separate the two batters only for the combined years.  We included the individual year breakdown but they are difficult to see.  We included points to bring them out.  The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions.  Vectors have both direction and length.  The direction is the number of hits over number of at bats, the traditional batting average.  The length is related to the number of at bats.  The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats.  The opposite is true for David Justice and that is why we get the reversal. 
 

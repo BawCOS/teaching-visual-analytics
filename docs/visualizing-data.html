@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-02-23">
+<meta name="date" content="2018-02-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -158,28 +158,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4" data-path="visualizing-data.html"><a href="visualizing-data.html"><i class="fa fa-check"></i><b>1.4</b> Visualizing data</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="visualizing-data.html"><a href="visualizing-data.html#background-on-visualizing-data"><i class="fa fa-check"></i><b>1.4.1</b> Background on Visualizing Data</a></li>
 <li class="chapter" data-level="1.4.2" data-path="visualizing-data.html"><a href="visualizing-data.html#using-problem"><i class="fa fa-check"></i><b>1.4.2</b> Using Problem</a></li>
+<li class="chapter" data-level="1.4.3" data-path="visualizing-data.html"><a href="visualizing-data.html#discussion-ideas-4"><i class="fa fa-check"></i><b>1.4.3</b> Discussion ideas</a></li>
+<li class="chapter" data-level="1.4.4" data-path="visualizing-data.html"><a href="visualizing-data.html#visualization"><i class="fa fa-check"></i><b>1.4.4</b> Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="interaction.html"><a href="interaction.html"><i class="fa fa-check"></i><b>1.5</b> Interaction</a></li>
 <li class="chapter" data-level="1.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>1.6</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="Chpt2.html"><a href="Chpt2.html"><i class="fa fa-check"></i><b>2</b> Analytic Reasoning</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
-<li class="chapter" data-level="4" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>4</b> Data Visualiztions</a></li>
-<li class="chapter" data-level="5" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>5</b> Methods</a></li>
-<li class="chapter" data-level="6" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>6</b> Applications</a><ul>
-<li class="chapter" data-level="6.1" data-path="example-one.html"><a href="example-one.html"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
-<li class="chapter" data-level="6.2" data-path="example-two.html"><a href="example-two.html"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>7</b> Interactions</a></li>
-<li class="chapter" data-level="8" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>8</b> Case Study</a></li>
-<li class="chapter" data-level="9" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>9</b> Final Words</a></li>
+<li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Data Visualiztions</a></li>
+<li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Interactions</a></li>
+<li class="chapter" data-level="5" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>5</b> Case Study</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="A" data-path="AppA.html"><a href="AppA.html"><i class="fa fa-check"></i><b>A</b> Lesson Handouts</a></li>
 <li class="chapter" data-level="B" data-path="AppB.html"><a href="AppB.html"><i class="fa fa-check"></i><b>B</b> Project</a><ul>
 <li class="chapter" data-level="B.0.1" data-path="AppB.html"><a href="AppB.html#introduction"><i class="fa fa-check"></i><b>B.0.1</b> Introduction</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/BawCOS/undergraduate-statistics-notes" target="blank">Published with bookdown</a></li>
 </ul>
@@ -201,19 +195,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="visualizing-data" class="section level2">
 <h2><span class="header-section-number">1.4</span> Visualizing data</h2>
-<p>The next phase of analytic reasoning is the development of insight through the manipulation of this representation. This really brings us to visualization and interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization both a table and a vector plot.</p>
+<p>The next phase of analytic reasoning is the development of insight through the manipulation of this representation. This really brings us to visualization and interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.</p>
 <div id="background-on-visualizing-data" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> Background on Visualizing Data</h3>
-<p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, you as the creator must decide which ideas are important to communicate to the reader. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience not know them.” Finally, what kind of data is it, what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data?</p>
-<p>The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first. The designer should understand how a reader picks up these preattentive attributes. Finally, the last point has you putting everything together. For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare.</p>
+<p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, the creator of the visualization must decide which ideas are important to communicate to the reader. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience not know them.” Finally, what kind of data is it, what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data?</p>
+<p>The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first. The designer should understand how a reader picks up these preattentive attributes. Finally, the last point has you putting everything together. For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare. See Figure <a href="#FigViz"><strong>??</strong></a> and <a href="visualizing-data.html#fig:fig1">1.1</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;./images/VisPurpose.png&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig1"></span>
+<img src="images/VisPurpose.png" alt="Test Caption" width="576" />
+<p class="caption">
+Figure 1.1: Test Caption
+</p>
+</div>
+<div class="figure">
+<img src="images/VisPurpose.png" alt="Caption Test " />
+<p class="caption">Caption Test </p>
+</div>
 </div>
 <div id="using-problem" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> Using Problem</h3>
 <p>In the batting average problem, we have compressed the results of individual bats into an average. There was also the choice to leave year as a separate variable or to compress further into a single summary. The compression to a batting average lost an important element of the data and that is the magnitude of number of bats. Understanding our reader, we should know that most people will compare the value of the batting averages equally, that is that assume that the number of at bats is approximately equal. Thus, in this example they will either compare Derek Jeter against David Justice each year or simply average the two years into a single number to make a decision on the better batter. In either case, the reader may conclude that David Justice is the better batter.</p>
-<p>Discussion ideas: The tables in the previous section are visual summaries but what are the limitations? What are the key idea(s) for this problem? How would you visualize this data?</p>
-<ol start="3" style="list-style-type: lower-roman">
-<li>Visualization</li>
-</ol>
+</div>
+<div id="discussion-ideas-4" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Discussion ideas</h3>
+<p>The tables in the previous section are visual summaries but what are the limitations? What are the key idea(s) for this problem? How would you visualize this data?</p>
+</div>
+<div id="visualization" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Visualization</h3>
+<p>We will examine two ways to visualize the data in our batting average problem. First we will continue to look at the tables and then move to a visualization that utilizes vectors.</p>
+<div id="tables-for-visualization" class="section level4">
+<h4><span class="header-section-number">1.4.4.1</span> Tables for Visualization</h4>
 <p>Since batting average is more a quantitative variable than a qualitative, we decided to use position to represent batting average. The x-axis is the number of batting attempts and the y-axis is the number of hits. The average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare. We used color to separate the two batters only for the combined years. We included the individual year breakdown but they are difficult to see. We included points to bring them out. The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions. Vectors have both direction and length. The direction is the number of hits over number of at bats, the traditional batting average. The length is related to the number of at bats. The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats. The opposite is true for David Justice and that is why we get the reversal.</p>
 <p>This might be hard to see in the document so you can open it separately as pdf to see the design better. The link is <a href="http://bit.ly/2tP05tU" class="uri">http://bit.ly/2tP05tU</a></p>
 <p>Discussion question: What do you like about the plot? What are the strengths and weaknesses? What changes would you make? Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?</p>
@@ -233,6 +244,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">arrows</span>(<span class="dv">48</span>,<span class="dv">12</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>))</code></pre></div>
 <p><img src="VA-Notes_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
 </div>
 </div>
             </section>
