@@ -1,3 +1,0 @@
-# Analytic Reasoning {#Chpt2}
-
-Use the unvotes package

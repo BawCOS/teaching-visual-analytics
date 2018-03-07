@@ -27,7 +27,7 @@ output:
 documentclass: book
 nocite: | 
   @xie2015,@agresti2003categorical
-bibliography: [bibliography.bib, packages.bib]
+bibliography: [bibliography.bib, packages.bib,article.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: BawCOS/undergraduate-statistics-notes

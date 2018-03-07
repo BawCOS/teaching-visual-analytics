@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="prerequisites.html">
-<link rel="next" href="Chpt1.html">
+<link rel="prev" href="analytic-reasoning.html">
+<link rel="next" href="interaction.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -194,22 +194,68 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="acknowledgements" class="section level2">
-<h2><span class="header-section-number">0.4</span> Acknowledgements</h2>
-<p>The workshop, GT, UCGA, Purdue, USAFA ….</p>
-<p>This book was written using the excellent <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2017</a><a href="#ref-R-bookdown">a</a>)</span>.</p>
-<div class="figure">
-<img src="./by-nc-sa.png" />
-
+<div id="visualizing-data-re-representation" class="section level2">
+<h2><span class="header-section-number">1.4</span> Visualizing data (Re-representation)</h2>
+<p>We are still in the transformation or re-representation of information phase. Visualization helps in this phase of the analysis project. We will present many different types of visualizations and this is a transition to the next phase of the analysis titled manipulation. Having to write code over will lead us to interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.</p>
+<div id="background-on-visualizing-data" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Background on Visualizing Data</h3>
+<p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, the creator of the visualization must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience not know them.” Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first. The designer should understand how a reader picks up these preattentive attributes. Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare.</p>
+<p>Figure <a href="visualizing-data-re-representation.html#fig:fig1">1.1</a>, adopted from <span class="citation">Friendly and Meyer (<a href="#ref-FriendlyMeyer:2016:DDAR">2016</a>)</span>, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;./images/VisPurpose.png&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig1"></span>
+<img src="images/VisPurpose.png" alt="Visualization Purposes" width="576" />
+<p class="caption">
+Figure 1.1: Visualization Purposes
+</p>
 </div>
-<p>This book is licensed under the <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
-
 </div>
-<!-- </div> -->
+<div id="using-problem" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Using Problem</h3>
+<p>In the batting average problem, we have compressed the results of individual bats into an average. There was also the choice to leave year as a separate variable or to compress further into a single summary. The compression to a batting average, weather accounting for year or not, lost an important element of the data and that is the magnitude of number of bats. Understanding our reader, in this case the analyst but ultimately any reader for presentation, we should expect that most people will consider the value of the batting averages for each player during each year to be of equal value, that is they assume that the number of at bats is approximately equal. Thus, in this example they will either compare Derek Jeter against David Justice each year or simply average the two years into a single number to make a decision on the better batter. In either case, the reader may conclude that David Justice is the better batter. In developing our visual summaries we will have to take this into consideration.</p>
+</div>
+<div id="discussion-ideas-4" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Discussion ideas</h3>
+<p>The tables in the previous section are visual summaries but what are the limitations? What are the key idea(s) for this problem? How would you visualize this data?</p>
+<p>Most students will only think about tables. In consider tables how should the variables be ordered? That is, which variables should be rows and which should be columns? Should you use shading in the tables?</p>
+</div>
+<div id="visualization" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Visualization</h3>
+<p>We will examine two ways to visualize the data in our batting average problem. First we will continue to look at the tables and then move to a visualization that utilizes vectors.</p>
+<div id="tables-for-visualization" class="section level4">
+<h4><span class="header-section-number">1.4.4.1</span> Tables for Visualization</h4>
+<p>In this case we will use the idea of effect-orders sorting <span class="citation">Friendly and Kwan (<a href="#ref-FRIENDLY2003509">2003</a>)</span>. Finally, the last point has you putting everything together.</p>
+</div>
+</div>
+<div id="vectors-for-visualization" class="section level3">
+<h3><span class="header-section-number">1.4.5</span> Vectors for Visualization</h3>
+<p>Since batting average is more a quantitative variable than a qualitative, we decided to use position to represent batting average. The x-axis is the number of batting attempts and the y-axis is the number of hits. The average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare. We used color to separate the two batters only for the combined years. We included the individual year breakdown but they are difficult to see. We included points to bring them out. The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions. Vectors have both direction and length. The direction is the number of hits over number of at bats, the traditional batting average. The length is related to the number of at bats. The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats. The opposite is true for David Justice and that is why we get the reversal.</p>
+<p>This might be hard to see in the document so you can open it separately as pdf to see the design better. The link is <a href="http://bit.ly/2tP05tU" class="uri">http://bit.ly/2tP05tU</a></p>
+<p>Discussion question: What do you like about the plot? What are the strengths and weaknesses? What changes would you make? Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?</p>
+<p>Note for discussion: The angle is the batting average, should we use white space and put an explanation into the graph? What if we had three years, how would we represent them? The labels overlap the lines, should we move them? Hook to next lesson: interaction could help us by selecting a year and turning it off or make more transparent. This question will lead to interaction section.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
+<span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
+<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>,<span class="dt">asp=</span><span class="dv">1</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">200</span>,<span class="dv">50</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
+<span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
+<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">700</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">48</span>,<span class="dv">12</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">48</span>,<span class="dv">12</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>))</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+</div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2017a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
+<div id="ref-FriendlyMeyer:2016:DDAR">
+<p>Friendly, Michael, and David Meyer. 2016. <em>Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
+</div>
+<div id="ref-FRIENDLY2003509">
+<p>Friendly, Michael, and Ernest Kwan. 2003. “Effect Ordering for Data Displays.” <em>Computational Statistics &amp; Data Analysis</em> 43 (4). Elsevier: 509–39. <a href="http://www.sciencedirect.com/science/article/pii/S0167947302002906" class="uri">http://www.sciencedirect.com/science/article/pii/S0167947302002906</a>.</p>
 </div>
 </div>
             </section>
@@ -217,8 +263,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="Chpt1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analytic-reasoning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interaction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -247,7 +293,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/BawCOS/undergraduate-statistics-notes/edit/master/index.Rmd",
+"link": "https://github.com/BawCOS/undergraduate-statistics-notes/edit/master/01-introducing-Visual-Analytics.Rmd",
 "text": "Edit"
 },
 "download": ["VA-Notes.pdf", "VA-Notes.epub"],

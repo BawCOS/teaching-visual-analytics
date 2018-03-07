@@ -1,8 +1,13 @@
 # Introducing Visual Analytics - Emphasis on Analytic Reasoning {#Chpt1}
 
+>“The purpose of computing is insight, not numbers.” -- Richard Hamming
+
+> "The simple graph has brought more information to the data analyst’s mind 
+> than any other device." --- John Tukey
+
 This chapter is a short introduction to visual analytics. It starts with a question, which can be understood to be the analytic reasoning leg of the visual analytics cycle. The second chapter is also an introduction to visual analytics but it takes more of a hypothesis generating point of view and thus has more emphasis on visualization and interaction. The depth that you as the instructor use depends on how much time can be devoted to this lesson.  This lesson could be done in a little as 30 minutes or as much as three 50 minute lessons.  These notes are broken into sections.  Under each section are some combination of definitions, explanations, discussion ideas, and problems as needed. You can drop portions or entire sections as needed or dictated by time.
 
-Many of the ideas for this chapter come from friendly's excellent book on the analysis of discrete data [@friendly2015discrete].
+Many of the ideas for this chapter come from friendly's excellent book on the analysis of discrete data [@FriendlyMeyer:2016:DDAR].
 
 
 ## Pre-Class Notes
@@ -47,24 +52,24 @@ This section introduces the concept of analytic reasoning and then uses an examp
 
 ### Analytic Reasoing Explained.
 
-The goal of analysis is to make a decision about a question.  This question can be part of a larger analysis problem with many questions.  Analytic reasoning requires reasoning logically with the support of numeric evidence.  The analyst must understand the limitations of the data and the assumptions of the data transformations and summaries.
+The goal of analysis is to make a decision about a question.  This question can be part of a larger analysis problem with many questions.  Analytic reasoning requires reasoning logically with the support of numeric evidence.  The analyst must understand the limitations of the data and the assumptions of the data transformations and summaries. Again it is important to note that analytics reasoning works in conjunction, not separate from, visualization and interaction. In other words, visual analytics takes analytical reasoning further by taking advantages of a visual and interactive representation of data to aid in the creation of knowledge products or actions.
 
-Many analytical reasoning tasks follow a process of
+Many analytical tasks follow a process of
 • Information gathering
 • Re-representation of the information in a form that aids analysis
 • Development of insight through the manipulation of this representation
 • Creation of some knowledge product or direct action based on the knowledge
 insight.
 
-Visual analytics takes analytical reasoning further by taking advantages of a visual and interactive representation.
+
 
 ### Example
 
-We will introduce an example to highlight the ideas and principles of analytic reasoining.  The example we selected is easy to understand and allows us to present some of the important concepts of visual analytics.  You can pick an example of your own, but remember to keep it simple and easy to understand.   
+We will introduce an example to highlight the ideas and principles of analytic reasoning.  The example we selected is easy to understand and allows us to present some of the important concepts of visual analytics.  You can pick an example of your own, but remember to keep it simple and easy to understand.   
 
 #### Problem:  
 
-Often in baseball, teams and fans want to compare players.  In the 1990s two extrodinary players were Derek Jeter of the New York Yankees and David Justice of the Atlanta Braves.  
+Often in baseball, teams and fans want to compare players.  In the 1990s two extraordinary players were Derek Jeter of the New York Yankees and David Justice of the Atlanta Braves.  
 
 #### Question: 
 
@@ -93,7 +98,7 @@ ii) In political science, we could use voter data to ask questions about coastal
 iii) In biology, we could look at sports data such as Olympic race times.
 iv) In engineering, we can look at strength of materials, completion times of projects, or design selection.
 
-### Using analytic reasoning.  
+### Using Analytic Reasoning.  
 
 We need data and a metric to help us answer the question of who is the better batter. There are many different ways to gather the data but this should be based on the metric we use. In sports analytics, there are many metrics that can be used to compare players, but for ease and the sake of an interesting analysis, we will use batting average. To make the problem even easier, we will provide the raw data from the years 1995 and 1996. Some students may object to this simplified data and you can use these objections as points of discussion on the importance of data that represents the question being asked. 
 
@@ -145,9 +150,9 @@ Now to get the data to students you could use the write.csv function
 write.csv(MLB_long,"./data/batting.csv")
 ```
 
-#### Transformation of Data
+#### Transformation (Re-representation) of Data
 
-The data is not in a form that will help make a decision. It is important to ask the students how they would transform the data to help make a decision. There are typically two responses. The first is to get the batting averages for the two players. The second is to summarize the batting averages by each player within each year. This then begs the question of how to aggregate the two years. At this point, try to steer the students to comparing the batting averages within each year. They will note that David Justice has the higher in each year. The next question is how to transform this information into a single metric of overall batting averages. First let's get the average for each year.
+The data is not in a form that will help make a decision. It is important to ask the students how they would transform the data to help make a decision. There are typically two responses to this request. The first is to get the batting averages for the two players. The second is to summarize the batting averages by each player within each year. This then begs the question of how to aggregate the two years. At this point, try to steer the students to comparing the batting averages within each year. They will note that David Justice has the higher in each year. The next question is how to transform this information into a single metric of overall batting averages. Also note at this point that our transformation is in the form of descriptive numeric summaries. This is often an important first step but in the next section we will work with visual representations of the data. Now, let's first get the batting average for each year.
 
 #### Problem  
 
@@ -155,18 +160,37 @@ How should we transform, summarize, the data in a manner that will help us make 
 
 ##### Discussion Ideas  
 
-There are many ways to summarize the data. The problem is that we have hits and outs separate. If we create a table we will not get an idea of the batting average. Students will have to mentally try to find the total at bats and then divide hits by at bats.  We can illustrate this point with Table \@ref(tab:first-tab) and the simple R table below it.
+There are many ways to summarize the data. The problem is that we have hits and outs whereas we need total at bats. If we create summary, we will not get an appropriate metric of performance. 
+
+```{r}
+summary(MLB_long)
+```
+
+We are going have to transform the data. The first step would be to group the data by each of the variables.
+
+```{r}
+MLB_long %>%
+  dplyr::group_by(Year,Player,Result) %>%
+  dplyr::summarize(Total=n())
+```
+
+Or using different code
+
 
 ```{r first-tab}
 knitr::kable(xtabs(~Player+Result+Year,MLB_long),caption = "A Simple Table Summarizing Batting Performance")
-```
-```{r}
+```  
+
+
+This is a good first step but students will have to mentally try to find the total at bats, sum hits and outs, and then divide hits by at bats; see Table \@ref(tab:first-tab) and the simple table below it.
+
+As a preview of the visualization section, consider the following table and think about how it presents the information.  
+
+```{r first-taba}
 ftable(xtabs(~Player+Year+Result,MLB_long))
 ```
 
-It should be clear that it is hard to use these tables to make a decision. 
-
-In the next section we will discuss visualizing the data to include the advantages and disadvantages of each type of table. But for now let's complete the discussion of comparing batting averages.
+It should be clear that it is hard to use these summaries to make a decision. In the next section we will discuss visualizing data to include the advantages and disadvantages of each type of table. But for now let's complete the discussion of comparing batting averages.
 
 Next we need to get a batting average for each player in each year.
 
@@ -187,12 +211,12 @@ knitr::kable(MLB_long %>%
   select(-Result) %>%
   mutate(Avg=round(Hits/Total,4)) %>%
   select(Player,Year,Avg) %>%
-  arrange(Year),caption="Batting Average in each Year")
+  arrange(Year,desc(Player)),caption="Batting Average in each Year")
 ```
 
 #### Discussion Ideas  
 
-Ask the students to decide who is the better player based on the batting averages. The students should point out that David Justice had a better batting average in each year. You can ask how you should combine these averages? The students may claim that it does not matter since David Justice was better in each year. They may also want to take a simple average, which again would lead to David Justice being the better player. Let's combine the hits and outs from each year by aggreagating across years.
+Ask the students to decide who is the better player based on the batting averages. The students should point out that David Justice had a better batting average in each year. You can ask how you should combine these averages? The students may claim that it does not matter since David Justice was better in each year. They may also want to take a simple average, which again would lead to David Justice being the better player. Other students will note that the overall batting average is found by dividing totals hits by total at bats. Let's combine the hits and outs from each year by aggregating across years.
 
 ```{r}
 prop.table(xtabs(~Player+Result,MLB_long),1)[,1]
@@ -208,38 +232,40 @@ knitr::kable(MLB_long %>%
               summarise(Total=n()),by="Player") %>%
   select(-Result) %>%
   mutate(Avg=round(Hits/Total,4)) %>%
-  select(Player,Avg),caption="Combined Batting Average for Both Years")
+  select(Player,Avg) %>%
+  arrange(desc(Player)),caption="Combined Batting Average for Both Years")
 ```
 
-From Table \@ref(tab:third-tab) it nows appears that Derke Jetter is the better player.
+From Table \@ref(tab:third-tab) it now appears that Derek Jetter is the better player.
 
 
-Who is the better player?  Why did we get different results depending on the summary? What concerns do you have with the summaries and data transformations?  
+Who is the better player?  Why did we get different results depending on the summary? What concerns do you have with the summaries and data transformations we created?  
 
 
-## Visualizing data 
+## Visualizing data (Re-representation)
 
-The next phase of analytic reasoning is the development of insight through the manipulation of this representation. This really brings us to visualization and interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.
+We are still in the transformation or re-representation of information phase. Visualization helps in this phase of the analysis project. We will present many different types of visualizations and this is a transition to the next phase of the analysis titled manipulation. Having to write code over will lead us to interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.
 
 ### Background on Visualizing Data
 
-Data visualization is a complicated and important subject.  You can get advanced degrees in the subject.  We will only give the basics principles and ideas in this section.  There are three things should always inform the visual summary that you select and/or design.  First, the creator of the visualization must decide which ideas are important to communicate to the reader.  Second, what is the reader’s background and how will they understand or what will they take away from the visualization?  Tufte states that you should “respect your audience not know them.” Finally, what kind of data is it, what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data?
+Data visualization is a complicated and important subject.  You can get advanced degrees in the subject.  We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, the creator of the visualization must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization?  Tufte states that you should “respect your audience not know them.” Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first.  The designer should understand how a reader picks up these preattentive attributes. Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables.  Length is good for continuous variables.  Area is difficult for readers to compare.
 
-The first point requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea.  A key point here is whether the visualization is for exploration and analysis or presentation of results. The second point is to understand such factors as short-term memory limits the amount of information a reader can hold and preattentive thought picks up position, motion, shape, and color first.  The designer should understand how a reader picks up these preattentive attributes.  Finally, the last point has you putting everything together.  For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables.  Length is good for continuous variables.  Area is difficult for readers to compare.  See Figure \@ref(FigViz) and \@ref(fig:fig1)
+Figure \@ref(fig:fig1), adopted from @FriendlyMeyer:2016:DDAR, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.  
 
-```{r fig1, fig.cap="Test Caption"}
+```{r fig1, fig.cap="Visualization Purposes"}
 knitr::include_graphics("./images/VisPurpose.png")
 ```
 
-![Caption Test \label{FigViz}](./images/VisPurpose.png)  
 
 ### Using Problem
 
-In the batting average problem, we have compressed the results of individual bats into an average.  There was also the choice to leave year as a separate variable or to compress further into a single summary.  The compression to a batting average lost an important element of the data and that is the magnitude of number of bats.  Understanding our reader, we should know that most people will compare the value of the batting averages equally, that is that assume that the number of at bats is approximately equal.  Thus, in this example they will either compare Derek Jeter against David Justice each year or simply average the two years into a single number to make a decision on the better batter.  In either case, the reader may conclude that David Justice is the better batter.  
+In the batting average problem, we have compressed the results of individual bats into an average.  There was also the choice to leave year as a separate variable or to compress further into a single summary.  The compression to a batting average, weather accounting for year or not, lost an important element of the data and that is the magnitude of number of bats.  Understanding our reader, in this case the analyst but ultimately any reader for presentation, we should expect that most people will consider the value of the batting averages for each player during each year to be of equal value, that is they assume that the number of at bats is approximately equal.  Thus, in this example they will either compare Derek Jeter against David Justice each year or simply average the two years into a single number to make a decision on the better batter.  In either case, the reader may conclude that David Justice is the better batter. In developing our visual summaries we will have to take this into consideration.
 
 ### Discussion ideas 
 
 The tables in the previous section are visual summaries but what are the limitations?  What are the key idea(s) for this problem?  How would you visualize this data?
+
+Most students will only think about tables. In consider tables how should the variables be ordered? That is, which variables should be rows and which should be columns? Should you use shading in the tables? 
 
 ### Visualization
 
@@ -247,7 +273,9 @@ We will examine two ways to visualize the data in our batting average problem. F
 
 #### Tables for Visualization  
 
+In this case we will use the idea of effect-orders sorting @FRIENDLY2003509.   Finally, the last point has you putting everything together.  
 
+### Vectors for Visualization
 
 Since batting average is more a quantitative variable than a qualitative, we decided to use position to represent batting average.  The x-axis is the number of batting attempts and the y-axis is the number of hits.  The average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare.  We used color to separate the two batters only for the combined years.  We included the individual year breakdown but they are difficult to see.  We included points to bring them out.  The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions.  Vectors have both direction and length.  The direction is the number of hits over number of at bats, the traditional batting average.  The length is related to the number of at bats.  The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats.  The opposite is true for David Justice and that is why we get the reversal. 
 
@@ -323,4 +351,5 @@ After the training, participants will:
 2.     be able to describe the three important components of visual analytics
 3.     be able to discuss types of unique insights that VA can provide
 
+https://www.r-bloggers.com/parallel-coordinate-plots-for-discrete-and-categorical-data-in-r-a-comparison/
 

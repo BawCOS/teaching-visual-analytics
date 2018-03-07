@@ -1,0 +1,11 @@
+# Exploratory Visual Analytics {#Chpt2}
+
+> "The simple graph has brought more information to the data analyst’s mind 
+> than any other device." --- John Tukey
+
+> “It isn’t accidental that when we begin to understand something we say 'I see.' 
+> Not 'I hear' or 'I smell'” -- Stephen Few
+
+>> "You see alot just by looking"  -- Yogi Berra
+
+Use the unvotes package
