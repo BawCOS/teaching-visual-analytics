@@ -26,14 +26,14 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-03-06">
+<meta name="date" content="2018-03-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="analytic-reasoning.html">
+<link rel="prev" href="AR1.html">
 <link rel="next" href="interaction.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -147,13 +147,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="Chpt1.html"><a href="Chpt1.html"><i class="fa fa-check"></i><b>1</b> Introducing Visual Analytics - Emphasis on Analytic Reasoning</a><ul>
 <li class="chapter" data-level="1.1" data-path="pre-class-notes.html"><a href="pre-class-notes.html"><i class="fa fa-check"></i><b>1.1</b> Pre-Class Notes</a></li>
-<li class="chapter" data-level="1.2" data-path="lesson-introduction.html"><a href="lesson-introduction.html"><i class="fa fa-check"></i><b>1.2</b> Lesson Introduction</a></li>
-<li class="chapter" data-level="1.3" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html"><i class="fa fa-check"></i><b>1.3</b> Analytic Reasoning</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#analytic-reasoing-explained."><i class="fa fa-check"></i><b>1.3.1</b> Analytic Reasoing Explained.</a></li>
-<li class="chapter" data-level="1.3.2" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#example"><i class="fa fa-check"></i><b>1.3.2</b> Example</a></li>
-<li class="chapter" data-level="1.3.3" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#second-example"><i class="fa fa-check"></i><b>1.3.3</b> Second Example</a></li>
-<li class="chapter" data-level="1.3.4" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#other-problem-ideas"><i class="fa fa-check"></i><b>1.3.4</b> Other problem ideas:</a></li>
-<li class="chapter" data-level="1.3.5" data-path="analytic-reasoning.html"><a href="analytic-reasoning.html#using-analytic-reasoning."><i class="fa fa-check"></i><b>1.3.5</b> Using Analytic Reasoning.</a></li>
+<li class="chapter" data-level="1.2" data-path="Intro1.html"><a href="Intro1.html"><i class="fa fa-check"></i><b>1.2</b> Lesson Introduction</a></li>
+<li class="chapter" data-level="1.3" data-path="AR1.html"><a href="AR1.html"><i class="fa fa-check"></i><b>1.3</b> Analytic Reasoning</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="AR1.html"><a href="AR1.html#analytic-reasoing-explained"><i class="fa fa-check"></i><b>1.3.1</b> Analytic Reasoing Explained</a></li>
+<li class="chapter" data-level="1.3.2" data-path="AR1.html"><a href="AR1.html#example"><i class="fa fa-check"></i><b>1.3.2</b> Example</a></li>
+<li class="chapter" data-level="1.3.3" data-path="AR1.html"><a href="AR1.html#second-example"><i class="fa fa-check"></i><b>1.3.3</b> Second Example</a></li>
+<li class="chapter" data-level="1.3.4" data-path="AR1.html"><a href="AR1.html#other-problem-ideas"><i class="fa fa-check"></i><b>1.3.4</b> Other problem ideas:</a></li>
+<li class="chapter" data-level="1.3.5" data-path="AR1.html"><a href="AR1.html#using-analytic-reasoning."><i class="fa fa-check"></i><b>1.3.5</b> Using Analytic Reasoning.</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="visualizing-data-re-representation.html"><a href="visualizing-data-re-representation.html"><i class="fa fa-check"></i><b>1.4</b> Visualizing data (Re-representation)</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="visualizing-data-re-representation.html"><a href="visualizing-data-re-representation.html#background-on-visualizing-data"><i class="fa fa-check"></i><b>1.4.1</b> Background on Visualizing Data</a></li>
@@ -196,11 +196,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="visualizing-data-re-representation" class="section level2">
 <h2><span class="header-section-number">1.4</span> Visualizing data (Re-representation)</h2>
-<p>We are still in the transformation or re-representation of information phase. Visualization helps in this phase of the analysis project. We will present many different types of visualizations and this is a transition to the next phase of the analysis titled manipulation. Having to write code over will lead us to interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.</p>
+<p>We are still in the transformation or re-representation of information phase. Visualization helps in this phase of the analysis project. We will present many different types of visualizations and this is a transition to the next phase of the analysis titled manipulation. Having to write code over and over with small changes will lead us to the interaction phase. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.</p>
 <div id="background-on-visualizing-data" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> Background on Visualizing Data</h3>
-<p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, the creator of the visualization must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience not know them.” Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first. The designer should understand how a reader picks up these preattentive attributes. Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare.</p>
-<p>Figure <a href="visualizing-data-re-representation.html#fig:fig1">1.1</a>, adopted from <span class="citation">Friendly and Meyer (<a href="#ref-FriendlyMeyer:2016:DDAR">2016</a>)</span>, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.</p>
+<p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things that should always inform the visual summary you select and/or design. First, you must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience”. Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first. Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare although rectangular is not as difficult because of the linear comparison of each side.</p>
+<p>Figure <a href="visualizing-data-re-representation.html#fig:fig1">1.1</a>, adopted from <span class="citation">Friendly and Meyer (<a href="#ref-FriendlyMeyer:2016:DDAR">2016</a>)</span>, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we, the analyst, are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;./images/VisPurpose.png&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:fig1"></span>
 <img src="images/VisPurpose.png" alt="Visualization Purposes" width="576" />
@@ -216,14 +216,169 @@ Figure 1.1: Visualization Purposes
 <div id="discussion-ideas-4" class="section level3">
 <h3><span class="header-section-number">1.4.3</span> Discussion ideas</h3>
 <p>The tables in the previous section are visual summaries but what are the limitations? What are the key idea(s) for this problem? How would you visualize this data?</p>
-<p>Most students will only think about tables. In consider tables how should the variables be ordered? That is, which variables should be rows and which should be columns? Should you use shading in the tables?</p>
+<p>Most students will only think about tables. In considering tables, how should the variables be ordered? That is, which variables should be rows and which should be columns? Should you use shading in the tables?</p>
 </div>
 <div id="visualization" class="section level3">
 <h3><span class="header-section-number">1.4.4</span> Visualization</h3>
 <p>We will examine two ways to visualize the data in our batting average problem. First we will continue to look at the tables and then move to a visualization that utilizes vectors.</p>
 <div id="tables-for-visualization" class="section level4">
 <h4><span class="header-section-number">1.4.4.1</span> Tables for Visualization</h4>
-<p>In this case we will use the idea of effect-orders sorting <span class="citation">Friendly and Kwan (<a href="#ref-FRIENDLY2003509">2003</a>)</span>. Finally, the last point has you putting everything together.</p>
+<p>In this section we will go through a series of tables and discuss advantages and disadvantages of each.</p>
+<div id="first-table" class="section level5">
+<h5><span class="header-section-number">1.4.4.1.1</span> First Table</h5>
+<p>The first table from the software is a default and looks like</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(MLB_long)</code></pre></div>
+<pre><code>## , , Result = Hit
+## 
+##                Year
+## Player          1995 1996
+##   David Justice  104   45
+##   Derek Jetter    12  183
+## 
+## , , Result = Out
+## 
+##                Year
+## Player          1995 1996
+##   David Justice  307   95
+##   Derek Jetter    36  399</code></pre>
+<p>Ask your students about their thoughts on this table.</p>
+<p>Some ideas that may come include the lack of a title, the use of “, ,”, and having the split on result because it is difficult to mentally combine for comparison. Remember that the reader of this table is the analytic team. As an analyst, the use of “, ,”&quot; in the titles and the splitting of result into two table may not bother you but it is still inefficient. Plus you as the analyst want the ability to control how the variables are arranged.</p>
+</div>
+<div id="additional-tables" class="section level5">
+<h5><span class="header-section-number">1.4.4.1.2</span> Additional Tables</h5>
+<p>Let’s start by finding a better representation of the table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ftable</span>(<span class="kw">table</span>(MLB_long))</code></pre></div>
+<pre><code>##                    Result Hit Out
+## Player        Year               
+## David Justice 1995        104 307
+##               1996         45  95
+## Derek Jetter  1995         12  36
+##               1996        183 399</code></pre>
+<p>The advantage of this figure did not split the data. Note that the software automatically placed Player and Year in the rows. This placement makes it difficult to compare the years since they are separated by one line.</p>
+<p>Next, we will sort the variables by the comparison we want to make. In this case we want players within years. This is called effect-ordering sorting <span class="citation">(Friendly and Kwan <a href="#ref-FRIENDLY2003509">2003</a>)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ftable</span>(<span class="kw">table</span>(MLB_long),<span class="dt">row.vars=</span><span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Player&quot;</span>))</code></pre></div>
+<pre><code>##                    Result Hit Out
+## Year Player                      
+## 1995 David Justice        104 307
+##      Derek Jetter          12  36
+## 1996 David Justice         45  95
+##      Derek Jetter         183 399</code></pre>
+<p>As we discussed in Section <a href="Intro1.html#Intro1">1.2</a>, the transitions between analysis, visualization, and interaction may be a cycle. So next we need to get the number of at bats.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">group_by</span>(Player,Year,Result) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">summarise</span>(<span class="dt">Hits=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">filter</span>(Result<span class="op">==</span><span class="st">&quot;Hit&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">left_join</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">group_by</span>(Player,Year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">summarise</span>(<span class="dt">At_Bats=</span><span class="kw">n</span>()),<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Player&quot;</span>,<span class="st">&quot;Year&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">select</span>(<span class="op">-</span>Result) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">arrange</span>(Year))</code></pre></div>
+<pre><code>##          Player Year Hits At_Bats
+## 1 David Justice 1995  104     411
+## 2  Derek Jetter 1995   12      48
+## 3 David Justice 1996   45     140
+## 4  Derek Jetter 1996  183     582</code></pre>
+<p>This is getting better although we lost year as an outer row variable and we still need average instead of hits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">group_by</span>(Player,Year,Result) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">summarise</span>(<span class="dt">Hits=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">filter</span>(Result<span class="op">==</span><span class="st">&quot;Hit&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">left_join</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">group_by</span>(Player,Year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">summarise</span>(<span class="dt">At_Bats=</span><span class="kw">n</span>()),<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Player&quot;</span>,<span class="st">&quot;Year&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">mutate</span>(<span class="dt">Average=</span>Hits<span class="op">/</span>At_Bats) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">select</span>(Year, Player,Average,At_Bats) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">arrange</span>(Year))</code></pre></div>
+<pre><code>##   Year        Player   Average At_Bats
+## 1 1995 David Justice 0.2530414     411
+## 2 1995  Derek Jetter 0.2500000      48
+## 3 1996 David Justice 0.3214286     140
+## 4 1996  Derek Jetter 0.3144330     582</code></pre>
+<p>This is a nice summary and makes it clear that we have years with a small number of at bats. We still have to clean up some things to improve the visualization. What are some ideas to improve it?</p>
+<p>A caption should be provided with enough detail to describe the table. In addition, the default of 7 decimal places is too much. We will use 4 decimal places.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">data.frame</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">group_by</span>(Player,Year,Result) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">summarise</span>(<span class="dt">Hits=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">filter</span>(Result<span class="op">==</span><span class="st">&quot;Hit&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">left_join</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">group_by</span>(Player,Year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">summarise</span>(<span class="dt">At_Bats=</span><span class="kw">n</span>()),<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Player&quot;</span>,<span class="st">&quot;Year&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">mutate</span>(<span class="dt">Average=</span><span class="kw">round</span>(Hits<span class="op">/</span>At_Bats,<span class="dv">4</span>)) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">select</span>(Year, Player,Average,At_Bats) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">arrange</span>(Year)),<span class="dt">caption=</span><span class="st">&quot;Batting Averages and Total at Bats for Both Years&quot;</span>)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-18">Table 1.4: </span>Batting Averages and Total at Bats for Both Years</caption>
+<thead>
+<tr class="header">
+<th align="right">Year</th>
+<th align="left">Player</th>
+<th align="right">Average</th>
+<th align="right">At_Bats</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1995</td>
+<td align="left">David Justice</td>
+<td align="right">0.2530</td>
+<td align="right">411</td>
+</tr>
+<tr class="even">
+<td align="right">1995</td>
+<td align="left">Derek Jetter</td>
+<td align="right">0.2500</td>
+<td align="right">48</td>
+</tr>
+<tr class="odd">
+<td align="right">1996</td>
+<td align="left">David Justice</td>
+<td align="right">0.3214</td>
+<td align="right">140</td>
+</tr>
+<tr class="even">
+<td align="right">1996</td>
+<td align="left">Derek Jetter</td>
+<td align="right">0.3144</td>
+<td align="right">582</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, we should combine both years. It is clear that we can’t just average the averages since the total at bats is different. We need to find the total hits and divide by the total at bats. This is Table <a href="AR1.html#tab:third-tab">1.3</a> with the addition of the total at bats.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Player,Result) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Hits=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Result<span class="op">==</span><span class="st">&quot;Hit&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(MLB_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">group_by</span>(Player) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">summarise</span>(<span class="dt">At_Bats=</span><span class="kw">n</span>()),<span class="dt">by=</span><span class="st">&quot;Player&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Result) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Average=</span><span class="kw">round</span>(Hits<span class="op">/</span>At_Bats,<span class="dv">4</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Player,Average,At_Bats) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Player)),<span class="dt">caption=</span><span class="st">&quot;Combined Batting Average for Both Years with Total at Bats&quot;</span>)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-19">Table 1.5: </span>Combined Batting Average for Both Years with Total at Bats</caption>
+<thead>
+<tr class="header">
+<th align="left">Player</th>
+<th align="right">Average</th>
+<th align="right">At_Bats</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Derek Jetter</td>
+<td align="right">0.3095</td>
+<td align="right">630</td>
+</tr>
+<tr class="even">
+<td align="left">David Justice</td>
+<td align="right">0.2704</td>
+<td align="right">551</td>
+</tr>
+</tbody>
+</table>
+<p>The two players had similar number of at bats but Derek Jeter had the higher batting average.</p>
+</div>
 </div>
 </div>
 <div id="vectors-for-visualization" class="section level3">
@@ -239,14 +394,14 @@ Figure 1.1: Visualization Purposes
 <span class="kw">arrows</span>(<span class="dv">200</span>,<span class="dv">50</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
 <span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
 <span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">700</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">48</span>,<span class="dv">12</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">48</span>,<span class="dv">12</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>))</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 </div>
 <h3>References</h3>
@@ -263,7 +418,7 @@ Figure 1.1: Visualization Purposes
           </div>
         </div>
       </div>
-<a href="analytic-reasoning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="AR1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="interaction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

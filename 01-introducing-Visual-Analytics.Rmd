@@ -28,7 +28,7 @@ Prior to class:
 2. [Watch TEDxWaterloo - Miriah Meyer - Information Visualization for Scientific Discovery](https://www.youtube.com/watch?v=Sua0xDCf8MA&feature=youtu.be)   
 3. [Read the article Visual Analytics: Definition, Process, and Challenges by Daniel Keim, Gennady Andrienko, Jean-Daniel Fekete, Carsten Gorg,Jorn Kohlhammer, and Guy Melan](https://hal-lirmm.ccsd.cnrs.fr/lirmm-00272779/document) 
 
-## Lesson Introduction
+## Lesson Introduction {#Intro1}
 
 Suggestions to start the lesson:
 
@@ -46,11 +46,11 @@ Below is a diagram of the visual analytics process. It is a cycle where any one 
 ![](./images/Cycle.png)  
 
 
-## Analytic Reasoning  
+## Analytic Reasoning {#AR1}  
 
 This section introduces the concept of analytic reasoning and then uses an example to illustrate the ideas.
 
-### Analytic Reasoing Explained.
+### Analytic Reasoing Explained
 
 The goal of analysis is to make a decision about a question.  This question can be part of a larger analysis problem with many questions.  Analytic reasoning requires reasoning logically with the support of numeric evidence.  The analyst must understand the limitations of the data and the assumptions of the data transformations and summaries. Again it is important to note that analytics reasoning works in conjunction, not separate from, visualization and interaction. In other words, visual analytics takes analytical reasoning further by taking advantages of a visual and interactive representation of data to aid in the creation of knowledge products or actions.
 
@@ -207,9 +207,9 @@ knitr::kable(MLB_long %>%
   filter(Result=="Hit") %>%
   left_join(MLB_long %>% 
               group_by(Player,Year) %>% 
-              summarise(Total=n()),by=c("Player","Year")) %>%
+              summarise(At_Bats=n()),by=c("Player","Year")) %>%
   select(-Result) %>%
-  mutate(Avg=round(Hits/Total,4)) %>%
+  mutate(Avg=round(Hits/At_Bats,4)) %>%
   select(Player,Year,Avg) %>%
   arrange(Year,desc(Player)),caption="Batting Average in each Year")
 ```
@@ -244,13 +244,13 @@ Who is the better player?  Why did we get different results depending on the sum
 
 ## Visualizing data (Re-representation)
 
-We are still in the transformation or re-representation of information phase. Visualization helps in this phase of the analysis project. We will present many different types of visualizations and this is a transition to the next phase of the analysis titled manipulation. Having to write code over will lead us to interaction. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.
+We are still in the transformation or re-representation of information phase. Visualization helps in this phase of the analysis project. We will present many different types of visualizations and this is a transition to the next phase of the analysis titled manipulation. Having to write code over and over with small changes will lead us to the interaction phase. We will first address visualization. Although some authors would not consider tables as a visualization of data, we do. In this section, we will use two different forms of visualization, both a table and a vector plot.
 
 ### Background on Visualizing Data
 
-Data visualization is a complicated and important subject.  You can get advanced degrees in the subject.  We will only give the basics principles and ideas in this section. There are three things should always inform the visual summary that you select and/or design. First, the creator of the visualization must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization?  Tufte states that you should “respect your audience not know them.” Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first.  The designer should understand how a reader picks up these preattentive attributes. Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables.  Length is good for continuous variables.  Area is difficult for readers to compare.
+Data visualization is a complicated and important subject.  You can get advanced degrees in the subject.  We will only give the basics principles and ideas in this section. There are three things that should always inform the visual summary you select and/or design. First, you must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization?  Tufte states that you should “respect your audience”. Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first.  Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables.  Length is good for continuous variables.  Area is difficult for readers to compare although rectangular is not as difficult because of the linear comparison of each side.
 
-Figure \@ref(fig:fig1), adopted from @FriendlyMeyer:2016:DDAR, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.  
+Figure \@ref(fig:fig1), adopted from @FriendlyMeyer:2016:DDAR, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we, the analyst, are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.  
 
 ```{r fig1, fig.cap="Visualization Purposes"}
 knitr::include_graphics("./images/VisPurpose.png")
@@ -265,7 +265,7 @@ In the batting average problem, we have compressed the results of individual bat
 
 The tables in the previous section are visual summaries but what are the limitations?  What are the key idea(s) for this problem?  How would you visualize this data?
 
-Most students will only think about tables. In consider tables how should the variables be ordered? That is, which variables should be rows and which should be columns? Should you use shading in the tables? 
+Most students will only think about tables. In considering tables, how should the variables be ordered? That is, which variables should be rows and which should be columns? Should you use shading in the tables? 
 
 ### Visualization
 
@@ -273,7 +273,98 @@ We will examine two ways to visualize the data in our batting average problem. F
 
 #### Tables for Visualization  
 
-In this case we will use the idea of effect-orders sorting @FRIENDLY2003509.   Finally, the last point has you putting everything together.  
+In this section we will go through a series of tables and discuss advantages and disadvantages of each.
+
+##### First Table  
+
+The first table from the software is a default and looks like
+
+```{r}
+table(MLB_long)
+```
+
+Ask your students about their thoughts on this table. 
+
+Some ideas that may come include the lack of a  title, the use of ", ,", and having the split on result because it is difficult to mentally combine for comparison.  Remember that the reader of this table is the analytic team. As an analyst, the use of ", ,"" in the titles and the splitting of result into two table may not bother you but it is still inefficient. Plus you as the analyst want the ability to control how the variables are arranged.
+
+##### Additional Tables  
+
+Let's start by finding a better representation of the table.
+
+```{r}
+ftable(table(MLB_long))
+```
+
+The advantage of this figure did not split the data. Note that the software automatically placed Player and Year in the rows. This placement makes it difficult to compare the years since they are separated by one line.
+
+Next, we will sort the variables by the comparison we want to make. In this case we want players within years. This is called effect-ordering sorting [@FRIENDLY2003509].
+
+```{r}
+ftable(table(MLB_long),row.vars=c("Year","Player"))
+```
+
+As we discussed in Section \@ref(Intro1), the transitions between analysis, visualization, and interaction may be a cycle. So next we need to get the number of at bats.
+
+```{r}
+data.frame(MLB_long %>% 
+   group_by(Player,Year,Result) %>% 
+   summarise(Hits=n()) %>% 
+   filter(Result=="Hit") %>%
+   left_join(MLB_long %>% 
+               group_by(Player,Year) %>% 
+               summarise(At_Bats=n()),by=c("Player","Year")) %>%
+   select(-Result) %>%
+   arrange(Year))
+```
+
+This is getting better although we lost year as an outer row variable and we still need average instead of hits.
+
+```{r}
+data.frame(MLB_long %>% 
+   group_by(Player,Year,Result) %>% 
+   summarise(Hits=n()) %>% 
+   filter(Result=="Hit") %>%
+   left_join(MLB_long %>% 
+               group_by(Player,Year) %>% 
+               summarise(At_Bats=n()),by=c("Player","Year")) %>%
+   mutate(Average=Hits/At_Bats) %>%
+   select(Year, Player,Average,At_Bats) %>%
+   arrange(Year))
+```
+This is a nice summary and makes it clear that we have years with a small number of at bats. We still have to clean up some things to improve the visualization. What are some ideas to improve it?
+
+A caption should be provided with enough detail to describe the table. In addition, the default of 7 decimal places is too much. We will use 4 decimal places.
+
+```{r}
+knitr::kable(data.frame(MLB_long %>% 
+   group_by(Player,Year,Result) %>% 
+   summarise(Hits=n()) %>% 
+   filter(Result=="Hit") %>%
+   left_join(MLB_long %>% 
+               group_by(Player,Year) %>% 
+               summarise(At_Bats=n()),by=c("Player","Year")) %>%
+   mutate(Average=round(Hits/At_Bats,4)) %>%
+   select(Year, Player,Average,At_Bats) %>%
+   arrange(Year)),caption="Batting Averages and Total at Bats for Both Years")
+```
+
+Finally, we should combine both years. It is clear that we can't just average the averages since the total at bats is different. We need to find the total hits and divide by the total at bats. This is Table \@ref(tab:third-tab) with the addition of the total at bats.
+
+```{r}
+knitr::kable(MLB_long %>% 
+  group_by(Player,Result) %>% 
+  summarise(Hits=n()) %>% 
+  filter(Result=="Hit") %>%
+  left_join(MLB_long %>% 
+              group_by(Player) %>% 
+              summarise(At_Bats=n()),by="Player") %>%
+  select(-Result) %>%
+  mutate(Average=round(Hits/At_Bats,4)) %>%
+  select(Player,Average,At_Bats) %>%
+  arrange(desc(Player)),caption="Combined Batting Average for Both Years with Total at Bats")
+```
+
+The two players had similar number of at bats but Derek Jeter had the higher batting average.
 
 ### Vectors for Visualization
 
