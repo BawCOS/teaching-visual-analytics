@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-03-08">
+<meta name="date" content="2018-03-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -201,7 +201,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">1.4.1</span> Background on Visualizing Data</h3>
 <p>Data visualization is a complicated and important subject. You can get advanced degrees in the subject. We will only give the basics principles and ideas in this section. There are three things that should always inform the visual summary you select and/or design. First, you must decide which ideas are important to communicate to the reader. This requires you to identify your key message, filter and summarize the data to a point that maintains that message without over-compressing the data, and finally think about how to communicate this idea. Second, what is the reader’s background and how will they understand or what will they take away from the visualization? Tufte states that you should “respect your audience”. Think about such factors as how short-term memory limits the amount of information a reader can hold and how preattentive thought quickly picks up position, motion, shape, and color first. Finally, consider the data type(s), what are the advantages and disadvantages of the data, what information is contained in the data, and what tools are needed to visualize this data? For example, color does a nice job with discrete variables although it could be used as a gradient for continuous variables. Length is good for continuous variables. Area is difficult for readers to compare although rectangular is not as difficult because of the linear comparison of each side.</p>
 <p>Figure <a href="visualizing-data-re-representation.html#fig:fig1">1.1</a>, adopted from <span class="citation">Friendly and Meyer (<a href="#ref-FriendlyMeyer:2016:DDAR">2016</a>)</span>, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we, the analyst, are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;./images/VisPurpose.png&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:fig1"></span>
 <img src="images/VisPurpose.png" alt="Visualization Purposes" width="576" />
 <p class="caption">
@@ -383,13 +382,32 @@ Figure 1.1: Visualization Purposes
 </div>
 <div id="vectors-for-visualization" class="section level3">
 <h3><span class="header-section-number">1.4.5</span> Vectors for Visualization</h3>
-<p>Since batting average is more a quantitative variable than a qualitative, we decided to use position to represent batting average. The x-axis is the number of batting attempts and the y-axis is the number of hits. The average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare. We used color to separate the two batters only for the combined years. We included the individual year breakdown but they are difficult to see. We included points to bring them out. The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions. Vectors have both direction and length. The direction is the number of hits over number of at bats, the traditional batting average. The length is related to the number of at bats. The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats. The opposite is true for David Justice and that is why we get the reversal.</p>
-<p>This might be hard to see in the document so you can open it separately as pdf to see the design better. The link is <a href="http://bit.ly/2tP05tU" class="uri">http://bit.ly/2tP05tU</a></p>
-<p>Discussion question: What do you like about the plot? What are the strengths and weaknesses? What changes would you make? Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?</p>
-<p>Note for discussion: The angle is the batting average, should we use white space and put an explanation into the graph? What if we had three years, how would we represent them? The labels overlap the lines, should we move them? Hook to next lesson: interaction could help us by selecting a year and turning it off or make more transparent. This question will lead to interaction section.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
-<span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
-<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>,<span class="dt">asp=</span><span class="dv">1</span>)
+<p>In the previous section, we learned that representing performance with just batting average is potentially misleading. The decimal representation of the average is too much of a compression that we lose the important information on the number of at bats. Carried to an extreme, if a player only batted twice and got one hit, batting average would be reported as a staggering 0.500. We attempted to remedy this by also reporting the total number of at bats along side of the batting average. The other issue we had was in the bias people use to combine batting averages. If only batting averages are reported, people tend to want to average them. However, since the number of at bats changes from year to year a weighted average is needed. In fact the way to determine overall average is to add the total number of hits and divide by the total number of at bats. If in the first year is <span class="math inline">\({a \over b}\)</span> and the second year is <span class="math inline">\({c \over d}\)</span>, then the overall average is <span class="math inline">\({(a+c) \over (b+d)}\)</span>. This is vector addition and gives another way to visualize the data; in the form of vectors and vector addition.</p>
+<div id="discussion-ideas-5" class="section level4">
+<h4><span class="header-section-number">1.4.5.1</span> Discussion Ideas</h4>
+<p>Now that we have described batting average, how to combine years, and the importance of the total at bats, is there a way to represent these in a plot?</p>
+</div>
+<div id="plot" class="section level4">
+<h4><span class="header-section-number">1.4.5.2</span> Plot</h4>
+<p>To plot both batting average and at bats is difficult so we will plot at bats on the x-axis and hits on the y-axis. In this case, the batting average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare. We used color to separate the two batters only for the combined years. We included the individual year breakdown but they are difficult to see. We included points to bring them out. The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions. Vectors have both direction and length. The direction is the number of hits over number of at bats, the traditional batting average. The length is related to the number of at bats. The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats. The opposite is true for David Justice and that is why we get the reversal of batting averages when we compress from two years to one.</p>
+<div class="figure"><span id="fig:fig2"></span>
+<img src="images/Batting_Visual.png" alt="Visualization of Batting Averages" width="2789" />
+<p class="caption">
+Figure 1.2: Visualization of Batting Averages
+</p>
+</div>
+<p>This might be hard to see in the document so you can open it separately as pdf to see the design of the graph better. The link is <a href="http://bit.ly/2tP05tU" class="uri">http://bit.ly/2tP05tU</a></p>
+</div>
+<div id="discussion-ideas-6" class="section level4">
+<h4><span class="header-section-number">1.4.5.3</span> Discussion Ideas</h4>
+<p>What do you like about the plot? What are the strengths and weaknesses? What changes would you make? Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?</p>
+<p>The angle is the batting average, should we use white space and put an explanation into the graph? What if we had three years, how would we represent them? The labels overlap the lines, should we move them? As a lead into the next lesson on interaction, selecting a year and turning it off as well as making lines more transparent could help.</p>
+<p>The problems with this graph are that the lines are close together, the font size on the axis is too small, the label points are hidden by the lines, and the aspect ratio is not one so that it appears that the average is closer to a 45 degree line which is an average of 1.000.</p>
+</div>
+<div id="plots-in-r" class="section level4">
+<h4><span class="header-section-number">1.4.5.4</span> Plots in R</h4>
+<p>You can construct these plots in R although they are a bit awkward however we can control the aspect ratio, offset text, change the font size. To get an idea of how to do this consider</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">800</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>,<span class="dt">asp=</span><span class="dv">1</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">200</span>,<span class="dv">50</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">400</span>,<span class="dv">150</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
@@ -397,11 +415,19 @@ Figure 1.1: Visualization Purposes
 <p><img src="VA-Notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#par(pty=&quot;s&quot;)</span>
 <span class="co">#plot(1,type=&quot;n&quot;,xlim=c(0,700),ylim=c(0,200),xlab=&quot;At Bats&quot;,ylab=&quot;Hits&quot;,asp=1)</span>
-<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">700</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>)
+<span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">700</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">200</span>),<span class="dt">xlab=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Hits&quot;</span>,<span class="dt">asp=</span><span class="dv">1</span>)
 <span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">48</span>,<span class="dv">12</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">arrows</span>(<span class="dv">48</span>,<span class="dv">12</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
-<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>))</code></pre></div>
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">48</span><span class="op">+</span><span class="dv">582</span>),(<span class="dv">183</span><span class="op">+</span><span class="dv">12</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">411</span>,<span class="dv">104</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">411</span>,<span class="dv">104</span>,(<span class="dv">411</span><span class="op">+</span><span class="dv">140</span>),(<span class="dv">104</span><span class="op">+</span><span class="dv">45</span>),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+<span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(<span class="dv">411</span><span class="op">+</span><span class="dv">140</span>),(<span class="dv">104</span><span class="op">+</span><span class="dv">45</span>),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>)
+<span class="kw">title</span>(<span class="st">&quot;Batting Averages&quot;</span>)
+<span class="kw">legend</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Derek Jeter&quot;</span>, <span class="st">&quot;David Justice&quot;</span>),
+       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>),<span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">cex=</span><span class="fl">0.8</span>)</code></pre></div>
 <p><img src="VA-Notes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
 </div>
 </div>
 <h3>References</h3>
@@ -464,6 +490,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

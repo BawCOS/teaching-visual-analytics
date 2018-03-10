@@ -252,7 +252,7 @@ Data visualization is a complicated and important subject.  You can get advanced
 
 Figure \@ref(fig:fig1), adopted from @FriendlyMeyer:2016:DDAR, is an excellent framework for thinking about visualization. Often, we first start in the analysis phase. For our current problem we are in the analysis phase with comparison being the primary design principle; we want to compare Derek Jetter to David Justice. At the end of the analysis we must present the results and this puts us in the presentation section. In each case the reader is different. In the analysis phase, we, the analyst, are the reader and maybe a few others on the analysis team. In the presentation, the readers can be from a variety of backgrounds often leading to a simpler presentation.  
 
-```{r fig1, fig.cap="Visualization Purposes"}
+```{r fig1, fig.cap="Visualization Purposes",echo=FALSE}
 knitr::include_graphics("./images/VisPurpose.png")
 ```
 
@@ -368,19 +368,37 @@ The two players had similar number of at bats but Derek Jeter had the higher bat
 
 ### Vectors for Visualization
 
-Since batting average is more a quantitative variable than a qualitative, we decided to use position to represent batting average.  The x-axis is the number of batting attempts and the y-axis is the number of hits.  The average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare.  We used color to separate the two batters only for the combined years.  We included the individual year breakdown but they are difficult to see.  We included points to bring them out.  The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions.  Vectors have both direction and length.  The direction is the number of hits over number of at bats, the traditional batting average.  The length is related to the number of at bats.  The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats.  The opposite is true for David Justice and that is why we get the reversal. 
+In the previous section, we learned that representing performance with just batting average is potentially misleading. The decimal representation of the average is too much of a compression that we lose the important information on the number of at bats. Carried to an extreme, if a player only batted twice and got one hit, batting average would be reported as a staggering 0.500. We attempted to remedy this by also reporting the total number of at bats along side of the batting average. The other issue we had was in the bias people use to combine batting averages. If only batting averages are reported, people tend to want to average them. However, since the number of at bats changes from year to year a weighted average is needed. In fact the way to determine overall average is to add the total number of hits and divide by the total number of at bats. If in the first year is ${a \over b}$ and the second year is ${c \over d}$, then the overall average is ${(a+c) \over (b+d)}$. This is vector addition and gives another way to visualize the data; in the form of vectors and vector addition.
+
+#### Discussion Ideas  
+
+Now that we have described batting average, how to combine years, and the importance of the total at bats, is there a way to represent these in a plot?
+
+#### Plot  
+
+To plot both batting average and at bats is difficult so we will plot at bats on the x-axis and hits on the y-axis. In this case, the batting average is the angle, or the slope of the line. Angles are difficult to estimate but easy to compare.  We used color to separate the two batters only for the combined years.  We included the individual year breakdown but they are difficult to see.  We included points to bring them out.  The combination of years, or the calculation of combined batting average, is a vector addition and not the addition of fractions.  Vectors have both direction and length.  The direction is the number of hits over number of at bats, the traditional batting average.  The length is related to the number of at bats.  The plot shows that Derek Jeter’s combined batting average gets pulled more towards the second year when he had more at bats.  The opposite is true for David Justice and that is why we get the reversal of batting averages when we compress from two years to one.
+
+```{r fig2, fig.cap="Visualization of Batting Averages",echo=FALSE}
+knitr::include_graphics("./images/Batting_Visual.png")
+```
 
 
 
-This might be hard to see in the document so you can open it separately as pdf to see the design better.  The link is http://bit.ly/2tP05tU 
+This might be hard to see in the document so you can open it separately as pdf to see the design of the graph better.  The link is http://bit.ly/2tP05tU 
 
-Discussion question: What do you like about the plot?  What are the strengths and weaknesses? What changes would you make?  Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?
+#### Discussion Ideas  
 
-Note for discussion: The angle is the batting average, should we use white space and put an explanation into the graph?  What if we had three years, how would we represent them? The labels overlap the lines, should we move them?  Hook to next lesson: interaction could help us by selecting a year and turning it off or make more transparent.  This question will lead to interaction section.
+What do you like about the plot?  What are the strengths and weaknesses? What changes would you make?  Is it better to put the players’ years end to end or does that hide that David Justice is better in each individual year? Does the color help or hurt?
+
+The angle is the batting average, should we use white space and put an explanation into the graph?  What if we had three years, how would we represent them? The labels overlap the lines, should we move them?  As a lead into the next lesson on interaction, selecting a year and turning it off as well as making lines more transparent could help.
+
+The problems with this graph are that the lines are close together, the font size on the axis is too small, the label points are hidden by the lines, and the aspect ratio is not one so that it appears that the average is closer to a 45 degree line which is an average of 1.000.
+
+#### Plots in R  
+
+You can construct these plots in R although they are a bit awkward however we can control the aspect ratio, offset text, change the font size.  To get an idea of how to do this consider 
 
 ```{r}
-#par(pty="s")
-#plot(1,type="n",xlim=c(0,700),ylim=c(0,200),xlab="At Bats",ylab="Hits",asp=1)
 plot(1,type="n",xlim=c(0,800),ylim=c(0,800),xlab="At Bats",ylab="Hits",asp=1)
 arrows(0,0,200,50,col="red")
 arrows(200,50,400,150,col="red")
@@ -391,10 +409,17 @@ abline(0,1)
 ```{r}
 #par(pty="s")
 #plot(1,type="n",xlim=c(0,700),ylim=c(0,200),xlab="At Bats",ylab="Hits",asp=1)
-plot(1,type="n",xlim=c(0,700),ylim=c(0,200),xlab="At Bats",ylab="Hits")
+plot(1,type="n",xlim=c(0,700),ylim=c(0,200),xlab="At Bats",ylab="Hits",asp=1)
 arrows(0,0,48,12,col="red")
 arrows(48,12,(48+582),(183+12),col="red")
-arrows(0,0,(48+582),(183+12))
+arrows(0,0,(48+582),(183+12),col="red")
+arrows(0,0,411,104,col="blue")
+arrows(411,104,(411+140),(104+45),col="blue")
+arrows(0,0,(411+140),(104+45),col="blue")
+abline(0,1)
+title("Batting Averages")
+legend(1, 200, legend=c("Derek Jeter", "David Justice"),
+       col=c("red", "blue"),lty=c(1,1), cex=0.8)
 ```
 
 
