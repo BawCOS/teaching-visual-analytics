@@ -6,7 +6,7 @@
 > “It isn’t accidental that when we begin to understand something we say 'I see.' 
 > Not 'I hear' or 'I smell'” -- Stephen Few
 
->> "You see alot just by looking"  -- Yogi Berra
+> "You see alot just by looking"  -- Yogi Berra
 
 Use the unvotes package
 of NHANES data

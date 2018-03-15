@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-03-13">
+<meta name="date" content="2018-03-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,8 +167,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.2" data-path="Inert1.html"><a href="Inert1.html#our-problem"><i class="fa fa-check"></i><b>1.5.2</b> Our Problem</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="final-product.html"><a href="final-product.html"><i class="fa fa-check"></i><b>1.6</b> Final Product</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-11"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
-<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-12"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#first-knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> First Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.3" data-path="final-product.html"><a href="final-product.html#discussion-ideas-13"><i class="fa fa-check"></i><b>1.6.3</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.4" data-path="final-product.html"><a href="final-product.html#second-knowledge-product"><i class="fa fa-check"></i><b>1.6.4</b> Second Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.5" data-path="final-product.html"><a href="final-product.html#web-resources"><i class="fa fa-check"></i><b>1.6.5</b> Web Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="Conc1.html"><a href="Conc1.html"><i class="fa fa-check"></i><b>1.7</b> Conclusion</a></li>
 </ul></li>
@@ -203,7 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="Inert1" class="section level2">
 <h2><span class="header-section-number">1.5</span> Interaction</h2>
-<p>The third phase of the analysis is to develop insight through manipulaton of representations. In some sense we did this in section <a href="Viz1.html#Viz1">1.4</a> by running different table and plots. This exercise was static and labor intensive. In this section we will introduce the use of interactive tools that reduce the need to re-write code. We will be using html widgets as this document is written in html. However, there are many other tools that can be used for interaction.</p>
+<p>The third phase of the analysis is to develop insight through manipulation of representations. In some sense we did this in section <a href="Viz1.html#Viz1">1.4</a> by running different table and plots. This exercise was static and labor intensive. In this section we will introduce the use of interactive tools that reduce the need to re-write code. We will be using html widgets as this document is written in html. However, there are many other tools that can be used for interaction.</p>
 <div id="background-information-on-interaction" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Background Information on Interaction</h3>
 <p>The purpose of interaction in a visual display of data is the aid in the decision process. It can be used to explain a concept, develop conjectures or insights, and/or facilitate an exploration. This can lead to increased efficiencies and effectiveness of the decision making process. However, the science of understanding and implementing interaction is the least developed of the three areas. This is partly due to the only recent availability of software to easily develop customized interactive displays.</p>
@@ -247,11 +250,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT<span class="op">::</span><span class="kw">datatable</span>(interdata)</code></pre></div>
 <div id="htmlwidget-167f80f9264c80063ad2" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-167f80f9264c80063ad2">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],["1995","1995","1996","1996","Combined","Combined"],["David Justice","Derek Jeter","David Justice","Derek Jeter","David Justice","Derek Jeter"],[104,12,45,183,149,195],[411,48,140,582,551,630],[0.253,0.25,0.3214,0.3144,0.2704,0.3095]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Year<\/th>\n      <th>Player<\/th>\n      <th>Hits<\/th>\n      <th>At_Bats<\/th>\n      <th>Average<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
-<p>Experiment with the table.</p>
 </div>
 <div id="discussion-ideas-9" class="section level5">
 <h5><span class="header-section-number">1.5.2.1.2</span> Discussion Ideas</h5>
-<p>Use the sorting arrows to sort by player first then year. Subset the data to only show Derek Jeter, note use the search window.</p>
+<p>Have the students experiment with the table. some examples are to use the sorting arrows to sort by player first then year or subset the data to only show Derek Jeter, note use the search window.</p>
+<p>What are the advantages and disadvantages of this interactive table?</p>
 </div>
 <div id="second-interactive-table" class="section level5">
 <h5><span class="header-section-number">1.5.2.1.3</span> Second Interactive Table</h5>
@@ -262,17 +265,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="discussion-ideas-10" class="section level5">
 <h5><span class="header-section-number">1.5.2.1.4</span> Discussion Ideas</h5>
-<p>Remove year to get the batting averages for each player. Experiment with the pulldown menus to create other summaries. Sort using the small areas next to the aggregation pulldown menu. Switch year and player and determine the output.</p>
+<p>Have the students first remove year to get the batting averages for each player. Now ask the students to experiment with the pulldown menus to create other summaries; sort using the small areas next to the aggregation pulldown menu; switch year and player and determine the output.</p>
 </div>
 </div>
 <div id="interactive-vector-plots" class="section level4">
 <h4><span class="header-section-number">1.5.2.2</span> Interactive Vector Plots</h4>
-<p><strong>shiny</strong><span class="citation">(Chang et al. <a href="#ref-R-shiny">2017</a>)</span></p>
-<p>Without developing our own custom visualization, which we could have done in <a href="https://www.geogebra.org/">geogebra</a> , we decided to find an existing application. There is an interactive visualization application in the geogebra library, go to <a href="https://www.geogebra.org/m/YrPAV6KK" class="uri">https://www.geogebra.org/m/YrPAV6KK</a>. The example uses shooting baskets but gives the same idea as the reversal we saw in our problem. We selected this interaction becomes it helps explain why the reversal occurs and the conditions under which it occurs.</p>
-<p>Discussion ideas: Have the participants move Lucy1 around by experimenting with the length and angle to determine when the reversal occurs. What is the relationship between angle and the reversal? What is the relationship between length and reversal? Is it possible to have Tom as the better shooter regardless of Lucy’s actions as long as Lucy’s first and second day performances are less than Tom’s? What are the strengths of the interaction? What would have to be done to use it for our data?</p>
-<p>USE MANIPULATEWIDGET WITHIN HTMLWIDGETS TO SEE IF YOU CAN GET INTERACTIVE PLOT</p>
-<p><a href="https://www.datacamp.com/community/tutorials/15-questions-about-r-plots#q14" class="uri">https://www.datacamp.com/community/tutorials/15-questions-about-r-plots#q14</a></p>
-<p><a href="https://cran.r-project.org/web/packages/manipulateWidget/vignettes/manipulateWidgets.html" class="uri">https://cran.r-project.org/web/packages/manipulateWidget/vignettes/manipulateWidgets.html</a> <a href="https://github.com/rte-antares-rpackage/manipulateWidget" class="uri">https://github.com/rte-antares-rpackage/manipulateWidget</a> <a href="http://gallery.htmlwidgets.org/" class="uri">http://gallery.htmlwidgets.org/</a></p>
+<p>Without developing our own custom visualization of the vector plot, which we could do in <a href="https://www.geogebra.org/">geogebra</a> or using the R package <strong>shiny</strong><span class="citation">(Chang et al. <a href="#ref-R-shiny">2017</a>)</span>, we decided to find an existing application on the web. There is an interactive visualization application in the geogebra library, go to <a href="https://www.geogebra.org/m/YrPAV6KK" class="uri">https://www.geogebra.org/m/YrPAV6KK</a>. The example uses shooting baskets but gives the same idea as the reversal we saw in our problem. We selected this interaction because it helps explain why the reversal occurs and the conditions under which it occurs.</p>
+</div>
+<div id="discussion-ideas-11" class="section level4">
+<h4><span class="header-section-number">1.5.2.3</span> Discussion ideas</h4>
+<p>Have the participants move Lucy1 around by experimenting with the length and angle to determine when the reversal occurs. What is the relationship between angle and the reversal? What is the relationship between length and reversal? Is it possible to have Tom as the better shooter regardless of Lucy’s actions as long as Lucy’s first and second day performances are less than Tom’s? What are the strengths of the interaction tool? What would have to be done to use it for our data?</p>
 </div>
 </div>
 </div>

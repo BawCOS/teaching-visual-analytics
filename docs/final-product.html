@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-03-13">
+<meta name="date" content="2018-03-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,8 +167,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.2" data-path="Inert1.html"><a href="Inert1.html#our-problem"><i class="fa fa-check"></i><b>1.5.2</b> Our Problem</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="final-product.html"><a href="final-product.html"><i class="fa fa-check"></i><b>1.6</b> Final Product</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-11"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
-<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-12"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#first-knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> First Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.3" data-path="final-product.html"><a href="final-product.html#discussion-ideas-13"><i class="fa fa-check"></i><b>1.6.3</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.4" data-path="final-product.html"><a href="final-product.html#second-knowledge-product"><i class="fa fa-check"></i><b>1.6.4</b> Second Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.5" data-path="final-product.html"><a href="final-product.html#web-resources"><i class="fa fa-check"></i><b>1.6.5</b> Web Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="Conc1.html"><a href="Conc1.html"><i class="fa fa-check"></i><b>1.7</b> Conclusion</a></li>
 </ul></li>
@@ -203,17 +206,102 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="final-product" class="section level2">
 <h2><span class="header-section-number">1.6</span> Final Product</h2>
-<p>The fourth phase of the analysis is the creation of a knowledge product. In this case the reader(s) will be varied.</p>
-<div id="discussion-ideas-11" class="section level3">
+<p>The fourth phase of the analysis is the creation of a knowledge product. In this case the reader(s) will be varied. It is important to think about graphic design elements such as color, labels, font. The key point is to clearly define the message and then use the graphic elements to support this message.</p>
+<div id="discussion-ideas-12" class="section level3">
 <h3><span class="header-section-number">1.6.1</span> Discussion Ideas</h3>
-<p>What would be the best way to present the final conclusion that Derek Jeter is a better batter than David Justice?</p>
+<p>What is the key message? What is the best method to communicate this message? Should we use a static graphic or an interactive display?</p>
 </div>
-<div id="knowledge-product" class="section level3">
-<h3><span class="header-section-number">1.6.2</span> Knowledge Product</h3>
+<div id="first-knowledge-product" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> First Knowledge Product</h3>
+<p>We think the key message is that Derek Jeter is the better batter than David Justice. We will use a static visual since interactive tools currently require access to the internet of special software. Before coming up with our final knowledge product we will discuss ideas using our vector plot from Figure <a href="Viz1.html#fig:fig-ggplot">1.5</a>, reproduced below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">700</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">200</span>)<span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">xend =</span> At_Bats, <span class="dt">yend =</span> Hits,<span class="dt">color=</span>Player),<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(.<span class="dv">2</span>,<span class="st">&#39;cm&#39;</span>),<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits, <span class="dt">label =</span> Year)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Batting Averages&quot;</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>First let’s change the theme to reduce the background color.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">700</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">200</span>)<span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">xend =</span> At_Bats, <span class="dt">yend =</span> Hits,<span class="dt">color=</span>Player),<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(.<span class="dv">2</span>,<span class="st">&#39;cm&#39;</span>),<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits, <span class="dt">label =</span> Year)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Batting Averages&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Now let’s improve the labels.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">700</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">200</span>)<span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">xend =</span> At_Bats, <span class="dt">yend =</span> Hits,<span class="dt">color=</span>Player),<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(.<span class="dv">2</span>,<span class="st">&#39;cm&#39;</span>),<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits, <span class="dt">label =</span> Year)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Derek Jeter is Better than David Justice&quot;</span>,<span class="dt">x=</span><span class="st">&quot;Number of At Bats&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Hits&quot;</span>,
+       <span class="dt">subtitle=</span><span class="st">&quot;Batting averages for 1995 and 1996 as well as the combined averages&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Finally, let’s change the ticks on the axes and a different theme.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">200</span>)<span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">xend =</span> At_Bats, <span class="dt">yend =</span> Hits,<span class="dt">color=</span>Player),<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(.<span class="dv">2</span>,<span class="st">&#39;cm&#39;</span>),<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits, <span class="dt">label =</span> Year)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Derek Jeter is Better than David Justice&quot;</span>,<span class="dt">x=</span><span class="st">&quot;Number of At Bats&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Hits&quot;</span>,
+       <span class="dt">subtitle=</span><span class="st">&quot;Batting averages for 1995 and 1996 as well as the combined averages&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">600</span>,<span class="dv">50</span>))</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="discussion-ideas-13" class="section level3">
+<h3><span class="header-section-number">1.6.3</span> Discussion Ideas</h3>
+<p>What do you like and dislike about the latest visual? Does it accomplish it goal of showing Derek Jeter is the better batter? What would you change?</p>
+</div>
+<div id="second-knowledge-product" class="section level3">
+<h3><span class="header-section-number">1.6.4</span> Second Knowledge Product</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d=<span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">y2=</span><span class="kw">c</span>(<span class="fl">0.3095</span>,<span class="fl">0.2704</span>), <span class="dt">y1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">x2=</span><span class="kw">c</span>(.<span class="dv">630</span>,<span class="fl">0.551</span>), <span class="dt">Player=</span><span class="kw">c</span>(<span class="st">&#39;Derek Jeter&#39;</span>,<span class="st">&#39;David Justice&#39;</span>), <span class="dt">r=</span><span class="kw">c</span>(<span class="dv">630</span>,<span class="dv">551</span>))
+<span class="kw">ggplot</span>(d) <span class="op">+</span><span class="st"> </span>
+<span class="kw">geom_rect</span>(<span class="kw">aes</span>(<span class="dt">xmin=</span>x1, <span class="dt">xmax=</span>x2, <span class="dt">ymin=</span>y1, <span class="dt">ymax=</span>y2, <span class="dt">fill=</span>Player), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Paired&quot;</span>)  <span class="op">+</span>
+<span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Player) <span class="op">+</span>
+<span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;At Bats&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Batting Average&quot;</span>) <span class="op">+</span>
+<span class="co">#geom_text(data=d, aes(x=x1+(x2-x1)/2, y=y1+(y2-y1)/2, label=r), size=4) +</span>
+<span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Derek Jeter is a batter batter than David Justice&quot;</span>,
+     <span class="dt">subtitle=</span><span class="st">&quot;Based on data from the years 1995 - 1996&quot;</span>) <span class="op">+</span>
+<span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span>x1<span class="op">+</span>(x2<span class="op">-</span>x1)<span class="op">/</span><span class="dv">2</span>, <span class="dt">y=</span>y1<span class="op">-</span><span class="fl">0.01</span>, <span class="dt">label=</span>r)) <span class="op">+</span>
+<span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),<span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(),<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d=<span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">y2=</span><span class="kw">c</span>(<span class="fl">0.3095</span>,<span class="fl">0.2704</span>), <span class="dt">y1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">x2=</span><span class="kw">c</span>(.<span class="dv">630</span>,<span class="fl">0.551</span>), <span class="dt">Player=</span><span class="kw">c</span>(<span class="st">&#39;Derek Jeter&#39;</span>,<span class="st">&#39;David Justice&#39;</span>), <span class="dt">r=</span><span class="kw">c</span>(<span class="dv">630</span>,<span class="dv">551</span>))
+<span class="kw">ggplot</span>(d) <span class="op">+</span><span class="st"> </span>
+<span class="kw">geom_rect</span>(<span class="kw">aes</span>(<span class="dt">xmin=</span>x1, <span class="dt">xmax=</span>x2, <span class="dt">ymin=</span>y1, <span class="dt">ymax=</span>y2, <span class="dt">fill=</span>Player), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Paired&quot;</span>)  <span class="op">+</span>
+<span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Player) <span class="op">+</span>
+<span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;At Bats&quot;</span>,<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">25</span>,.<span class="dv">5</span>,.<span class="dv">75</span>),<span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;250&quot;</span>, <span class="st">&quot;500&quot;</span>,<span class="st">&quot;750&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Batting Average&quot;</span>) <span class="op">+</span>
+<span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Derek Jeter is a batter batter than David Justice&quot;</span>,
+     <span class="dt">subtitle=</span><span class="st">&quot;Based on data from the years 1995 - 1996&quot;</span>) <span class="op">+</span>
+<span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div id="web-resources" class="section level3">
+<h3><span class="header-section-number">1.6.5</span> Web Resources</h3>
+<p>The following are some resource</p>
 <p><a href="https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/" class="uri">https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/</a></p>
 <p><a href="http://nandeshwar.info/data-visualization/how-to-create-infographics-in-r/" class="uri">http://nandeshwar.info/data-visualization/how-to-create-infographics-in-r/</a></p>
 <p><a href="http://flowingdata.com/category/tutorials/" class="uri">http://flowingdata.com/category/tutorials/</a></p>
-<p><a href="https://github.com/hrbrmstr/waffle" class="uri">https://github.com/hrbrmstr/waffle</a> <a href="http://floda31.com/2011/05/if-the-world-were-100-people/" class="uri">http://floda31.com/2011/05/if-the-world-were-100-people/</a> <a href="https://www.r-bloggers.com/infographic-style-charts-using-the-r-waffle-package/" class="uri">https://www.r-bloggers.com/infographic-style-charts-using-the-r-waffle-package/</a></p>
 </div>
 </div>
             </section>

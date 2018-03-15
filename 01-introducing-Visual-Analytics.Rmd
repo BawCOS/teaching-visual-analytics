@@ -469,7 +469,7 @@ http://www.storytellingwithdata.com/
 
 ## Interaction {#Inert1}  
 
-The third phase of the analysis is to develop insight through manipulaton of representations. In some sense we did this in section \@ref(Viz1) by running different table and plots. This exercise was static and labor intensive. In this section we will introduce the use of interactive tools that reduce the need to re-write code. We will be using html widgets as this document is written in html. However, there are many other tools that can be used for interaction.
+The third phase of the analysis is to develop insight through manipulation of representations. In some sense we did this in section \@ref(Viz1) by running different table and plots. This exercise was static and labor intensive. In this section we will introduce the use of interactive tools that reduce the need to re-write code. We will be using html widgets as this document is written in html. However, there are many other tools that can be used for interaction.
 
 
 ### Background Information on Interaction
@@ -528,13 +528,11 @@ Next we generate the table using the **DT** package [@R-DT].
 DT::datatable(interdata)
 ```
 
-Experiment with the table.
-
-
-
 ##### Discussion Ideas  
 
-Use the sorting arrows to sort by player first then year. Subset the data to only show Derek Jeter, note use the search window.
+Have the students experiment with the table. some examples are to use the sorting arrows to sort by player first then year or subset the data to only show Derek Jeter, note use the search window.
+
+What are the advantages and disadvantages of this interactive table?
 
 ##### Second Interactive Table 
 
@@ -546,34 +544,131 @@ rpivotTable(MLB_long,rows=c("Year","Player"),cols="Result",aggregatorName="Count
 
 ##### Discussion Ideas  
 
-Remove year to get the batting averages for each player. Experiment with the pulldown menus to create other summaries.  Sort using the small areas next to the aggregation pulldown menu. Switch year and player and determine the output.
+Have the students first remove year to get the batting averages for each player. Now ask the students to experiment with the pulldown menus to create other summaries; sort using the small areas next to the aggregation pulldown menu; switch year and player and determine the output.
 
 #### Interactive Vector Plots  
 
-**shiny**[@R-shiny]
+Without developing our own custom visualization of the vector plot, which we could do in [geogebra](https://www.geogebra.org/) or using the R package  **shiny**[@R-shiny], we decided to find an existing application on the web.  There is an interactive visualization application in the geogebra library, go to https://www.geogebra.org/m/YrPAV6KK.  The example uses shooting baskets but gives the same idea as the reversal we saw in our problem.  We selected this interaction because it helps explain why the reversal occurs and the conditions under which it occurs.  
 
-Without developing our own custom visualization, which we could have done in [geogebra](https://www.geogebra.org/) , we decided to find an existing application.  There is an interactive visualization application in the geogebra library, go to https://www.geogebra.org/m/YrPAV6KK.  The example uses shooting baskets but gives the same idea as the reversal we saw in our problem.  We selected this interaction becomes it helps explain why the reversal occurs and the conditions under which it occurs.  
+#### Discussion ideas  
 
-Discussion ideas:  Have the participants move Lucy1 around by experimenting with the length and angle to determine when the reversal occurs.  What is the relationship between angle and the reversal?  What is the relationship between length and reversal?  Is it possible to have Tom as the better shooter regardless of Lucy’s actions as long as Lucy’s first and second day performances are less than Tom’s?  What are the strengths of the interaction?  What would have to be done to use it for our data? 
-
-
-USE MANIPULATEWIDGET WITHIN HTMLWIDGETS TO SEE IF YOU CAN GET INTERACTIVE PLOT
-
-https://www.datacamp.com/community/tutorials/15-questions-about-r-plots#q14
-
-https://cran.r-project.org/web/packages/manipulateWidget/vignettes/manipulateWidgets.html 
-https://github.com/rte-antares-rpackage/manipulateWidget
-http://gallery.htmlwidgets.org/ 
+Have the participants move Lucy1 around by experimenting with the length and angle to determine when the reversal occurs.  What is the relationship between angle and the reversal?  What is the relationship between length and reversal?  Is it possible to have Tom as the better shooter regardless of Lucy’s actions as long as Lucy’s first and second day performances are less than Tom’s?  What are the strengths of the interaction tool?  What would have to be done to use it for our data? 
 
 ## Final Product 
 
-The fourth phase of the analysis is the creation of a knowledge product. In this case the reader(s) will be varied.
+The fourth phase of the analysis is the creation of a knowledge product. In this case the reader(s) will be varied. It is important to think about graphic design elements such as color, labels, font. The key point is to clearly define the message and then use the graphic elements to support this message.  
 
 ### Discussion Ideas  
 
-What would be the best way to present the final conclusion that Derek Jeter is a better batter than David Justice?
+What is the key message? What is the best method to communicate this message? Should we use a static graphic or an interactive display? 
 
-### Knowledge Product  
+### First Knowledge Product  
+
+We think the key message is that Derek Jeter is the better batter than David Justice. We will use a static visual since interactive tools currently require access to the internet of special software.  Before coming up with our final knowledge product we will discuss ideas using our vector plot from Figure \@ref(fig:fig-ggplot), reproduced below.
+
+
+```{r}
+plotdata %>%
+  ggplot(aes(x=At_Bats,y=Hits)) +
+  geom_point() +
+  xlim(0,700)+
+  ylim(0,200)+ 
+  coord_fixed(ratio=1) +
+  geom_segment(aes(x = 0, y = 0, xend = At_Bats, yend = Hits,color=Player),arrow=arrow(length=unit(.2,'cm'),type="closed")) +
+  geom_text_repel(aes(x=At_Bats,y=Hits, label = Year)) +
+  labs(title="Batting Averages")
+```
+
+First let's change the theme to reduce the background color.
+
+
+```{r}
+plotdata %>%
+  ggplot(aes(x=At_Bats,y=Hits)) +
+  geom_point() +
+  xlim(0,700)+
+  ylim(0,200)+ 
+  coord_fixed(ratio=1) +
+  geom_segment(aes(x = 0, y = 0, xend = At_Bats, yend = Hits,color=Player),arrow=arrow(length=unit(.2,'cm'),type="closed")) +
+  geom_text_repel(aes(x=At_Bats,y=Hits, label = Year)) +
+  labs(title="Batting Averages")+
+  theme_minimal()
+```
+
+Now let's improve the labels.
+
+
+```{r}
+plotdata %>%
+  ggplot(aes(x=At_Bats,y=Hits)) +
+  geom_point() +
+  xlim(0,700)+
+  ylim(0,200)+ 
+  coord_fixed(ratio=1) +
+  geom_segment(aes(x = 0, y = 0, xend = At_Bats, yend = Hits,color=Player),arrow=arrow(length=unit(.2,'cm'),type="closed")) +
+  geom_text_repel(aes(x=At_Bats,y=Hits, label = Year)) +
+  labs(title="Derek Jeter is Better than David Justice",x="Number of At Bats",y="Hits",
+       subtitle="Batting averages for 1995 and 1996 as well as the combined averages")+
+  theme_minimal()
+```  
+
+Finally, let's change the ticks on the axes and a different theme.
+
+```{r}
+plotdata %>%
+  ggplot(aes(x=At_Bats,y=Hits)) +
+  geom_point() +
+  ylim(0,200)+ 
+  coord_fixed(ratio=1) +
+  geom_segment(aes(x = 0, y = 0, xend = At_Bats, yend = Hits,color=Player),arrow=arrow(length=unit(.2,'cm'),type="closed")) +
+  geom_text_repel(aes(x=At_Bats,y=Hits, label = Year)) +
+  labs(title="Derek Jeter is Better than David Justice",x="Number of At Bats",y="Hits",
+       subtitle="Batting averages for 1995 and 1996 as well as the combined averages")+
+  theme_bw() +
+  scale_x_continuous(breaks=seq(0,600,50))
+```  
+
+### Discussion Ideas  
+
+What do you like and dislike about the latest visual? Does it accomplish it goal of showing Derek Jeter is the better batter? What would you change?
+
+### Second Knowledge Product  
+
+```{r}
+d=data.frame(x1=c(0,0), y2=c(0.3095,0.2704), y1=c(0,0), x2=c(.630,0.551), Player=c('Derek Jeter','David Justice'), r=c(630,551))
+ggplot(d) + 
+geom_rect(aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2, fill=Player), color="black", alpha=0.5) + 
+theme_classic() +
+scale_fill_brewer(palette="Paired")  +
+facet_grid(. ~ Player) +
+scale_x_continuous(name="At Bats") + 
+scale_y_continuous(name="Batting Average") +
+#geom_text(data=d, aes(x=x1+(x2-x1)/2, y=y1+(y2-y1)/2, label=r), size=4) +
+labs(title="Derek Jeter is a batter batter than David Justice",
+     subtitle="Based on data from the years 1995 - 1996") +
+geom_text(aes(x=x1+(x2-x1)/2, y=y1-0.01, label=r)) +
+theme(axis.text.x = element_blank(),axis.ticks.x = element_blank(),legend.position = "none")
+```
+
+
+```{r}
+d=data.frame(x1=c(0,0), y2=c(0.3095,0.2704), y1=c(0,0), x2=c(.630,0.551), Player=c('Derek Jeter','David Justice'), r=c(630,551))
+ggplot(d) + 
+geom_rect(aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2, fill=Player), color="black", alpha=0.5) + 
+theme_classic() +
+scale_fill_brewer(palette="Paired")  +
+facet_grid(. ~ Player) +
+scale_x_continuous(name="At Bats",breaks=c(0,.25,.5,.75),labels=c("0", "250", "500","750")) + 
+scale_y_continuous(name="Batting Average") +
+labs(title="Derek Jeter is a batter batter than David Justice",
+     subtitle="Based on data from the years 1995 - 1996") +
+theme(legend.position = "none")
+```
+
+
+### Web Resources  
+
+The following are some resource
 
 https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/ 
 
@@ -581,9 +676,6 @@ http://nandeshwar.info/data-visualization/how-to-create-infographics-in-r/
 
 http://flowingdata.com/category/tutorials/ 
 
-https://github.com/hrbrmstr/waffle 
-http://floda31.com/2011/05/if-the-world-were-100-people/ 
-https://www.r-bloggers.com/infographic-style-charts-using-the-r-waffle-package/ 
 
 ## Conclusion {#Conc1}
 
@@ -597,5 +689,4 @@ After the training, participants will:
 2.    be able to describe the three important components of visual analytics
 3.    be able to discuss types of unique insights that VA can provide
 
-https://www.r-bloggers.com/parallel-coordinate-plots-for-discrete-and-categorical-data-in-r-a-comparison/
 

@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-03-13">
+<meta name="date" content="2018-03-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,8 +167,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.2" data-path="Inert1.html"><a href="Inert1.html#our-problem"><i class="fa fa-check"></i><b>1.5.2</b> Our Problem</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="final-product.html"><a href="final-product.html"><i class="fa fa-check"></i><b>1.6</b> Final Product</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-11"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
-<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-12"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#first-knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> First Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.3" data-path="final-product.html"><a href="final-product.html#discussion-ideas-13"><i class="fa fa-check"></i><b>1.6.3</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.4" data-path="final-product.html"><a href="final-product.html#second-knowledge-product"><i class="fa fa-check"></i><b>1.6.4</b> Second Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.5" data-path="final-product.html"><a href="final-product.html#web-resources"><i class="fa fa-check"></i><b>1.6.5</b> Web Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="Conc1.html"><a href="Conc1.html"><i class="fa fa-check"></i><b>1.7</b> Conclusion</a></li>
 </ul></li>
@@ -204,7 +207,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="prerequisites" class="section level2">
 <h2><span class="header-section-number">0.3</span> Prerequisites</h2>
 <p>WHY USE R what if you don’t want to</p>
-<p>These notes make use of the following packages in R <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">b</a>)</span>, <strong>rmarkdown</strong> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2017</a>)</span>, <strong>fastR</strong> <span class="citation">(Pruim <a href="#ref-R-fastR">2017</a>)</span>, <strong>Hmisc</strong> <span class="citation">(Harrell <a href="#ref-R-Hmisc">2018</a>)</span>, <strong>lattice</strong> <span class="citation">(Sarkar <a href="#ref-R-lattice">2017</a>)</span>, <strong>vcd</strong> <span class="citation">(Meyer, Zeileis, and Hornik <a href="#ref-R-vcd">2017</a>)</span>, <strong>ggplot2</strong> <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>, <strong>MASS</strong> <span class="citation">(Ripley <a href="#ref-R-MASS">2017</a>)</span>, <strong>TeachingDemos</strong> <span class="citation">(Snow <a href="#ref-R-TeachingDemos">2016</a>)</span>, <strong>Stat2Data</strong> <span class="citation">(Lock <a href="#ref-R-Stat2Data">2013</a>)</span>, <strong>car</strong> <span class="citation">(Fox and Weisberg <a href="#ref-R-car">2017</a>)</span>, <strong>DT</strong> <span class="citation">(Xie <a href="#ref-R-DT">2016</a>)</span>,<strong>crosstalk</strong> <span class="citation">(Cheng <a href="#ref-R-crosstalk">2016</a>)</span>, <strong>leaflet</strong> <span class="citation">(Cheng, Karambelkar, and Xie <a href="#ref-R-leaflet">2017</a>)</span>, <strong>plotly</strong> <span class="citation">(Sievert et al. <a href="#ref-R-plotly">2017</a>)</span>, <strong>ggrepel</strong><span class="citation">(Slowikowski <a href="#ref-R-ggrepel">2017</a>)</span>, <strong>rpivotTable</strong><span class="citation">(Martoglio <a href="#ref-R-rpivotTable">2017</a>)</span>.</p>
+<p>These notes make use of the following packages in R <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">b</a>)</span>, <strong>rmarkdown</strong> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2017</a>)</span>, <strong>fastR</strong> <span class="citation">(Pruim <a href="#ref-R-fastR">2017</a>)</span>, <strong>Hmisc</strong> <span class="citation">(Harrell <a href="#ref-R-Hmisc">2018</a>)</span>, <strong>lattice</strong> <span class="citation">(Sarkar <a href="#ref-R-lattice">2017</a>)</span>, <strong>vcd</strong> <span class="citation">(Meyer, Zeileis, and Hornik <a href="#ref-R-vcd">2017</a>)</span>, <strong>ggplot2</strong> <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>, <strong>MASS</strong> <span class="citation">(Ripley <a href="#ref-R-MASS">2017</a>)</span>, <strong>TeachingDemos</strong> <span class="citation">(Snow <a href="#ref-R-TeachingDemos">2016</a>)</span>, <strong>Stat2Data</strong> <span class="citation">(Lock <a href="#ref-R-Stat2Data">2013</a>)</span>, <strong>car</strong> <span class="citation">(Fox and Weisberg <a href="#ref-R-car">2017</a>)</span>, <strong>DT</strong> <span class="citation">(Xie <a href="#ref-R-DT">2016</a>)</span>,<strong>crosstalk</strong> <span class="citation">(Cheng <a href="#ref-R-crosstalk">2016</a>)</span>, <strong>leaflet</strong> <span class="citation">(Cheng, Karambelkar, and Xie <a href="#ref-R-leaflet">2017</a>)</span>, <strong>plotly</strong> <span class="citation">(Sievert et al. <a href="#ref-R-plotly">2017</a>)</span>, <strong>ggrepel</strong><span class="citation">(Slowikowski <a href="#ref-R-ggrepel">2017</a>)</span>, <strong>rpivotTable</strong><span class="citation">(Martoglio <a href="#ref-R-rpivotTable">2017</a>)</span>, <strong>RColorBrewer</strong><span class="citation">(Neuwirth <a href="#ref-R-RColorBrewer">2014</a>)</span>.</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
@@ -258,6 +261,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="ref-R-rpivotTable">
 <p>Martoglio, Enzo. 2017. <em>RpivotTable: Build Powerful Pivot Tables and Dynamically Slice &amp; Dice Your Data</em>. <a href="https://CRAN.R-project.org/package=rpivotTable" class="uri">https://CRAN.R-project.org/package=rpivotTable</a>.</p>
+</div>
+<div id="ref-R-RColorBrewer">
+<p>Neuwirth, Erich. 2014. <em>RColorBrewer: ColorBrewer Palettes</em>. <a href="https://CRAN.R-project.org/package=RColorBrewer" class="uri">https://CRAN.R-project.org/package=RColorBrewer</a>.</p>
 </div>
 </div>
             </section>
