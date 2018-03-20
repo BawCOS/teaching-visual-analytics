@@ -1,0 +1,123 @@
+# Interactions {#Chpt4}
+
+> “It isn’t accidental that when we begin to understand something we say 'I see.' 
+> Not 'I hear' or 'I smell'” -- Stephen Few
+
+> "You see alot just by looking"  -- Yogi Berra
+
+> Visualization can surprise but doesn't scale well. Modeling scales well but cannot surprise you. -- Hadley Wickham
+
+
+Use the unvotes package
+or NHANES data
+
+## Lesson Preparation
+
+### Objectives:  
+
+After the training, students will:
+  
+1.    explain the basic principles of visual displays of data
+2.    be able to define visualization 
+3.    be able to use metrics to evaluate and compare visual displays of data 
+4.    be able
+
+
+### Preparation
+
+The following sites can be used as preparation material for this lesson, note they are arranged in a rough order of time commitment: 
+1) https://moz.com/blog/data-visualization-principles-lessons-from-tufte with a focus on the contents of good graphics.  
+2) https://www.columnfivemedia.com/makes-visualization-memorable this site offers some support of the previous link but also some counterpoints.  See the paper at http://cvcl.mit.edu/papers/Borkin_etal_MemorableVisualization_TVCG2013.pdf for more details.
+3) Read https://eagereyes.org/criticism/definition-of-visualization 
+4) Watch https://www.youtube.com/watch?v=AdSZJzb-aX8 The Art of Data Visualization
+5) Watch https://www.youtube.com/watch?v=5Zg-C8AAIGg The Beauty of Data Visualization 
+6)  Bring Data Viz into Class on Lesson One https://escholarship.org/uc/item/84v3774z 
+For more detailed lesson or more experienced students:
+
+https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen?language=en 
+
+Read Visualizing Categorical Data https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=6&cad=rja&uact=8&ved=0ahUKEwiwyPnessrUAhUL5WMKHaFhAioQFghSMAU&url=http%3A%2F%2Fdl.acm.org%2Fcitation.cfm%3Fid%3D517003&usg=AFQjCNGvmx1AHiGmRZ5vHn7IPJWdStlZaQ&sig2=G5Dly2rSS7I0v64zpo2T1Q 
+Watch https://www.youtube.com/watch?v=R-oiKt7bUU8 Designing Data Visualizations with Noah Iliinsky
+Advances in Visualizing Categorical Data https://www.youtube.com/watch?v=qfNsoc7Tf60 
+Read http://neomam.com/interactive/13reasons/ 
+Watch https://www.youtube.com/watch?v=8tJ4nBIU3q0 
+
+From the cognitive class on IBM Dark Horse Analytics three key points Less is more effective, less is more attractive, less is more impactful.  They use a 3D pie as an example.
+
+https://courses.cognitiveclass.ai/courses/course-v1:CognitiveClass+DV0101EN+v1/courseware/407a9f86565c44189740699636b4fb85/12eab34ec218468995e4d06566ef4a32/
+
+Also check out www.darkhorseanalytics.com 
+
+In training session:
+
+Discuss the following:
+
+Definition from the above reading:
+
+Based on (non-visual) data. A visualization’s purpose is the communication of data. That means that the data must come from something that is abstract or at least not immediately visible (like the inside of the human body). This rules out photography and image processing. Visualization transforms from the invisible to the visible.
+Produce an image. It may seem obvious that a visualization has to produce an image, but that is not always so clear. Also, the visual must be the primary means of communication, other modalities can only provide additional information. If the image is only a small part of the process, it is not visualization.
+The result must be readable and recognizable. The most important criteria is that the visualization must provide a way to learn something about the data. Any transformation of non-trivial data into an image will leave out information, but there must be at least some relevant aspects of the data that can be read. The visualization must also be recognizable as one and not pretend to be something else (see the discussion of Informative Art).
+
+2) There are four important ingredients for information visualization:
+
+```{r eval=FALSE}
+library(dplyr)
+library(htmlwidgets)
+library(rpivotTable)
+library(crosstalk)
+library(DT)
+library(leaflet)
+library(plotly)
+```
+
+
+```{r}
+DT::datatable(iris)
+```
+
+```{r eval=FALSE}
+library(ggplot2)
+library(plotly)
+```
+
+```{r}
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+            geom_bar(position = "dodge")
+ggplotly(p)
+```
+
+```{r}
+data(mtcars)
+rpivotTable(mtcars,rows="gear", cols=c("cyl","carb"),width="100%")
+```
+
+```{r eval=FALSE}
+devtools::install_github("jcheng5/d3scatter")
+```
+
+
+```{r}
+library(htmlwidgets)
+library(crosstalk)
+library(leaflet)
+library(DT)
+library(d3scatter)
+```
+
+```{r}
+shared_mtcars <- SharedData$new(mtcars)
+bscols(widths = c(3,NA,NA),
+  list(
+    filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE),
+    filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%"),
+    filter_select("auto", "Automatic", shared_mtcars, ~ifelse(am == 0, "Yes", "No"))
+  ),
+  d3scatter(shared_mtcars, ~wt, ~mpg, ~factor(cyl), width="100%", height=250),
+  d3scatter(shared_mtcars, ~hp, ~qsec, ~factor(cyl), width="100%", height=250)
+)
+```
+
+```{r}
+plot_ly(z = ~volcano)
+```
+

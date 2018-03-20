@@ -5,14 +5,14 @@
 > "The simple graph has brought more information to the data analyst’s mind 
 > than any other device." --- John Tukey
 
-This chapter is a short introduction to visual analytics. It starts with a question, which can be understood to be the analytic reasoning leg of the visual analytics cycle. The second chapter is also an introduction to visual analytics but it takes more of a hypothesis generating point of view and thus has more emphasis on visualization and interaction. The depth that you as the instructor use depends on how much time can be devoted to this lesson.  This lesson could be done in a little as 30 minutes or as much as three 50 minute lessons.  These notes are broken into sections.  Under each section are some combination of definitions, explanations, discussion ideas, and problems as needed. You can drop portions or entire sections as needed or dictated by time.
+This chapter is an introduction to visual analytics. It starts with a question, which can be understood to be the analytic reasoning leg of the visual analytics cycle. The second chapter is also an introduction to visual analytics but it takes more of a hypothesis generating point of view and thus has more emphasis on visualization and interaction. The depth that you as the instructor use depends on how much time can be devoted to this lesson.  This lesson could be done in a little as 30 minutes or as much as three 50 minute lessons.  These notes are broken into sections.  Under each section are some combination of definitions, explanations, discussion ideas, and problems as needed. You can drop portions or entire sections as needed or dictated by time.
 
 Many of the ideas for this chapter come from friendly's excellent book on the analysis of discrete data [@FriendlyMeyer:2016:DDAR].
 
 
-## Pre-Class Notes
+## Lesson Preparation
 
-Objectives  
+### Objectives  
 
 After the training, participants will:
  
@@ -20,7 +20,7 @@ After the training, participants will:
 2. be able to describe the three important components of visual analytics
 3. be able to discuss types of unique insights that visual analytics can provide
   
-Preparation
+### Preparation
 
 Prior to class: 
 
@@ -32,7 +32,7 @@ Prior to class:
 
 Suggestions to start the lesson:
 
-1.  Have the participants discuss the videos and explain insights gained for the preparation work..
+1.  Have the participants discuss the videos and explain insights gained for the preparation work.
 
 2.  One of the objectives is to define and explain visual analytics.  A useful definition is (this can be given or developed by asking students for input): Visual analytics is the science of analytical reasoning facilitated by interactive visual interfaces.  
 
@@ -43,7 +43,11 @@ c) We must in turn explore and understand analytical reasoning, visual represent
 
 Below is a diagram of the visual analytics process. It is a cycle where any one particular step can be a starting point, and ending point, and a transition point to another area of the cycle. For this lesson we will assume you start with a hypothesis and thus start with analytical reasoning. It is important to note that this is not always the case. You could start with data visualization in an exploratory manner and then move to either analytic reasoning or data visualization.  
 
-![](./images/Cycle.png)  
+
+
+```{r fig0, fig.cap="Visual Analytics Cycle",echo=FALSE}
+knitr::include_graphics("./images/Cycle.png")
+```
 
 
 ## Analytic Reasoning {#AR1}  
