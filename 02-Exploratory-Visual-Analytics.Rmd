@@ -44,20 +44,22 @@ We are replicating Figure \@ref(fig:fig0) below to remind you of the process for
 
 ## Data Collection  
 
-The data for this lesson comes from the [Gapminder](https://www.gapminder.org/data/) website. Again, you could just start with the **tools** application on the website instead of using the R code here.  
+The data for this lesson comes from the [Gapminder](https://www.gapminder.org/data/) website. Again, you could just start with the **tools** application on the website instead of using the R code here. This section will be long but remember that data wrangling can take up to 80% of the time in a project.  
 
 First we will load two pacages we need. The data is downloaded in a Excel spreadsheet; we will use the package **readxl** to read it.  In addition, R has a package called **gapminder** which is a subset of the data from the Gapminder website. We will use it to get country names to reduce the size of our data and exclude countries with a large amount of missing data.  
 
 ```{r eval=FALSE}
 library(readxl)
 library(gapminder)
+library(dplyr)
+library(tidyverse)
 ```
 
 The data has been downloaded and is in the **data** folder on the GitHub site for this book.
 
 ```{r}
 gapminder_population_temp <- read_excel("data/indicator gapminder population.xlsx")
-head(gapminder_population_temp)
+gapminder_population_temp
 ```
 
 From the **gapminder** package, we will get the subset of countries where the data is most complete.
@@ -74,7 +76,71 @@ gapminder_population<-gapminder_population_temp %>%
   rename(country="Total population") %>%
   mutate(year=as.integer(year),pop=as.integer(pop)) %>%
   filter(country %in% countries,year>=1950)
-rm(gapminder_population_temp)
+gapminder_population
+```
+
+Before proceeding. We will check the quality of the data.
+
+```{r}
+length(countries)
+length(unique(gapminder_population$country))
+```
+
+There are 142 countries in the **gapminder** data but only 139 in the data we collected. These names might be different from those from the imported data. We will check that first.
+
+```{r}
+countries[!(countries %in% unique(gapminder_population$country))]
+```
+
+We are missing the two Koreas and Yemen from our data.
+
+We need the full list of countries, so we have to start over.
+
+```{r}
+gapminder_population<-gapminder_population_temp %>%
+  gather(year,pop,-"Total population") %>%
+  rename(country="Total population") %>%
+  mutate(year=as.integer(year),pop=as.integer(pop)) %>%
+  filter(year>=1950)
+gapminder_population
+```
+
+```{r}
+unique(gapminder_population$country)[grep("Korea",unique(gapminder_population$country))]
+unique(gapminder_population$country)[grep("Yemen",unique(gapminder_population$country))]
+```
+
+We now know the problem is that in the **gapminder** package we have the titles
+"Korea, Dem. Rep."  
+"Korea, Rep."  
+"Yemen, Rep."  
+
+while in our data from the gapminder website we have the names
+"North Korea"  
+"South Korea"
+"Yemen"
+
+We will correct the names in the countries vector.
+
+```{r}
+which(!(countries %in% unique(gapminder_population$country)))
+countries[70]="North Korea"
+countries[71]="South Korea"
+countries[140]="Yemen"
+```
+
+We will check our data again.
+
+```{r}
+sum(!(countries %in% unique(gapminder_population$country)))
+```
+
+```{r}
+gapminder_population<-gapminder_population_temp %>%
+  gather(year,pop,-"Total population") %>%
+  rename(country="Total population") %>%
+  mutate(year=as.integer(year),pop=as.integer(pop)) %>%
+  filter(country %in% countries,year>=1950)
 gapminder_population
 ```
 
@@ -94,6 +160,239 @@ gapminder_population[is.na(gapminder_population$pop),][1,3]=23151000 + 140000
 Now we need to add the continents to the dataframe.
 
 ```{r}
-dict<-gapminder %>% group_by(continent) %>% distinct(country)
+dict<-gapminder %>% group_by(continent) %>% distinct(country) %>%
+  mutate(country=as.character(country))
+```
+
+We still have the problem with the three countries.  
+
+```{r}
+dict$country[is.na(match(dict$country,countries))]
+dict$country[is.na(match(dict$country,countries))]=c("North Korea","South Korea","Yemen")
+```
+
+Now we will add continent to the data.
+
+```{r}
+gapminder_population <- gapminder_population %>% 
+  left_join(dict,by="country") %>%
+  select(country,continent,year,pop)
+gapminder_population
+```
+
+Clean up by removing temporary objects.
+
+```{r}
+rm(gapminder_population_temp)
+```
+
+Next we bring in life expectancy data.
+
+```{r}
+gapminder_lifeexp_temp <- read_excel("data/indicator life_expectancy_at_birth.xlsx")
+```
+
+
+```{r}
+gapminder_lifeexp<-gapminder_lifeexp_temp %>%
+  gather(year,life_exp,-"Life expectancy") %>%
+  rename(country="Life expectancy") %>%
+  mutate(year=as.integer(year)) %>%
+  filter(country %in% countries,year>=1950)
+rm(gapminder_lifeexp_temp)
+gapminder_lifeexp
+```
+
+```{r}
+gapminder_lifeexp <- gapminder_lifeexp %>% 
+  left_join(dict,by="country") %>%
+  select(country,continent,year,life_exp)
+gapminder_lifeexp
+```
+
+Next is fertility rates.
+
+```{r}
+gapminder_fertility_temp <- read_excel("data/indicator undata total_fertility.xlsx")
+```
+
+
+```{r}
+gapminder_fertility<-gapminder_fertility_temp %>%
+  gather(year,fertility,-"Total fertility rate") %>%
+  rename(country="Total fertility rate") %>%
+  mutate(year=as.integer(year)) %>%
+  filter(country %in% countries,year>=1950)
+rm(gapminder_fertility_temp)
+gapminder_fertility
+```
+
+We need to check for missing values.
+
+```{r}
+sum(is.na(gapminder_fertility$fertility))
+```
+
+```{r}
+gapminder_fertility[is.na(gapminder_fertility$fertility),]
+```
+
+It is the country of Taiwan again that has missing values. I will estimate the fertility with average of the previous 5 years.
+
+```{r}
+temp<-as.double(gapminder_fertility %>% filter(country=="Taiwan",year<2014 & year>2008) %>% summarise(ave=mean(fertility)))
+gapminder_fertility<-gapminder_fertility %>% replace_na(list(fertility=temp))
+rm(temp)
+```
+
+
+```{r}
+gapminder_fertility <- gapminder_fertility %>% 
+  left_join(dict,by="country") %>%
+  select(country,continent,year,fertility)
+gapminder_fertility
+```
+
+Next we will collect data on child mortality. This data is the number of children out of 1000 born in the given year that will die before reaching the age of 5.
+
+```{r}
+gapminder_mortality5_temp <- read_excel("data/indicator gapminder under5mortality.xlsx")
+```
+
+
+```{r}
+gapminder_mortality5<-gapminder_mortality5_temp %>%
+  gather(year,mortality,-"Under five mortality") %>%
+  rename(country="Under five mortality") %>%
+  mutate(year=as.integer(year)) %>%
+  filter(country %in% countries,year>=1950)
+rm(gapminder_mortality5_temp)
+gapminder_mortality5
+```
+
+We need to check for missing values.
+
+```{r}
+sum(is.na(gapminder_mortality5$mortality))
+```
+
+```{r}
+gapminder_mortality5[is.na(gapminder_mortality5$mortality),]
+```
+
+Now Hong Kong, Puerto Rico, and Reunion are missing data up through the year 1979 and Taiwan is missing all years. We could drop Taiwan from the data but that is a waste of the data sets. We could imput the values but we need to be careful when we interpret the resulting plots. The other three countries are going to impose problems for the years prior to 1980.  For ease will will drop these countries from the analysis after we get our final data set.
+
+`
+```{r}
+gapminder_mortality5 <- gapminder_mortality5 %>% 
+  left_join(dict,by="country") %>%
+  select(country,continent,year,mortality)
+gapminder_mortality5
+```
+
+Another thought may be that developed countries have an older population by percentage. We will next collect data on the percent of population above 60 years in age.
+
+```{r}
+gapminder_above60_temp <- read_excel("data/indicator_total above 60 percen.xlsx")
+```
+
+
+```{r}
+gapminder_above60<-gapminder_above60_temp %>%
+  gather(year,above60,-"Total above 60 (%)") %>%
+  rename(country="Total above 60 (%)") %>%
+  mutate(year=as.integer(year)) %>%
+  filter(country %in% countries,year>=1950)
+rm(gapminder_above60_temp)
+gapminder_above60
+```
+
+```{r}
+sum(is.na(gapminder_above60$above60))
+```
+No missing values.
+
+But the data is only for every 5 years and has projections.
+
+```{r}
+unique(gapminder_above60$year)
+```
+
+We will first remove the projections.
+
+```{r}
+gapminder_above60 <- gapminder_above60 %>% filter(year <= 2015)
+```
+
+Before we interpolate, let's look at two countries to get an idea of the data.
+
+```{r}
+p<-gapminder_above60 %>% filter(country=="Albania" | country=="United States") %>%
+  ggplot(aes(x=year,y=above60,color=country))+
+  geom_point()
+p
+```
+
+We will use a spline to interpolate the data but we will first plot a linear interpolation to compare the the spline.
+
+```{r}
+temp1<-data.frame(with(gapminder_above60 %>% 
+        filter(country=="Albania"),approx(year,above60,xout=seq(1950,2015)))) %>% 
+  mutate(country="Albania")
+temp2<-data.frame(with(gapminder_above60 %>% 
+        filter(country=="United States"),approx(year,above60,xout=seq(1950,2015)))) %>% 
+  mutate(country="United States")
+```
+
+
+```{r}
+p+
+  geom_line(data=temp1,mapping=aes(x=x,y=y)) +
+  geom_line(data=temp2,mapping=aes(x=x,y=y)) +
+  labs(x="Year",y="Percentage of Population above 60 years",title="Estimating Percent of Population Above 60",subtitle="Linear Interpolation")
+```
+
+```{r}
+temp1<-data.frame(with(gapminder_above60 %>% 
+        filter(country=="Albania"),spline(year,above60,xout=seq(1950,2015)))) %>% 
+  mutate(country="Albania")
+temp2<-data.frame(with(gapminder_above60 %>% 
+        filter(country=="United States"),spline(year,above60,xout=seq(1950,2015)))) %>% 
+  mutate(country="United States")
+```
+
+```{r}
+p+
+  geom_line(data=temp1,mapping=aes(x=x,y=y)) +
+  geom_line(data=temp2,mapping=aes(x=x,y=y)) +
+  labs(x="Year",y="Percentage of Population above 60 years",title="Estimating Percent of Population Above 60",subtitle="Linear Interpolation")
+```
+
+Now we need to interpolate for every country and create our final data frame. 
+
+Test code
+
+gapminder_above60 %>% filter(country=="Albania" | country=="United States") %>% split(.$country) %>%
+map(~spline(.$year,.$above60,xout=seq(1950,2015)))
+
+
+
+```{r}
+gapminder_above60_temp <- gapminder_above60 %>% 
+  left_join(dict,by="country") %>%
+  select(country,continent,year,above60)
+gapminder_above60_temp
+```
+
+Data quality check
+
+```{r}
+table(gapminder_population$continent)/66
+table(gapminder_lifeexp$continent)/67
+table(gapminder_fertility$continent)/66
+table(dict$continent)
+for (name in (dict %>% filter(continent=="Asia"))$country){
+  if (length((gapminder_fertility %>% filter(country==name))$year)==0){print(name)}
+  }
 ```
 
