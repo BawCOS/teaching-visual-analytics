@@ -1,4 +1,4 @@
-# Data Visualiztions {#Chpt3}
+# Inference in Visual Analytics {#Chpt3}
 
 We describe our methods in this chapter.
 
