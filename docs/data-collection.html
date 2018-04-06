@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-04-03">
+<meta name="date" content="2018-04-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -242,8 +242,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="population" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Population</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/indicator gapminder population.xlsx&quot;</span>)
-gapminder_population_temp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
+<p>We will read the data in first.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/indicator gapminder population.xlsx&quot;</span>)</code></pre></div>
+<p>Let’s look at the first few rows of the data.</p>
 <table>
 <thead>
 <tr class="header">
@@ -845,9 +846,10 @@ gapminder_population_temp <span class="op">%&gt;%</span><span class="st"> </span
 <span class="st">  </span><span class="kw">gather</span>(year,pop,<span class="op">-</span><span class="st">&quot;Total population&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Total population&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year),<span class="dt">pop=</span><span class="kw">as.integer</span>(pop)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries,year<span class="op">&gt;=</span><span class="dv">1950</span>)
-gapminder_population <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries,year<span class="op">&gt;=</span><span class="dv">1950</span>)</code></pre></div>
+<p>Table <a href="data-collection.html#tab:tab-pop">2.1</a> is the first 6 rows of our data.</p>
 <table>
+<caption><span id="tab:tab-pop">Table 2.1: </span>Population Data Arranged into Rows</caption>
 <thead>
 <tr class="header">
 <th align="left">country</th>
@@ -897,21 +899,21 @@ gapminder_population <span class="op">%&gt;%</span><span class="st"> </span><spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries[<span class="op">!</span>(countries <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
 <pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;      &quot;Yemen, Rep.&quot;</code></pre>
 <p>We are missing the two Koreas and Yemen from our data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country)[<span class="kw">grep</span>(<span class="st">&quot;Korea&quot;</span>,<span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
-<pre><code>## character(0)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country)[<span class="kw">grep</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
-<pre><code>## character(0)</code></pre>
-<p>We now know the problem is that in the <strong>gapminder</strong> package we have the titles “Korea, Dem. Rep.”<br />
-“Korea, Rep.”<br />
-“Yemen, Rep.”</p>
-<p>while in our data from the gapminder website we have the names “North Korea”<br />
-“South Korea” “Yemen”</p>
 <p>We need the full list of countries in the original data to change the names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population&lt;-gapminder_population_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,pop,<span class="op">-</span><span class="st">&quot;Total population&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Total population&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year),<span class="dt">pop=</span><span class="kw">as.integer</span>(pop)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country)[<span class="kw">grep</span>(<span class="st">&quot;Korea&quot;</span>,<span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
+<pre><code>## [1] &quot;North Korea&quot;           &quot;South Korea&quot;           &quot;United Korea (former)&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country)[<span class="kw">grep</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
+<pre><code>## [1] &quot;North Yemen (former)&quot; &quot;South Yemen (former)&quot; &quot;Yemen&quot;</code></pre>
+<p>We now know the problem is that in the <strong>gapminder</strong> package we have the titles “Korea, Dem. Rep.”<br />
+“Korea, Rep.”<br />
+“Yemen, Rep.”</p>
+<p>while in our data from the gapminder website we have the names “North Korea”<br />
+“South Korea” “Yemen”</p>
 <p>We will correct the names in the our data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_population<span class="op">$</span>country)
 gapminder_population<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_population<span class="op">$</span>country)
@@ -921,22 +923,7 @@ gapminder_population<span class="op">$</span>country&lt;-<span class="kw">gsub</
 <pre><code>## [1] 0</code></pre>
 <p>Finally we will get rid of the countries not in the <strong>gapminder</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population&lt;-gapminder_population <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)
-gapminder_population</code></pre></div>
-<pre><code>## # A tibble: 9,372 x 3
-##    country      year      pop
-##    &lt;chr&gt;       &lt;int&gt;    &lt;int&gt;
-##  1 Afghanistan  1950  7752118
-##  2 Albania      1950  1263171
-##  3 Algeria      1950  8872247
-##  4 Angola       1950  4354882
-##  5 Argentina    1950 17150335
-##  6 Australia    1950  8177344
-##  7 Austria      1950  6936445
-##  8 Bahrain      1950   115614
-##  9 Bangladesh   1950 37894680
-## 10 Belgium      1950  8628489
-## # ... with 9,362 more rows</code></pre>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)</code></pre></div>
 <p>Next we will look for missing observations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population[<span class="kw">is.na</span>(gapminder_population<span class="op">$</span>pop),]</code></pre></div>
 <pre><code>## # A tibble: 2 x 3
@@ -947,27 +934,63 @@ gapminder_population</code></pre></div>
 <p>We are missing the last two years of data for Taiwan. We could drop Taiwan or get another estimate of the population from the web. Using the website <a href="http://www.worldometers.info/world-population/taiwan-population/" class="uri">http://www.worldometers.info/world-population/taiwan-population/</a> we see that for the last four years the population has grown by about 70000 each year. So we will estimate the population for 2014 and 2015 by adding 70000 to the population in 2013 for each year..</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population[<span class="kw">is.na</span>(gapminder_population<span class="op">$</span>pop),][<span class="dv">1</span>,<span class="dv">3</span>]=<span class="dv">23151000</span> <span class="op">+</span><span class="st"> </span><span class="dv">70000</span>
 gapminder_population[<span class="kw">is.na</span>(gapminder_population<span class="op">$</span>pop),][<span class="dv">1</span>,<span class="dv">3</span>]=<span class="dv">23151000</span> <span class="op">+</span><span class="st"> </span><span class="dv">140000</span></code></pre></div>
-<p>Now we need to add the continents to the data frame.</p>
+<p>Now we need to add the continents to the data frame. First we will get the country names and associated continent names from the <strong>gapminder</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dict&lt;-gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(country) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country=</span><span class="kw">as.character</span>(country))</code></pre></div>
+<p>Now we can add the continent names using a <code>join</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population &lt;-<span class="st"> </span>gapminder_population <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(country,continent,year,pop)
-gapminder_population</code></pre></div>
-<pre><code>## # A tibble: 9,372 x 4
-##    country     continent  year      pop
-##    &lt;chr&gt;       &lt;fctr&gt;    &lt;int&gt;    &lt;dbl&gt;
-##  1 Afghanistan Asia       1950  7752118
-##  2 Albania     Europe     1950  1263171
-##  3 Algeria     Africa     1950  8872247
-##  4 Angola      Africa     1950  4354882
-##  5 Argentina   Americas   1950 17150335
-##  6 Australia   Oceania    1950  8177344
-##  7 Austria     Europe     1950  6936445
-##  8 Bahrain     Asia       1950   115614
-##  9 Bangladesh  Asia       1950 37894680
-## 10 Belgium     Europe     1950  8628489
-## # ... with 9,362 more rows</code></pre>
+<span class="st">  </span><span class="kw">select</span>(country,continent,year,pop)</code></pre></div>
+<p>Table <a href="data-collection.html#tab:tab-final-pop">2.2</a> shows the form of the final data set.</p>
+<table>
+<caption><span id="tab:tab-final-pop">Table 2.2: </span>Final Population Data</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">7752118</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">1263171</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">8872247</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">4354882</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">17150335</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">8177344</td>
+</tr>
+</tbody>
+</table>
 <p>Clean up by removing temporary objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(gapminder_population_temp)</code></pre></div>
 </div>
@@ -980,62 +1003,67 @@ gapminder_population</code></pre></div>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Life expectancy&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)
-<span class="kw">rm</span>(gapminder_lifeexp_temp)
-gapminder_lifeexp</code></pre></div>
-<pre><code>## # A tibble: 17,420 x 3
-##    country                year life_exp
-##    &lt;chr&gt;                 &lt;int&gt;    &lt;dbl&gt;
-##  1 Abkhazia               1950     NA  
-##  2 Afghanistan            1950     26.8
-##  3 Akrotiri and Dhekelia  1950     NA  
-##  4 Albania                1950     54.5
-##  5 Algeria                1950     42.8
-##  6 American Samoa         1950     NA  
-##  7 Andorra                1950     NA  
-##  8 Angola                 1950     30.7
-##  9 Anguilla               1950     NA  
-## 10 Antigua and Barbuda    1950     58.0
-## # ... with 17,410 more rows</code></pre>
+<span class="kw">rm</span>(gapminder_lifeexp_temp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_lifeexp<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_lifeexp<span class="op">$</span>country)
 gapminder_lifeexp<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_lifeexp<span class="op">$</span>country)
 gapminder_lifeexp<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="st">&quot;Yemen, Rep.&quot;</span>,gapminder_lifeexp<span class="op">$</span>country)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_lifeexp&lt;-gapminder_lifeexp <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)
-gapminder_lifeexp</code></pre></div>
-<pre><code>## # A tibble: 9,514 x 3
-##    country      year life_exp
-##    &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;
-##  1 Afghanistan  1950     26.8
-##  2 Albania      1950     54.5
-##  3 Algeria      1950     42.8
-##  4 Angola       1950     30.7
-##  5 Argentina    1950     61.6
-##  6 Australia    1950     69.0
-##  7 Austria      1950     64.9
-##  8 Bahrain      1950     41.0
-##  9 Bangladesh   1950     42.5
-## 10 Belgium      1950     66.3
-## # ... with 9,504 more rows</code></pre>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(gapminder_lifeexp))</code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_lifeexp &lt;-<span class="st"> </span>gapminder_lifeexp <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(country,continent,year,life_exp)
-gapminder_lifeexp</code></pre></div>
-<pre><code>## # A tibble: 9,514 x 4
-##    country     continent  year life_exp
-##    &lt;chr&gt;       &lt;fctr&gt;    &lt;int&gt;    &lt;dbl&gt;
-##  1 Afghanistan Asia       1950     26.8
-##  2 Albania     Europe     1950     54.5
-##  3 Algeria     Africa     1950     42.8
-##  4 Angola      Africa     1950     30.7
-##  5 Argentina   Americas   1950     61.6
-##  6 Australia   Oceania    1950     69.0
-##  7 Austria     Europe     1950     64.9
-##  8 Bahrain     Asia       1950     41.0
-##  9 Bangladesh  Asia       1950     42.5
-## 10 Belgium     Europe     1950     66.3
-## # ... with 9,504 more rows</code></pre>
+<span class="st">  </span><span class="kw">select</span>(country,continent,year,life_exp)</code></pre></div>
+<p>Again @ref(tab:tab-life_exp) shows the final data set.</p>
+<table>
+<caption>(#tab:tab-life_exp)Final Life Expectancy Data</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">life_exp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">26.85</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">54.48</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">42.77</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">30.70</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">61.61</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">69.01</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="fertility-rates" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Fertility Rates</h3>
@@ -1046,42 +1074,12 @@ gapminder_lifeexp</code></pre></div>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Total fertility rate&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)
-<span class="kw">rm</span>(gapminder_fertility_temp)
-gapminder_fertility</code></pre></div>
-<pre><code>## # A tibble: 17,160 x 3
-##    country                year fertility
-##    &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;
-##  1 Abkhazia               1950     NA   
-##  2 Afghanistan            1950      7.67
-##  3 Akrotiri and Dhekelia  1950     NA   
-##  4 Albania                1950      5.80
-##  5 Algeria                1950      7.65
-##  6 American Samoa         1950     NA   
-##  7 Andorra                1950     NA   
-##  8 Angola                 1950      6.93
-##  9 Anguilla               1950     NA   
-## 10 Antigua and Barbuda    1950      4.45
-## # ... with 17,150 more rows</code></pre>
+<span class="kw">rm</span>(gapminder_fertility_temp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_fertility<span class="op">$</span>country)
 gapminder_fertility<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_fertility<span class="op">$</span>country)
 gapminder_fertility<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="st">&quot;Yemen, Rep.&quot;</span>,gapminder_fertility<span class="op">$</span>country)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility&lt;-gapminder_fertility <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)
-gapminder_fertility</code></pre></div>
-<pre><code>## # A tibble: 9,372 x 3
-##    country      year fertility
-##    &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;
-##  1 Afghanistan  1950      7.67
-##  2 Albania      1950      5.80
-##  3 Algeria      1950      7.65
-##  4 Angola       1950      6.93
-##  5 Argentina    1950      3.16
-##  6 Australia    1950      3.07
-##  7 Austria      1950      1.87
-##  8 Bahrain      1950      7.03
-##  9 Bangladesh   1950      6.23
-## 10 Belgium      1950      2.30
-## # ... with 9,362 more rows</code></pre>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(gapminder_fertility<span class="op">$</span>country))</code></pre></div>
 <pre><code>## [1] 142</code></pre>
 <p>We need to check for missing values.</p>
@@ -1099,22 +1097,57 @@ gapminder_fertility&lt;-gapminder_fertility <span class="op">%&gt;%</span><span 
 <span class="kw">rm</span>(temp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility &lt;-<span class="st"> </span>gapminder_fertility <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(country,continent,year,fertility)
-gapminder_fertility</code></pre></div>
-<pre><code>## # A tibble: 9,372 x 4
-##    country     continent  year fertility
-##    &lt;chr&gt;       &lt;fctr&gt;    &lt;int&gt;     &lt;dbl&gt;
-##  1 Afghanistan Asia       1950      7.67
-##  2 Albania     Europe     1950      5.80
-##  3 Algeria     Africa     1950      7.65
-##  4 Angola      Africa     1950      6.93
-##  5 Argentina   Americas   1950      3.16
-##  6 Australia   Oceania    1950      3.07
-##  7 Austria     Europe     1950      1.87
-##  8 Bahrain     Asia       1950      7.03
-##  9 Bangladesh  Asia       1950      6.23
-## 10 Belgium     Europe     1950      2.30
-## # ... with 9,362 more rows</code></pre>
+<span class="st">  </span><span class="kw">select</span>(country,continent,year,fertility)</code></pre></div>
+<p>Table <a href="data-collection.html#tab:tab-fertility">2.3</a> is the final form of the fertility data.</p>
+<table>
+<caption><span id="tab:tab-fertility">Table 2.3: </span>Final Fertility Data</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">fertility</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">7.67</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">5.80</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">7.65</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">6.93</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">3.16</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">3.07</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="child-mortality" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> Child Mortality</h3>
@@ -1125,22 +1158,7 @@ gapminder_fertility</code></pre></div>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Under five mortality&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)
-<span class="kw">rm</span>(gapminder_mortality5_temp)
-gapminder_mortality5</code></pre></div>
-<pre><code>## # A tibble: 18,150 x 3
-##    country                year mortality
-##    &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;
-##  1 Abkhazia               1950        NA
-##  2 Afghanistan            1950       440
-##  3 Akrotiri and Dhekelia  1950        NA
-##  4 Albania                1950       165
-##  5 Algeria                1950       292
-##  6 American Samoa         1950        NA
-##  7 Andorra                1950        NA
-##  8 Angola                 1950       405
-##  9 Anguilla               1950        NA
-## 10 Antigua and Barbuda    1950       130
-## # ... with 18,140 more rows</code></pre>
+<span class="kw">rm</span>(gapminder_mortality5_temp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_mortality5<span class="op">$</span>country)
 gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_mortality5<span class="op">$</span>country)
 gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="st">&quot;Yemen, Rep.&quot;</span>,gapminder_mortality5<span class="op">$</span>country)</code></pre></div>
@@ -1184,21 +1202,55 @@ gapminder_mortality5</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5 &lt;-<span class="st"> </span>gapminder_mortality5 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(country,continent,year,mortality)
-gapminder_mortality5</code></pre></div>
-<pre><code>## # A tibble: 9,372 x 4
-##    country     continent  year mortality
-##    &lt;chr&gt;       &lt;fctr&gt;    &lt;int&gt;     &lt;dbl&gt;
-##  1 Afghanistan Asia       1950     440  
-##  2 Albania     Europe     1950     165  
-##  3 Algeria     Africa     1950     292  
-##  4 Angola      Africa     1950     405  
-##  5 Argentina   Americas   1950      93.5
-##  6 Australia   Oceania    1950      31.6
-##  7 Austria     Europe     1950      75.3
-##  8 Bahrain     Asia       1950     306  
-##  9 Bangladesh  Asia       1950     353  
-## 10 Belgium     Europe     1950      59.3
-## # ... with 9,362 more rows</code></pre>
+gapminder_mortality5 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">mortality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">439.56</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">165.17</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">292.13</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">404.92</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">93.53</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">31.60</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="aging-population" class="section level3">
 <h3><span class="header-section-number">2.3.6</span> Aging Population</h3>
@@ -1209,22 +1261,7 @@ gapminder_mortality5</code></pre></div>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Total above 60 (%)&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)
-<span class="kw">rm</span>(gapminder_above60_temp)
-gapminder_above60</code></pre></div>
-<pre><code>## # A tibble: 4,116 x 3
-##    country      year above_60
-##    &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;
-##  1 Afghanistan  1950     4.50
-##  2 Albania      1950    10.1 
-##  3 Algeria      1950     6.81
-##  4 Angola       1950     4.94
-##  5 Argentina    1950     7.04
-##  6 Armenia      1950    12.2 
-##  7 Aruba        1950     0   
-##  8 Australia    1950    12.5 
-##  9 Austria      1950    15.4 
-## 10 Azerbaijan   1950    11.1 
-## # ... with 4,106 more rows</code></pre>
+<span class="kw">rm</span>(gapminder_above60_temp)</code></pre></div>
 <p>This data came from a different source, so we need to be careful about the country names and which ones are contained in the data set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries[<span class="op">!</span>countries <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(gapminder_above60<span class="op">$</span>country)]</code></pre></div>
 <pre><code>## [1] &quot;Central African Republic&quot; &quot;Czech Republic&quot;          
@@ -1235,22 +1272,7 @@ gapminder_above60</code></pre></div>
 <span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">unique</span>(gapminder_mortality5[<span class="kw">is.na</span>(gapminder_mortality5<span class="op">$</span>mortality),]<span class="op">$</span>country),
 countries[<span class="op">!</span>countries <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(gapminder_above60<span class="op">$</span>country)]))]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_above60&lt;-gapminder_above60 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)
-gapminder_above60</code></pre></div>
-<pre><code>## # A tibble: 2,835 x 3
-##    country      year above_60
-##    &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;
-##  1 Afghanistan  1950     4.50
-##  2 Albania      1950    10.1 
-##  3 Algeria      1950     6.81
-##  4 Angola       1950     4.94
-##  5 Argentina    1950     7.04
-##  6 Australia    1950    12.5 
-##  7 Austria      1950    15.4 
-##  8 Bahrain      1950     4.35
-##  9 Bangladesh   1950     5.38
-## 10 Belgium      1950    15.9 
-## # ... with 2,825 more rows</code></pre>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(gapminder_above60<span class="op">$</span>above_<span class="dv">60</span>))</code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>There are no missing values.</p>
@@ -1265,7 +1287,7 @@ gapminder_above60</code></pre></div>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>,<span class="dt">color=</span>country))<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()
 p</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 <p>We will use a spline to interpolate the data but we will first plot a linear interpolation to compare the the spline.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp1&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="kw">approx</span>(year,above_<span class="dv">60</span>,<span class="dt">xout=</span><span class="kw">seq</span>(<span class="dv">1950</span>,<span class="dv">2015</span>)))) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -1277,7 +1299,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp1,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp2,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Linear Interpolation&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp1&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="kw">spline</span>(year,above_<span class="dv">60</span>,<span class="dt">xout=</span><span class="kw">seq</span>(<span class="dv">1950</span>,<span class="dv">2015</span>)))) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country=</span><span class="st">&quot;Albania&quot;</span>)
@@ -1288,7 +1310,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp1,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp2,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Spline Interpolation&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>Clean the work space.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(temp1)
 <span class="kw">rm</span>(temp2)</code></pre></div>
@@ -1303,7 +1325,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,
        <span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Spline Interpolation&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 <p>Now we need to interpolate for every country and create our final data frame. We will use the map function from the <strong>purrr</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_above60&lt;-gapminder_above60 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>country) <span class="op">%&gt;%</span>
@@ -1316,26 +1338,61 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(country,continent,year,above_<span class="dv">60</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(year,country)
-gapminder_above60</code></pre></div>
-<pre><code>## # A tibble: 8,910 x 4
-##    country     continent  year above_60
-##    &lt;chr&gt;       &lt;fctr&gt;    &lt;int&gt;    &lt;dbl&gt;
-##  1 Afghanistan Asia       1950     4.50
-##  2 Albania     Europe     1950    10.1 
-##  3 Algeria     Africa     1950     6.81
-##  4 Angola      Africa     1950     4.94
-##  5 Argentina   Americas   1950     7.04
-##  6 Australia   Oceania    1950    12.5 
-##  7 Austria     Europe     1950    15.4 
-##  8 Bahrain     Asia       1950     4.35
-##  9 Bangladesh  Asia       1950     5.38
-## 10 Belgium     Europe     1950    15.9 
-## # ... with 8,900 more rows</code></pre>
+gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">above_60</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">4.503620</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">10.131796</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">6.808316</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">4.944525</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">7.043321</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">12.458937</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, cleaning up the figure of our data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>gapminder_above60<span class="op">%&gt;%</span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>gapminder_above60<span class="op">%&gt;%</span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;United States&quot;</span>),<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Spline Interpolation&quot;</span>) <span class="op">+</span><span class="kw">theme_classic</span>()</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 </div>
 <div id="final-data" class="section level3">
 <h3><span class="header-section-number">2.3.7</span> Final Data</h3>
@@ -1386,7 +1443,7 @@ gapminder_above60</code></pre></div>
 <span class="st">  </span><span class="kw">left_join</span>(gapminder_fertility,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(gapminder_population,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(gapminder_mortality5,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(country,year)</code></pre></div>
+<span class="st">  </span><span class="kw">arrange</span>(year,country)</code></pre></div>
 <p>Let’s look at the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
 <table>
@@ -1414,59 +1471,59 @@ gapminder_above60</code></pre></div>
 <td align="right">439.56</td>
 </tr>
 <tr class="even">
-<td align="left">Afghanistan</td>
-<td align="left">Asia</td>
-<td align="right">1951</td>
-<td align="right">4.482529</td>
-<td align="right">27.13</td>
-<td align="right">7.67</td>
-<td align="right">7839426</td>
-<td align="right">435.90</td>
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">10.131796</td>
+<td align="right">54.48</td>
+<td align="right">5.80</td>
+<td align="right">1263171</td>
+<td align="right">165.17</td>
 </tr>
 <tr class="odd">
-<td align="left">Afghanistan</td>
-<td align="left">Asia</td>
-<td align="right">1952</td>
-<td align="right">4.459831</td>
-<td align="right">27.67</td>
-<td align="right">7.67</td>
-<td align="right">7934798</td>
-<td align="right">426.11</td>
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">6.808316</td>
+<td align="right">42.77</td>
+<td align="right">7.65</td>
+<td align="right">8872247</td>
+<td align="right">292.13</td>
 </tr>
 <tr class="even">
-<td align="left">Afghanistan</td>
-<td align="left">Asia</td>
-<td align="right">1953</td>
-<td align="right">4.435804</td>
-<td align="right">28.19</td>
-<td align="right">7.67</td>
-<td align="right">8038312</td>
-<td align="right">416.55</td>
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">4.944525</td>
+<td align="right">30.70</td>
+<td align="right">6.93</td>
+<td align="right">4354882</td>
+<td align="right">404.92</td>
 </tr>
 <tr class="odd">
-<td align="left">Afghanistan</td>
-<td align="left">Asia</td>
-<td align="right">1954</td>
-<td align="right">4.410724</td>
-<td align="right">28.73</td>
-<td align="right">7.67</td>
-<td align="right">8150037</td>
-<td align="right">407.20</td>
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">7.043321</td>
+<td align="right">61.61</td>
+<td align="right">3.16</td>
+<td align="right">17150335</td>
+<td align="right">93.53</td>
 </tr>
 <tr class="even">
-<td align="left">Afghanistan</td>
-<td align="left">Asia</td>
-<td align="right">1955</td>
-<td align="right">4.384869</td>
-<td align="right">29.27</td>
-<td align="right">7.67</td>
-<td align="right">8270024</td>
-<td align="right">398.07</td>
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">12.458937</td>
+<td align="right">69.01</td>
+<td align="right">3.07</td>
+<td align="right">8177344</td>
+<td align="right">31.60</td>
 </tr>
 </tbody>
 </table>
 <p>One last note is that we have not included an economic metric such as gross domestic product, GDP, per capita. The reason is that the data is sparse. On the gapminder website the data starts in 1960 and ends in 2011; in addition many countries are missing data. On the World Bank site, the data is more complete but still has many missing values and goes from 1960 to 2016. The data in the <strong>gapminder</strong> package in R has data for each country but only in five year increments and ends in 2007. if you want to include GDP data you would have to make the choice of limiting the number of years, interpolating, and/or removing more countries. It would be too much to extrapolate from 2007 to 2015, so a possible solution is to merge the World Bank data with the data from the <strong>gapminder</strong> package. However, they are inflation adjusted on different times so a correction would have to be made. The World Bank data was in current US dollars while the <strong>gapminder</strong> package used something earlier, maybe 2000.</p>
-<p>Here is some code to investigate how to incorporate GDP, but we will not do it for our work.</p>
+<p>Here is some code to investigate how to incorporate GDP, but we will not complete it for our work. It is only a start to give you an idea of the work involved.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_gdp_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/World Bank GDP.xlsx&quot;</span>,<span class="dt">skip=</span><span class="dv">4</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_gdp&lt;-gapminder_gdp_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,gdpPercap,<span class="op">-</span>(<span class="st">&quot;Country Name&quot;</span><span class="op">:</span><span class="st">&quot;Indicator Code&quot;</span>)) <span class="op">%&gt;%</span>
@@ -1503,22 +1560,7 @@ gapminder_gdp<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(o
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_gdp &lt;-<span class="st"> </span>gapminder_gdp <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(country,continent,year,gdpPercap) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(year,country)
-gapminder_gdp</code></pre></div>
-<pre><code>## # A tibble: 3,375 x 4
-##    country     continent  year gdpPercap
-##    &lt;chr&gt;       &lt;fctr&gt;    &lt;int&gt;     &lt;dbl&gt;
-##  1 Afghanistan Asia       1992        NA
-##  2 Albania     Europe     1992       218
-##  3 Algeria     Africa     1992      1766
-##  4 Angola      Africa     1992       438
-##  5 Argentina   Americas   1992      6798
-##  6 Australia   Oceania    1992     18616
-##  7 Austria     Europe     1992     24880
-##  8 Bahrain     Asia       1992      9083
-##  9 Bangladesh  Asia       1992       285
-## 10 Belgium     Europe     1992     23498
-## # ... with 3,365 more rows</code></pre>
+<span class="st">  </span><span class="kw">arrange</span>(year,country)</code></pre></div>
 <p>Now let’s get the data from the <strong>gapminder</strong> package and compare the years to determine how to adjust.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder_gdp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(gdpPercap)<span class="op">/</span>
 gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>,country <span class="op">%in%</span><span class="st"> </span>countries) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(gdpPercap) <span class="op">-</span>
@@ -1531,7 +1573,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 ## 4 0.3436639
 ## 5 0.2697395
 ## 6 0.5360116</code></pre>
-<p>The adjustment is not consistent so we are missing some thing in this data. We will stop here but if you wanted to continue, you would adjust the data from the World Bank to be consistent with the <strong>gapminder</strong> data and then use interpolation similar to what was done with percentage of population above 60.</p>
+<p>The adjustment is not consistent so we may be lacking some understanding of how inflation adjustment is being done. We will stop here but if you wanted to continue, you would adjust the data from the World Bank to be consistent with the <strong>gapminder</strong> data and then use interpolation similar to what was done with percentage of population above 60.</p>
 <p>We want to clean our work space.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(gapminder_gdp_temp)
 <span class="kw">rm</span>(new_names)
@@ -1541,7 +1583,84 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 </div>
 <div id="summary-of-data-collection" class="section level3">
 <h3><span class="header-section-number">2.3.8</span> Summary of Data Collection</h3>
-<p>Explain what each variable is</p>
+<p>To recap our data collection process, we will explain each variable. We have 135 countries on 5 continents for the years 1950 through and including 2015. Table <a href="data-collection.html#tab:final-tab">2.4</a></p>
+<table>
+<caption><span id="tab:final-tab">Table 2.4: </span>The First Rows of our Final Data Set</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">above_60</th>
+<th align="right">life_exp</th>
+<th align="right">fertility</th>
+<th align="right">pop</th>
+<th align="right">mortality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">4.503620</td>
+<td align="right">26.85</td>
+<td align="right">7.67</td>
+<td align="right">7752118</td>
+<td align="right">439.56</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">10.131796</td>
+<td align="right">54.48</td>
+<td align="right">5.80</td>
+<td align="right">1263171</td>
+<td align="right">165.17</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">6.808316</td>
+<td align="right">42.77</td>
+<td align="right">7.65</td>
+<td align="right">8872247</td>
+<td align="right">292.13</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">4.944525</td>
+<td align="right">30.70</td>
+<td align="right">6.93</td>
+<td align="right">4354882</td>
+<td align="right">404.92</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">7.043321</td>
+<td align="right">61.61</td>
+<td align="right">3.16</td>
+<td align="right">17150335</td>
+<td align="right">93.53</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">12.458937</td>
+<td align="right">69.01</td>
+<td align="right">3.07</td>
+<td align="right">8177344</td>
+<td align="right">31.60</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
             </section>
