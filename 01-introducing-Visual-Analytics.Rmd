@@ -54,7 +54,7 @@ knitr::include_graphics("./images/Cycle.png")
 
 This section introduces the concept of analytic reasoning and then uses an example to illustrate the ideas.
 
-### Analytic Reasoing Explained
+### Analytic Reasoning Explained
 
 The goal of analysis is to make a decision about a question.  This question can be part of a larger analysis problem with many questions.  Analytic reasoning requires reasoning logically with the support of numeric evidence.  The analyst must understand the limitations of the data and the assumptions of the data transformations and summaries. Again it is important to note that analytics reasoning works in conjunction, not separate from, visualization and interaction. In other words, visual analytics takes analytical reasoning further by taking advantages of a visual and interactive representation of data to aid in the creation of knowledge products or actions.
 
