@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-04-13">
+<meta name="date" content="2018-04-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -196,7 +196,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.9" data-path="data-collection.html"><a href="data-collection.html#economic-data"><i class="fa fa-check"></i><b>2.3.9</b> Economic Data</a></li>
 <li class="chapter" data-level="2.3.10" data-path="data-collection.html"><a href="data-collection.html#summary-of-data-collection"><i class="fa fa-check"></i><b>2.3.10</b> Summary of Data Collection</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="visualization-of-data.html"><a href="visualization-of-data.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a></li>
+<li class="chapter" data-level="2.4" data-path="visualization-of-data.html"><a href="visualization-of-data.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="visualization-of-data.html"><a href="visualization-of-data.html#first-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> First Visualizations</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Inference in Visual Analytics</a></li>
 <li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Interactions</a><ul>
@@ -234,7 +236,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="prerequisites" class="section level2">
 <h2><span class="header-section-number">0.3</span> Prerequisites</h2>
 <p>WHY USE R what if you don’t want to</p>
-<p>These notes make use of the following packages in R <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">b</a>)</span>, <strong>rmarkdown</strong> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2017</a>)</span>, <strong>Hmisc</strong> <span class="citation">(Harrell <a href="#ref-R-Hmisc">2018</a>)</span>, <strong>lattice</strong> <span class="citation">(Sarkar <a href="#ref-R-lattice">2017</a>)</span>, <strong>vcd</strong> <span class="citation">(Meyer, Zeileis, and Hornik <a href="#ref-R-vcd">2017</a>)</span>, <strong>ggplot2</strong> <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>, <strong>MASS</strong> <span class="citation">(Ripley <a href="#ref-R-MASS">2017</a>)</span>, <strong>TeachingDemos</strong> <span class="citation">(Snow <a href="#ref-R-TeachingDemos">2016</a>)</span>, <strong>Stat2Data</strong> <span class="citation">(Lock <a href="#ref-R-Stat2Data">2013</a>)</span>, <strong>car</strong> <span class="citation">(Fox and Weisberg <a href="#ref-R-car">2017</a>)</span>, <strong>DT</strong> <span class="citation">(Xie <a href="#ref-R-DT">2016</a>)</span>,<strong>crosstalk</strong> <span class="citation">(Cheng <a href="#ref-R-crosstalk">2016</a>)</span>, <strong>leaflet</strong> <span class="citation">(Cheng, Karambelkar, and Xie <a href="#ref-R-leaflet">2017</a>)</span>, <strong>plotly</strong> <span class="citation">(Sievert et al. <a href="#ref-R-plotly">2017</a>)</span>, <strong>ggrepel</strong><span class="citation">(Slowikowski <a href="#ref-R-ggrepel">2017</a>)</span>, <strong>rpivotTable</strong><span class="citation">(Martoglio <a href="#ref-R-rpivotTable">2017</a>)</span>, <strong>RColorBrewer</strong><span class="citation">(Neuwirth <a href="#ref-R-RColorBrewer">2014</a>)</span>, <strong>gapminder</strong><span class="citation">(Bryan <a href="#ref-R-gapminder">2017</a>)</span>, <strong>tidyverse</strong><span class="citation">(Wickham <a href="#ref-R-tidyverse">2017</a>)</span>, <strong>readxl</strong><span class="citation">(Wickham and Bryan <a href="#ref-R-readxl">2017</a>)</span>, <strong>kableExtra</strong><span class="citation">(Zhu <a href="#ref-R-kableExtra">2018</a>)</span>.</p>
+<p>These notes make use of the following packages in R <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">b</a>)</span>, <strong>rmarkdown</strong> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2017</a>)</span>, <strong>Hmisc</strong> <span class="citation">(Harrell <a href="#ref-R-Hmisc">2018</a>)</span>, <strong>lattice</strong> <span class="citation">(Sarkar <a href="#ref-R-lattice">2017</a>)</span>, <strong>vcd</strong> <span class="citation">(Meyer, Zeileis, and Hornik <a href="#ref-R-vcd">2017</a>)</span>, <strong>ggplot2</strong> <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>, <strong>MASS</strong> <span class="citation">(Ripley <a href="#ref-R-MASS">2017</a>)</span>, <strong>TeachingDemos</strong> <span class="citation">(Snow <a href="#ref-R-TeachingDemos">2016</a>)</span>, <strong>Stat2Data</strong> <span class="citation">(Lock <a href="#ref-R-Stat2Data">2013</a>)</span>, <strong>car</strong> <span class="citation">(Fox and Weisberg <a href="#ref-R-car">2017</a>)</span>, <strong>DT</strong> <span class="citation">(Xie <a href="#ref-R-DT">2016</a>)</span>,<strong>crosstalk</strong> <span class="citation">(Cheng <a href="#ref-R-crosstalk">2016</a>)</span>, <strong>leaflet</strong> <span class="citation">(Cheng, Karambelkar, and Xie <a href="#ref-R-leaflet">2017</a>)</span>, <strong>plotly</strong> <span class="citation">(Sievert et al. <a href="#ref-R-plotly">2017</a>)</span>, <strong>ggrepel</strong><span class="citation">(Slowikowski <a href="#ref-R-ggrepel">2017</a>)</span>, <strong>rpivotTable</strong><span class="citation">(Martoglio <a href="#ref-R-rpivotTable">2017</a>)</span>, <strong>RColorBrewer</strong><span class="citation">(Neuwirth <a href="#ref-R-RColorBrewer">2014</a>)</span>, <strong>gapminder</strong><span class="citation">(Bryan <a href="#ref-R-gapminder">2017</a>)</span>, <strong>tidyverse</strong><span class="citation">(Wickham <a href="#ref-R-tidyverse">2017</a>)</span>, <strong>readxl</strong><span class="citation">(Wickham and Bryan <a href="#ref-R-readxl">2017</a>)</span>, <strong>kableExtra</strong><span class="citation">(Zhu <a href="#ref-R-kableExtra">2018</a>)</span>, <strong>GGally</strong><span class="citation">(Schloerke et al. <a href="#ref-R-GGally">2017</a>)</span>.</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
@@ -300,6 +302,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="ref-R-kableExtra">
 <p>Zhu, Hao. 2018. <em>KableExtra: Construct Complex Table with ’Kable’ and Pipe Syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a>.</p>
+</div>
+<div id="ref-R-GGally">
+<p>Schloerke, Barret, Jason Crowley, Di Cook, Francois Briatte, Moritz Marbach, Edwin Thoen, Amos Elberg, and Joseph Larmarange. 2017. <em>GGally: Extension to ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=GGally" class="uri">https://CRAN.R-project.org/package=GGally</a>.</p>
 </div>
 </div>
             </section>

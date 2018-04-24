@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-04-13">
+<meta name="date" content="2018-04-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -196,7 +196,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.9" data-path="data-collection.html"><a href="data-collection.html#economic-data"><i class="fa fa-check"></i><b>2.3.9</b> Economic Data</a></li>
 <li class="chapter" data-level="2.3.10" data-path="data-collection.html"><a href="data-collection.html#summary-of-data-collection"><i class="fa fa-check"></i><b>2.3.10</b> Summary of Data Collection</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="visualization-of-data.html"><a href="visualization-of-data.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a></li>
+<li class="chapter" data-level="2.4" data-path="visualization-of-data.html"><a href="visualization-of-data.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="visualization-of-data.html"><a href="visualization-of-data.html#first-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> First Visualizations</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Inference in Visual Analytics</a></li>
 <li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Interactions</a><ul>
@@ -239,7 +241,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>First we will load two packages we need. The data is downloaded in a Excel spreadsheet; we will use the package <strong>readxl</strong> to read it. In addition, R has a package called <strong>gapminder</strong> which is a subset of the data from the Gapminder website. We will use it to get country names to reduce the size of our data and exclude countries with a large amount of missing data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
 <span class="kw">library</span>(gapminder)
-<span class="kw">library</span>(tidyverse)</code></pre></div>
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(GGally)</code></pre></div>
 <p>The data has been downloaded and is in the <strong>data</strong> folder on the GitHub site for this book.</p>
 </div>
 <div id="Pop2" class="section level3">
@@ -1543,7 +1546,8 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">left_join</span>(gapminder_fertility,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(gapminder_popdensity,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(gapminder_mortality5,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(year,country)</code></pre></div>
+<span class="st">  </span><span class="kw">arrange</span>(year,country) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country=</span><span class="kw">factor</span>(country),<span class="dt">pop=</span>pop<span class="op">/</span><span class="dv">100000</span>) </code></pre></div>
 <p>Let’s look at the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
 <table>
@@ -1568,7 +1572,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <td align="right">4.503620</td>
 <td align="right">26.85</td>
 <td align="right">7.67</td>
-<td align="right">7752118</td>
+<td align="right">77.52118</td>
 <td align="right">11.885559</td>
 <td align="right">439.56</td>
 </tr>
@@ -1579,7 +1583,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <td align="right">10.131796</td>
 <td align="right">54.48</td>
 <td align="right">5.80</td>
-<td align="right">1263171</td>
+<td align="right">12.63171</td>
 <td align="right">43.936383</td>
 <td align="right">165.17</td>
 </tr>
@@ -1590,7 +1594,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <td align="right">6.808316</td>
 <td align="right">42.77</td>
 <td align="right">7.65</td>
-<td align="right">8872247</td>
+<td align="right">88.72247</td>
 <td align="right">3.725112</td>
 <td align="right">292.13</td>
 </tr>
@@ -1601,7 +1605,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <td align="right">4.944525</td>
 <td align="right">30.70</td>
 <td align="right">6.93</td>
-<td align="right">4354882</td>
+<td align="right">43.54882</td>
 <td align="right">3.493127</td>
 <td align="right">404.92</td>
 </tr>
@@ -1612,7 +1616,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <td align="right">7.043321</td>
 <td align="right">61.61</td>
 <td align="right">3.16</td>
-<td align="right">17150335</td>
+<td align="right">171.50335</td>
 <td align="right">6.168298</td>
 <td align="right">93.53</td>
 </tr>
@@ -1623,7 +1627,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <td align="right">12.458937</td>
 <td align="right">69.01</td>
 <td align="right">3.07</td>
-<td align="right">8177344</td>
+<td align="right">81.77344</td>
 <td align="right">1.056338</td>
 <td align="right">31.60</td>
 </tr>
@@ -1719,7 +1723,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <td align="right">4.503620</td>
 <td align="right">26.85</td>
 <td align="right">7.67</td>
-<td align="right">7752118</td>
+<td align="right">77.52118</td>
 <td align="right">11.885559</td>
 <td align="right">439.56</td>
 </tr>
@@ -1730,7 +1734,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <td align="right">10.131796</td>
 <td align="right">54.48</td>
 <td align="right">5.80</td>
-<td align="right">1263171</td>
+<td align="right">12.63171</td>
 <td align="right">43.936383</td>
 <td align="right">165.17</td>
 </tr>
@@ -1741,7 +1745,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <td align="right">6.808316</td>
 <td align="right">42.77</td>
 <td align="right">7.65</td>
-<td align="right">8872247</td>
+<td align="right">88.72247</td>
 <td align="right">3.725112</td>
 <td align="right">292.13</td>
 </tr>
@@ -1752,7 +1756,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <td align="right">4.944525</td>
 <td align="right">30.70</td>
 <td align="right">6.93</td>
-<td align="right">4354882</td>
+<td align="right">43.54882</td>
 <td align="right">3.493127</td>
 <td align="right">404.92</td>
 </tr>
@@ -1763,7 +1767,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <td align="right">7.043321</td>
 <td align="right">61.61</td>
 <td align="right">3.16</td>
-<td align="right">17150335</td>
+<td align="right">171.50335</td>
 <td align="right">6.168298</td>
 <td align="right">93.53</td>
 </tr>
@@ -1774,7 +1778,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <td align="right">12.458937</td>
 <td align="right">69.01</td>
 <td align="right">3.07</td>
-<td align="right">8177344</td>
+<td align="right">81.77344</td>
 <td align="right">1.056338</td>
 <td align="right">31.60</td>
 </tr>
@@ -1804,7 +1808,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 </tr>
 <tr class="even">
 <td align="left">pop</td>
-<td align="left">The population of the country</td>
+<td align="left">The population of the country (100,000 people)</td>
 </tr>
 <tr class="odd">
 <td align="left">density</td>
