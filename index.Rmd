@@ -39,6 +39,7 @@ description: "Lessons on teaching visual analytics in a generic undergraduate cl
 ![](./images/Teaching_Visual_Analytics.jpg)  
 
 
+
 http://socviz.co/lookatdata.html 
 http://serialmentor.com/dataviz/ 
 

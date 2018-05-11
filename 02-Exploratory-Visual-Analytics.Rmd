@@ -62,6 +62,7 @@ library(readxl)
 library(gapminder)
 library(tidyverse)
 library(GGally)
+library(plotly)
 ```
 
 The data has been downloaded and is in the **data** folder on the GitHub site for this book.
@@ -850,11 +851,11 @@ Next we will begin the process of visualizing the data.
 
 ## Visualization of Data 
 
-In the next phase of our exploratory data analysis we will be visualizing the data. In Section \@ref(Viz1), we discussed some of the ideas of visualization. For the first part, we will be generating visualization to help understand the content of the data.
+In the next phase of our exploratory data analysis we will be visualizing the data. In Section \@ref(Viz1), we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step.
 
 ### First Visualizations
 
-In our first visualization we need to try to find key varialbes from the 9 total variables. The first three variables, country, continent, and year are different from the last seven and will have to be dealt with in a different manner.
+In our first visualization we need to try to find key variables from the 9 total variables. The first three variables, country, continent, and year are different from the last seven and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other 6 variables are continuous and can be plotted against each other on a scatterplot.
 
 #### Discussion Ideas:
 
@@ -874,11 +875,296 @@ str(gapminder_va)
 summary(gapminder_va)
 ```
 
+There are some potential issues with this data in terms of visualizing. First population and density have a large range. We may need to go to a logarithm scale. The variables country and continent are categorical and must be treated differently than the continuous variables. Finally, year is a count variable and we will have to deal with the 65 year span of data.
+
 #### Matrix of Scatterplots
 
-To get an overview of the data, let's plot the pairwise scatterplot for each of the continuous variables.
+To get an overview of the data, let's plot the pairwise scatterplots for each of the continuous variables. We still need to address the issue with year, but for now we will just pick 1950.
 
-```{r fig-mat, fig.cap="Pairwise Scatterplots of Variables",warning=FALSE}
-ggpairs(gapminder_va %>% filter(year==1950) %>% select(c(-1,-3)),aes(color=continent))
+```{r fig-mat1, fig.cap="Pairwise Scatterplots of Variables",warning=FALSE}
+ggpairs(gapminder_va %>% filter(year==1950), columns = 4:9)
 ```
 
+#### Discussion Ideas
+
+Using Figure \@ref(fig:fig-mat1), discuss the following questions:  
+
+What are advantages and disadvantages of the matrix scatterplot?  
+What issues are revealed in the plot?  
+What are some of the important conclusions that can be draws at this point in the exploration?  
+What are some of the next steps that should be taken?
+
+These plots do a nice job of comparing variables however it is restricted to pairwise comparisons. The correlation coefficient summaries the linear relationship between variables but the relationship between life expectancy and fertility may be non-linear. The density plots along the diagonal illustrate the data is at least bimodal, this may be an important insight if we want to separate countries into a binary distinction such as developed and developing. The variables population and density are dominated by a few very large values. It may be advantageous to link or brush data points to track them across plots. The background lines in the upper triangle of the matrix is confusing and makes reading difficult.
+
+#### Adjustments
+
+First let's put population and density on a logarithm scale.
+
+```{r}
+gapminder_va_log <- gapminder_va %>% 
+  mutate(log_pop=log10(pop),log_density=log10(density)) %>% 
+  select(-pop,-density)
+```
+
+```{r tab-va-log,echo=FALSE}
+gapminder_va_log %>% 
+  head() %>% 
+  knitr::kable(caption="Data with Population and Density on a Log Scale")
+```
+
+Next we plot this new data set and add continent as a color.
+
+```{r fig-mat2, fig.cap="Pairwise Scatterplots of Variables (Population and Density on Log Scale)",warning=FALSE,echo=FALSE,message=FALSE}
+ggpairs(gapminder_va_log %>% filter(year==1950) %>% select(c(-1, -3)),aes(color=continent))
+```
+
+#### Discussion Ideas  
+
+What is wrong with the mortality density plot?  
+Which variables seem to have the potential to separate the countries into developed and developing ?  
+Why is the point cloud for the Americas so wide?
+
+Since Oceania only has two data points it is causing problems with the visual representation. We could continue with the exploration as is or combine Oceania with Europe since by most measures, except density, it is similar to Europe. The Americas combine North, Central, and South America together and the countries in this region have a wide range of values for the different variables. We may want to break them apart but that is only if we keep the analysis at the continent level and not the country level.
+
+#### Recoding Oceania  
+
+Let's combine Oceania into Europe. We will also check that our work is correct.
+
+```{r}
+table(gapminder_va_log$continent)
+```
+
+
+```{r}
+gapminder_va_log$continent <- recode_factor(gapminder_va_log$continent,'Oceania'='Europe')
+```
+
+
+```{r}
+table(gapminder_va_log$continent)
+```
+
+Now we will recreate the plot and add transparency to aid in visualization.
+
+```{r fig-mat3, fig.cap="Pairwise Scatterplots of Variables with Oceania Removed",warning=FALSE,echo=FALSE,message=FALSE}
+ggpairs(gapminder_va_log %>% filter(year==1950) %>% select(c(-1, -3)),aes(color=continent,alpha=.7))
+```  
+
+#### Discussion Ideas  
+
+Do you see the bimodal feature we saw in previous plots?  
+What are your thoughts on life expectancy versus mortality?  
+What is the next step?  
+
+
+It is now easier to see that a large part of the bimodal features were due to differences in continents. However, in the Americas we still see this bimodal nature.  It is expected that there is a strong linear relationship between life expectancy and mortality since they are related and do not offer different view of the population.
+
+The next step is to bring in the variable year. We should focus on two variables. The pairs that show promise are above 60 and fertility or mortality and fertility. We can bring population or density into the plots as well.
+
+### Next Visualizations  
+
+To understand the progression of countries over time we need to look at different years. In the previous section we look only at the year 1950. In this section we will address different years.
+
+#### Adding the Year 2015  
+
+First let's look at the scatterplot matrix for the final year, 2015.
+
+
+```{r fig-mat4, fig.cap="Pairwise Scatterplots of Variables for 2015",warning=FALSE,echo=FALSE,message=FALSE}
+ggpairs(gapminder_va_log %>% filter(year==2015) %>% select(c(-1, -3)),aes(color=continent,alpha=.7))
+```  
+
+#### Discussion Ideas  
+
+What changes do we see in the data compared to 1950?
+What features still standout in the plots?
+
+The countries of Asia, in terms of fertility and life expectancy, are now similar to Europe. The Americas still have the bimodal nature and Africa still lags the rest of the world. However, in general it appears countries are moving towards long life expectancy and low fertility. The variable above 60 is much different for Europe compared to the rest of the world.
+
+It is hard to compare the 2015 plot with the 1950 since they are separate plots. We need to have a side by side comparison. 
+
+#### Side by Side Comparison of 1950 and 2015 
+
+To compare two years, let's focus first on just two variables, fertility and life expectancy.
+
+```{r fig-sbs1, fig.cap="Side by Side Scatterplots for 1950 and 2015"}
+ggplot(gapminder_va_log %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent)) +
+  geom_point(alpha=.7)+
+  facet_wrap(~year) +
+  theme_bw()
+```
+
+#### Discussion Ideas  
+
+How should the variable population be incorporated?
+What insights are gained from this visualization?
+Did changing the background theme help in the analysis?
+
+It is clear from these plots that in general fertility rates are going down and life expectancy is increasing. There is less spread in the data as most countries are in the lower right corner of the 2015 plot. Africa still lags the rest of the world but it is also showing gains.
+
+The background changed helped to visualize the data by removing the dark background. Making the data points a little translucent helped but maybe adding some jitter would also help. 
+
+Population has not been incorporated but could be added by using size for population or density.
+
+#### Population 
+
+We can account for populaton by assigning it to another aestheic such as size. This will work better if we go back to original data. Using population density will also be better than population because this variable accounts for the size of the country. 
+
+First, let's combine Oceania with Europe.
+
+```{r}
+gapminder_va$continent <- recode_factor(gapminder_va$continent,'Oceania'='Europe')
+```
+
+One concern is that population and density will have an extreme skewness with a few large values.  Let's summarize population and density.
+
+```{r}
+gapminder_va %>% filter(year==2015 | year==1950) %>% select(density,pop) %>% summary()
+```
+
+This confirms our suspicion. A country with a large population may not be one with a large density.  
+
+```{r fig-sbs2, fig.cap="Side by Side Scatterplots of Density and Population for 1950 and 2015"}
+ggplot(gapminder_va %>% filter(year==2015 | year==1950),aes(x=density,y=pop,color=continent)) + 
+  geom_jitter() +
+  facet_wrap(~year)
+```
+
+From Figure \@ref(fig:fig-sbs2) it is clear that density and population are dominated by a few large values. We will need to be careful when we use either as an aesthetic on our plots. We will break the size into a logarithmic type of scale. We are also going to change the color scheme to one from the [Brewer color scheme.](http://www.colorbrewer.org)
+
+```{r fig-sbs3, fig.cap="Side by Side Scatterplots for 1950 and 2015 with Population Density"}
+ggplot(gapminder_va %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent,size=density)) +
+  geom_point(alpha=.7) +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000)) +
+  scale_colour_brewer(palette="Dark2",name="Continent") +
+  facet_wrap(~year) +
+  theme_bw()
+```
+
+#### Discussion Questions  
+
+Using \@ref(fig:fig-sbs3) answer the following questions:
+
+What is happening to population density over the 65 years?  
+Which continent has had the greatest increase in life expectancy?
+Which country has had the greatest increase in life expectancy?
+
+It is clear that as population increases from 1950 to 2015, the population density increases. The high density in 2015 of a few countries makes most of the data points seem to be the same size.
+
+#### Adding a Third Year, 1982
+
+We still have not adequately incorporated year into the visual exploration. As a next step, let's add a year that is between the end points, in this case 1982.
+
+```{r fig-sbs4, fig.cap="Side by Side Scatterplots for 1950, 1982, and 2015 with Population Density"}
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent,size=density)) +
+  geom_point(alpha=.7) +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000)) +
+  scale_colour_brewer(palette="Dark2",name="Continent") +
+  facet_wrap(~year) +
+  theme_bw()
+```
+
+#### Discussion Questions  
+
+Using Figure \@ref(fig:fig-sbs4) as a reference:
+
+What features do you see in the data?
+How should we incorporate year in a better format?
+
+The shift from 1950 to 1982 was mostly an increase in life expectancy with a moderate decrease in fertility. although for some of the African countries, the fertility increased.  The period from 1982 to 2015 saw a big decrease in fertility whith a minor increase in life expectancy.
+
+We could incoporate year by have a slider function to select year or another option is to animate the plot by year.
+
+#### Using the Percentage of the Population Above 60
+
+In our initial exploration, we also considered the variable population percentage above the age of 60.
+
+```{r fig-sbs5, fig.cap="Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density"}
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,size=density)) +
+  geom_point(alpha=.7) +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000)) +
+  scale_colour_brewer(palette="Dark2",name="Continent") +
+  facet_wrap(~year) +
+  theme_bw() +
+  labs(x="Fertility",y="Percentage of Population above 60")
+```
+
+#### Discusssion Ideas
+
+From Figure \@ref(fig:fig-sbs5), notice that we also cleaned up the axes labels, answer the following questions:
+
+What new insights are gained from this plot?  
+What are some of the trends?  
+
+Again, we see that in 1950 Europe is different from the other continents with a low fertility rate and a higher percentage of the population over 60. We do not see an again population in Africa over the entire time span. The fertility is going down in Africa but the percentage of the population over 60 is not changing. The continent with the biggest change over the 65 years is Asia. Again, it is hard to identify countries but we see an increase in population density. The change in density in Europe is not significant.
+
+We need to brush and identify. In 2015 one Asian country has high percentage of population above 60.
+
+#### Parallel Coordinates Plot
+
+Another type of plot for our data is a parallel coordiantes plot. This plot scales the data first so that the size of the variables will not dominate the plot. We will also use the data with density and population on a logarithmic scale. The order of the variables is key as well. 
+
+```{r fig-pc1, fig.cap="Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale."}
+ggparcoord(gapminder_va_log %>% filter(year==1950 | 
+  year==2015),columns=4:9,group='continent',
+  order = c(6,7,5,4,8,9)) +
+  scale_colour_brewer(palette="Dark2",name="Continent") +
+  facet_wrap(~year) +
+  theme_bw() +
+  labs(x="Variables",y="Scaled Values")
+```
+
+#### Discussion Ideas  
+
+Using Figure \@ref(fig:fig-pc1) answer the following questions:
+
+Do population and population density aid?
+What do we observe over the two time periods?
+What order would you use for the variables and why?
+
+We put fertility and mortality first since Europe was lower on both of the metrics in 1950 than the other continents. We place population and population density at the end since there was no decernible pattern. 
+
+We again see that over time that the countries are becoming closer together in the metrics. The exception appears to be that Europe has a high percentage of the population over 60 relative to the rest of the planet.
+
+We should remove population and population density to clean up the plot, see Figure \@ref(fig:fig-pc2).
+
+We need the ability to identify countries and to link the plots.
+
+```{r fig-pc2, fig.cap="Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale."}
+ggparcoord(gapminder_va_log %>% filter(year==1950 | 
+  year==2015),columns=4:7,group='continent',
+  order = c(6,7,5,4)) +
+  scale_colour_brewer(palette="Dark2",name="Continent") +
+  facet_wrap(~year) +
+  theme_bw() +
+  labs(x="Variables",y="Scaled Values")
+```
+
+
+## Interactions with Visualizations  
+
+
+```{r}
+ggplotly(ggparcoord(gapminder_va_log %>% filter(year==1950 | 
+   year==2015),columns=4:9,group='continent',
+   order = c(6,7,5,4,8,9),alphaLines = 0.5) +
+   scale_colour_brewer(palette="Dark2",name="Continent") +
+   facet_wrap(~year),tooltip="continent")
+```
+ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,text = paste("country:", country))) +
+  geom_point(alpha=.7)+
+  facet_wrap(~year) +
+  theme_bw())
+  
+ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,text = paste("country:", country))) +
+  geom_point(alpha=.7)+
+  facet_wrap(~year) +
+  theme_bw(),tooltip="text")
+  
+ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,text = country)) +
+  geom_point(alpha=.7)+
+  facet_wrap(~year) +
+  theme_bw(),tooltip=c("text","fertility","above_60"))
