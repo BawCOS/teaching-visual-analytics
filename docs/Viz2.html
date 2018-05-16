@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Lesson Modules for Teaching Visual Analytics</title>
+  <meta name="description" content="Lessons on teaching visual analytics in a generic undergraduate classroom">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Lesson Modules for Teaching Visual Analytics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lessons on teaching visual analytics in a generic undergraduate classroom" />
+  <meta name="github-repo" content="BawCOS/teaching-visual-analytics" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lesson Modules for Teaching Visual Analytics" />
+  
+  <meta name="twitter:description" content="Lessons on teaching visual analytics in a generic undergraduate classroom" />
+  
+
+<meta name="author" content="Bradley Warner">
+<meta name="author" content="David Ebert">
+
+
+<meta name="date" content="2018-05-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-collection.html">
+<link rel="next" href="interactions-with-visualizations.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<link href="libs/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
+<script src="libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<script src="libs/jquery-ui-1.11.4/jquery.ui.touch-punch.min.js"></script>
+<link href="libs/c3-0.4.11/c3.min.css" rel="stylesheet" />
+<script src="libs/c3-0.4.11/c3.min.js"></script>
+<script src="libs/d3-3.5.9/d3.min.js"></script>
+<link href="libs/pivottable-2.11.0/pivot.min.css" rel="stylesheet" />
+<script src="libs/pivottable-2.11.0/pivot.min.js"></script>
+<script src="libs/pivottable_d3renderers-2.11.0/d3_renderers.min.js"></script>
+<script src="libs/pivottable_c3renderers-2.11.0/c3_renderers.min.js"></script>
+<script src="libs/polyfill-0.1/polyfill.min.js"></script>
+<link href="libs/rpivotTable_style-0.1/rpivotTable.css" rel="stylesheet" />
+<script src="libs/rpivotTable-binding-0.2.0/rpivotTable.js"></script>
+<script src="libs/plotly-binding-4.7.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotlyjs-1.29.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotlyjs-1.29.2/plotly-latest.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+<link href="libs/ionrangeslider-2.1.2/css/ion.rangeSlider.css" rel="stylesheet" />
+<link href="libs/ionrangeslider-2.1.2/css/ion.rangeSlider.skinShiny.css" rel="stylesheet" />
+<script src="libs/ionrangeslider-2.1.2/js/ion.rangeSlider.min.js"></script>
+<script src="libs/strftime-0.9.2/strftime-min.js"></script>
+<link href="libs/selectize-0.11.2/css/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.11.2/js/selectize.min.js"></script>
+<link href="libs/d3scatter-0.0.0/d3scatter.css" rel="stylesheet" />
+<script src="libs/d3scatter-0.0.0/d3scatter.js"></script>
+<script src="libs/d3scatter-binding-0.1.0/d3scatter.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Lesson Notes for Visual Analytics</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="who-is-this-book-for.html"><a href="who-is-this-book-for.html"><i class="fa fa-check"></i><b>0.1</b> Who is this book for?</a></li>
+<li class="chapter" data-level="0.2" data-path="book-structure-and-how-to-use-it.html"><a href="book-structure-and-how-to-use-it.html"><i class="fa fa-check"></i><b>0.2</b> Book Structure and How to Use It</a></li>
+<li class="chapter" data-level="0.3" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.4" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="Chpt1.html"><a href="Chpt1.html"><i class="fa fa-check"></i><b>1</b> Introducing Visual Analytics - Emphasis on Analytic Reasoning</a><ul>
+<li class="chapter" data-level="1.1" data-path="lesson-preparation.html"><a href="lesson-preparation.html"><i class="fa fa-check"></i><b>1.1</b> Lesson Preparation</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="lesson-preparation.html"><a href="lesson-preparation.html#objectives"><i class="fa fa-check"></i><b>1.1.1</b> Objectives</a></li>
+<li class="chapter" data-level="1.1.2" data-path="lesson-preparation.html"><a href="lesson-preparation.html#preparation"><i class="fa fa-check"></i><b>1.1.2</b> Preparation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="Intro1.html"><a href="Intro1.html"><i class="fa fa-check"></i><b>1.2</b> Lesson Introduction</a></li>
+<li class="chapter" data-level="1.3" data-path="AR1.html"><a href="AR1.html"><i class="fa fa-check"></i><b>1.3</b> Analytic Reasoning</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="AR1.html"><a href="AR1.html#analytic-reasoning-explained"><i class="fa fa-check"></i><b>1.3.1</b> Analytic Reasoning Explained</a></li>
+<li class="chapter" data-level="1.3.2" data-path="AR1.html"><a href="AR1.html#example"><i class="fa fa-check"></i><b>1.3.2</b> Example</a></li>
+<li class="chapter" data-level="1.3.3" data-path="AR1.html"><a href="AR1.html#second-example"><i class="fa fa-check"></i><b>1.3.3</b> Second Example</a></li>
+<li class="chapter" data-level="1.3.4" data-path="AR1.html"><a href="AR1.html#other-problem-ideas"><i class="fa fa-check"></i><b>1.3.4</b> Other problem ideas:</a></li>
+<li class="chapter" data-level="1.3.5" data-path="AR1.html"><a href="AR1.html#using-analytic-reasoning."><i class="fa fa-check"></i><b>1.3.5</b> Using Analytic Reasoning.</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="Viz1.html"><a href="Viz1.html"><i class="fa fa-check"></i><b>1.4</b> Visualizing data (Re-representation)</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="Viz1.html"><a href="Viz1.html#background-on-visualizing-data"><i class="fa fa-check"></i><b>1.4.1</b> Background on Visualizing Data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="Viz1.html"><a href="Viz1.html#using-problem"><i class="fa fa-check"></i><b>1.4.2</b> Using Problem</a></li>
+<li class="chapter" data-level="1.4.3" data-path="Viz1.html"><a href="Viz1.html#discussion-ideas-4"><i class="fa fa-check"></i><b>1.4.3</b> Discussion ideas</a></li>
+<li class="chapter" data-level="1.4.4" data-path="Viz1.html"><a href="Viz1.html#visualization"><i class="fa fa-check"></i><b>1.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="1.4.5" data-path="Viz1.html"><a href="Viz1.html#vectors-for-visualization"><i class="fa fa-check"></i><b>1.4.5</b> Vectors for Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="Inert1.html"><a href="Inert1.html"><i class="fa fa-check"></i><b>1.5</b> Interaction</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="Inert1.html"><a href="Inert1.html#background-information-on-interaction"><i class="fa fa-check"></i><b>1.5.1</b> Background Information on Interaction</a></li>
+<li class="chapter" data-level="1.5.2" data-path="Inert1.html"><a href="Inert1.html#our-problem"><i class="fa fa-check"></i><b>1.5.2</b> Our Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="final-product.html"><a href="final-product.html"><i class="fa fa-check"></i><b>1.6</b> Final Product</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="final-product.html"><a href="final-product.html#discussion-ideas-12"><i class="fa fa-check"></i><b>1.6.1</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.2" data-path="final-product.html"><a href="final-product.html#first-knowledge-product"><i class="fa fa-check"></i><b>1.6.2</b> First Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.3" data-path="final-product.html"><a href="final-product.html#discussion-ideas-13"><i class="fa fa-check"></i><b>1.6.3</b> Discussion Ideas</a></li>
+<li class="chapter" data-level="1.6.4" data-path="final-product.html"><a href="final-product.html#second-knowledge-product"><i class="fa fa-check"></i><b>1.6.4</b> Second Knowledge Product</a></li>
+<li class="chapter" data-level="1.6.5" data-path="final-product.html"><a href="final-product.html#web-resources"><i class="fa fa-check"></i><b>1.6.5</b> Web Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="Conc1.html"><a href="Conc1.html"><i class="fa fa-check"></i><b>1.7</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Chpt2.html"><a href="Chpt2.html"><i class="fa fa-check"></i><b>2</b> Exploratory Visual Analytics</a><ul>
+<li class="chapter" data-level="2.1" data-path="lesson-preparation-1.html"><a href="lesson-preparation-1.html"><i class="fa fa-check"></i><b>2.1</b> Lesson Preparation</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="lesson-preparation-1.html"><a href="lesson-preparation-1.html#objectives-1"><i class="fa fa-check"></i><b>2.1.1</b> Objectives:</a></li>
+<li class="chapter" data-level="2.1.2" data-path="lesson-preparation-1.html"><a href="lesson-preparation-1.html#preparation-1"><i class="fa fa-check"></i><b>2.1.2</b> Preparation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="Intro2.html"><a href="Intro2.html"><i class="fa fa-check"></i><b>2.2</b> Lesson Introduction</a></li>
+<li class="chapter" data-level="2.3" data-path="data-collection.html"><a href="data-collection.html"><i class="fa fa-check"></i><b>2.3</b> Data Collection</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-collection.html"><a href="data-collection.html#load-packages"><i class="fa fa-check"></i><b>2.3.1</b> Load Packages</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-collection.html"><a href="data-collection.html#Pop2"><i class="fa fa-check"></i><b>2.3.2</b> Population</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-collection.html"><a href="data-collection.html#population-density"><i class="fa fa-check"></i><b>2.3.3</b> Population Density</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-collection.html"><a href="data-collection.html#life-expectancy"><i class="fa fa-check"></i><b>2.3.4</b> Life Expectancy</a></li>
+<li class="chapter" data-level="2.3.5" data-path="data-collection.html"><a href="data-collection.html#fertility-rates"><i class="fa fa-check"></i><b>2.3.5</b> Fertility Rates</a></li>
+<li class="chapter" data-level="2.3.6" data-path="data-collection.html"><a href="data-collection.html#child-mortality"><i class="fa fa-check"></i><b>2.3.6</b> Child Mortality</a></li>
+<li class="chapter" data-level="2.3.7" data-path="data-collection.html"><a href="data-collection.html#aging-population"><i class="fa fa-check"></i><b>2.3.7</b> Aging Population</a></li>
+<li class="chapter" data-level="2.3.8" data-path="data-collection.html"><a href="data-collection.html#final-data"><i class="fa fa-check"></i><b>2.3.8</b> Final Data</a></li>
+<li class="chapter" data-level="2.3.9" data-path="data-collection.html"><a href="data-collection.html#economic-data"><i class="fa fa-check"></i><b>2.3.9</b> Economic Data</a></li>
+<li class="chapter" data-level="2.3.10" data-path="data-collection.html"><a href="data-collection.html#summary-of-data-collection"><i class="fa fa-check"></i><b>2.3.10</b> Summary of Data Collection</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="Viz2.html"><a href="Viz2.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="Viz2.html"><a href="Viz2.html#first-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> First Visualizations</a></li>
+<li class="chapter" data-level="2.4.2" data-path="Viz2.html"><a href="Viz2.html#next-visualizations"><i class="fa fa-check"></i><b>2.4.2</b> Next Visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html"><i class="fa fa-check"></i><b>2.5</b> Interactions with Visualizations</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#first-interactive-plot"><i class="fa fa-check"></i><b>2.5.1</b> First Interactive Plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Inference in Visual Analytics</a></li>
+<li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Interactions</a><ul>
+<li class="chapter" data-level="4.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson Preparation</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#objectives-2"><i class="fa fa-check"></i><b>4.1.1</b> Objectives:</a></li>
+<li class="chapter" data-level="4.1.2" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#preparation-2"><i class="fa fa-check"></i><b>4.1.2</b> Preparation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>5</b> Case Study</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="AppA.html"><a href="AppA.html"><i class="fa fa-check"></i><b>A</b> Lesson Handouts</a></li>
+<li class="chapter" data-level="B" data-path="AppB.html"><a href="AppB.html"><i class="fa fa-check"></i><b>B</b> Project</a><ul>
+<li class="chapter" data-level="B.0.1" data-path="AppB.html"><a href="AppB.html#introduction"><i class="fa fa-check"></i><b>B.0.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bawcos.github.io/teaching-visual-analytics/" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Lesson Modules for Teaching Visual Analytics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Viz2" class="section level2">
+<h2><span class="header-section-number">2.4</span> Visualization of Data</h2>
+<p>In the next phase of our exploratory data analysis we will be visualizing the data. In Section <a href="Viz1.html#Viz1">1.4</a>, we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step.</p>
+<div id="first-visualizations" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> First Visualizations</h3>
+<p>In our first visualization we need to try to find key variables from the 9 total variables. The first three variables, country, continent, and year are different from the last seven and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other 6 variables are continuous and can be plotted against each other on a scatterplot.</p>
+<div id="discussion-ideas-15" class="section level4">
+<h4><span class="header-section-number">2.4.1.1</span> Discussion Ideas:</h4>
+<p>What are the first steps we should take to understand and visualize the data?</p>
+<p>Are we doing reconnaissance or exploration, and what does that mean for the type of visualizations we want to create?</p>
+</div>
+<div id="summarize-data" class="section level4">
+<h4><span class="header-section-number">2.4.1.2</span> Summarize Data</h4>
+<p>Let’s perform a descriptive summary of our data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder_va)</code></pre></div>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    9108 obs. of  9 variables:
+##  $ country  : Factor w/ 138 levels &quot;Afghanistan&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 4 1 1 2 5 4 3 3 4 ...
+##  $ year     : int  1950 1950 1950 1950 1950 1950 1950 1950 1950 1950 ...
+##  $ above_60 : num  4.5 10.13 6.81 4.94 7.04 ...
+##  $ life_exp : num  26.9 54.5 42.8 30.7 61.6 ...
+##  $ fertility: num  7.67 5.8 7.65 6.93 3.16 3.07 1.87 7.03 6.23 2.3 ...
+##  $ pop      : num  77.5 12.6 88.7 43.5 171.5 ...
+##  $ density  : num  11.89 43.94 3.73 3.49 6.17 ...
+##  $ mortality: num  439.6 165.2 292.1 404.9 93.5 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gapminder_va)</code></pre></div>
+<pre><code>##         country        continent         year         above_60     
+##  Afghanistan:  66   Africa  :3366   Min.   :1950   Min.   : 1.624  
+##  Albania    :  66   Americas:1584   1st Qu.:1966   1st Qu.: 4.856  
+##  Algeria    :  66   Asia    :2046   Median :1982   Median : 6.026  
+##  Angola     :  66   Europe  :1980   Mean   :1982   Mean   : 8.594  
+##  Argentina  :  66   Oceania : 132   3rd Qu.:1999   3rd Qu.:11.094  
+##  Australia  :  66                   Max.   :2015   Max.   :33.041  
+##  (Other)    :8712                                                  
+##     life_exp       fertility          pop               density        
+##  Min.   :13.20   Min.   :1.130   Min.   :    0.582   Min.   :   0.499  
+##  1st Qu.:51.70   1st Qu.:2.450   1st Qu.:   29.270   1st Qu.:  14.611  
+##  Median :62.90   Median :4.750   Median :   76.242   Median :  44.441  
+##  Mean   :61.42   Mean   :4.515   Mean   :  321.453   Mean   : 117.353  
+##  3rd Qu.:72.20   3rd Qu.:6.450   3rd Qu.:  210.961   3rd Qu.: 108.530  
+##  Max.   :83.30   Max.   :9.220   Max.   :13760.489   Max.   :7892.592  
+##                                                                        
+##    mortality    
+##  Min.   :  2.0  
+##  1st Qu.: 25.6  
+##  Median : 82.3  
+##  Mean   :112.6  
+##  3rd Qu.:180.0  
+##  Max.   :500.4  
+## </code></pre>
+<p>There are some potential issues with this data in terms of visualizing. First population and density have a large range. We may need to go to a logarithm scale. The variables country and continent are categorical and must be treated differently than the continuous variables. Finally, year is a count variable and we will have to deal with the 65 year span of data.</p>
+</div>
+<div id="matrix-of-scatterplots" class="section level4">
+<h4><span class="header-section-number">2.4.1.3</span> Matrix of Scatterplots</h4>
+<p>To get an overview of the data, let’s plot the pairwise scatterplots for each of the continuous variables. We still need to address the issue with year, but for now we will just pick 1950.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggpairs</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1950</span>), <span class="dt">columns =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">9</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig-mat1"></span>
+<img src="VA-Notes_files/figure-html/fig-mat1-1.png" alt="Pairwise Scatterplots of Variables" width="672" />
+<p class="caption">
+Figure 2.1: Pairwise Scatterplots of Variables
+</p>
+</div>
+</div>
+<div id="discussion-ideas-16" class="section level4">
+<h4><span class="header-section-number">2.4.1.4</span> Discussion Ideas</h4>
+<p>Using Figure <a href="Viz2.html#fig:fig-mat1">2.1</a>, discuss the following questions:</p>
+<p>What are advantages and disadvantages of the matrix scatterplot?<br />
+What issues are revealed in the plot?<br />
+What are some of the important conclusions that can be draws at this point in the exploration?<br />
+What are some of the next steps that should be taken?</p>
+<p>These plots do a nice job of comparing variables however it is restricted to pairwise comparisons. The correlation coefficient summaries the linear relationship between variables but the relationship between life expectancy and fertility may be non-linear. The density plots along the diagonal illustrate the data is at least bimodal, this may be an important insight if we want to separate countries into a binary distinction such as developed and developing. The variables population and density are dominated by a few very large values. It may be advantageous to link or brush data points to track them across plots. The background lines in the upper triangle of the matrix is confusing and makes reading difficult.</p>
+</div>
+<div id="adjustments" class="section level4">
+<h4><span class="header-section-number">2.4.1.5</span> Adjustments</h4>
+<p>First let’s put population and density on a logarithm scale.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log &lt;-<span class="st"> </span>gapminder_va <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">log_pop=</span><span class="kw">log10</span>(pop),<span class="dt">log_density=</span><span class="kw">log10</span>(density)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>pop,<span class="op">-</span>density)</code></pre></div>
+<table>
+<caption><span id="tab:tab-va-log">Table 2.8: </span>Data with Population and Density on a Log Scale</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+<th align="right">year</th>
+<th align="right">above_60</th>
+<th align="right">life_exp</th>
+<th align="right">fertility</th>
+<th align="right">mortality</th>
+<th align="right">log_pop</th>
+<th align="right">log_density</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+<td align="right">1950</td>
+<td align="right">4.503620</td>
+<td align="right">26.85</td>
+<td align="right">7.67</td>
+<td align="right">439.56</td>
+<td align="right">1.889420</td>
+<td align="right">1.0750196</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+<td align="right">1950</td>
+<td align="right">10.131796</td>
+<td align="right">54.48</td>
+<td align="right">5.80</td>
+<td align="right">165.17</td>
+<td align="right">1.101462</td>
+<td align="right">1.6428243</td>
+</tr>
+<tr class="odd">
+<td align="left">Algeria</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">6.808316</td>
+<td align="right">42.77</td>
+<td align="right">7.65</td>
+<td align="right">292.13</td>
+<td align="right">1.948034</td>
+<td align="right">0.5711393</td>
+</tr>
+<tr class="even">
+<td align="left">Angola</td>
+<td align="left">Africa</td>
+<td align="right">1950</td>
+<td align="right">4.944525</td>
+<td align="right">30.70</td>
+<td align="right">6.93</td>
+<td align="right">404.92</td>
+<td align="right">1.638976</td>
+<td align="right">0.5432144</td>
+</tr>
+<tr class="odd">
+<td align="left">Argentina</td>
+<td align="left">Americas</td>
+<td align="right">1950</td>
+<td align="right">7.043321</td>
+<td align="right">61.61</td>
+<td align="right">3.16</td>
+<td align="right">93.53</td>
+<td align="right">2.234273</td>
+<td align="right">0.7901653</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="left">Oceania</td>
+<td align="right">1950</td>
+<td align="right">12.458937</td>
+<td align="right">69.01</td>
+<td align="right">3.07</td>
+<td align="right">31.60</td>
+<td align="right">1.912612</td>
+<td align="right">0.0238029</td>
+</tr>
+</tbody>
+</table>
+<p>Next we plot this new data set and add continent as a color.</p>
+<div class="figure"><span id="fig:fig-mat2"></span>
+<img src="VA-Notes_files/figure-html/fig-mat2-1.png" alt="Pairwise Scatterplots of Variables (Population and Density on Log Scale)" width="672" />
+<p class="caption">
+Figure 2.2: Pairwise Scatterplots of Variables (Population and Density on Log Scale)
+</p>
+</div>
+</div>
+<div id="discussion-ideas-17" class="section level4">
+<h4><span class="header-section-number">2.4.1.6</span> Discussion Ideas</h4>
+<p>What is wrong with the mortality density plot?<br />
+Which variables seem to have the potential to separate the countries into developed and developing ?<br />
+Why is the point cloud for the Americas so wide?</p>
+<p>Since Oceania only has two data points it is causing problems with the visual representation. We could continue with the exploration as is or combine Oceania with Europe since by most measures, except density, it is similar to Europe. The Americas combine North, Central, and South America together and the countries in this region have a wide range of values for the different variables. We may want to break them apart but that is only if we keep the analysis at the continent level and not the country level.</p>
+</div>
+<div id="recoding-oceania" class="section level4">
+<h4><span class="header-section-number">2.4.1.7</span> Recoding Oceania</h4>
+<p>Let’s combine Oceania into Europe. We will also check that our work is correct.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(gapminder_va_log<span class="op">$</span>continent)</code></pre></div>
+<pre><code>## 
+##   Africa Americas     Asia   Europe  Oceania 
+##     3366     1584     2046     1980      132</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log<span class="op">$</span>continent &lt;-<span class="st"> </span><span class="kw">recode_factor</span>(gapminder_va_log<span class="op">$</span>continent,<span class="st">&#39;Oceania&#39;</span>=<span class="st">&#39;Europe&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(gapminder_va_log<span class="op">$</span>continent)</code></pre></div>
+<pre><code>## 
+##   Europe   Africa Americas     Asia 
+##     2112     3366     1584     2046</code></pre>
+<p>Now we will recreate the plot and add transparency to aid in visualization.</p>
+<div class="figure"><span id="fig:fig-mat3"></span>
+<img src="VA-Notes_files/figure-html/fig-mat3-1.png" alt="Pairwise Scatterplots of Variables with Oceania Removed" width="672" />
+<p class="caption">
+Figure 2.3: Pairwise Scatterplots of Variables with Oceania Removed
+</p>
+</div>
+</div>
+<div id="discussion-ideas-18" class="section level4">
+<h4><span class="header-section-number">2.4.1.8</span> Discussion Ideas</h4>
+<p>Do you see the bimodal feature we saw in previous plots?<br />
+What are your thoughts on life expectancy versus mortality?<br />
+What is the next step?</p>
+<p>It is now easier to see that a large part of the bimodal features were due to differences in continents. However, in the Americas we still see this bimodal nature. It is expected that there is a strong linear relationship between life expectancy and mortality since they are related and do not offer different view of the population.</p>
+<p>The next step is to bring in the variable year. We should focus on two variables. The pairs that show promise are above 60 and fertility or mortality and fertility. We can bring population or density into the plots as well.</p>
+</div>
+</div>
+<div id="next-visualizations" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Next Visualizations</h3>
+<p>To understand the progression of countries over time we need to look at different years. In the previous section we look only at the year 1950. In this section we will address different years.</p>
+<div id="adding-the-year-2015" class="section level4">
+<h4><span class="header-section-number">2.4.2.1</span> Adding the Year 2015</h4>
+<p>First let’s look at the scatterplot matrix for the final year, 2015.</p>
+<div class="figure"><span id="fig:fig-mat4"></span>
+<img src="VA-Notes_files/figure-html/fig-mat4-1.png" alt="Pairwise Scatterplots of Variables for 2015" width="672" />
+<p class="caption">
+Figure 2.4: Pairwise Scatterplots of Variables for 2015
+</p>
+</div>
+</div>
+<div id="discussion-ideas-19" class="section level4">
+<h4><span class="header-section-number">2.4.2.2</span> Discussion Ideas</h4>
+<p>What changes do we see in the data compared to 1950? What features still standout in the plots?</p>
+<p>The countries of Asia, in terms of fertility and life expectancy, are now similar to Europe. The Americas still have the bimodal nature and Africa still lags the rest of the world. However, in general it appears countries are moving towards long life expectancy and low fertility. The variable above 60 is much different for Europe compared to the rest of the world.</p>
+<p>It is hard to compare the 2015 plot with the 1950 since they are separate plots. We need to have a side by side comparison.</p>
+</div>
+<div id="side-by-side-comparison-of-1950-and-2015" class="section level4">
+<h4><span class="header-section-number">2.4.2.3</span> Side by Side Comparison of 1950 and 2015</h4>
+<p>To compare two years, let’s focus first on just two variables, fertility and life expectancy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">x=</span>life_exp,<span class="dt">y=</span>fertility,<span class="dt">color=</span>continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">7</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-sbs1"></span>
+<img src="VA-Notes_files/figure-html/fig-sbs1-1.png" alt="Side by Side Scatterplots for 1950 and 2015" width="672" />
+<p class="caption">
+Figure 2.5: Side by Side Scatterplots for 1950 and 2015
+</p>
+</div>
+</div>
+<div id="discussion-ideas-20" class="section level4">
+<h4><span class="header-section-number">2.4.2.4</span> Discussion Ideas</h4>
+<p>How should the variable population be incorporated? What insights are gained from this visualization? Did changing the background theme help in the analysis?</p>
+<p>It is clear from these plots that in general fertility rates are going down and life expectancy is increasing. There is less spread in the data as most countries are in the lower right corner of the 2015 plot. Africa still lags the rest of the world but it is also showing gains.</p>
+<p>The background changed helped to visualize the data by removing the dark background. Making the data points a little translucent helped but maybe adding some jitter would also help.</p>
+<p>Population has not been incorporated but could be added by using size for population or density.</p>
+</div>
+<div id="population" class="section level4">
+<h4><span class="header-section-number">2.4.2.5</span> Population</h4>
+<p>We can account for populaton by assigning it to another aestheic such as size. This will work better if we go back to original data. Using population density will also be better than population because this variable accounts for the size of the country.</p>
+<p>First, let’s combine Oceania with Europe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va<span class="op">$</span>continent &lt;-<span class="st"> </span><span class="kw">recode_factor</span>(gapminder_va<span class="op">$</span>continent,<span class="st">&#39;Oceania&#39;</span>=<span class="st">&#39;Europe&#39;</span>)</code></pre></div>
+<p>One concern is that population and density will have an extreme skewness with a few large values. Let’s summarize population and density.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(density,pop) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</code></pre></div>
+<pre><code>##     density              pop          
+##  Min.   :   0.499   Min.   :    0.60  
+##  1st Qu.:  13.178   1st Qu.:   26.12  
+##  Median :  48.843   Median :   72.00  
+##  Mean   : 127.928   Mean   :  336.42  
+##  3rd Qu.: 104.902   3rd Qu.:  216.04  
+##  Max.   :7892.592   Max.   :13760.49</code></pre>
+<p>This confirms our suspicion. A country with a large population may not be one with a large density.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">x=</span>density,<span class="dt">y=</span>pop,<span class="dt">color=</span>continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year)</code></pre></div>
+<div class="figure"><span id="fig:fig-sbs2"></span>
+<img src="VA-Notes_files/figure-html/fig-sbs2-1.png" alt="Side by Side Scatterplots of Density and Population for 1950 and 2015" width="672" />
+<p class="caption">
+Figure 2.6: Side by Side Scatterplots of Density and Population for 1950 and 2015
+</p>
+</div>
+<p>From Figure <a href="Viz2.html#fig:fig-sbs2">2.6</a> it is clear that density and population are dominated by a few large values. We will need to be careful when we use either as an aesthetic on our plots. We will break the size into a logarithmic type of scale. We are also going to change the color scheme to one from the <a href="http://www.colorbrewer.org">Brewer color scheme.</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">x=</span>life_exp,<span class="dt">y=</span>fertility,<span class="dt">color=</span>continent,<span class="dt">size=</span>density)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size</span>(<span class="dt">name=</span><span class="st">&quot;Density&quot;</span>,
+             <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">4000</span>,<span class="dv">6000</span>),<span class="dt">range=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">7</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>,<span class="dt">name=</span><span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-sbs3"></span>
+<img src="VA-Notes_files/figure-html/fig-sbs3-1.png" alt="Side by Side Scatterplots for 1950 and 2015 with Population Density" width="672" />
+<p class="caption">
+Figure 2.7: Side by Side Scatterplots for 1950 and 2015 with Population Density
+</p>
+</div>
+</div>
+<div id="discussion-questions" class="section level4">
+<h4><span class="header-section-number">2.4.2.6</span> Discussion Questions</h4>
+<p>Using <a href="Viz2.html#fig:fig-sbs3">2.7</a> answer the following questions:</p>
+<p>What is happening to population density over the 65 years?<br />
+Which continent has had the greatest increase in life expectancy? Which country has had the greatest increase in life expectancy?</p>
+<p>It is clear that as population increases from 1950 to 2015, the population density increases. The high density in 2015 of a few countries makes most of the data points seem to be the same size.</p>
+</div>
+<div id="adding-a-third-year-1982" class="section level4">
+<h4><span class="header-section-number">2.4.2.7</span> Adding a Third Year, 1982</h4>
+<p>We still have not adequately incorporated year into the visual exploration. As a next step, let’s add a year that is between the end points, in this case 1982.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1982</span> <span class="op">|</span>year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">x=</span>life_exp,<span class="dt">y=</span>fertility,<span class="dt">color=</span>continent,<span class="dt">size=</span>density)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size</span>(<span class="dt">name=</span><span class="st">&quot;Density&quot;</span>,
+             <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">4000</span>,<span class="dv">6000</span>),<span class="dt">range=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">7</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>,<span class="dt">name=</span><span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-sbs4"></span>
+<img src="VA-Notes_files/figure-html/fig-sbs4-1.png" alt="Side by Side Scatterplots for 1950, 1982, and 2015 with Population Density" width="672" />
+<p class="caption">
+Figure 2.8: Side by Side Scatterplots for 1950, 1982, and 2015 with Population Density
+</p>
+</div>
+</div>
+<div id="discussion-questions-1" class="section level4">
+<h4><span class="header-section-number">2.4.2.8</span> Discussion Questions</h4>
+<p>Using Figure <a href="Viz2.html#fig:fig-sbs4">2.8</a> as a reference:</p>
+<p>What features do you see in the data? How should we incorporate year in a better format?</p>
+<p>The shift from 1950 to 1982 was mostly an increase in life expectancy with a moderate decrease in fertility. although for some of the African countries, the fertility increased. The period from 1982 to 2015 saw a big decrease in fertility whith a minor increase in life expectancy.</p>
+<p>We could incoporate year by have a slider function to select year or another option is to animate the plot by year.</p>
+</div>
+<div id="using-the-percentage-of-the-population-above-60" class="section level4">
+<h4><span class="header-section-number">2.4.2.9</span> Using the Percentage of the Population Above 60</h4>
+<p>In our initial exploration, we also considered the variable population percentage above the age of 60.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1982</span> <span class="op">|</span>year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">y=</span>above_<span class="dv">60</span>,<span class="dt">x=</span>fertility,<span class="dt">color=</span>continent,<span class="dt">size=</span>density)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size</span>(<span class="dt">name=</span><span class="st">&quot;Density&quot;</span>,
+             <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">4000</span>,<span class="dv">6000</span>),<span class="dt">range=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">7</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>,<span class="dt">name=</span><span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fertility&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig-sbs5"></span>
+<img src="VA-Notes_files/figure-html/fig-sbs5-1.png" alt="Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density" width="672" />
+<p class="caption">
+Figure 2.9: Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density
+</p>
+</div>
+</div>
+<div id="discusssion-ideas" class="section level4">
+<h4><span class="header-section-number">2.4.2.10</span> Discusssion Ideas</h4>
+<p>From Figure <a href="Viz2.html#fig:fig-sbs5">2.9</a>, notice that we also cleaned up the axes labels, answer the following questions:</p>
+<p>What new insights are gained from this plot?<br />
+What are some of the trends?</p>
+<p>Again, we see that in 1950 Europe is different from the other continents with a low fertility rate and a higher percentage of the population over 60. We do not see an again population in Africa over the entire time span. The fertility is going down in Africa but the percentage of the population over 60 is not changing. The continent with the biggest change over the 65 years is Asia. Again, it is hard to identify countries but we see an increase in population density. The change in density in Europe is not significant.</p>
+<p>We need to brush and identify. In 2015 one Asian country has high percentage of population above 60.</p>
+</div>
+<div id="box-and-dot-plots" class="section level4">
+<h4><span class="header-section-number">2.4.2.11</span> Box and Dot Plots</h4>
+<p>An alternative way to view the data is with a dotplot and boxplot. We will start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure <a href="Viz2.html#fig:fig-dp1">2.10</a> gives the result. The vertical axis is too crowded and not</p>
+<p>ggplot(gapminder_va %&gt;% filter(year==1982 |year==2015 | year==1950,continent==“Europe”),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) + geom_point() + scale_size(name=“Density”, breaks=c(10,100,1000,4000,6000),range=c(1,4)) + scale_color_discrete(name=“Year”) + labs(x=“Life Expectancy”,y=“”) + theme_bw()</p>
+<p>ggplot(gapminder_va %&gt;% filter(year==1982 |year==2015 | year==1950,continent==“Asia”),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) + geom_point() + scale_size(name=“Density”, breaks=c(10,100,1000,4000,6000),range=c(1,4)) + scale_color_discrete(name=“Year”) + labs(x=“Life Expectancy”,y=“”) + theme_bw()</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1982</span> <span class="op">|</span>year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">x=</span>life_exp,<span class="dt">y=</span><span class="kw">reorder</span>(country,life_exp),<span class="dt">color=</span><span class="kw">factor</span>(year),<span class="dt">size=</span>density)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size</span>(<span class="dt">name=</span><span class="st">&quot;Density&quot;</span>,
+             <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">4000</span>,<span class="dv">6000</span>),<span class="dt">range=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;Year&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(continent<span class="op">~</span>.,<span class="dt">scale=</span> <span class="st">&#39;free_y&#39;</span>, <span class="dt">space =</span> <span class="st">&#39;free_y&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Lief Expectancy&quot;</span>,<span class="dt">y=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y=</span><span class="kw">element_text</span>(<span class="dt">hjust =</span> grid<span class="op">::</span><span class="kw">unit</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="st">&quot;points&quot;</span>)))</code></pre></div>
+<div class="figure"><span id="fig:fig-dp1"></span>
+<img src="VA-Notes_files/figure-html/fig-dp1-1.png" alt="Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density" width="672" />
+<p class="caption">
+Figure 2.10: Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1950</span> <span class="op">|</span><span class="st"> </span>year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>),<span class="kw">aes</span>(<span class="dt">y=</span>life_exp,<span class="dt">x=</span><span class="kw">reorder</span>(continent,life_exp))) <span class="op">+</span><span class="st"> </span>
+<span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="kw">facet_grid</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Life Expectancy&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Continent&quot;</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+</div>
+<div id="parallel-coordinates-plot" class="section level4">
+<h4><span class="header-section-number">2.4.2.12</span> Parallel Coordinates Plot</h4>
+<p>Another type of plot for our data is a parallel coordiantes plot. This plot scales the data first so that the size of the variables will not dominate the plot. We will also use the data with density and population on a logarithmic scale. The order of the variables is key as well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggparcoord</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1950</span> <span class="op">|</span><span class="st"> </span>
+<span class="st">  </span>year<span class="op">==</span><span class="dv">2015</span>),<span class="dt">columns=</span><span class="dv">4</span><span class="op">:</span><span class="dv">9</span>,<span class="dt">group=</span><span class="st">&#39;continent&#39;</span>,
+  <span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">9</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>,<span class="dt">name=</span><span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Variables&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Scaled Values&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig-pc1"></span>
+<img src="VA-Notes_files/figure-html/fig-pc1-1.png" alt="Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale." width="672" />
+<p class="caption">
+Figure 2.11: Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale.
+</p>
+</div>
+</div>
+<div id="discussion-ideas-21" class="section level4">
+<h4><span class="header-section-number">2.4.2.13</span> Discussion Ideas</h4>
+<p>Using Figure <a href="Viz2.html#fig:fig-pc1">2.11</a> answer the following questions:</p>
+<p>Do population and population density aid? What do we observe over the two time periods? What order would you use for the variables and why?</p>
+<p>We put fertility and mortality first since Europe was lower on both of the metrics in 1950 than the other continents. We place population and population density at the end since there was no decernible pattern.</p>
+<p>We again see that over time that the countries are becoming closer together in the metrics. The exception appears to be that Europe has a high percentage of the population over 60 relative to the rest of the planet.</p>
+<p>We should remove population and population density to clean up the plot, see Figure <a href="Viz2.html#fig:fig-pc2">2.12</a>.</p>
+<p>We need the ability to identify countries and to link the plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggparcoord</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1950</span> <span class="op">|</span><span class="st"> </span>
+<span class="st">  </span>year<span class="op">==</span><span class="dv">2015</span>),<span class="dt">columns=</span><span class="dv">4</span><span class="op">:</span><span class="dv">7</span>,<span class="dt">group=</span><span class="st">&#39;continent&#39;</span>,
+  <span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">4</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>,<span class="dt">name=</span><span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Variables&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Scaled Values&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig-pc2"></span>
+<img src="VA-Notes_files/figure-html/fig-pc2-1.png" alt="Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale." width="672" />
+<p class="caption">
+Figure 2.12: Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale.
+</p>
+</div>
+</div>
+<div id="time-series" class="section level4">
+<h4><span class="header-section-number">2.4.2.14</span> Time Series</h4>
+<p>Next we will plot year on the horizontal axis and one of the other variables of interest on the vertical axis. Figure <a href="Viz2.html#fig:fig-ts1">2.13</a> is an example. This has a different line for each country and as a result contains too much information. To help with this problem, could just summarize each continent instead.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>fertility,<span class="dt">group=</span>country,<span class="dt">color=</span>continent)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">alpha=</span><span class="fl">0.7</span>)</code></pre></div>
+<div class="figure"><span id="fig:fig-ts1"></span>
+<img src="VA-Notes_files/figure-html/fig-ts1-1.png" alt="Fertility versus Year" width="672" />
+<p class="caption">
+Figure 2.13: Fertility versus Year
+</p>
+</div>
+<p>In Figure <a href="Viz2.html#fig:fig-ts2">2.14</a> we have simplified the plot by finding the median for each continent for each year. This of course assumes that the countries within a continent are similar. This is not a particularly good assumption for the Americas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(continent,year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Fertility=</span><span class="kw">median</span>(fertility)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>Fertility,<span class="dt">color=</span>continent)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Median Fertility&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-ts2"></span>
+<img src="VA-Notes_files/figure-html/fig-ts2-1.png" alt="Median Fertility versus Year for each Continent" width="672" />
+<p class="caption">
+Figure 2.14: Median Fertility versus Year for each Continent
+</p>
+</div>
+<p>In Figure <a href="Viz2.html#fig:fig-ts3">2.15</a> we have a nice plot of the two variables fertility and life expectancy plotted next to each other. We again summarized the data at the continent level by taking the median. This erases individual country level data but we can see overall trends for each continent.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(continent,year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Fertility=</span><span class="kw">median</span>(fertility),<span class="st">&quot;Life Expectancy&quot;</span>=<span class="kw">median</span>(life_exp)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(event,median,Fertility,<span class="st">&quot;Life Expectancy&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>median,<span class="dt">color=</span>continent)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>event,<span class="dt">scales=</span><span class="st">&quot;free_y&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-ts3"></span>
+<img src="VA-Notes_files/figure-html/fig-ts3-1.png" alt="Median Fertility and Median Life Expectancy versus Year for each Continent" width="672" />
+<p class="caption">
+Figure 2.15: Median Fertility and Median Life Expectancy versus Year for each Continent
+</p>
+</div>
+</div>
+<div id="discussion-ideas-22" class="section level4">
+<h4><span class="header-section-number">2.4.2.15</span> Discussion Ideas</h4>
+<p>What are the advantages and disadvantages of each of the plots?<br />
+How can we account for country to country variation within a continent?<br />
+What are some unusual insights?</p>
+<p>The time series plots have the advantage of showing the entire time history instead of a few selected time periods. However, we are limited in how to compare the different variables simultaneouly. We could map variation as the line width to help understand the consistency within a continent. See Figure <a href="Viz2.html#fig:fig-ts4">2.16</a> for an example. There is not much difference in variance except for Europe where the variance is smaller and for the last 25 years is minimal.</p>
+<p>Around 2000, Africa had a large drop in life expectancy. In the late 1950s, Asia had a big drop in fertility. Conjectures about the cause can be made and researched. These trends would be hard to see in previous plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(continent,year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Fertility=</span><span class="kw">median</span>(fertility),<span class="dt">Variance=</span><span class="kw">sd</span>(fertility)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>Fertility,<span class="dt">color=</span>continent,<span class="dt">group=</span>continent)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>continent,<span class="dt">size=</span>Variance)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_size</span>(<span class="dt">range=</span><span class="kw">c</span>(.<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">guide=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Median Fertility&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-ts4"></span>
+<img src="VA-Notes_files/figure-html/fig-ts4-1.png" alt="Median Fertility with Standard Deviation as line width for each Continent" width="672" />
+<p class="caption">
+Figure 2.16: Median Fertility with Standard Deviation as line width for each Continent
+</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-collection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interactions-with-visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/BawCOS/teaching-visual-analytics/edit/master/02-Exploratory-Visual-Analytics.Rmd",
+"text": "Edit"
+},
+"download": ["VA-Notes.pdf", "VA-Notes.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

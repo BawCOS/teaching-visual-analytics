@@ -26,7 +26,7 @@
 <meta name="author" content="David Ebert">
 
 
-<meta name="date" content="2018-05-11">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="Intro2.html">
-<link rel="next" href="visualization-of-data.html">
+<link rel="next" href="Viz2.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -196,11 +196,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.9" data-path="data-collection.html"><a href="data-collection.html#economic-data"><i class="fa fa-check"></i><b>2.3.9</b> Economic Data</a></li>
 <li class="chapter" data-level="2.3.10" data-path="data-collection.html"><a href="data-collection.html#summary-of-data-collection"><i class="fa fa-check"></i><b>2.3.10</b> Summary of Data Collection</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="visualization-of-data.html"><a href="visualization-of-data.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="visualization-of-data.html"><a href="visualization-of-data.html#first-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> First Visualizations</a></li>
-<li class="chapter" data-level="2.4.2" data-path="visualization-of-data.html"><a href="visualization-of-data.html#next-visualizations"><i class="fa fa-check"></i><b>2.4.2</b> Next Visualizations</a></li>
+<li class="chapter" data-level="2.4" data-path="Viz2.html"><a href="Viz2.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="Viz2.html"><a href="Viz2.html#first-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> First Visualizations</a></li>
+<li class="chapter" data-level="2.4.2" data-path="Viz2.html"><a href="Viz2.html#next-visualizations"><i class="fa fa-check"></i><b>2.4.2</b> Next Visualizations</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html"><i class="fa fa-check"></i><b>2.5</b> Interactions with Visualizations</a></li>
+<li class="chapter" data-level="2.5" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html"><i class="fa fa-check"></i><b>2.5</b> Interactions with Visualizations</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#first-interactive-plot"><i class="fa fa-check"></i><b>2.5.1</b> First Interactive Plot</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Inference in Visual Analytics</a></li>
 <li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Interactions</a><ul>
@@ -245,7 +247,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(gapminder)
 <span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(GGally)
-<span class="kw">library</span>(plotly)</code></pre></div>
+<span class="kw">library</span>(plotly)
+<span class="kw">library</span>(crosstalk)</code></pre></div>
 <p>The data has been downloaded and is in the <strong>data</strong> folder on the GitHub site for this book.</p>
 </div>
 <div id="Pop2" class="section level3">
@@ -1832,7 +1835,7 @@ gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw
         </div>
       </div>
 <a href="Intro2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="visualization-of-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="Viz2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

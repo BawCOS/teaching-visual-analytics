@@ -63,6 +63,7 @@ library(gapminder)
 library(tidyverse)
 library(GGally)
 library(plotly)
+library(crosstalk)
 ```
 
 The data has been downloaded and is in the **data** folder on the GitHub site for this book.
@@ -849,7 +850,7 @@ knitr::kable(text_tbl,caption="Description of Variables")
 
 Next we will begin the process of visualizing the data.
 
-## Visualization of Data 
+## Visualization of Data {#Viz2}
 
 In the next phase of our exploratory data analysis we will be visualizing the data. In Section \@ref(Viz1), we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step.
 
@@ -1036,7 +1037,7 @@ From Figure \@ref(fig:fig-sbs2) it is clear that density and population are domi
 ggplot(gapminder_va %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent,size=density)) +
   geom_point(alpha=.7) +
   scale_size(name="Density",
-             breaks=c(10,100,1000,4000,6000)) +
+             breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
   theme_bw()
@@ -1060,7 +1061,7 @@ We still have not adequately incorporated year into the visual exploration. As a
 ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent,size=density)) +
   geom_point(alpha=.7) +
   scale_size(name="Density",
-             breaks=c(10,100,1000,4000,6000)) +
+             breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
   theme_bw()
@@ -1085,7 +1086,7 @@ In our initial exploration, we also considered the variable population percentag
 ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,size=density)) +
   geom_point(alpha=.7) +
   scale_size(name="Density",
-             breaks=c(10,100,1000,4000,6000)) +
+             breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
   theme_bw() +
@@ -1102,6 +1103,50 @@ What are some of the trends?
 Again, we see that in 1950 Europe is different from the other continents with a low fertility rate and a higher percentage of the population over 60. We do not see an again population in Africa over the entire time span. The fertility is going down in Africa but the percentage of the population over 60 is not changing. The continent with the biggest change over the 65 years is Asia. Again, it is hard to identify countries but we see an increase in population density. The change in density in Europe is not significant.
 
 We need to brush and identify. In 2015 one Asian country has high percentage of population above 60.
+
+#### Box and Dot Plots  
+
+An alternative way to view the data is with a dotplot and boxplot. We will start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure \@ref(fig:fig-dp1) gives the result. The vertical axis is too crowded and not
+
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950,continent=="Europe"),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
+  geom_point() +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
+  scale_color_discrete(name="Year") +
+  labs(x="Life Expectancy",y="") +
+  theme_bw()
+  
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950,continent=="Asia"),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
+  geom_point() +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
+  scale_color_discrete(name="Year") +
+  labs(x="Life Expectancy",y="") +
+  theme_bw()
+
+```{r fig-dp1, fig.cap="Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density",warning=FALSE,message=FALSE}
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
+  geom_point() +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
+  scale_color_discrete(name="Year") +
+  facet_grid(continent~.,scale= 'free_y', space = 'free_y') +
+  labs(x="Lief Expectancy",y="") +
+  theme(axis.text.y=element_text(hjust = grid::unit(c(-2, 0, 2), "points")))
+```
+
+
+```{r}
+ggplot(gapminder_va %>% 
+         filter(year==1950 | year == 2015),aes(y=life_exp,x=reorder(continent,life_exp))) + 
+geom_boxplot() + 
+coord_flip() +
+facet_grid(~year) +
+theme_bw() +
+labs(x="Life Expectancy",y="Continent")
+```  
+
+
 
 #### Parallel Coordinates Plot
 
@@ -1143,17 +1188,92 @@ ggparcoord(gapminder_va_log %>% filter(year==1950 |
   labs(x="Variables",y="Scaled Values")
 ```
 
+#### Time Series  
+
+Next we will plot year on the horizontal axis and one of the other variables of interest on the vertical axis. Figure \@ref(fig:fig-ts1) is an example. This has a different line for each country and as a result contains too much information. To help with this problem, could just summarize each continent instead.
+
+```{r fig-ts1,fig.cap="Fertility versus Year"}
+gapminder_va_log %>% ggplot(aes(x=year,y=fertility,group=country,color=continent)) + geom_line(alpha=0.7)
+```
+
+In Figure \@ref(fig:fig-ts2) we have simplified the plot by finding the median for each continent for each year. This of course assumes that the countries within a continent are similar. This is not a particularly good assumption for the Americas.
+
+```{r fig-ts2,fig.cap="Median Fertility versus Year for each Continent"}
+gapminder_va_log %>% 
+  group_by(continent,year) %>% 
+  summarise(Fertility=median(fertility)) %>%
+  ggplot(aes(x=year,y=Fertility,color=continent)) + geom_line() +
+  labs(x="Year",y="Median Fertility") +
+  theme_bw()
+```
+
+In Figure \@ref(fig:fig-ts3) we have a nice plot of the two variables fertility and life expectancy plotted next to each other. We again summarized the data at the continent level by taking the median. This erases individual country level data but we can see overall trends for each continent.
+
+```{r fig-ts3,fig.cap="Median Fertility and Median Life Expectancy versus Year for each Continent"}
+gapminder_va_log %>% 
+  group_by(continent,year) %>% 
+  summarise(Fertility=median(fertility),"Life Expectancy"=median(life_exp)) %>%
+  gather(event,median,Fertility,"Life Expectancy") %>% 
+  ggplot(aes(x=year,y=median,color=continent)) + geom_line() +
+  labs(x="Year",y="") +
+  facet_wrap(~event,scales="free_y") +
+  theme_bw()
+```  
+
+#### Discussion Ideas  
+
+What are the advantages and disadvantages of each of the plots?  
+How can we account for country to country variation within a continent?  
+What are some unusual insights?
+
+The time series plots have the advantage of showing the entire time history instead of a few selected time periods. However, we are limited in how to compare the different variables simultaneouly. We could map variation as the line width to help understand the consistency within a continent. See Figure \@ref(fig:fig-ts4) for an example. There is not much difference in variance except for Europe where the variance is smaller and for the last 25 years is minimal.
+
+Around 2000, Africa had a large drop in life expectancy. In the late 1950s, Asia had a big drop in fertility. Conjectures about the cause can be made and researched. These trends would be hard to see in previous plots.
+
+
+```{r fig-ts4,fig.cap="Median Fertility with Standard Deviation as line width for each Continent"}
+gapminder_va_log %>% 
+  group_by(continent,year) %>% 
+  summarise(Fertility=median(fertility),Variance=sd(fertility)) %>%
+  ggplot(aes(x=year,y=Fertility,color=continent,group=continent)) + geom_line(aes(group=continent,size=Variance)) + 
+  scale_size(range=c(.1,2),guide=FALSE) +
+  labs(x="Year",y="Median Fertility") +
+  theme_bw()
+```  
+
 
 ## Interactions with Visualizations  
 
+In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section impliments interaction as the next step in the visual exploration.
 
-```{r}
+### First Interactive Plot  
+
+We started our visual exploration of our data with a matrix scatterplot. Let's use this same visualization, but now we will add the ability to interact with the plot. Since the plot will be too crowded with all the variables, we will drop population and density and we will remove the density plots on the diagonal and the correlation information in the upper portion of the plot. This information does work well with the interaction software.
+
+```{r warning=FALSE,message=FALSE}
+gapminder_va_log %>% filter(year==1950) %>%
+ggpairs(aes(color=continent,alpha=.7,text=country),upper = list(continuous = "blank", combo = "box_no_facet", discrete =
+  "facetbar", na = "na"),diag = list(continuous =
+  "blankDiag", discrete = "barDiag", na = "naDiag"),columns = 4:7 ) %>%
+ggplotly()
+```
+
+```{r warning=FALSE,message=FALSE}
 ggplotly(ggparcoord(gapminder_va_log %>% filter(year==1950 | 
    year==2015),columns=4:9,group='continent',
    order = c(6,7,5,4,8,9),alphaLines = 0.5) +
    scale_colour_brewer(palette="Dark2",name="Continent") +
    facet_wrap(~year),tooltip="continent")
-```
+```  
+
+
+ggplotly(ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=country,color=factor(year),size=density)) +
+  geom_point() +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
+  facet_grid(continent~.) +
+  theme_bw())
+
 ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,text = paste("country:", country))) +
   geom_point(alpha=.7)+
   facet_wrap(~year) +
