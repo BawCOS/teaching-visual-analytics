@@ -43,12 +43,9 @@ c) We must in turn explore and understand analytical reasoning, visual represent
 
 Below is a diagram of the visual analytics process. It is a cycle where any one particular step can be a starting point, and ending point, and a transition point to another area of the cycle. For this lesson we will assume you start with a hypothesis and thus start with analytical reasoning. It is important to note that this is not always the case. You could start with data visualization in an exploratory manner and then move to either analytic reasoning or data visualization.  
 
-
-
 ```{r fig0, fig.cap="Visual Analytics Cycle",echo=FALSE}
 knitr::include_graphics("./images/Cycle.png")
 ```
-
 
 ## Analytic Reasoning {#AR1}  
 
@@ -505,7 +502,7 @@ We will generate several tables that a student can interact with in an html docu
 
 ##### First Table  
 
-Our first attempt at interaction is to create a table where you can sort the columns. First we create the dataframe.
+Our first attempt at interaction is to create a table where you can sort the columns. First we create the data frame.
 
 
 ```{r}

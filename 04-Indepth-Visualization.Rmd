@@ -1,11 +1,6 @@
-# Interactions {#Chpt4}
+# Forecasting and Prediction {#Chpt4}
 
-> “It isn’t accidental that when we begin to understand something we say 'I see.' 
-> Not 'I hear' or 'I smell'” -- Stephen Few
 
-> "You see alot just by looking"  -- Yogi Berra
-
-> Visualization can surprise but doesn't scale well. Modeling scales well but cannot surprise you. -- Hadley Wickham
 
 
 http://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html 
@@ -63,6 +58,7 @@ The result must be readable and recognizable. The most important criteria is tha
 2) There are four important ingredients for information visualization:
 
 ```{r eval=FALSE}
+library(ggthemes)
 library(dplyr)
 library(htmlwidgets)
 library(rpivotTable)

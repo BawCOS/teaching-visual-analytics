@@ -49,7 +49,7 @@ We are replicating Figure \@ref(fig:fig0) below to remind you of the process for
 
 ![](./images/Cycle.png)  
 
-## Data Collection  
+## Data Collection  {#DataCol2}
 
 The data for this lesson comes from the [Gapminder](https://www.gapminder.org/data/) website. Again, you could just start with the **tools** application on the website instead of using the R code here. This section will be long but remember that data wrangling can take up to 80% of the time in a project. We also provide the final data in a csv file on the github site for this book. The file name is Gapminder_final.csv.  
 
@@ -64,6 +64,8 @@ library(tidyverse)
 library(GGally)
 library(plotly)
 library(crosstalk)
+library(ggthemes)
+library(DT)
 ```
 
 The data has been downloaded and is in the **data** folder on the GitHub site for this book.
@@ -433,7 +435,9 @@ gapminder_fertility[is.na(gapminder_fertility$fertility),]
 It is the country of Taiwan again that has missing values. I will estimate the fertility with average of the previous 5 years.
 
 ```{r}
-temp<-as.double(gapminder_fertility %>% filter(country=="Taiwan",year<2014 & year>2008) %>% summarise(ave=mean(fertility)))
+temp<-as.double(gapminder_fertility %>% 
+    filter(country=="Taiwan",year<2014 & year>2008) %>%
+    summarise(ave=mean(fertility)))
 gapminder_fertility<-gapminder_fertility %>% replace_na(list(fertility=temp))
 rm(temp)
 ```
@@ -714,13 +718,15 @@ unique(gapminder_popdensity$country)[!unique(gapminder_popdensity$country) %in% 
 We drop by using the join function.
 
 ```{r}
-gapminder_va<-gapminder_above60 %>%
+gapminder_va <-gapminder_above60 %>%
   left_join(gapminder_lifeexp,by=c("country","year","continent")) %>%
   left_join(gapminder_fertility,by=c("country","year","continent")) %>%
   left_join(gapminder_popdensity,by=c("country","year","continent")) %>%
   left_join(gapminder_mortality5,by=c("country","year","continent")) %>%
   arrange(year,country) %>%
-  mutate(country=factor(country),pop=pop/100000) 
+  mutate(country=factor(country),pop=round(pop/100000,2),
+         above_60=round(above_60,2),
+         mortality=round(mortality,2),density=round(density,2)) 
 ```  
 
 Let's look at the data.
@@ -986,13 +992,14 @@ It is hard to compare the 2015 plot with the 1950 since they are separate plots.
 
 #### Side by Side Comparison of 1950 and 2015 
 
-To compare two years, let's focus first on just two variables, fertility and life expectancy.
+To compare two years, let's focus first on just two variables, fertility and life expectancy. If we want to minimize ink, we can use a theme based on Tufte's work.
 
 ```{r fig-sbs1, fig.cap="Side by Side Scatterplots for 1950 and 2015"}
 ggplot(gapminder_va_log %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent)) +
   geom_point(alpha=.7)+
   facet_wrap(~year) +
-  theme_bw()
+  theme_tufte() +
+  labs(x="Life Expectancy",y="Fertility",color="Continent")
 ```
 
 #### Discussion Ideas  
@@ -1009,7 +1016,7 @@ Population has not been incorporated but could be added by using size for popula
 
 #### Population 
 
-We can account for populaton by assigning it to another aestheic such as size. This will work better if we go back to original data. Using population density will also be better than population because this variable accounts for the size of the country. 
+We can account for population by assigning it to another aesthetic such as size. This will work better if we go back to original data. Using population density will also be better than population because this variable accounts for the size of the country. 
 
 First, let's combine Oceania with Europe.
 
@@ -1040,8 +1047,16 @@ ggplot(gapminder_va %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fertili
              breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
-  theme_bw()
+  theme_tufte() +
+  labs(x="Life Expectancy",y="Fertility")
 ```
+
+We are getting tired of adding the theme element so we will just set it as the default.
+
+```{r}
+theme_set(theme_tufte())
+```
+
 
 #### Discussion Questions  
 
@@ -1064,7 +1079,7 @@ ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_e
              breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
-  theme_bw()
+  labs(x="Life Expectancy",y="Fertility")
 ```
 
 #### Discussion Questions  
@@ -1074,9 +1089,9 @@ Using Figure \@ref(fig:fig-sbs4) as a reference:
 What features do you see in the data?
 How should we incorporate year in a better format?
 
-The shift from 1950 to 1982 was mostly an increase in life expectancy with a moderate decrease in fertility. although for some of the African countries, the fertility increased.  The period from 1982 to 2015 saw a big decrease in fertility whith a minor increase in life expectancy.
+The shift from 1950 to 1982 was mostly an increase in life expectancy with a moderate decrease in fertility. although for some of the African countries, the fertility increased.  The period from 1982 to 2015 saw a big decrease in fertility with a minor increase in life expectancy.
 
-We could incoporate year by have a slider function to select year or another option is to animate the plot by year.
+We could incorporate year by have a slider function to select year or another option is to animate the plot by year.
 
 #### Using the Percentage of the Population Above 60
 
@@ -1089,7 +1104,6 @@ ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_
              breaks=c(10,100,1000,4000,6000),range=c(1,7)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
-  theme_bw() +
   labs(x="Fertility",y="Percentage of Population above 60")
 ```
 
@@ -1106,51 +1120,72 @@ We need to brush and identify. In 2015 one Asian country has high percentage of 
 
 #### Box and Dot Plots  
 
-An alternative way to view the data is with a dotplot and boxplot. We will start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure \@ref(fig:fig-dp1) gives the result. The vertical axis is too crowded and not
+An alternative way to view the data is with a dotplot and boxplot. We will start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure \@ref(fig:fig-dp1) gives the result. The vertical axis is too crowded and not readable even though we reduced the default font size. Notice also how the countries within continents are arranged in decreasing life expectancy.
 
-ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950,continent=="Europe"),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
-  geom_point() +
-  scale_size(name="Density",
-             breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
-  scale_color_discrete(name="Year") +
-  labs(x="Life Expectancy",y="") +
-  theme_bw()
-  
-ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950,continent=="Asia"),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
-  geom_point() +
-  scale_size(name="Density",
-             breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
-  scale_color_discrete(name="Year") +
-  labs(x="Life Expectancy",y="") +
-  theme_bw()
-
-```{r fig-dp1, fig.cap="Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density",warning=FALSE,message=FALSE}
+```{r fig-dp1, fig.cap="Plots of Life Expectancy for Each Country grouped by Continent for 1950, 1982, and 2015 with Population Density",warning=FALSE,message=FALSE}
 ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
   geom_point() +
   scale_size(name="Density",
              breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
   scale_color_discrete(name="Year") +
   facet_grid(continent~.,scale= 'free_y', space = 'free_y') +
-  labs(x="Lief Expectancy",y="") +
-  theme(axis.text.y=element_text(hjust = grid::unit(c(-2, 0, 2), "points")))
+  labs(x="Life Expectancy",y="") +
+  theme_tufte(base_size = 8)
 ```
 
+We could break each plot down into an individual continent. For example Figure \@ref(fig:fig-dp2) shows the plot for Europe. This plot is much easier to read but we lose the ability to compare the other three continents.
 
-```{r}
+```{r fig-dp2,fig.cap="Plot of Life Expectancy for Europe for the Years 1950, 1982, and 2015"}
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950,continent=="Europe"),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
+  geom_point() +
+  scale_size(name="Density",
+             breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
+  scale_color_discrete(name="Year") +
+  labs(x="Life Expectancy",y="")
+```  
+
+A third attempt is to make a two dimensional matrix plot of the four individual plots. Figure \@ref(fig:fig-dp3) shows the results. Africa is still a bit crowded but individual country names are visible.
+
+```{r fig-dp3,fig.cap="Matrix Plot of Life Expectancy for the Years 1950, 1982, and 2015"}
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
+     geom_point() +
+     scale_size(name="Density",
+                breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
+     scale_color_discrete(name="Year") +
+     facet_wrap(~continent,scales= 'free_y') +
+     labs(x="Life Expectancy",y="") 
+```
+
+Another approach to compare continents is to generate boxplots for each continent for a particular year. Figure \@ref(fig:fig-bp1) is an example. This makes it easy to compare the continents withing a year but more difficult to compare years.
+
+```{r fig-bp1,fig.cap="Boxplots of Life Expectancy for Each Continent for the Years 1950 and 2015"}
 ggplot(gapminder_va %>% 
-         filter(year==1950 | year == 2015),aes(y=life_exp,x=reorder(continent,life_exp))) + 
+         filter(year==1950 | year == 2015),
+         aes(y=life_exp,x=reorder(continent,life_exp))) + 
 geom_boxplot() + 
 coord_flip() +
 facet_grid(~year) +
-theme_bw() +
-labs(x="Life Expectancy",y="Continent")
+labs(y="Life Expectancy",x="Continent")
 ```  
 
+#### Discussion Ideas  
 
+What are the advantages of the boxplots versus the dotplots?  
+What trends do we see in the boxplots?  
+How can we deal with the variable year in a better manner?  
+What are some ways to address the issue of the crowded vertical axes in the dotplots?  
+
+In the boxplot we get an idea of the variability of life expectancy within each continent. It is easy to compare continents as well. However, we don't have the ability to analyze on the country level. 
+
+In general, we see that life expectancy has improved for all continents. Europe still has the best results but the difference between continents in 2015 is much smaller than it was in 1950. The variability is also decreasing as the width of the boxplots is getting smaller.  
+
+The side by side boxplots has done a good job of accounting for years but we may need to use an animation to explore all years.  
+
+The crowded axes is difficult. We may want to sample countries from each quartile to reduce the number of countries on each axes. Another approach is to offset the labels slightly but this has a small chance of making a difference.  
 
 #### Parallel Coordinates Plot
 
-Another type of plot for our data is a parallel coordiantes plot. This plot scales the data first so that the size of the variables will not dominate the plot. We will also use the data with density and population on a logarithmic scale. The order of the variables is key as well. 
+Another type of plot for our data is a parallel coordinates plot. This plot scales the data first so that the size of the variables will not dominate the plot. We will also use the data with density and population on a logarithmic scale. The order of the variables is key as well. 
 
 ```{r fig-pc1, fig.cap="Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale."}
 ggparcoord(gapminder_va_log %>% filter(year==1950 | 
@@ -1158,7 +1193,6 @@ ggparcoord(gapminder_va_log %>% filter(year==1950 |
   order = c(6,7,5,4,8,9)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
-  theme_bw() +
   labs(x="Variables",y="Scaled Values")
 ```
 
@@ -1170,7 +1204,7 @@ Do population and population density aid?
 What do we observe over the two time periods?
 What order would you use for the variables and why?
 
-We put fertility and mortality first since Europe was lower on both of the metrics in 1950 than the other continents. We place population and population density at the end since there was no decernible pattern. 
+We put fertility and mortality first since Europe was lower on both of the metrics in 1950 than the other continents. We place population and population density at the end since there was no discernible pattern. 
 
 We again see that over time that the countries are becoming closer together in the metrics. The exception appears to be that Europe has a high percentage of the population over 60 relative to the rest of the planet.
 
@@ -1178,13 +1212,12 @@ We should remove population and population density to clean up the plot, see Fig
 
 We need the ability to identify countries and to link the plots.
 
-```{r fig-pc2, fig.cap="Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale."}
+```{r fig-pc2, fig.cap="Parallel Coordinate Plot for 1950 and 2015. Population and Density are removed."}
 ggparcoord(gapminder_va_log %>% filter(year==1950 | 
   year==2015),columns=4:7,group='continent',
   order = c(6,7,5,4)) +
   scale_colour_brewer(palette="Dark2",name="Continent") +
   facet_wrap(~year) +
-  theme_bw() +
   labs(x="Variables",y="Scaled Values")
 ```
 
@@ -1193,7 +1226,8 @@ ggparcoord(gapminder_va_log %>% filter(year==1950 |
 Next we will plot year on the horizontal axis and one of the other variables of interest on the vertical axis. Figure \@ref(fig:fig-ts1) is an example. This has a different line for each country and as a result contains too much information. To help with this problem, could just summarize each continent instead.
 
 ```{r fig-ts1,fig.cap="Fertility versus Year"}
-gapminder_va_log %>% ggplot(aes(x=year,y=fertility,group=country,color=continent)) + geom_line(alpha=0.7)
+gapminder_va_log %>% ggplot(aes(x=year,y=fertility,group=country,color=continent)) + 
+  geom_line(alpha=0.7)
 ```
 
 In Figure \@ref(fig:fig-ts2) we have simplified the plot by finding the median for each continent for each year. This of course assumes that the countries within a continent are similar. This is not a particularly good assumption for the Americas.
@@ -1203,8 +1237,7 @@ gapminder_va_log %>%
   group_by(continent,year) %>% 
   summarise(Fertility=median(fertility)) %>%
   ggplot(aes(x=year,y=Fertility,color=continent)) + geom_line() +
-  labs(x="Year",y="Median Fertility") +
-  theme_bw()
+  labs(x="Year",y="Median Fertility")
 ```
 
 In Figure \@ref(fig:fig-ts3) we have a nice plot of the two variables fertility and life expectancy plotted next to each other. We again summarized the data at the continent level by taking the median. This erases individual country level data but we can see overall trends for each continent.
@@ -1216,8 +1249,7 @@ gapminder_va_log %>%
   gather(event,median,Fertility,"Life Expectancy") %>% 
   ggplot(aes(x=year,y=median,color=continent)) + geom_line() +
   labs(x="Year",y="") +
-  facet_wrap(~event,scales="free_y") +
-  theme_bw()
+  facet_wrap(~event,scales="free_y")
 ```  
 
 #### Discussion Ideas  
@@ -1226,7 +1258,7 @@ What are the advantages and disadvantages of each of the plots?
 How can we account for country to country variation within a continent?  
 What are some unusual insights?
 
-The time series plots have the advantage of showing the entire time history instead of a few selected time periods. However, we are limited in how to compare the different variables simultaneouly. We could map variation as the line width to help understand the consistency within a continent. See Figure \@ref(fig:fig-ts4) for an example. There is not much difference in variance except for Europe where the variance is smaller and for the last 25 years is minimal.
+The time series plots have the advantage of showing the entire time history instead of a few selected time periods. However, we are limited in how to compare the different variables simultaneously. We could map variation as the line width to help understand the consistency within a continent. See Figure \@ref(fig:fig-ts4) for an example. There is not much difference in variance except for Europe where the variance is smaller and for the last 25 years is minimal.
 
 Around 2000, Africa had a large drop in life expectancy. In the late 1950s, Asia had a big drop in fertility. Conjectures about the cause can be made and researched. These trends would be hard to see in previous plots.
 
@@ -1235,37 +1267,69 @@ Around 2000, Africa had a large drop in life expectancy. In the late 1950s, Asia
 gapminder_va_log %>% 
   group_by(continent,year) %>% 
   summarise(Fertility=median(fertility),Variance=sd(fertility)) %>%
-  ggplot(aes(x=year,y=Fertility,color=continent,group=continent)) + geom_line(aes(group=continent,size=Variance)) + 
+  ggplot(aes(x=year,y=Fertility,color=continent,group=continent)) + 
+  geom_line(aes(group=continent,size=Variance)) + 
   scale_size(range=c(.1,2),guide=FALSE) +
-  labs(x="Year",y="Median Fertility") +
-  theme_bw()
+  labs(x="Year",y="Median Fertility")
 ```  
 
 
 ## Interactions with Visualizations  
 
-In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section impliments interaction as the next step in the visual exploration.
+In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration.
 
-### First Interactive Plot  
+### First Interactive Plots  
+
+We will start our exploration with the plots from Section \@ref(Viz2) and data from Section \@ref(DataCol2). As a reminder, some of the shortcomings we found in our static visualizations were the inability to handle time, not being able to identify data points, and not link data points together.
+
+#### Final Data  
+
+We presented our data in Table\@ref(tab:final-tab) but the table only presented the first several rows.  Figure \@ref(fig:tab-it1) is an interactive table, note **knitr** and **bookdown** require the title of figure for items from the package **DT**. We can change the number of rows and scroll to see the entire table.
+
+```{r tab-it1,fig.cap="Interactive Table of Final Data",echo=FALSE}
+DT::datatable(gapminder_va,rownames=FALSE,options=list(scrollX=TRUE))
+```
+
+#### Discussion Ideas  
+
+What is the life expectancy of the United States in 1984?  
+Which country in Europe had the highest mortality in 1984?  
+
+#### Interactive Scatterplot Matrix  
 
 We started our visual exploration of our data with a matrix scatterplot. Let's use this same visualization, but now we will add the ability to interact with the plot. Since the plot will be too crowded with all the variables, we will drop population and density and we will remove the density plots on the diagonal and the correlation information in the upper portion of the plot. This information does work well with the interaction software.
 
-```{r warning=FALSE,message=FALSE}
+```{r fig-ip1,fig.cap="Interactive Scatterplot Matrix for 1950",warning=FALSE,message=FALSE}
 gapminder_va_log %>% filter(year==1950) %>%
-ggpairs(aes(color=continent,alpha=.7,text=country),upper = list(continuous = "blank", combo = "box_no_facet", discrete =
+ggpairs(aes(color=continent,alpha=.7,text=country),
+  upper = list(continuous = "blank", combo = "box_no_facet", discrete =
   "facetbar", na = "na"),diag = list(continuous =
   "blankDiag", discrete = "barDiag", na = "naDiag"),columns = 4:7 ) %>%
-ggplotly()
+ggplotly(tooltip = c('continent','x','y','country'))
 ```
+
+#### Discussion Questions  
+
+Spend some time experimenting with Figure \@ref(fig:fig-ip1). The toolbar at the top of the plot has some options to zoom, pan, and screen capture. Also by placing the cursor over a data point, a popup window reveals information about that point.
+
+What are the countries that have low fertility and low life expectancy?  
+Using the pan and zoom features, find the the life expectancy for the country with the largest fraction of the population above the age of 60.  
+What is the country in the previous question?  
+
+#### Interactive Parallel Coordianates Plot  
+tooltip="continent"
+
 
 ```{r warning=FALSE,message=FALSE}
 ggplotly(ggparcoord(gapminder_va_log %>% filter(year==1950 | 
    year==2015),columns=4:9,group='continent',
-   order = c(6,7,5,4,8,9),alphaLines = 0.5) +
+   order = c(6,7,5,4,8,9),alphaLines = 0.5,mapping = aes(text=country)) +
    scale_colour_brewer(palette="Dark2",name="Continent") +
-   facet_wrap(~year),tooltip="continent")
+   facet_wrap(~year))
 ```  
 
+
+Use trelliscope package 
 
 ggplotly(ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=country,color=factor(year),size=density)) +
   geom_point() +
@@ -1288,3 +1352,14 @@ ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950)
   geom_point(alpha=.7)+
   facet_wrap(~year) +
   theme_bw(),tooltip=c("text","fertility","above_60"))
+
+library(rbokeh)  
+tools <- c("pan", "wheel_zoom", "box_zoom", "box_select", "reset")
+nms <- expand.grid(names(iris)[1:4], rev(names(iris)[1:4]), stringsAsFactors = FALSE)
+splom_list <- vector("list", 16)
+for(ii in seq_len(nrow(nms))) {
+     splom_list[[ii]] <- figure(width = 200, height = 200, tools = tools,
+                                xlab = nms$Var1[ii], ylab = nms$Var2[ii]) %>%
+         ly_points(nms$Var1[ii], nms$Var2[ii], data = iris,
+                   color = Species, size = 5, legend = FALSE,hover = c(nms$Var1[ii], nms$Var2[ii]))
+ }

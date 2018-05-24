@@ -1,5 +1,9 @@
 # Inference in Visual Analytics {#Chpt3}
 
-We describe our methods in this chapter.
+In Chapter \@ref(Chpt1) we introduced an visual analysis. The problem was purposefully simple and easy to understand. However, it did not offer the ability to perform more in depth analysis and inference. In this chapter we will use a similar problem to the one introduce in Chapter \@ref(Chpt1) except that it has more variables and thus the opportunity for a deeper analysis. We will not be as complete in our instruction as Chapter \@ref(Chpt1); we leave it up to the instructor to piece ideas from Chapter \@ref(Chpt1) with this work. Thus this chapter will appear to be a loose collections of ideas.
+
+## Lesson Preparation Differences 
+
+The lesson objectives will be similar to 
 
 
