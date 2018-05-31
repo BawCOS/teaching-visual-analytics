@@ -66,6 +66,8 @@ library(plotly)
 library(crosstalk)
 library(ggthemes)
 library(DT)
+library(rbokeh)
+library(trelliscopejs)
 ```
 
 The data has been downloaded and is in the **data** folder on the GitHub site for this book.

@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="interactions-with-visualizations.html">
-<link rel="next" href="lesson-preparation-differences.html">
+<link rel="prev" href="prerequisites.html">
+<link rel="next" href="acknowledgements.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -245,17 +245,95 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="Chpt3" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Inference in Visual Analytics</h1>
-<p>In Chapter <a href="Chpt1.html#Chpt1">1</a> we introduced an visual analysis. The problem was purposefully simple and easy to understand. However, it did not offer the ability to perform more in depth analysis and inference. In this chapter we will use a similar problem to the one introduce in Chapter <a href="Chpt1.html#Chpt1">1</a> except that it has more variables and thus the opportunity for a deeper analysis. We will not be as complete in our instruction as Chapter <a href="Chpt1.html#Chpt1">1</a>; we leave it up to the instructor to piece ideas from Chapter <a href="Chpt1.html#Chpt1">1</a> with this work. Thus this chapter will appear to be a loose collections of ideas.</p> 
+<div id="software-packages" class="section level2">
+<h2><span class="header-section-number">0.4</span> Software Packages</h2>
+<p>These notes make use of the following packages in R <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2018</a><a href="#ref-R-knitr">c</a>)</span>, <strong>rmarkdown</strong> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2017</a>)</span>, <strong>Hmisc</strong> <span class="citation">(Harrell <a href="#ref-R-Hmisc">2018</a>)</span>, <strong>lattice</strong> <span class="citation">(Sarkar <a href="#ref-R-lattice">2017</a>)</span>, <strong>vcd</strong> <span class="citation">(Meyer, Zeileis, and Hornik <a href="#ref-R-vcd">2017</a>)</span>, <strong>ggplot2</strong> <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>, <strong>MASS</strong> <span class="citation">(Ripley <a href="#ref-R-MASS">2018</a>)</span>, <strong>TeachingDemos</strong> <span class="citation">(Snow <a href="#ref-R-TeachingDemos">2016</a>)</span>, <strong>Stat2Data</strong> <span class="citation">(Lock <a href="#ref-R-Stat2Data">2013</a>)</span>, <strong>car</strong> <span class="citation">(Fox and Weisberg <a href="#ref-R-car">2017</a>)</span>, <strong>DT</strong> <span class="citation">(Xie <a href="#ref-R-DT">2018</a><a href="#ref-R-DT">b</a>)</span>,<strong>crosstalk</strong> <span class="citation">(Cheng <a href="#ref-R-crosstalk">2016</a>)</span>, <strong>leaflet</strong> <span class="citation">(Cheng, Karambelkar, and Xie <a href="#ref-R-leaflet">2017</a>)</span>, <strong>plotly</strong> <span class="citation">(Sievert et al. <a href="#ref-R-plotly">2017</a>)</span>, <strong>ggrepel</strong><span class="citation">(Slowikowski <a href="#ref-R-ggrepel">2018</a>)</span>, <strong>rpivotTable</strong><span class="citation">(Martoglio <a href="#ref-R-rpivotTable">2017</a>)</span>, <strong>RColorBrewer</strong><span class="citation">(Neuwirth <a href="#ref-R-RColorBrewer">2014</a>)</span>, <strong>gapminder</strong><span class="citation">(Bryan <a href="#ref-R-gapminder">2017</a>)</span>, <strong>tidyverse</strong><span class="citation">(Wickham <a href="#ref-R-tidyverse">2017</a>)</span>, <strong>readxl</strong><span class="citation">(Wickham and Bryan <a href="#ref-R-readxl">2017</a>)</span>, <strong>kableExtra</strong><span class="citation">(Zhu <a href="#ref-R-kableExtra">2018</a>)</span>, <strong>GGally</strong><span class="citation">(Schloerke et al. <a href="#ref-R-GGally">2018</a>)</span>, <strong>ggthemes</strong><span class="citation">(Arnold <a href="#ref-R-ggthemes">2018</a>)</span>, <strong>rbokeh</strong><span class="citation">(Hafen and Continuum Analytics, Inc. <a href="#ref-R-rbokeh">2016</a>)</span>, <strong>trelliscopejs</strong><span class="citation">(Hafen and Schloerke <a href="#ref-R-trelliscopejs">2018</a>)</span>, <strong>DT</strong><span class="citation">(Xie <a href="#ref-R-DT">2018</a><a href="#ref-R-DT">b</a>)</span>.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-knitr">
+<p>Xie, Yihui. 2018c. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
+</div>
+<div id="ref-R-rmarkdown">
+<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, and Winston Chang. 2017. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown" class="uri">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
+</div>
+<div id="ref-R-Hmisc">
+<p>Harrell, Frank E, Jr. 2018. <em>Hmisc: Harrell Miscellaneous</em>. <a href="https://CRAN.R-project.org/package=Hmisc" class="uri">https://CRAN.R-project.org/package=Hmisc</a>.</p>
+</div>
+<div id="ref-R-lattice">
+<p>Sarkar, Deepayan. 2017. <em>Lattice: Trellis Graphics for R</em>. <a href="https://CRAN.R-project.org/package=lattice" class="uri">https://CRAN.R-project.org/package=lattice</a>.</p>
+</div>
+<div id="ref-R-vcd">
+<p>Meyer, David, Achim Zeileis, and Kurt Hornik. 2017. <em>Vcd: Visualizing Categorical Data</em>. <a href="https://CRAN.R-project.org/package=vcd" class="uri">https://CRAN.R-project.org/package=vcd</a>.</p>
+</div>
+<div id="ref-R-ggplot2">
+<p>Wickham, Hadley, and Winston Chang. 2016. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+</div>
+<div id="ref-R-MASS">
+<p>Ripley, Brian. 2018. <em>MASS: Support Functions and Datasets for Venables and Ripley’s Mass</em>. <a href="https://CRAN.R-project.org/package=MASS" class="uri">https://CRAN.R-project.org/package=MASS</a>.</p>
+</div>
+<div id="ref-R-TeachingDemos">
+<p>Snow, Greg. 2016. <em>TeachingDemos: Demonstrations for Teaching and Learning</em>. <a href="https://CRAN.R-project.org/package=TeachingDemos" class="uri">https://CRAN.R-project.org/package=TeachingDemos</a>.</p>
+</div>
+<div id="ref-R-Stat2Data">
+<p>Lock, Robin. 2013. <em>Stat2Data: Datasets for Stat2</em>. <a href="https://CRAN.R-project.org/package=Stat2Data" class="uri">https://CRAN.R-project.org/package=Stat2Data</a>.</p>
+</div>
+<div id="ref-R-car">
+<p>Fox, John, and Sanford Weisberg. 2017. <em>Car: Companion to Applied Regression</em>. <a href="https://CRAN.R-project.org/package=car" class="uri">https://CRAN.R-project.org/package=car</a>.</p>
+</div>
+<div id="ref-R-DT">
+<p>Xie, Yihui. 2018b. <em>DT: A Wrapper of the Javascript Library ’Datatables’</em>. <a href="https://CRAN.R-project.org/package=DT" class="uri">https://CRAN.R-project.org/package=DT</a>.</p>
+</div>
+<div id="ref-R-crosstalk">
+<p>Cheng, Joe. 2016. <em>Crosstalk: Inter-Widget Interactivity for Html Widgets</em>. <a href="https://CRAN.R-project.org/package=crosstalk" class="uri">https://CRAN.R-project.org/package=crosstalk</a>.</p>
+</div>
+<div id="ref-R-leaflet">
+<p>Cheng, Joe, Bhaskar Karambelkar, and Yihui Xie. 2017. <em>Leaflet: Create Interactive Web Maps with the Javascript ’Leaflet’ Library</em>. <a href="https://CRAN.R-project.org/package=leaflet" class="uri">https://CRAN.R-project.org/package=leaflet</a>.</p>
+</div>
+<div id="ref-R-plotly">
+<p>Sievert, Carson, Chris Parmer, Toby Hocking, Scott Chamberlain, Karthik Ram, Marianne Corvellec, and Pedro Despouy. 2017. <em>Plotly: Create Interactive Web Graphics via ’Plotly.js’</em>. <a href="https://CRAN.R-project.org/package=plotly" class="uri">https://CRAN.R-project.org/package=plotly</a>.</p>
+</div>
+<div id="ref-R-ggrepel">
+<p>Slowikowski, Kamil. 2018. <em>Ggrepel: Automatically Position Non-Overlapping Text Labels with ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggrepel" class="uri">https://CRAN.R-project.org/package=ggrepel</a>.</p>
+</div>
+<div id="ref-R-rpivotTable">
+<p>Martoglio, Enzo. 2017. <em>RpivotTable: Build Powerful Pivot Tables and Dynamically Slice &amp; Dice Your Data</em>. <a href="https://CRAN.R-project.org/package=rpivotTable" class="uri">https://CRAN.R-project.org/package=rpivotTable</a>.</p>
+</div>
+<div id="ref-R-RColorBrewer">
+<p>Neuwirth, Erich. 2014. <em>RColorBrewer: ColorBrewer Palettes</em>. <a href="https://CRAN.R-project.org/package=RColorBrewer" class="uri">https://CRAN.R-project.org/package=RColorBrewer</a>.</p>
+</div>
+<div id="ref-R-gapminder">
+<p>Bryan, Jennifer. 2017. <em>Gapminder: Data from Gapminder</em>. <a href="https://CRAN.R-project.org/package=gapminder" class="uri">https://CRAN.R-project.org/package=gapminder</a>.</p>
+</div>
+<div id="ref-R-tidyverse">
+<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse" class="uri">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div id="ref-R-readxl">
+<p>Wickham, Hadley, and Jennifer Bryan. 2017. <em>Readxl: Read Excel Files</em>. <a href="https://CRAN.R-project.org/package=readxl" class="uri">https://CRAN.R-project.org/package=readxl</a>.</p>
+</div>
+<div id="ref-R-kableExtra">
+<p>Zhu, Hao. 2018. <em>KableExtra: Construct Complex Table with ’Kable’ and Pipe Syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a>.</p>
+</div>
+<div id="ref-R-GGally">
+<p>Schloerke, Barret, Jason Crowley, Di Cook, Francois Briatte, Moritz Marbach, Edwin Thoen, Amos Elberg, and Joseph Larmarange. 2018. <em>GGally: Extension to ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=GGally" class="uri">https://CRAN.R-project.org/package=GGally</a>.</p>
+</div>
+<div id="ref-R-ggthemes">
+<p>Arnold, Jeffrey B. 2018. <em>Ggthemes: Extra Themes, Scales and Geoms for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggthemes" class="uri">https://CRAN.R-project.org/package=ggthemes</a>.</p>
+</div>
+<div id="ref-R-rbokeh">
+<p>Hafen, Ryan, and Continuum Analytics, Inc. 2016. <em>Rbokeh: R Interface for Bokeh</em>. <a href="https://CRAN.R-project.org/package=rbokeh" class="uri">https://CRAN.R-project.org/package=rbokeh</a>.</p>
+</div>
+<div id="ref-R-trelliscopejs">
+<p>Hafen, Ryan, and Barret Schloerke. 2018. <em>Trelliscopejs: Create Interactive Trelliscope Displays</em>. <a href="https://github.com/hafen/trelliscopejs" class="uri">https://github.com/hafen/trelliscopejs</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="interactions-with-visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lesson-preparation-differences.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="acknowledgements.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +363,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/BawCOS/teaching-visual-analytics/edit/master/03-Indepth-Analytic-Reasoning.Rmd",
+"link": "https://github.com/BawCOS/teaching-visual-analytics/edit/master/index.Rmd",
 "text": "Edit"
 },
 "download": ["VA-Notes.pdf", "VA-Notes.epub"],

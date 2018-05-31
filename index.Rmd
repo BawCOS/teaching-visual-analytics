@@ -43,31 +43,49 @@ description: "Lessons on teaching visual analytics in a generic undergraduate cl
 
 ## Who is this book for?
 
-
+This book is intended to provide the reader an introduction to visual analytics and notes to teach topics on visual analytics. Visual analytics is simply a cycle of analytic reasoning, visualization, and interaction. The book is primarily designed to provide structures and ideas on how to teach others about visual analytics. It provides two examples, the first has a heavy emphasis on analytic reasoning. The second has a heavy emphasis on exploration using visualization and interaction. An instructor can use all or portions of each chapter as necessary to meet the desired educational outcomes. 
 
 ## Book Structure and How to Use It
 
-Introduction:  This is a work is the result of an effort between the VACCINE lab at Purdue University and the United States Air Force Academy to develop a smaller set of lesson to introduce the field of visual analytics (VA).  Since many institutions do not have the resources to offer complete courses on VA, it was decided that standalone lessons plans have the potential for more use and dissemination.   
+### Introduction  
 
-Intent:  These modules are designed to help participants:
-Understand the definition and value of visual analytics
-Explain and use design principles for visual analytics
+This is a work is the result of an effort between the Visual Analytics for Command, Control, and Interoperability Environments (VACCINE) Center at Purdue University and the United States Air Force Academy to develop a smaller set of lessons to introduce the field of visual analytics (VA).  Since many institutions do not have the resources to offer complete courses on VA, it was decided that standalone lessons plans have the potential for more use and dissemination.   
+
+### Intent  
+
+These modules are designed to help participants:  
+Understand the definition and value of visual analytics  
+Explain and use design principles for visual analytics  
 Use visual analytics to explore and reach a decision for a problem
 
-Use:  The first chapter is a short introduction to visual analytics. It starts with a question, which can be understood to be the analytic reasoning leg of the visual analytics cycle. The second chapter is also an introduction to visual analytics but it takes more of a hypothesis generating point of view and thus has more emphasis on visualization and interaction. The third chapter is an in-depth  chapters give in-depth lessons into each of the three knowledge areas, analytic reasoning, visualization, and interaction.
+### Use  
+
+The first chapter introduces visual analytics through a simple small example that emphasizes analytic reasoning. It starts with a question and proceeds through the visual analytic cycle in an attempt to answer the question. In the process, the reader/instructor can different aspects of the cycle.  which can be understood to be the analytic reasoning leg of the visual analytics cycle. 
+
+The second chapter is also an introduction to visual analytics but it takes more of a hypothesis generating or exploration point of view and thus has more emphasis on visualization and interaction. 
+
+Each lesson can be modified to change the length. They are written to comprise around 3 one hour lessons. However, and instructor can alter the length either way by increasing emphasis on certain points or dropping some topics.
+
+Each lesson is comprised of a sequence of ideas that leads students through several iterations of the visual analytics cycle. Each idea is supported with code and suggested discussion ideas.
 
 
 ## Prerequisites
 
-WHY USE R what if you don't want to
+There only a minimal assumed skills and knowledge for these lessons. The students should have some basic understanding of statistics and the ability to use basic algebra skills.  
 
-These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT],**crosstalk** [@R-crosstalk], **leaflet** [@R-leaflet], **plotly** [@R-plotly], **ggrepel**[@R-ggrepel], **rpivotTable**[@R-rpivotTable], **RColorBrewer**[@R-RColorBrewer], **gapminder**[@R-gapminder], **tidyverse**[@R-tidyverse], **readxl**[@R-readxl], **kableExtra**[@R-kableExtra], **GGally**[@R-GGally], **ggthemes**[@R-ggthemes].
+Since visual analytics is heavily dependent on visualization and interaction it is heavily dependent on software. There are a number of choices that could be used for software; all of them have advantages and disadvantages. We choice to use [R](https://cran.r-project.org) because it is a commonly used software, supports many different packages, and can be used to generate an interactive html document. 
+
+There are no assumed knowledge or computing skills for these lessons. The instructor can have the participants write code or use the output of the code provided in these notes. There are of course some limitations to using html rendered results but these are generally minor in nature. Code for most of the examples has been provided for most of the examples to help the instructor recreate and modify the results.
+
+## Software Packages   
+
+These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT],**crosstalk** [@R-crosstalk], **leaflet** [@R-leaflet], **plotly** [@R-plotly], **ggrepel**[@R-ggrepel], **rpivotTable**[@R-rpivotTable], **RColorBrewer**[@R-RColorBrewer], **gapminder**[@R-gapminder], **tidyverse**[@R-tidyverse], **readxl**[@R-readxl], **kableExtra**[@R-kableExtra], **GGally**[@R-GGally], **ggthemes**[@R-ggthemes], **rbokeh**[@R-rbokeh], **trelliscopejs**[@R-trelliscopejs], **DT**[@R-DT].
 
 ## Acknowledgements 
 
-The workshop, GT, UCGA, Purdue, USAFA ....
+This work has been supported with a grant from the Department of Homeland Security. Many ideas were generated from a workshop conducted at the United States Air Force Academy and included faculty from Georgia Tech, Purdue, Unites States Air Force Academy, and Prarie View A&M. Key contributors , GT, UCGA, Purdue, USAFA ....
 
-This book was written using the excellent **bookdown** package [@R-bookdown].
+This book was written using the excellent **bookdown** package [@R-bookdown] in R.
 
 
 
@@ -78,7 +96,7 @@ This book is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr','vcdExtra','ggrepel', 'shiny', 'rpivotTable','ggrepel','d3scatter','RColorBrewer','gapminder','tidyverse','readxl','kableExtra','GGally','ggthemes'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr','vcdExtra','ggrepel', 'shiny', 'rpivotTable','ggrepel','d3scatter','RColorBrewer','gapminder','tidyverse','readxl','kableExtra','GGally','ggthemes','trelliscopejs','rbokeh'
 ), 'packages.bib')
 ```
 
@@ -109,5 +127,7 @@ library(gapminder)
 library(readxl)
 library(kableExtra)
 library(GGally)
+library(rbokeh)
+library(trelliscopejs)
 ```
 
