@@ -26,7 +26,7 @@
 <meta name="author" content="Bradley Warner">
 
 
-<meta name="date" content="2018-06-01">
+<meta name="date" content="2018-06-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -210,16 +210,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.1" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#first-interactive-plots"><i class="fa fa-check"></i><b>2.5.1</b> First Interactive Plots</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Inference in Visual Analytics</a><ul>
-<li class="chapter" data-level="3.1" data-path="lesson-preparation-differences.html"><a href="lesson-preparation-differences.html"><i class="fa fa-check"></i><b>3.1</b> Lesson Preparation Differences</a></li>
+<li class="chapter" data-level="3" data-path="nest-gapminder-data-by-country.html"><a href="nest-gapminder-data-by-country.html"><i class="fa fa-check"></i><b>3</b> nest gapminder data by country</a></li>
+<li class="chapter" data-level="4" data-path="add-in-a-plot-column-with-map-plot.html"><a href="add-in-a-plot-column-with-map-plot.html"><i class="fa fa-check"></i><b>4</b> add in a plot column with map_plot</a></li>
+<li class="chapter" data-level="5" data-path="plot-it.html"><a href="plot-it.html"><i class="fa fa-check"></i><b>5</b> plot it</a></li>
+<li class="chapter" data-level="6" data-path="dt-options-httpsrstudio-github-iodtoptions-html.html"><a href="dt-options-httpsrstudio-github-iodtoptions-html.html"><i class="fa fa-check"></i><b>6</b> DT options <a href="https://rstudio.github.io/DT/options.html" class="uri">https://rstudio.github.io/DT/options.html</a></a></li>
+<li class="chapter" data-level="7" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>7</b> Inference in Visual Analytics</a><ul>
+<li class="chapter" data-level="7.1" data-path="lesson-preparation-differences.html"><a href="lesson-preparation-differences.html"><i class="fa fa-check"></i><b>7.1</b> Lesson Preparation Differences</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Forecasting and Prediction</a><ul>
-<li class="chapter" data-level="4.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson Preparation</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#objectives-2"><i class="fa fa-check"></i><b>4.1.1</b> Objectives:</a></li>
-<li class="chapter" data-level="4.1.2" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#preparation-2"><i class="fa fa-check"></i><b>4.1.2</b> Preparation</a></li>
+<li class="chapter" data-level="8" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>8</b> Forecasting and Prediction</a><ul>
+<li class="chapter" data-level="8.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html"><i class="fa fa-check"></i><b>8.1</b> Lesson Preparation</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#objectives-2"><i class="fa fa-check"></i><b>8.1.1</b> Objectives:</a></li>
+<li class="chapter" data-level="8.1.2" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#preparation-2"><i class="fa fa-check"></i><b>8.1.2</b> Preparation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>5</b> Case Study</a></li>
+<li class="chapter" data-level="9" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>9</b> Case Study</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="AppA.html"><a href="AppA.html"><i class="fa fa-check"></i><b>A</b> Lesson Handouts</a></li>
 <li class="chapter" data-level="B" data-path="AppB.html"><a href="AppB.html"><i class="fa fa-check"></i><b>B</b> Project</a><ul>
@@ -254,7 +258,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>“You see alot just by looking” – Yogi Berra</p>
 </blockquote>
 <blockquote>
-<p>Visualization can surprise but doesn’t scale well. Modeling scales well but cannot &gt; surprise you. – Hadley Wickham</p>
+<p>“Visualization can surprise but doesn’t scale well. Modeling scales well but cannot surprise you.” – Hadley Wickham</p>
+</blockquote>
+<blockquote>
+<p>“We have the duty of formulating, of summarizing, and of communicating our conclusions, in intelligible form, in recognition of the right of other free minds to utilize them in making their own decisions” – Ronald Fisher</p>
 </blockquote>
 <p>In Chapter @ref(#Chpt1) we illustrated the visual analytics process in Figure <a href="Intro1.html#fig:fig0">1.1</a>. In that chapter, we started in the analytic reasoning section and then proceeded to visualization and interaction. This is typical when you begin with a research question and perform a more traditional analysis. In this chapter, we will be conducting what is known as an explanatory analysis in a visual analytic framework. We will start with visualization and explore relationships between variables. Ultimately, we will be recreating a chart similar to Hans Rosling’s famous animated visualization from his <a href="https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen?language=en">TED talk</a>.</p>
 <p>We will be using R to generate the display however, if you don’t want to use R go the gapminder website, <a href="https://www.gapminder.org/" class="uri">https://www.gapminder.org/</a>, and under the header <strong>tools</strong>, you will have access to all the data as well as an interactive scatter plot. Another avenue you could explore is to use data directly from the <a href="https://data.worldbank.org/">World Bank</a>. On their website you can create interactive visual displays, <a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org/</a>.</p>
