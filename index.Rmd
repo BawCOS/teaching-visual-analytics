@@ -87,11 +87,17 @@ This work has been supported with a grant from the Department of Homeland Securi
 
 This book was written using the excellent **bookdown** package [@R-bookdown] in R.
 
+The book was run on Windows machine using RStudio. The following information gives the software and package versions:
 
+```{r}
+devtools::session_info(c("tidyverse"))
+```
 
 ![](./images/by-nc-sa.png)  
 
 This book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -99,6 +105,7 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr','vcdExtra','ggrepel', 'shiny', 'rpivotTable','ggrepel','d3scatter','RColorBrewer','gapminder','tidyverse','readxl','kableExtra','GGally','ggthemes','trelliscopejs','rbokeh'
 ), 'packages.bib')
 ```
+
 
 ```{r warning=FALSE,message=FALSE,include=FALSE}
 library(ggthemes)

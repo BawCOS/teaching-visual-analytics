@@ -5,7 +5,12 @@
 
 > "You see alot just by looking"  -- Yogi Berra
 
-> Visualization can surprise but doesn't scale well. Modeling scales well but cannot > surprise you. -- Hadley Wickham
+> "Visualization can surprise but doesn't scale well. Modeling scales well but cannot 
+> surprise you." -- Hadley Wickham
+
+> "We have the duty of formulating, of summarizing, and of communicating our conclusions,
+> in intelligible form, in recognition of the right of other free minds to utilize 
+> them in making their own decisions" -- Ronald Fisher  
 
 In Chapter \@ref(#Chpt1) we illustrated the visual analytics process in Figure \@ref(fig:fig0). In that chapter, we started in the analytic reasoning section and then proceeded to visualization and interaction. This is typical when you begin with a research question and perform a more traditional analysis. In this chapter, we will be conducting what is known as an explanatory analysis in a visual analytic framework. We will start with visualization and explore relationships between variables. Ultimately, we will be recreating a chart similar to Hans Rosling's famous animated visualization from his [TED talk](https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen?language=en ). 
 
@@ -66,6 +71,7 @@ library(plotly)
 library(crosstalk)
 library(ggthemes)
 library(DT)
+library(d3scatter)
 library(rbokeh)
 library(trelliscopejs)
 ```
@@ -915,10 +921,11 @@ gapminder_va_log <- gapminder_va %>%
   select(-pop,-density)
 ```
 
-```{r tab-va-log,echo=FALSE}
+```{r tab-va-log,echo=FALSE,warning=FALSE}
 gapminder_va_log %>% 
   head() %>% 
-  knitr::kable(caption="Data with Population and Density on a Log Scale")
+  knitr::kable(caption="Data with Population and Density on a Log Scale",digits=2,format='html') %>%
+  kable_styling(bootstrap_options = c("striped", "hover"),font_size = 12)
 ```
 
 Next we plot this new data set and add continent as a color.
@@ -1037,7 +1044,8 @@ This confirms our suspicion. A country with a large population may not be one wi
 ```{r fig-sbs2, fig.cap="Side by Side Scatterplots of Density and Population for 1950 and 2015"}
 ggplot(gapminder_va %>% filter(year==2015 | year==1950),aes(x=density,y=pop,color=continent)) + 
   geom_jitter() +
-  facet_wrap(~year)
+  facet_wrap(~year) +
+  theme_tufte()
 ```
 
 From Figure \@ref(fig:fig-sbs2) it is clear that density and population are dominated by a few large values. We will need to be careful when we use either as an aesthetic on our plots. We will break the size into a logarithmic type of scale. We are also going to change the color scheme to one from the [Brewer color scheme.](http://www.colorbrewer.org)
@@ -1276,9 +1284,12 @@ gapminder_va_log %>%
 ```  
 
 
+MAYBE add stuff from this section of the book
+http://r4ds.had.co.nz/many-models.html#gapminder 
+
 ## Interactions with Visualizations  
 
-In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration.
+In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration. We will make use of the R implementation of the plotly javascript library, **plotly** [@R-bookdown].
 
 ### First Interactive Plots  
 
@@ -1286,7 +1297,7 @@ We will start our exploration with the plots from Section \@ref(Viz2) and data f
 
 #### Final Data  
 
-We presented our data in Table\@ref(tab:final-tab) but the table only presented the first several rows.  Figure \@ref(fig:tab-it1) is an interactive table, note **knitr** and **bookdown** require the title of figure for items from the package **DT**. We can change the number of rows and scroll to see the entire table.
+We presented our data in Table\@ref(tab:final-tab) but the table only presented the first several rows.  Figure \@ref(fig:tab-it1) is an interactive table, note **knitr** and **bookdown** require the title of figure for items from the package **DT** [@R-DT]. We can change the number of rows and scroll to see the entire table.
 
 ```{r tab-it1,fig.cap="Interactive Table of Final Data",echo=FALSE}
 DT::datatable(gapminder_va,rownames=FALSE,options=list(scrollX=TRUE))
@@ -1299,7 +1310,7 @@ Which country in Europe had the highest mortality in 1984?
 
 #### Interactive Scatterplot Matrix  
 
-We started our visual exploration of our data with a matrix scatterplot. Let's use this same visualization, but now we will add the ability to interact with the plot. Since the plot will be too crowded with all the variables, we will drop population and density and we will remove the density plots on the diagonal and the correlation information in the upper portion of the plot. This information does work well with the interaction software.
+We started our visual exploration of our data with a matrix scatterplot. Let's use this same visualization, but now we will add the ability to interact with the plot. Since the plot will be too crowded with all the variables, we will drop population and density and we will remove the density plots on the diagonal and the correlation information in the upper portion of the plot. The density plots do not work well with the interaction software.
 
 ```{r fig-ip1,fig.cap="Interactive Scatterplot Matrix for 1950",warning=FALSE,message=FALSE}
 gapminder_va_log %>% filter(year==1950) %>%
@@ -1319,19 +1330,38 @@ Using the pan and zoom features, find the the life expectancy for the country wi
 What is the country in the previous question?  
 
 #### Interactive Parallel Coordianates Plot  
-tooltip="continent"
 
 
-```{r warning=FALSE,message=FALSE}
+
+```{r fig-ip2,fig.cap="Interactive Scatterplot Matrix for 1950",warning=FALSE,message=FALSE}
 ggplotly(ggparcoord(gapminder_va_log %>% filter(year==1950 | 
-   year==2015),columns=4:9,group='continent',
-   order = c(6,7,5,4,8,9),alphaLines = 0.5,mapping = aes(text=country)) +
+   year==2015),columns=c(4:7),group='continent',
+   order = c(6,7,5,4),alphaLines = 0.5,mapping = aes(text=paste("country:", country))) +
    scale_colour_brewer(palette="Dark2",name="Continent") +
-   facet_wrap(~year))
+   facet_wrap(~year),tooltip = c('continent','x','text'))
 ```  
 
 
+#### Linking Plots  
+
+See https://rstudio.github.io/crosstalk/using.html 
+Check d3scatter
+
+```{r}
+sd <- SharedData$new(gapminder_va_log %>% filter(year==1950 |
+      year==2015) %>% mutate(country=as.character(country)), ~country)
+
+p <- ggplot(sd, aes(life_exp, fertility,color=continent)) +
+  geom_point() +
+  facet_wrap(~ year)
+
+ggplotly(p,tooltip=c("x","country"))
+```
+
+
 Use trelliscope package 
+
+
 
 ggplotly(ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=country,color=factor(year),size=density)) +
   geom_point() +
@@ -1344,6 +1374,10 @@ ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950)
   geom_point(alpha=.7)+
   facet_wrap(~year) +
   theme_bw())
+
+subplot(ggplotly(ggplot(gapminder_va_log %>% filter(year==1950),aes(y=above_60,x=fertility,color=continent,text = paste("country:", country))) +
+geom_point(alpha=.7),tooltip="text"),ggplotly(ggplot(gapminder_va_log %>% filter(year==2015),aes(y=above_60,x=fertility,color=continent,text = paste("country:", country))) +
+geom_point(alpha=.7),tooltip=c('continent','x','y','text')))
   
 ggplotly(ggplot(gapminder_va_log %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_60,x=fertility,color=continent,text = paste("country:", country))) +
   geom_point(alpha=.7)+
@@ -1365,3 +1399,23 @@ for(ii in seq_len(nrow(nms))) {
          ly_points(nms$Var1[ii], nms$Var2[ii], data = iris,
                    color = Species, size = 5, legend = FALSE,hover = c(nms$Var1[ii], nms$Var2[ii]))
  }
+grid_plot(splom_list, ncol = 4, same_axes = TRUE, link_data = TRUE)
+
+# nest gapminder data by country
+by_country <- gapminder %>%
+  group_by(country, continent) %>%
+  nest()
+
+# add in a plot column with map_plot
+by_country <- by_country %>% mutate(
+  panel = map_plot(data,
+    ~ figure(xlim = c(1948, 2011), ylim = c(10, 95), width = 300, tools = NULL) %>%
+        ly_points(year, lifeExp, data = .x, hover = .x)
+  ))
+
+# plot it
+by_country %>%
+  trelliscope("gapminder", nrow = 2, ncol = 7)
+
+
+# DT options https://rstudio.github.io/DT/options.html

@@ -26,7 +26,7 @@
 <meta name="author" content="Bradley Warner">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-06-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -264,7 +264,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">xend =</span> At_Bats, <span class="dt">yend =</span> Hits,<span class="dt">color=</span>Player),<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(.<span class="dv">2</span>,<span class="st">&#39;cm&#39;</span>),<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits, <span class="dt">label =</span> Year)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Batting Averages&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>First let’s change the theme to reduce the background color.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
@@ -276,7 +276,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits, <span class="dt">label =</span> Year)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Batting Averages&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Now let’s improve the labels.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
@@ -289,7 +289,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Derek Jeter is Better than David Justice&quot;</span>,<span class="dt">x=</span><span class="st">&quot;Number of At Bats&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Hits&quot;</span>,
        <span class="dt">subtitle=</span><span class="st">&quot;Batting averages for 1995 and 1996 as well as the combined averages&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Finally, let’s change the ticks on the axes and a different theme.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotdata <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>At_Bats,<span class="dt">y=</span>Hits)) <span class="op">+</span>
@@ -302,7 +302,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
        <span class="dt">subtitle=</span><span class="st">&quot;Batting averages for 1995 and 1996 as well as the combined averages&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">600</span>,<span class="dv">50</span>))</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 <div id="discussion-ideas-13" class="section level3">
 <h3><span class="header-section-number">1.6.3</span> Discussion Ideas</h3>
@@ -323,7 +323,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">subtitle=</span><span class="st">&quot;Based on data from the years 1995 - 1996&quot;</span>) <span class="op">+</span>
 <span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span>x1<span class="op">+</span>(x2<span class="op">-</span>x1)<span class="op">/</span><span class="dv">2</span>, <span class="dt">y=</span>y1<span class="op">-</span><span class="fl">0.01</span>, <span class="dt">label=</span>r)) <span class="op">+</span>
 <span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),<span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(),<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d=<span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">y2=</span><span class="kw">c</span>(<span class="fl">0.3095</span>,<span class="fl">0.2704</span>), <span class="dt">y1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">x2=</span><span class="kw">c</span>(.<span class="dv">630</span>,<span class="fl">0.551</span>), <span class="dt">Player=</span><span class="kw">c</span>(<span class="st">&#39;Derek Jeter&#39;</span>,<span class="st">&#39;David Justice&#39;</span>), <span class="dt">r=</span><span class="kw">c</span>(<span class="dv">630</span>,<span class="dv">551</span>))
 <span class="kw">ggplot</span>(d) <span class="op">+</span><span class="st"> </span>
 <span class="kw">geom_rect</span>(<span class="kw">aes</span>(<span class="dt">xmin=</span>x1, <span class="dt">xmax=</span>x2, <span class="dt">ymin=</span>y1, <span class="dt">ymax=</span>y2, <span class="dt">fill=</span>Player), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
@@ -335,7 +335,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Derek Jeter is a batter batter than David Justice&quot;</span>,
      <span class="dt">subtitle=</span><span class="st">&quot;Based on data from the years 1995 - 1996&quot;</span>) <span class="op">+</span>
 <span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
 <div id="web-resources" class="section level3">
 <h3><span class="header-section-number">1.6.5</span> Web Resources</h3>

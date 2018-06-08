@@ -26,7 +26,7 @@
 <meta name="author" content="Bradley Warner">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-06-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1411,7 +1411,7 @@ gapminder_above60<span class="op">$</span>country&lt;-<span class="kw">gsub</spa
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>,<span class="dt">color=</span>country))<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() 
 p</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 <p>We will use a spline to interpolate the data but we will first plot a linear interpolation to compare with the spline.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp1&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="kw">approx</span>(year,above_<span class="dv">60</span>,<span class="dt">xout=</span><span class="kw">seq</span>(<span class="dv">1950</span>,<span class="dv">2015</span>)))) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -1423,7 +1423,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp1,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp2,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Linear Interpolation&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 <p>Now we will use a spline. It fits a cubic spline between each point and will be smoother than the linear interpolation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp1&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="kw">spline</span>(year,above_<span class="dv">60</span>,<span class="dt">xout=</span><span class="kw">seq</span>(<span class="dv">1950</span>,<span class="dv">2015</span>)))) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -1435,7 +1435,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp1,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>temp2,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Spline Interpolation&quot;</span>)</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
 <p>Clean the work space.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(temp1)
 <span class="kw">rm</span>(temp2)</code></pre></div>
@@ -1517,7 +1517,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>gapminder_above60<span class="op">%&gt;%</span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>gapminder_above60<span class="op">%&gt;%</span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;United States&quot;</span>),<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Percentage of Population above 60 years&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Estimating Percent of Population Above 60&quot;</span>,<span class="dt">subtitle=</span><span class="st">&quot;Spline Interpolation&quot;</span>) <span class="op">+</span><span class="kw">theme_classic</span>()</code></pre></div>
-<p><img src="VA-Notes_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
 </div>
 <div id="final-data" class="section level3">
 <h3><span class="header-section-number">2.3.8</span> Final Data</h3>
