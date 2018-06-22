@@ -26,7 +26,7 @@
 <meta name="author" content="Bradley Warner">
 
 
-<meta name="date" content="2018-06-08">
+<meta name="date" content="2018-06-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -76,15 +76,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+<link href="libs/d3scatter-0.0.0/d3scatter.css" rel="stylesheet" />
+<script src="libs/d3scatter-0.0.0/d3scatter.js"></script>
+<script src="libs/d3scatter-binding-0.1.0/d3scatter.js"></script>
 <link href="libs/ionrangeslider-2.1.2/css/ion.rangeSlider.css" rel="stylesheet" />
 <link href="libs/ionrangeslider-2.1.2/css/ion.rangeSlider.skinShiny.css" rel="stylesheet" />
 <script src="libs/ionrangeslider-2.1.2/js/ion.rangeSlider.min.js"></script>
 <script src="libs/strftime-0.9.2/strftime-min.js"></script>
 <link href="libs/selectize-0.11.2/css/selectize.bootstrap3.css" rel="stylesheet" />
 <script src="libs/selectize-0.11.2/js/selectize.min.js"></script>
-<link href="libs/d3scatter-0.0.0/d3scatter.css" rel="stylesheet" />
-<script src="libs/d3scatter-0.0.0/d3scatter.js"></script>
-<script src="libs/d3scatter-binding-0.1.0/d3scatter.js"></script>
 
 
 <style type="text/css">
@@ -254,7 +254,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The data for this lesson comes from the <a href="https://www.gapminder.org/data/">Gapminder</a> website. Again, you could just start with the <strong>tools</strong> application on the website instead of using the R code here. This section will be long but remember that data wrangling can take up to 80% of the time in a project. We also provide the final data in a csv file on the github site for this book. The file name is Gapminder_final.csv.</p>
 <div id="load-packages" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Load Packages</h3>
-<p>First we will load two packages we need. The data is downloaded in a Excel spreadsheet; we will use the package <strong>readxl</strong> to read it. In addition, R has a package called <strong>gapminder</strong> which is a subset of the data from the Gapminder website. We will use it to get country names to reduce the size of our data and exclude countries with a large amount of missing data.</p>
+<p>First we will load the packages we need for this chapter. The list below are the packages we will be using:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
 <span class="kw">library</span>(gapminder)
 <span class="kw">library</span>(tidyverse)
@@ -262,10 +262,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(plotly)
 <span class="kw">library</span>(crosstalk)
 <span class="kw">library</span>(ggthemes)
+<span class="kw">library</span>(geofacet)
 <span class="kw">library</span>(DT)
 <span class="kw">library</span>(d3scatter)
 <span class="kw">library</span>(rbokeh)
 <span class="kw">library</span>(trelliscopejs)</code></pre></div>
+<p>First data is downloaded in a Excel spreadsheet from the <a href="https://www.gapminder.org/data/">Gapminder</a> website. We will use the package <strong>readxl</strong> to read it into <code>R</code>. In addition, <code>R</code> has a package called <strong>gapminder</strong> which is a subset of the data from the Gapminder website. We will use it to get country names to reduce the size of our data and exclude countries with a large amount of missing data.</p>
 <p>The data has been downloaded and is in the <strong>data</strong> folder on the GitHub site for this book.</p>
 </div>
 <div id="Pop2" class="section level3">
@@ -872,7 +874,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </table>
 <p>From the <strong>gapminder</strong> package, we will get the subset of countries where the data is most complete.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries&lt;-<span class="kw">levels</span>(gapminder<span class="op">$</span>country)</code></pre></div>
-<p>Finally, we will wrangle the data into the final form needed.</p>
+<p>Finally, we will wrangle the data into the final form needed. The term used in tidy data; each row is an observation and each column a variable. As read in, the data is in a wide format where the value of years, which is a single variable, are used as column titles. We will switch to a long format.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population&lt;-gapminder_population_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,pop,<span class="op">-</span><span class="st">&quot;Total population&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Total population&quot;</span>) <span class="op">%&gt;%</span>
@@ -924,12 +926,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="quality-check" class="section level4">
 <h4><span class="header-section-number">2.3.2.2</span> Quality Check</h4>
-<p>Before proceeding. We will check the quality of the data.</p>
+<p>Before proceeding, we will check the condition of the data and clean up any obvious issues. First compare the number of countries in our data with those in the <strong>gapminder</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(countries)</code></pre></div>
 <pre><code>## [1] 142</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))</code></pre></div>
 <pre><code>## [1] 139</code></pre>
-<p>There are 142 countries in the <strong>gapminder</strong> data but only 139 in the data we collected that match those 142 countries. There might some names in <strong>gapminder</strong> that are different from those from the imported data. We will check this idea first.</p>
+<p>There are 142 countries in the <strong>gapminder</strong> data but only 139 in the data we collected that match those 142 countries. There might some names in <strong>gapminder</strong> that are different from the imported data. We will check this idea first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries[<span class="op">!</span>(countries <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
 <pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;      &quot;Yemen, Rep.&quot;</code></pre>
 <p>We are missing the two Koreas and Yemen from our data.</p>
@@ -943,11 +945,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] &quot;North Korea&quot;           &quot;South Korea&quot;           &quot;United Korea (former)&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder_population<span class="op">$</span>country)[<span class="kw">grep</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="kw">unique</span>(gapminder_population<span class="op">$</span>country))]</code></pre></div>
 <pre><code>## [1] &quot;North Yemen (former)&quot; &quot;South Yemen (former)&quot; &quot;Yemen&quot;</code></pre>
-<p>We now know the problem is that in the <strong>gapminder</strong> package we have the titles “Korea, Dem. Rep.”<br />
+<p>We now know the problem is that in the <strong>gapminder</strong> package we have the titles:</p>
+<p>“Korea, Dem. Rep.”<br />
 “Korea, Rep.”<br />
 “Yemen, Rep.”</p>
-<p>while in our data from the gapminder website we have the names “North Korea”<br />
-“South Korea” “Yemen”</p>
+<p>while in our data from the gapminder website we have the names:</p>
+<p>“North Korea”<br />
+“South Korea”<br />
+“Yemen”</p>
 <p>We will correct the names in the our data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_population<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_population<span class="op">$</span>country)
 gapminder_population<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_population<span class="op">$</span>country)
@@ -1028,12 +1033,13 @@ gapminder_population[<span class="kw">is.na</span>(gapminder_population<span cla
 </tr>
 </tbody>
 </table>
-<p>Clean up by removing temporary objects.</p>
+<p>To conclude, we clean up the workspace by removing temporary objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(gapminder_population_temp)</code></pre></div>
 </div>
 <div id="discussion-ideas-14" class="section level4">
 <h4><span class="header-section-number">2.3.2.4</span> Discussion Ideas</h4>
-<p>Even though the video we watched used population, what are the disadvantages of using raw population? A large country will have a larger population because of size, what is another population metric that places the numbers on equal scale?</p>
+<p>Even though the video we watched used population, what are the disadvantages of using raw population?</p>
+<p>A large country will have a larger population because of size, what is another population metric that places the data on an equal scale?</p>
 </div>
 </div>
 <div id="population-density" class="section level3">
@@ -1060,7 +1066,7 @@ gapminder_population[<span class="kw">is.na</span>(gapminder_population<span cla
 <pre><code>## character(0)</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder_area<span class="op">$</span>country)[<span class="kw">grep</span>(<span class="st">&quot;Taiwan&quot;</span>,<span class="kw">unique</span>(gapminder_area<span class="op">$</span>country))]</code></pre></div>
 <pre><code>## character(0)</code></pre>
-<p>We are missing Taiwan and Reunion from the data and for the other three we have Republic names as Rep.</p>
+<p>We are missing Taiwan and Reunion from the data and for the other three mismatches we have Republic names as Rep.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_area<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Czech Rep.&quot;</span>,<span class="st">&quot;Czech Republic&quot;</span>,gapminder_area<span class="op">$</span>country)
 gapminder_area<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Central African Rep.&quot;</span>,<span class="st">&quot;Central African Republic&quot;</span>,gapminder_area<span class="op">$</span>country)
 gapminder_area<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Dominican Rep.&quot;</span>,<span class="st">&quot;Dominican Republic&quot;</span>,gapminder_area<span class="op">$</span>country)</code></pre></div>
@@ -1111,14 +1117,13 @@ gapminder_popdensity[gapminder_popdensity<span class="op">$</span>country<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_popdensity &lt;-<span class="st"> </span>gapminder_popdensity <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">density=</span>pop<span class="op">/</span>area) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>area)</code></pre></div>
-<p>We will add continent to the data frame.</p>
 <p>Clean up the work space.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(gapminder_area)
 <span class="kw">rm</span>(gapminder_population)</code></pre></div>
 </div>
 <div id="life-expectancy" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Life Expectancy</h3>
-<p>Next we bring in life expectancy data and since the source is the same we will have the same issue with the names of the Koreas and Yemen. We will be performing the same steps as section <a href="DataCol2.html#Pop2">2.3.2</a>, so will skip the narrative on many of the steps.</p>
+<p>Next we bring in life expectancy data and since the source is the same as population we will have the same issue with the names of the Koreas and Yemen. We will be performing the same steps as section <a href="DataCol2.html#Pop2">2.3.2</a>, so will skip the narrative on many of the steps.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_lifeexp_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/indicator life_expectancy_at_birth.xlsx&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_lifeexp&lt;-gapminder_lifeexp_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,life_exp,<span class="op">-</span><span class="st">&quot;Life expectancy&quot;</span>) <span class="op">%&gt;%</span>
@@ -1189,27 +1194,21 @@ gapminder_lifeexp<span class="op">$</span>country&lt;-<span class="kw">gsub</spa
 </div>
 <div id="fertility-rates" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> Fertility Rates</h3>
-<p>Next fertility rates of a country may be an indication of its developmental state.</p>
-<p>Read in the data.</p>
+<p>Next fertility rates of a country may be an indication of its developmental state. Let’s get the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/indicator undata total_fertility.xlsx&quot;</span>)</code></pre></div>
-<p>Change the columns of year to a variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility&lt;-gapminder_fertility_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,fertility,<span class="op">-</span><span class="st">&quot;Total fertility rate&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Total fertility rate&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)
 <span class="kw">rm</span>(gapminder_fertility_temp)</code></pre></div>
-<p>Change out the names of the Koreas and Yemen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_fertility<span class="op">$</span>country)
 gapminder_fertility<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_fertility<span class="op">$</span>country)
 gapminder_fertility<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="st">&quot;Yemen, Rep.&quot;</span>,gapminder_fertility<span class="op">$</span>country)</code></pre></div>
-<p>Narrow the list of countries to those in the <strong>gapminder</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility&lt;-gapminder_fertility <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)</code></pre></div>
-<p>Check the number of countries in the data frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(gapminder_fertility<span class="op">$</span>country))</code></pre></div>
 <pre><code>## [1] 142</code></pre>
-<p>We need to check for missing values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(gapminder_fertility<span class="op">$</span>fertility))</code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_fertility[<span class="kw">is.na</span>(gapminder_fertility<span class="op">$</span>fertility),]</code></pre></div>
@@ -1281,26 +1280,20 @@ gapminder_fertility&lt;-gapminder_fertility <span class="op">%&gt;%</span><span 
 <div id="child-mortality" class="section level3">
 <h3><span class="header-section-number">2.3.6</span> Child Mortality</h3>
 <p>Next we will collect data on child mortality. This data is the number of children out of 1000 born in the given year that will die before reaching the age of 5.</p>
-<p>Read in the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/indicator gapminder under5mortality.xlsx&quot;</span>)</code></pre></div>
-<p>Arrange year from columns to a column.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5&lt;-gapminder_mortality5_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,mortality,<span class="op">-</span><span class="st">&quot;Under five mortality&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">country=</span><span class="st">&quot;Under five mortality&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1950</span>)
 <span class="kw">rm</span>(gapminder_mortality5_temp)</code></pre></div>
-<p>Change the names of the Koreas and Yemen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;North Korea&quot;</span>,<span class="st">&quot;Korea, Dem. Rep.&quot;</span>,gapminder_mortality5<span class="op">$</span>country)
 gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;South Korea&quot;</span>,<span class="st">&quot;Korea, Rep.&quot;</span>,gapminder_mortality5<span class="op">$</span>country)
 gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</span>(<span class="st">&quot;Yemen&quot;</span>,<span class="st">&quot;Yemen, Rep.&quot;</span>,gapminder_mortality5<span class="op">$</span>country)</code></pre></div>
-<p>Narrow to the list of countries in the <strong>gapminder</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5&lt;-gapminder_mortality5 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>countries)</code></pre></div>
-<p>We need to check for missing values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(gapminder_mortality5<span class="op">$</span>mortality))</code></pre></div>
 <pre><code>## [1] 156</code></pre>
-<p>We have a large number of missing values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5[<span class="kw">is.na</span>(gapminder_mortality5<span class="op">$</span>mortality),]</code></pre></div>
 <pre><code>## # A tibble: 156 x 3
 ##    country           year mortality
@@ -1316,7 +1309,7 @@ gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</
 ##  9 Hong Kong, China  1952        NA
 ## 10 Puerto Rico       1952        NA
 ## # ... with 146 more rows</code></pre>
-<p>Now Hong Kong, Puerto Rico, and Reunion are missing data up through the year 1979 and Taiwan is missing all years. We could drop Taiwan from the data but that is a waste of the data sets. We could impute the values but we need to be careful when we interpret the resulting plots. The other three countries are going to impose problems for the years prior to 1980. For ease will will drop these countries from the analysis after we get our final data set.</p>
+<p>Now Hong Kong, Puerto Rico, and Reunion are missing data up through the year 1979 and Taiwan is missing all years. We could drop Taiwan from the data but at this point that is a waste of information from the other data sets. We could impute the values but we need to be careful when we interpret the resulting plots. The other three countries are going to pose problems for the years prior to 1980. For ease will will drop these countries from the analysis after we get our final data set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_mortality5 &lt;-<span class="st"> </span>gapminder_mortality5 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(country,continent,year,mortality)</code></pre></div>
@@ -1374,7 +1367,6 @@ gapminder_mortality5<span class="op">$</span>country&lt;-<span class="kw">gsub</
 <div id="aging-population" class="section level3">
 <h3><span class="header-section-number">2.3.7</span> Aging Population</h3>
 <p>Another idea is that developed countries have an older population by percentage. We will next collect data on the percent of population above 60 years in age.</p>
-<p>Read in the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_above60_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/indicator_total above 60 percen.xlsx&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_above60&lt;-gapminder_above60_temp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(year,above_<span class="dv">60</span>,<span class="op">-</span><span class="st">&quot;Total above 60 (%)&quot;</span>) <span class="op">%&gt;%</span>
@@ -1411,7 +1403,7 @@ gapminder_above60<span class="op">$</span>country&lt;-<span class="kw">gsub</spa
 ## [15] 2020 2025 2030 2035 2040 2045 2050</code></pre>
 <p>We will first remove the projections.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_above60 &lt;-<span class="st"> </span>gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2015</span>)</code></pre></div>
-<p>Before we interpolate, let’s plot at two countries to get an idea of the data.</p>
+<p>Before we interpolate, let’s plot two countries to get an idea of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p&lt;-gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span> <span class="op">|</span><span class="st"> </span>country<span class="op">==</span><span class="st">&quot;United States&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>,<span class="dt">color=</span>country))<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() 
@@ -1467,7 +1459,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 <span class="st">  </span><span class="kw">left_join</span>(dict,<span class="dt">by=</span><span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(country,continent,year,above_<span class="dv">60</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(year,country)</code></pre></div>
-<p>The final data frame.</p>
+<p>The first few rows of the final data frame:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_above60 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre></div>
 <table>
 <thead>
@@ -1517,7 +1509,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 </tr>
 </tbody>
 </table>
-<p>Finally, cleaning up the figure of our data by removing the background shading.</p>
+<p>Finally, we clean up the figure of our data by removing the background shading.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>gapminder_above60<span class="op">%&gt;%</span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;Albania&quot;</span>),<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>gapminder_above60<span class="op">%&gt;%</span><span class="kw">filter</span>(country<span class="op">==</span><span class="st">&quot;United States&quot;</span>),<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>above_<span class="dv">60</span>)) <span class="op">+</span>
@@ -1665,7 +1657,7 @@ temp2&lt;-<span class="kw">data.frame</span>(<span class="kw">with</span>(gapmin
 </div>
 <div id="economic-data" class="section level3">
 <h3><span class="header-section-number">2.3.9</span> Economic Data</h3>
-<p>One last note is that we have not included an economic metric such as gross domestic product, GDP, per capita. The reason is that the data is sparse. On the gapminder website the data starts in 1960 and ends in 2011; in addition many countries are missing data. On the World Bank site, the data is more complete but still has many missing values and goes from 1960 to 2016. The data in the <strong>gapminder</strong> package in R has data for each country but only in five year increments and ends in 2007. if we want to include GDP data we would have to make the choice of limiting the number of years, interpolating, and/or removing more countries. It would be too much to extrapolate from 2007 to 2015, so a possible solution is to merge the World Bank data with the data from the <strong>gapminder</strong> package. However, they are inflation adjusted on different scales so a correction would have to be made. The World Bank data was in current US dollars while the <strong>gapminder</strong> package used something earlier, maybe 2000?</p>
+<p>One last note is that we have not included an economic metric such as gross domestic product, GDP, per capita. The reason is that the data is sparse. On the gapminder website the data starts in 1960 and ends in 2011; in addition many countries are missing data. On the World Bank site, the data is more complete but still has many missing values and goes from 1960 to 2016. The data in the <strong>gapminder</strong> package in <code>R</code> has data for each country but only in five year increments and ends in 2007. if we want to include GDP data we would have to make the choice of limiting the number of years, interpolating, and/or removing more countries. It would be too much to extrapolate from 2007 to 2015, so a possible solution is to merge the World Bank data with the data from the <strong>gapminder</strong> package. However, they are inflation adjusted on different scales so a correction would have to be made. The World Bank data was in current US dollars while the <strong>gapminder</strong> package used something earlier, maybe 2000?</p>
 <p>Here is some code to investigate how to incorporate GDP, but we will not complete it for our work. It is only a start to give you an idea of the work involved.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_gdp_temp &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/World Bank GDP.xlsx&quot;</span>,<span class="dt">skip=</span><span class="dv">4</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_gdp&lt;-gapminder_gdp_temp <span class="op">%&gt;%</span>

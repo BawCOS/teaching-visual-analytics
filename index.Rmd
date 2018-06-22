@@ -79,7 +79,7 @@ There are no assumed knowledge or computing skills for these lessons. The instru
 
 ## Software Packages   
 
-These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT],**crosstalk** [@R-crosstalk], **leaflet** [@R-leaflet], **plotly** [@R-plotly], **ggrepel**[@R-ggrepel], **rpivotTable**[@R-rpivotTable], **RColorBrewer**[@R-RColorBrewer], **gapminder**[@R-gapminder], **tidyverse**[@R-tidyverse], **readxl**[@R-readxl], **kableExtra**[@R-kableExtra], **GGally**[@R-GGally], **ggthemes**[@R-ggthemes], **rbokeh**[@R-rbokeh], **trelliscopejs**[@R-trelliscopejs], **DT**[@R-DT].
+These notes make use of the following packages in R **knitr** [@R-knitr], **rmarkdown** [@R-rmarkdown], **Hmisc** [@R-Hmisc], **lattice** [@R-lattice], **vcd** [@R-vcd], **ggplot2** [@R-ggplot2], **MASS** [@R-MASS], **TeachingDemos** [@R-TeachingDemos], **Stat2Data** [@R-Stat2Data], **car** [@R-car], **DT** [@R-DT],**crosstalk** [@R-crosstalk], **leaflet** [@R-leaflet], **plotly** [@R-plotly], **ggrepel**[@R-ggrepel], **rpivotTable**[@R-rpivotTable], **RColorBrewer**[@R-RColorBrewer], **gapminder**[@R-gapminder], **tidyverse**[@R-tidyverse], **readxl**[@R-readxl], **kableExtra**[@R-kableExtra], **GGally**[@R-GGally], **ggthemes**[@R-ggthemes], **rbokeh**[@R-rbokeh], **trelliscopejs**[@R-trelliscopejs], **DT**[@R-DT], **geofacet**[@R-geofacet].
 
 ## Acknowledgements 
 
@@ -102,7 +102,7 @@ This book is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr','vcdExtra','ggrepel', 'shiny', 'rpivotTable','ggrepel','d3scatter','RColorBrewer','gapminder','tidyverse','readxl','kableExtra','GGally','ggthemes','trelliscopejs','rbokeh'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown','Hmisc','lattice','vcd','ggplot2','MASS','TeachingDemos','Stat2Data','car','DT','leaflet','crosstalk','plotly','tidyr','vcdExtra','ggrepel', 'shiny', 'rpivotTable','ggrepel','d3scatter','RColorBrewer','gapminder','tidyverse','readxl','kableExtra','GGally','ggthemes','trelliscopejs','rbokeh','geofacet'
 ), 'packages.bib')
 ```
 
