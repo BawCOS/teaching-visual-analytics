@@ -14,7 +14,7 @@
 
 In Chapter \@ref(Chpt1) we illustrated the visual analytics process in Figure \@ref(fig:fig0). In that chapter we started in the analytic reasoning section and then proceeded to visualization and interaction. This is typical when you begin with a research question and perform a more traditional analysis. In this chapter, we will be conducting what is known as an explanatory analysis in a visual analytic framework. We will start with visualization and explore relationships between variables. Ultimately, we will be recreating a chart similar to Hans Rosling's famous animated visualization from his [TED talk](https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen?language=en ). 
 
-We will be using R to generate the display however, if you don't want to use R go the [gapminder website](https://www.gapminder.org/) and under the header **tools**, you will have access to all the data as well as an interactive scatter plot. Another avenue you could explore is to use data directly from the [World Bank](https://data.worldbank.org/). On their website you can create interactive visual displays. 
+We will be using `R` to generate the display however, if you don't want to use `R` go the [gapminder website](https://www.gapminder.org/) and under the header **tools**, you will have access to all the data as well as an interactive scatter plot. Another avenue you could explore is to use data directly from the [World Bank](https://data.worldbank.org/). On their website you can create interactive visual displays. 
 
 The beginning of this chapter has a heavy, but reasonable, amount of data acquisition and preparation. This is often minimized in a typical lesson but in practice this part of the analysis comprises a significant portion of the time and effort in the project. In the visualization section, we offer many different options for visualizing the data. Finally, in the interactive section, we suggest several methods to interact with the data. We are limited by what can be hosted in an html5 format. Many more options are available if you host on a server; however, as lesson the ideas are present in this section.
 
@@ -59,7 +59,7 @@ We are replicating Figure \@ref(fig:fig0) below to remind you of the process for
 
 ## Data Collection  {#DataCol2}
 
-The data for this lesson comes from the [Gapminder](https://www.gapminder.org/data/) website. Again, you could just start with the **tools** application on the website instead of using the R code here. This section will be long but remember that data wrangling can take up to 80% of the time in a project. We also provide the final data in a csv file on the github site for this book. The file name is Gapminder_final.csv.  
+The data for this lesson comes from the [Gapminder](https://www.gapminder.org/data/) website. Again, you could just start with the **tools** application on the website instead of using the `R` code here. This section will be long but remember that data wrangling can take up to 80% of the time in a project. We also provide the final data in a csv file on the github site for this book. The file name is Gapminder_final.csv.  
 
 ### Load Packages  
 
@@ -82,7 +82,7 @@ library(trelliscopejs)
 
 First data is downloaded in a Excel spreadsheet from the [Gapminder](https://www.gapminder.org/data/) website.  We will use the package **readxl** to read it into `R`.  In addition, `R` has a package called **gapminder** which is a subset of the data from the Gapminder website. We will use it to get country names to reduce the size of our data and exclude countries with a large amount of missing data.  
 
-The data has been downloaded and is in the **data** folder on the GitHub site for this book.
+If you want to skip the data collection and cleaning steps, data has been downloaded and is in the **data** folder on the GitHub site for this book.
 
 ### Population  {#Pop2}
 
@@ -90,25 +90,25 @@ The first data set we will be working with is the population for each country.
 
 #### Import Data  
 
-We will read the data in first.  
+First import the data.  
 
 ```{r}
 gapminder_population_temp <- read_excel("data/indicator gapminder population.xlsx")
 ```
 
-Let's look at the first few rows of the data.  
+Look at the first few rows of the data to get a feel for the data.  
 
 ```{r echo=FALSE}
 gapminder_population_temp %>% head() %>% knitr::kable()
 ```
 
-From the **gapminder** package, we will get the subset of countries where the data is most complete.
+From the **gapminder** package, obtain the subset of countries where the data is most complete.
 
 ```{r}
 countries<-levels(gapminder$country)
 ```
 
-Finally, we will wrangle the data into the final form needed. The term used in tidy data; each row is an observation and each column a variable. As read in, the data is in a wide format where the value of years, which is a single variable, are used as column titles. We will switch to a long format.
+Finally, wrangle the data into the final form needed. The term used is tidy data; each row is an observation and each column a variable. As currently imported, the data is in a wide format where the value of years, which is a single variable, are used as column titles. Switch to a long format.
 
 ```{r}
 gapminder_population<-gapminder_population_temp %>%
@@ -126,14 +126,14 @@ gapminder_population %>% head() %>% knitr::kable(caption="Population Data Arrang
 
 #### Quality Check
 
-Before proceeding, we will check the condition of the data and clean up any obvious issues. First compare the number of countries in our data with those in the **gapminder** package.
+Before proceeding, check the condition of the data and clean up any obvious issues. First compare the number of countries in our data with those in the **gapminder** package.
 
 ```{r}
 length(countries)
 length(unique(gapminder_population$country))
 ```
 
-There are 142 countries in the **gapminder** data but only 139 in the data we collected that match those 142 countries. There might some names in **gapminder** that are different from the imported data. We will check this idea first.
+There are 142 countries in the **gapminder** data but only 139 in the data we collected that match those 142 countries. There might some names in **gapminder** that are different from the imported data. Check this idea first.
 
 ```{r}
 countries[!(countries %in% unique(gapminder_population$country))]
@@ -170,7 +170,7 @@ while in our data from the gapminder website we have the names:
 "Yemen"  
 
 
-We will correct the names in the our data.
+Correct the names in the our data.
 
 ```{r}
 gapminder_population$country<-gsub("North Korea","Korea, Dem. Rep.",gapminder_population$country)
@@ -178,26 +178,26 @@ gapminder_population$country<-gsub("South Korea","Korea, Rep.",gapminder_populat
 gapminder_population$country<-gsub("Yemen","Yemen, Rep.",gapminder_population$country)
 ```
 
-We will check our data again.
+Now check our data again.
 
 ```{r}
 sum(!(countries %in% unique(gapminder_population$country)))
 ```
 
-Finally we will get rid of the countries not in the **gapminder** package.
+Finally get rid of the countries not in the **gapminder** package.
 
 ```{r}
 gapminder_population<-gapminder_population %>%
   filter(country %in% countries)
 ```
 
-Next we will look for missing observations.
+Next look for missing observations.
 
 ```{r}
 gapminder_population[is.na(gapminder_population$pop),]
 ```
 
-We are missing the last two years of data for Taiwan. We could drop Taiwan or get another estimate of the population from the web.  Using the website http://www.worldometers.info/world-population/taiwan-population/ we see that for the last four years the population has grown by about 70000 each year. So we will estimate the population for 2014 and 2015 by adding 70000 to the population in 2013 for each year.. 
+We are missing the last two years of data for Taiwan. We could drop Taiwan or get another estimate of the population from the web.  Using the website http://www.worldometers.info/world-population/taiwan-population/ we see that for the last four years the population has grown by about 70000 each year. We will estimate the population for 2014 and 2015 by adding 70000 to the population in 2013 for each year.. 
 
 ```{r}
 gapminder_population[is.na(gapminder_population$pop),][1,3]=23151000 + 70000
@@ -206,14 +206,14 @@ gapminder_population[is.na(gapminder_population$pop),][1,3]=23151000 + 140000
 
 #### Getting Data into Final Form  
 
-Now we need to add the continents to the data frame. First we will get the country names and associated continent names from the **gapminder** package.
+Now add the continents names to the data frame. First get the country names and associated continent names from the **gapminder** package.
 
 ```{r}
 dict<-gapminder %>% group_by(continent) %>% distinct(country) %>%
   mutate(country=as.character(country))
 ```
 
-Now we can add the continent names using a `join` function.  
+Add the continent names using a `join` function.  
 
 ```{r}
 gapminder_population <- gapminder_population %>% 
@@ -227,7 +227,7 @@ Table \@ref(tab:tab-final-pop) shows the form of the final data set.
 gapminder_population %>% head() %>% knitr::kable(caption="Final Population Data")
 ```
 
-To conclude, we clean up the workspace by removing temporary objects.
+To conclude, clean up the workspace by removing temporary objects.
 
 ```{r}
 rm(gapminder_population_temp)
@@ -241,7 +241,7 @@ A large country will have a larger population because of size, what is another p
 
 ### Population  Density
 
-Adjusting population by the size of the country gives a better basis to compare countries. We will import data from the gapminder website. The website has a data set on population density, the population divided by the area of the country in squared kilometers, but it only goes to the year 2010. The gapminder website also has a data file with the area of each country. It also only goes up to 2010. To find population density, we will import the surface area file and divide population by the surface area. This file only goes up to 2010 so we will have to assume that the area does not change in the last five years.
+Adjusting population by the size of the country gives a better basis to compare countries. The gapminder website has a data set on population density, the population divided by the area of the country in squared kilometers, but it only goes to the year 2010. The gapminder website also has a data file with the area of each country. It also only goes up to 2010. To find population density, we will import the surface area file and divide population by the surface area. This file only goes up to 2010 so we will have to assume that the area does not change in the last five years.
 
 
 ```{r}
@@ -256,7 +256,7 @@ gapminder_area <- gapminder_area %>%
   filter(year > 1960,year<2011)
 ```
 
-Next we need to check the country names.
+Next check the country names.
 
 ```{r}
 countries[!(countries %in% unique(gapminder_area$country))]
@@ -270,7 +270,7 @@ unique(gapminder_area$country)[grep("Reunion",unique(gapminder_area$country))]
 unique(gapminder_area$country)[grep("Taiwan",unique(gapminder_area$country))]
 ```
 
-We are missing Taiwan and Reunion from the data and for the other three mismatches we have Republic names as Rep.
+We are missing Taiwan and Reunion from the data and for the other three mismatches we have Republic named as Rep.
 
 ```{r}
 gapminder_area$country<-gsub("Czech Rep.","Czech Republic",gapminder_area$country)
@@ -299,21 +299,21 @@ gapminder_area %>% filter(country=="Belgium") %>% filter(!is.na(area))
 gapminder_area <- gapminder_area %>% replace_na(list(area=30530))
 ```
 
-We will now merge with the population data and fill in the missing values.
+Now merge the data with the population data and fill in the missing values.
 
 ```{r}
 gapminder_popdensity <- gapminder_population %>%
   left_join(gapminder_area,by=c("country","year"))
 ```
 
-Let's fill in Taiwan and Reunion. Taiwan is missing its density. The area of Taiwan is [36,000 squared kilometers](https://www.statista.com/statistics/321367/taiwan-land-area/) and the area of Reunion is 2510, .
+Fill in data for Taiwan and Reunion. Taiwan is missing its density. The area of Taiwan is [36,000 squared kilometers](https://www.statista.com/statistics/321367/taiwan-land-area/) and the area of Reunion is 2510, .
 
 ```{r}
 gapminder_popdensity[gapminder_popdensity$country=="Reunion","area"] = 2510
 gapminder_popdensity[gapminder_popdensity$country=="Taiwan","area"] = 36000
 ```
 
-No we will fill in the years prior to 1961 with the values from 1961.  
+Fill in the years prior to 1961 with the values from 1961.  
 
 ```{r}
 gapminder_popdensity<- gapminder_popdensity %>% 
@@ -323,7 +323,7 @@ gapminder_popdensity<- gapminder_popdensity %>%
   arrange(year,country)
 ```
 
-We will fill in the missing value in the tail with the most recent values.
+Fill in the missing value in the tail with the most recent values.
 
 ```{r}
 gapminder_popdensity<- gapminder_popdensity %>% 
@@ -333,7 +333,7 @@ gapminder_popdensity<- gapminder_popdensity %>%
   arrange(year,country)
 ```
 
-We now calculate density by dividing population by area.
+Calculate density by dividing population by area.
 
 ```{r}
 gapminder_popdensity <- gapminder_popdensity %>% 
@@ -351,7 +351,7 @@ rm(gapminder_population)
 
 ### Life Expectancy  
 
-Next we bring in life expectancy data and since the source is the same as population we will have the same issue with the names of the Koreas and Yemen. We will be performing the same steps as section \@ref(Pop2), so will skip the narrative on many of the steps.
+Next bring in life expectancy data. Since the data source is the same as population we will have the same issue with the names of the Koreas and Yemen. We will be performing the same steps as section \@ref(Pop2), so the narrative on many of the steps is skipped.
 
 ```{r}
 gapminder_lifeexp_temp <- read_excel("data/indicator life_expectancy_at_birth.xlsx")
@@ -397,7 +397,7 @@ gapminder_lifeexp %>% head() %>% knitr::kable(caption="Final Life Expectancy Dat
 
 ### Fertility Rates  
 
-Next fertility rates of a country may be an indication of its developmental state. Let's get the data.
+Next fertility rates of a country may be an indication of its developmental state. Get the data.
 
 
 ```{r}
@@ -441,7 +441,7 @@ sum(is.na(gapminder_fertility$fertility))
 gapminder_fertility[is.na(gapminder_fertility$fertility),]
 ```
 
-It is the country of Taiwan again that has missing values. I will estimate the fertility with average of the previous 5 years.
+Taiwan again has missing values. Estimate the fertility with average of the previous 5 years.
 
 ```{r}
 temp<-as.double(gapminder_fertility %>% 
@@ -466,7 +466,7 @@ gapminder_fertility %>% head() %>% knitr::kable(caption="Final Fertility Data")
 
 ### Child Mortality  
 
-Next we will collect data on child mortality. This data is the number of children out of 1000 born in the given year that will die before reaching the age of 5.
+Next collect data on child mortality. This data is the number of children out of 1000 born in the given year that will die before reaching the age of 5.
 
 
 ```{r}
@@ -506,7 +506,7 @@ sum(is.na(gapminder_mortality5$mortality))
 gapminder_mortality5[is.na(gapminder_mortality5$mortality),]
 ```
 
-Now Hong Kong, Puerto Rico, and Reunion are missing data up through the year 1979 and Taiwan is missing all years. We could drop Taiwan from the data but at this point that is a waste of information from the other data sets. We could impute the values but we need to be careful when we interpret the resulting plots. The other three countries are going to pose problems for the years prior to 1980.  For ease will will drop these countries from the analysis after we get our final data set.
+Now Hong Kong, Puerto Rico, and Reunion are missing data up through the year 1979 and Taiwan is missing all years. We could drop Taiwan from the data but at this point that is a waste of information from the other data sets. We could impute the values but we need to be careful when we interpret the resulting plots. The first three countries mentioned are going to pose problems for the years prior to 1980.  For ease will will drop these countries from the analysis after we get our final data set.
 
 ```{r}
 gapminder_mortality5 <- gapminder_mortality5 %>% 
@@ -522,7 +522,7 @@ gapminder_mortality5 %>% head() %>% knitr::kable(caption="Final Child Mortality 
 
 ### Aging Population  
 
-Another idea is that developed countries have an older population by percentage. We will next collect data on the percent of population above 60 years in age.
+Another idea is that developed countries have an older population by percentage. Collect data on the percent of population above 60 years in age.
 
 ```{r}
 gapminder_above60_temp <- read_excel("data/indicator_total above 60 percen.xlsx")
@@ -538,13 +538,13 @@ gapminder_above60<-gapminder_above60_temp %>%
 rm(gapminder_above60_temp)
 ```
 
-This data came from a different source, so we need to be careful about the country names and which ones are contained in the data set.
+This data came from a different source, so be careful about the country names.
 
 ```{r}
 countries[!countries %in% unique(gapminder_above60$country)]
 ```
 
-Taiwan is still a problem but now we have three other countries that are in the **gapminder** package and not in the new data set. This is a problem with naming similar to what we found when we were finding density. Let's correct the other first countries.
+Taiwan is still a problem but now there are three other countries that are in the **gapminder** package and not in the new data set. This is a problem with naming similar to what we found when finding density. Correct those first three countries.
 
 ```{r}
 unique(gapminder_above60$country)[grep("Czech",unique(gapminder_above60$country))]
@@ -558,7 +558,7 @@ gapminder_above60$country<-gsub("Central African Rep.","Central African Republic
 gapminder_above60$country<-gsub("Dominican Rep.","Dominican Republic",gapminder_above60$country)
 ```
 
-Let's remove Taiwan since we have no data on it. While we are at it, we will now also remove Hong Kong, Puerto Rico, and Reunion. We could drop all data prior to 1980 but this is 30 years of data. We will choose to drop these four small countries.
+Remove Taiwan since we have no data on it. While at it, remove Hong Kong, Puerto Rico, and Reunion. We could drop all data prior to 1980 but this is 30 years of data. Instead, we chose to drop these four small countries.
 
 ```{r}
 final_countries<- countries[!countries %in% 
@@ -578,19 +578,19 @@ sum(is.na(gapminder_above60$above_60))
 
 There are no missing values.
 
-But the data is only for every 5 years and has projections past 2015. We will remove the projections and then interpolate for the remaining years.
+The data is only for every 5 years and has projections past 2015. We will remove the projections and then interpolate for the remaining years.
 
 ```{r}
 unique(gapminder_above60$year)
 ```
 
-We will first remove the projections.
+First remove the projections.
 
 ```{r}
 gapminder_above60 <- gapminder_above60 %>% filter(year <= 2015)
 ```
 
-Before we interpolate, let's plot two countries to get an idea of the data.
+Before interpolating, plot two countries to get an idea of the data.
 
 ```{r}
 p<-gapminder_above60 %>% filter(country=="Albania" | country=="United States") %>%
@@ -599,7 +599,7 @@ p<-gapminder_above60 %>% filter(country=="Albania" | country=="United States") %
 p
 ```
 
-We will use a spline to interpolate the data but we will first plot a linear interpolation to compare with the spline.
+We will be using a spline to interpolate, but first plot a linear interpolation to compare with the spline.
 
 ```{r}
 temp1<-data.frame(with(gapminder_above60 %>% 
@@ -618,7 +618,7 @@ p+
   labs(x="Year",y="Percentage of Population above 60 years",title="Estimating Percent of Population Above 60",subtitle="Linear Interpolation")
 ```
 
-Now we will use a spline. It fits a cubic spline between each point and will be smoother than the linear interpolation.  
+Now use a spline. This process fits a cubic spline between each point and will be smoother than the linear interpolation.  
 
 ```{r}
 temp1<-data.frame(with(gapminder_above60 %>% 
@@ -643,7 +643,7 @@ rm(temp1)
 rm(temp2)
 ```
 
-If you did not want the temporary variables we could have used the code in one step.
+To aviod the temporary variables, use the code below in one step.
 
 ```{r eval=FALSE}
 p+ data.frame(with(gapminder_above60 %>% 
@@ -659,7 +659,7 @@ p+ data.frame(with(gapminder_above60 %>%
 ```
 
 
-Now we need to interpolate for every country and create our final data frame. We will use the map function from the **purrr** package.  
+Interpolate for every country and create our final data frame. Use the map function from the **purrr** package.  
 
 ```{r}
 gapminder_above60<-gapminder_above60 %>%
@@ -670,7 +670,7 @@ gapminder_above60<-gapminder_above60 %>%
   select(country,year,above_60) %>% as.tibble()
 ```
 
-We finish by adding the continents.
+Finish by adding the continents.
 
 ```{r}
 gapminder_above60 <- gapminder_above60 %>% 
@@ -685,7 +685,7 @@ The first few rows of the final data frame:
 gapminder_above60 %>% head() %>% knitr::kable()
 ```
 
-Finally, we clean up the figure of our data by removing the background shading.
+Finally, clean up the figure by removing the background shading.
 
 ```{r}
 p+
@@ -697,7 +697,7 @@ p+
 
 ### Final Data  
 
-First we will do a quick quality check.
+First do a quick quality check.
 
 ```{r}
 table(gapminder_popdensity$continent)/66
@@ -708,7 +708,7 @@ table(gapminder_above60$continent)/66
 table(dict$continent)
 ```
 
-We have two problems left, the percentage of the population above 60 has less countries than the other data sets and life expectancy has one more year, 2016, than the other data sets. We will resolve this problem by dropping the 4 countries and the year 2016.
+We have two problems left, the percentage of the population above 60 has less countries than the other data sets and life expectancy has one more year, 2016, than the other data sets. Resolve these problems by dropping the 4 countries and the year 2016.
 
 ```{r}
 gapminder_popdensity %>% summarise(Total=n_distinct(country))
@@ -716,7 +716,7 @@ gapminder_above60 %>% summarise(Total=n_distinct(country))
 unique(gapminder_popdensity$country)[!unique(gapminder_popdensity$country) %in% final_countries]
 ```
 
-We drop by using the join function.
+Drop the countries by using the join function.
 
 ```{r}
 gapminder_va <-gapminder_above60 %>%
@@ -730,13 +730,13 @@ gapminder_va <-gapminder_above60 %>%
          mortality=round(mortality,2),density=round(density,2)) 
 ```  
 
-Let's look at the data.
+Look at the data.
 
 ```{r}
 gapminder_va %>% head() %>% knitr::kable()
 ```
 
-Finally, we will write the data to a csv for use as needed for instruction.
+Finally, write the data to a csv file. This file could be used in the future without have to use the long data processing steps.
 
 ```{r eval=FALSE}
 write.csv(gapminder_va,file="data/Gapminder_final.csv")
@@ -746,7 +746,7 @@ write.csv(gapminder_va,file="data/Gapminder_final.csv")
 
 One last note is that we have not included an economic metric such as gross domestic product, GDP, per capita. The reason is that the data is sparse. On the gapminder website the data starts in 1960 and ends in 2011; in addition many countries are missing data. On the World Bank site, the data is more complete but still has many missing values and goes from 1960 to 2016. The data in the **gapminder** package in `R` has data for each country but only in five year increments and ends in 2007. if we want to include GDP data we would have to make the choice of limiting the number of years, interpolating, and/or removing more countries. It would be too much to extrapolate from 2007 to 2015, so a possible solution is to merge the World Bank data with the data from the **gapminder** package. However, they are inflation adjusted on different scales so a correction would have to be made. The World Bank data was in current US dollars while the **gapminder** package used something earlier, maybe 2000?
 
-Here is some code to investigate how to incorporate GDP, but we will not complete it for our work. It is only a start to give you an idea of the work involved.
+Here is some code to investigate how to incorporate GDP, but we will not complete it for our work. It is only a start to give an idea of the work involved.
 
 ```{r}
 gapminder_gdp_temp <- read_excel("data/World Bank GDP.xlsx",skip=4)
@@ -760,14 +760,14 @@ gapminder_gdp<-gapminder_gdp_temp %>%
   mutate(year=as.integer(year)) 
 ```
 
-We have a problem with the names of the countries again. 
+There is a problem with the names of the countries again. 
 
 ```{r}
 gdp_countries<-unique(gapminder_gdp$country)
 countries[!countries %in% gdp_countries]
 ```
 
-There is a problem, we will determine if these countries are in the new data set and then correct the names.
+Determine which countries are in the new data set and then correct the names.
 
 ```{r}
 ind<-vector()
@@ -777,7 +777,7 @@ for (country in final_countries[!final_countries %in% gdp_countries]){
 gdp_countries[ind]
 ```
 
-Let's fix the names. We know *Korea, Rep.* is correct, let's remove it.
+Fix the names. We know *Korea, Rep.* is correct, let's remove it.
 
 ```{r}
 ind<-ind[-4]
@@ -809,7 +809,7 @@ gapminder_gdp <- gapminder_gdp %>%
   arrange(year,country)
 ```
 
-Now let's get the data from the **gapminder** package and compare the years to determine how to adjust.
+Now get the data from the **gapminder** package and compare the years to determine how to adjust.
 
 ```{r}
 head(gapminder_gdp %>% filter(year == 2007) %>% select(gdpPercap)/
@@ -818,9 +818,9 @@ gapminder %>% filter(year == 2007,country %in% final_countries) %>% select(gdpPe
 gapminder %>% filter(year == 2002,country %in% final_countries) %>% select(gdpPercap)))
 ```
 
-The adjustment is not consistent so we may be lacking some understanding of how inflation adjustment is being done. We will stop here but if you wanted to continue, you would adjust the data from the World Bank to be consistent with the **gapminder** data and then use interpolation similar to what was done with percentage of population above 60.
+The adjustment is not consistent so we may be lacking some understanding of how inflation adjustment is being done. Stop the process here but if you wanted to continue, you would adjust the data from the World Bank to be consistent with the **gapminder** data and then use interpolation similar to what was done with percentage of population above 60.
 
-We want to clean our work space.
+Clean our work space.
 
 ```{r}
 rm(gapminder_gdp_temp)
@@ -832,7 +832,7 @@ rm(old_names)
 
 ### Summary of Data Collection  
 
-To recap our data collection process, we will explain each variable. We have 138 countries on 5 continents for the years 1950 through and including 2015. Table \@ref(tab:final-tab) gives the first six rows of the data.
+To recap the data collection process, we will explain each variable. There are 138 countries on 5 continents for the years 1950 through and including 2015. Table \@ref(tab:final-tab) gives the first six rows of the data.
 
 ```{r final-tab,echo=FALSE}
 gapminder_va %>% head() %>% knitr::kable(caption = "The First Rows of our Final Data Set")
@@ -855,15 +855,15 @@ text_tbl <- data.frame(
 knitr::kable(text_tbl,caption="Description of Variables")
 ```
 
-Next we will begin the process of visualizing the data.
+In the next section, we will explore the process of visualizing the data.
 
 ## Visualization of Data {#Viz2}
 
-In the next phase of our exploratory data analysis we will be visualizing the data. In Section \@ref(Viz1), we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step.
+In the next phase of our exploratory data analysis we will be visualizing the gapminder data. In Section \@ref(Viz1), we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step of the analysis.
 
 ### First Visualizations
 
-In our first visualization we need to try to find key variables from the 9 total variables. The first three variables, country, continent, and year are different from the last seven and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other 6 variables are continuous and can be plotted against each other on a scatterplot.
+In the first visualization we attempt to understand the variables and thier relationship to each other. There are nine total variables. The first three variables, country, continent, and year are different from the last six and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other six variables are continuous and can be plotted against each other on a scatterplot.
 
 #### Discussion Ideas:
 
@@ -871,9 +871,11 @@ What are the first steps we should take to understand and visualize the data?
 
 Are we doing reconnaissance or exploration, and what does that mean for the type of visualizations we want to create?
 
+We are doing exploration. We need to focus on detection of interesting features. Our choice of plots and colors should be driven by this goal.
+
 #### Summarize Data 
 
-Let's perform a descriptive summary of our data.
+Complete a descriptive summary of the data.
 
 ```{r}
 str(gapminder_va)
@@ -883,11 +885,11 @@ str(gapminder_va)
 summary(gapminder_va)
 ```
 
-There are some potential issues with this data in terms of visualizing. First population and density have a large range. We may need to go to a logarithm scale. The variables country and continent are categorical and must be treated differently than the continuous variables. Finally, year is a count variable and we will have to deal with the 65 year span of data.
+There are some potential issues with this data in terms of visualizing. First population and density have a large range; this may require a logarithm scale. The variables country and continent are categorical and must be treated differently than the continuous variables. Finally, year is a count variable and we will have to deal with the 65 year span of data.
 
 #### Matrix of Scatterplots
 
-To get an overview of the data, let's plot the pairwise scatterplots for each of the continuous variables. We still need to address the issue with year, but for now we will just pick 1950.
+To get an overview of the data, plot the pairwise scatterplots for each of the continuous variables. We still need to address the issue with year, but for now we will just pick the year 1950.
 
 ```{r fig-mat1, fig.cap="Pairwise Scatterplots of Variables",warning=FALSE}
 ggpairs(gapminder_va %>% filter(year==1950), columns = 4:9)
@@ -902,11 +904,11 @@ What issues are revealed in the plot?
 What are some of the important conclusions that can be draws at this point in the exploration?  
 What are some of the next steps that should be taken?
 
-These plots do a nice job of comparing variables however it is restricted to pairwise comparisons. The correlation coefficient summaries the linear relationship between variables but the relationship between life expectancy and fertility may be non-linear. The density plots along the diagonal illustrate the data is at least bimodal, this may be an important insight if we want to separate countries into a binary distinction such as developed and developing. The variables population and density are dominated by a few very large values. It may be advantageous to link or brush data points to track them across plots. The background lines in the upper triangle of the matrix is confusing and makes reading difficult.
+These plots do a nice job of comparing variables however it is restricted to pairwise comparisons. The correlation coefficient summaries the linear relationship between variables but the relationship between life expectancy and fertility may be non-linear. The density plots along the diagonal illustrate the data are at least bimodal, this may be an important insight if we want to separate countries into a binary distinction such as developed and developing. The variables population and density are dominated by a few very large values. It may be advantageous to link or brush data points to track them across plots. The background lines in the upper triangle of the matrix is confusing and makes reading difficult.
 
 #### Adjustments
 
-First let's put population and density on a logarithm scale.
+Put population and density on a logarithm scale.
 
 ```{r}
 gapminder_va_log <- gapminder_va %>% 
@@ -921,7 +923,7 @@ gapminder_va_log %>%
   kable_styling(bootstrap_options = c("striped", "hover"),font_size = 12)
 ```
 
-Next we plot this new data set and add continent as a color.
+Next plot this new data set and add continent as a color.
 
 ```{r fig-mat2, fig.cap="Pairwise Scatterplots of Variables (Population and Density on Log Scale)",warning=FALSE,echo=FALSE,message=FALSE}
 ggpairs(gapminder_va_log %>% filter(year==1950) %>% select(c(-1, -3)),aes(color=continent))
@@ -937,7 +939,7 @@ Since Oceania only has two data points it is causing problems with the visual re
 
 #### Recoding Oceania  
 
-Let's combine Oceania into Europe. We will also check that our work is correct.
+Combine Oceania into Europe; also check that our work is correct.
 
 ```{r}
 table(gapminder_va_log$continent)
@@ -953,10 +955,10 @@ gapminder_va_log$continent <- recode_factor(gapminder_va_log$continent,'Oceania'
 table(gapminder_va_log$continent)
 ```
 
-Now we will recreate the plot and add transparency to aid in visualization.
+Now recreate the plot and add a legend and transparency to aid in visualization.
 
 ```{r fig-mat3, fig.cap="Pairwise Scatterplots of Variables with Oceania Removed",warning=FALSE,echo=FALSE,message=FALSE}
-ggpairs(gapminder_va_log %>% filter(year==1950) %>% select(c(-1, -3)),aes(color=continent,alpha=.7))
+ggpairs(gapminder_va_log %>% filter(year==1950) %>% select(c(-1, -3)),aes(color=continent,alpha=.7),legend=c(1,1))
 ```  
 
 #### Discussion Ideas  
@@ -970,17 +972,17 @@ It is now easier to see that a large part of the bimodal features were due to di
 
 The next step is to bring in the variable year. We should focus on two variables. The pairs that show promise are above 60 and fertility or mortality and fertility. We can bring population or density into the plots as well.
 
-### Next Visualizations  
+### Next Visualizations - Adding Years and Focussing  
 
-To understand the progression of countries over time we need to look at different years. In the previous section we look only at the year 1950. In this section we will address different years.
+To understand the progression of countries over time, look at different years. In the previous section we looked only at the year 1950. In this section we will address different years.
 
 #### Adding the Year 2015  
 
-First let's look at the scatterplot matrix for the final year, 2015.
+First look at the scatterplot matrix for the final year, 2015.
 
 
 ```{r fig-mat4, fig.cap="Pairwise Scatterplots of Variables for 2015",warning=FALSE,echo=FALSE,message=FALSE}
-ggpairs(gapminder_va_log %>% filter(year==2015) %>% select(c(-1, -3)),aes(color=continent,alpha=.7))
+ggpairs(gapminder_va_log %>% filter(year==2015) %>% select(c(-1, -3)),aes(color=continent,alpha=.7),legend=c(1,1))
 ```  
 
 #### Discussion Ideas  
@@ -988,13 +990,13 @@ ggpairs(gapminder_va_log %>% filter(year==2015) %>% select(c(-1, -3)),aes(color=
 What changes do we see in the data compared to 1950?
 What features still standout in the plots?
 
-The countries of Asia, in terms of fertility and life expectancy, are now similar to Europe. The Americas still have the bimodal nature and Africa still lags the rest of the world. However, in general it appears countries are moving towards long life expectancy and low fertility. The variable above 60 is much different for Europe compared to the rest of the world.
+The countries of Asia, in terms of fertility and life expectancy, are now getting closer to Europe but with a large spread. The Americas still have the bimodal nature and Africa still lags the rest of the world. However, in general it appears countries are moving towards long life expectancy and low fertility. The variable above 60 is much different for Europe compared to the rest of the world.
 
 It is hard to compare the 2015 plot with the 1950 since they are separate plots. We need to have a side by side comparison. 
 
 #### Side by Side Comparison of 1950 and 2015 
 
-To compare two years, let's focus first on just two variables, fertility and life expectancy. If we want to minimize ink, we can use a theme based on Tufte's work.
+To compare two years, focus first on just two variables, fertility and life expectancy. If we want to minimize ink, we can use a theme based on [Tufte's work](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html).
 
 ```{r fig-sbs1, fig.cap="Side by Side Scatterplots for 1950 and 2015"}
 ggplot(gapminder_va_log %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent)) +
@@ -1006,9 +1008,9 @@ ggplot(gapminder_va_log %>% filter(year==2015 | year==1950),aes(x=life_exp,y=fer
 
 #### Discussion Ideas  
 
-How should the variable population be incorporated?
-What insights are gained from this visualization?
-Did changing the background theme help in the analysis?
+How should the variable population be incorporated?  
+What insights are gained from this visualization?  
+Did changing the background theme help in the analysis?  
 
 It is clear from these plots that in general fertility rates are going down and life expectancy is increasing. There is less spread in the data as most countries are in the lower right corner of the 2015 plot. Africa still lags the rest of the world but it is also showing gains.
 
@@ -1020,7 +1022,7 @@ Population has not been incorporated but could be added by using size for popula
 
 We can account for population by assigning it to another aesthetic such as size. This will work better if we go back to original data. Using population density will also be better than population because this variable accounts for the size of the country. 
 
-First, let's combine Oceania with Europe.
+First, combine Oceania with Europe.
 
 ```{r}
 gapminder_va$continent <- recode_factor(gapminder_va$continent,'Oceania'='Europe')
@@ -1063,7 +1065,7 @@ theme_set(theme_tufte())
 
 #### Discussion Questions  
 
-Using \@ref(fig:fig-sbs3) answer the following questions:
+Using Figure \@ref(fig:fig-sbs3) answer the following questions:
 
 What is happening to population density over the 65 years?  
 Which continent has had the greatest increase in life expectancy?
@@ -1073,7 +1075,7 @@ It is clear that as population increases from 1950 to 2015, the population densi
 
 #### Adding a Third Year, 1982
 
-We still have not adequately incorporated year into the visual exploration. As a next step, let's add a year that is between the end points, in this case 1982.
+We still have not adequately incorporated year into the visual exploration. As a next step, add a year that is between the end points, in this case 1982.
 
 ```{r fig-sbs4, fig.cap="Side by Side Scatterplots for 1950, 1982, and 2015 with Population Density"}
 ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=fertility,color=continent,size=density)) +
@@ -1112,18 +1114,18 @@ ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(y=above_
 
 #### Discusssion Ideas
 
-From Figure \@ref(fig:fig-sbs5), notice that we also cleaned up the axes labels, answer the following questions:
+From Figure \@ref(fig:fig-sbs5) answer the following questions:
 
 What new insights are gained from this plot?  
 What are some of the trends?  
 
-Again, we see that in 1950 Europe is different from the other continents with a low fertility rate and a higher percentage of the population over 60. We do not see an again population in Africa over the entire time span. The fertility is going down in Africa but the percentage of the population over 60 is not changing. The continent with the biggest change over the 65 years is Asia. Again, it is hard to identify countries but we see an increase in population density. The change in density in Europe is not significant.
+Again, we see that in 1950 Europe is different from the other continents with a low fertility rate and a higher percentage of the population over 60. We do not see a gain in the percentage of elderly population in Africa over the entire time span. This could be due to the high fertility rate. In some sense, the percentage of the population over 60 incorporates both life expectancy and fertility. The fertility is going down in Africa but the percentage of the population over 60 is not changing. The continent with the biggest change over the 65 years is Asia. Again, it is hard to identify individual countries but we see an increase in population density. The change in density in Europe is not significant.
 
-We need to brush and identify. In 2015 one Asian country has high percentage of population above 60.
+We need the capability to brush and identify. In 2015 one Asian country has high percentage of population above 60.
 
 #### Box and Dot Plots  
 
-An alternative way to view the data is with a dotplot and boxplot. We will start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure \@ref(fig:fig-dp1) gives the result. The vertical axis is too crowded and not readable even though we reduced the default font size. Notice also how the countries within continents are arranged in decreasing life expectancy.
+An alternative way to view the data is with a dotplot and boxplot. Start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure \@ref(fig:fig-dp1) gives the result. The vertical axis is too crowded and not readable even though we reduced the default font size. Notice also how the countries within continents are arranged in decreasing life expectancy.
 
 ```{r fig-dp1, fig.cap="Plots of Life Expectancy for Each Country grouped by Continent for 1950, 1982, and 2015 with Population Density",warning=FALSE,message=FALSE}
 ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
@@ -1150,7 +1152,8 @@ ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950,continent=="E
 A third attempt is to make a two dimensional matrix plot of the four individual plots. Figure \@ref(fig:fig-dp3) shows the results. Africa is still a bit crowded but individual country names are visible.
 
 ```{r fig-dp3,fig.cap="Matrix Plot of Life Expectancy for the Years 1950, 1982, and 2015"}
-ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
+ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),
+    aes(x=life_exp,y=reorder(country,life_exp),color=factor(year),size=density)) +
      geom_point() +
      scale_size(name="Density",
                 breaks=c(10,100,1000,4000,6000),range=c(1,4)) +
@@ -1159,7 +1162,7 @@ ggplot(gapminder_va %>% filter(year==1982 |year==2015 | year==1950),aes(x=life_e
      labs(x="Life Expectancy",y="") 
 ```
 
-Another approach to compare continents is to generate boxplots for each continent for a particular year. Figure \@ref(fig:fig-bp1) is an example. This makes it easy to compare the continents withing a year but more difficult to compare years.
+Another approach to compare continents is to generate boxplots for each continent for a particular year. Figure \@ref(fig:fig-bp1) is an example. This makes it easy to compare the continents withing a year but more difficult to compare across years.
 
 ```{r fig-bp1,fig.cap="Boxplots of Life Expectancy for Each Continent for the Years 1950 and 2015"}
 ggplot(gapminder_va %>% 
@@ -1278,7 +1281,7 @@ gapminder_va_log %>%
 
 #### Geofacets  
 
-Another approach to summarizing the data is to use [geofaceting](http://ryanhafen.com/blog/geofacet). The plots of interest are put in geographical relationship to each other. Figure \@ref(fig:fig-ts5) is an example. Here we look only at the European continent, this is because this grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package **Bookdown** was not able to render the graphic so we had export the image from R and then import into this document.
+Another approach to summarizing the data is to use [geofaceting](http://ryanhafen.com/blog/geofacet). The plots of interest are put in geographical relationship to each other. Figure \@ref(fig:fig-ts5) is an example. Here we look only at the European continent, this is because this grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package **Bookdown** was not able to render the graphic so we had export the image from `R` and then import into this document.
 
 ```
 # Redefine the grid to include the countries we have in our data
@@ -1305,9 +1308,15 @@ What are the advantages and disadvantages of each of this plot?
 
 This plot requires the reader to know geography. It is also difficult to compare countries that are separated by distance. However, it does exhibit geographical effects along with time. It would be difficult to build a plot for the entire world.
 
+### Conclusion from Visualization  
+
+Which plots worked did we can an insight into developed versus developing countries?
+
+ADD MORE here. An increase in life expectancy and a decrease in fertility.
+
 ## Interactions with Visualizations  
 
-In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration. We will make use of the R implementation of the plotly javascript library, **plotly** [@R-bookdown].
+In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration. We will make use of the `R` implementation of the plotly javascript library, **plotly** [@R-bookdown].
 
 ### First Interactive Plots  
 
@@ -1485,24 +1494,24 @@ for(ii in seq_len(nrow(nms))) {
  }
 grid_plot(splom_list, ncol = 4, same_axes = TRUE, link_data = TRUE)
 
-# nest gapminder data by country
+### nest gapminder data by country
 by_country <- gapminder %>%
   group_by(country, continent) %>%
   nest()
 
-# add in a plot column with map_plot
+### add in a plot column with map_plot
 by_country <- by_country %>% mutate(
   panel = map_plot(data,
     ~ figure(xlim = c(1948, 2011), ylim = c(10, 95), width = 300, tools = NULL) %>%
         ly_points(year, lifeExp, data = .x, hover = .x)
   ))
 
-# plot it
+### plot it
 by_country %>%
   trelliscope("gapminder", nrow = 2, ncol = 7)
 
 
-# DT options https://rstudio.github.io/DT/options.html
+### DT options https://rstudio.github.io/DT/options.html
 
 #### Animations 
 From https://plotly-book.cpsievert.me/key-frame-animations.html 

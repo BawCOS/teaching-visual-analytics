@@ -7,3 +7,209 @@ In Chapter \@ref(Chpt1) we introduced an visual analysis. The problem was purpos
 The lesson objectives will be similar to 
 
 
+```
+my_table<-matrix(Male=c(3738,4704),Female=c(1494,2827))
+my_table<-table(my_table)
+row.names(my_table)<-c("Admitted","Rejected")
+round(prop.table(my_table),3)
+round(prop.table(my_table,2),3)
+apply(my_table,1,sum)
+sum(my_table)
+(accept<-apply(my_table,1,sum)[1]/sum(my_table))
+apply(my_table,2,sum)
+apply(my_table,2,sum)*accept
+my_table[1,]-apply(my_table,2,sum)*accept
+
+students<-c(rep(1,8442),rep(0,4321))
+stat<-rep(0,100000)
+set.seed(418)
+for (i in 1:100000){
+temp<-sample(students,5232)
+stat[i]<-sum(temp)-3460.671
+}
+sum(stat>277.329)
+
+str(UCBAdmissions)
+head(UCBAdmissions)
+(UCBDatable<-apply(UCBAdmissions, c(1, 2), sum))
+round(prop.table(UCBDatable),3)
+round(prop.table(UCBDatable,2),3)
+sum(UCBDatable)
+
+(accept2<-apply(UCBDatable,1,sum)[1]/sum(UCBDatable))
+apply(UCBDatable,2,sum)
+apply(UCBDatable,2,sum)*accept2
+UCBDatable[1,]-apply(UCBDatable,2,sum)*accept2
+
+
+
+students<-c(rep(1,2691),rep(0,1835))
+stat<-rep(0,100000)
+set.seed(418)
+for (i in 1:100000){
+  temp<-sample(students,1755)
+  stat[i]<-sum(temp)-1043.4611
+}
+sum(stat>154.5389)/100000
+
+library(vcd)
+
+prop.table(UCBAdmissions,c(2,3))
+apply(UCBAdmissions, c(2, 3), sum)
+chisq.test(apply(UCBAdmissions, c(2, 3), sum))
+chisq.test(UCBAdmissions)
+apply(UCBAdmissions, c(2, 3), sum)[1,]-(apply(UCBAdmissions,3, sum)/4526)*2691
+prop.table(apply(UCBAdmissions, c(2, 3), sum),2)
+chisq.test(apply(UCBAdmissions, c(2, 3), sum))
+round(prop.table(apply(UCBAdmissions, c(1, 3), sum),2),3)
+
+UCB <- aperm(UCBAdmissions, c(2, 1, 3))
+dimnames(UCB)[[2]] <- c("Yes", "No")
+names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
+ftable(UCB)
+round(ftable(prop.table(UCB,c(1,3))),3)
+ftable(prop.table(UCBAdmissions,c(2,3)))
+
+## Code for three-way table
+
+# Get data from table in frequency form
+
+UCB.data<-as.data.frame(UCBAdmissions)
+head(UCB.data)
+
+# Since mutual independence implies marginal independence a lack of marginal independence implies a lack of mutuall independence.
+
+##Tests for partial tables AdmitxGender for each level of Dept.
+oddsratio(UCBAdmissions)
+
+chisq.test(UCBAdmissions[,,1])
+exp(oddsratio(UCBAdmissions[,,1]))
+
+chisq.test(UCBAdmissions[,,2])
+exp(oddsratio(UCBAdmissions[,,2]))
+
+chisq.test(UCBAdmissions[,,3])
+exp(oddsratio(UCBAdmissions[,,3]))
+
+chisq.test(UCBAdmissions[,,4])
+exp(oddsratio(UCBAdmissions[,,4]))
+
+chisq.test(UCBAdmissions[,,5])
+exp(oddsratio(UCBAdmissions[,,5]))
+
+chisq.test(UCBAdmissions[,,6])
+exp(oddsratio(UCBAdmissions[,,6]))
+
+# Visualization
+
+fourfoldplot(UCBAdmissions)
+cotabplot(UCBAdmissions, panel = cotab_fourfold)
+plot(oddsratio(UCBAdmissions,log=FALSE), xlab="Department", ylab="Odds Ratio (Admit | Gender)")
+mosaic(UCBAdmissions,gp=shading_Friendly) #mosaic1.png
+mosaic(apply(UCBAdmissions, c(1, 2), sum),gp=shading_Friendly) #mosaic2.png
+
+vnames <- list(set_varnames = c(Admit="Admission", Gender="Sex", Dept="Department"))
+lnames <- list(Admit = c("Yes", "No"),
+                 Gender = c("Males", "Females"),
+                 Dept = LETTERS[1:6])
+mosaic(UCBAdmissions, labeling_args=vnames, set_labels=lnames)
+
+# Mantel-Haenszel Test
+
+mantelhaen.test(UCBAdmissions)
+
+#############################
+### Berkeley admissions data for log-linear models
+### Lessons 4 & 5
+### See also berkeley.R in Lesson 4
+#############################
+
+### Dataset already exist in R library
+UCBAdmissions 
+
+# There is a oddsratio built into vcd
+oddsratio<-function(x) x[1,1]*x[2,2]/(x[2,1]*x[1,2])
+
+### To test the odds-ratios in the marginal table and each of the subtables
+library(vcd)
+
+### Two ways of fitting a log-linear model of complete independence
+
+### Via loglin() function
+berk.ind<-loglin(UCBAdmissions, list(1,2,3), fit=TRUE, param=TRUE)
+berk.ind
+
+#############################
+### Berkeley admissions data 
+### Lessons 4 & 5
+### Uses dataset already in R
+### See also berkeley1.R in Lesson 4 for a different code 
+### See also related berkeleyLoglin.R in Lesson 5
+#############################
+
+### Dataset already exist in R library
+UCBAdmissions 
+
+### To test the odds-ratios in the marginal table and each of the subtables
+library(vcd)
+
+##marginal table Admit x Gender
+admit.gender=margin.table(UCBAdmissions, c(1,2))
+admit.gender
+admit.gender/4526
+
+exp(oddsratio(admit.gender))
+chisq.test(admit.gender)
+
+##Tests for partial tables AdmitxGender for each level of Dept.
+chisq.test(UCBAdmissions[,,1])
+exp(oddsratio(UCBAdmissions[,,1]))
+
+chisq.test(UCBAdmissions[,,2])
+exp(oddsratio(UCBAdmissions[,,2]))
+
+chisq.test(UCBAdmissions[,,3])
+exp(oddsratio(UCBAdmissions[,,3]))
+
+chisq.test(UCBAdmissions[,,4])
+exp(oddsratio(UCBAdmissions[,,4]))
+
+chisq.test(UCBAdmissions[,,5])
+exp(oddsratio(UCBAdmissions[,,5]))
+    
+chisq.test(UCBAdmissions[,,6])
+exp(oddsratio(UCBAdmissions[,,6]))
+    
+    ### To visualize graphically these association explore fourfold() function in the vcd() package!
+    
+    ### CMH test
+    mantelhaen.test(UCBAdmissions)
+    
+### Via glm() function #######
+berk.data<-as.data.frame(UCBAdmissions)
+berk.data
+berk.ind<-glm(berk.data$Freq~berk.data$Admit+berk.data$Gender+berk.data$Dept, family=poisson())
+summary(berk.ind)
+fits<-fitted(berk.ind)
+resids <- residuals(berk.ind,type="pearson")
+h <- lm.influence(berk.ind)$hat
+adjresids <- resids/sqrt(1-h)
+round(cbind(berk.data$Freq,fits,adjresids),2)
+
+### Via loglin() function
+berk.ind<-loglin(UCBAdmissions, list(1,2,3), fit=TRUE, param=TRUE)
+berk.ind
+
+##### Saturated log-linear model 
+### via loglin()
+berk.sat<-loglin(UCBAdmissions, list(c(1,2,3)), fit=TRUE, param=TRUE)
+berk.sat
+
+### via glm()
+berk.sat<-glm(berk.data$Freq~berk.data$Admit*berk.data$Gender*berk.data$Dept, family=poisson())
+summary(berk.sat)
+fitted(berk.sat)
+```
+
+
+

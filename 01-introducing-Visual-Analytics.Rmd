@@ -397,7 +397,7 @@ The problems with this graph are that the lines are close together, the font siz
 
 #### Plots in R  
 
-You can construct these plots in R although they are a bit awkward. However on the positive side we can control the aspect ratio, offset text, and change the font size.  To get an idea of how to do this consider the simple plot in Figure \@ref(fig:fig-simp). 
+You can construct these plots in `R` although they are a bit awkward. However on the positive side we can control the aspect ratio, offset text, and change the font size.  To get an idea of how to do this consider the simple plot in Figure \@ref(fig:fig-simp). 
 
 ```{r fig-simp, fig.cap="Simple Example of visualization of Batting Averages"}
 plot(1,type="n",xlim=c(0,800),ylim=c(0,800),xlab="At Bats",ylab="Hits",asp=1)
@@ -549,7 +549,7 @@ Have the students first remove year to get the batting averages for each player.
 
 #### Interactive Vector Plots  
 
-Without developing our own custom visualization of the vector plot, which we could do in [geogebra](https://www.geogebra.org/) or using the R package  **shiny**[@R-shiny], we decided to find an existing application on the web.  There is an interactive visualization application in the geogebra library, go to https://www.geogebra.org/m/YrPAV6KK.  The example uses shooting baskets but gives the same idea as the reversal we saw in our problem.  We selected this interaction because it helps explain why the reversal occurs and the conditions under which it occurs.  
+Without developing our own custom visualization of the vector plot, which we could do in [geogebra](https://www.geogebra.org/) or using the `R` package  **shiny**[@R-shiny], we decided to find an existing application on the web.  There is an interactive visualization application in the geogebra library, go to https://www.geogebra.org/m/YrPAV6KK.  The example uses shooting baskets but gives the same idea as the reversal we saw in our problem.  We selected this interaction because it helps explain why the reversal occurs and the conditions under which it occurs.  
 
 #### Discussion ideas  
 
