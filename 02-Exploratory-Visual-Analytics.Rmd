@@ -18,7 +18,7 @@ We will be using `R` to generate the display however, if you don't want to use `
 
 The beginning of this chapter has a heavy, but reasonable, amount of data acquisition and preparation. This is often minimized in a typical lesson but in practice this part of the analysis comprises a significant portion of the time and effort in the project. In the visualization section, we offer many different options for visualizing the data. Finally, in the interactive section, we suggest several methods to interact with the data. We are limited by what can be hosted in an html5 format. Many more options are available if you host on a server; however, as lesson the ideas are present in this section.
 
-Again, this chapter can be condensed into a smaller set of notes but dropping portions of each section. The data cleaning section is the main area where material can be removed; however, we caution that most learning experiences remove the data cleaning process leading students to an illusion that data is easy to find and work with.
+Again, this chapter can be condensed into a smaller set of notes by dropping portions of each section. The data cleaning section is the main area where material can be removed; however, we caution that most learning experiences remove the data cleaning process leading students to an illusion that data is easy to find and work with.
 
 ## Lesson Preparation
 
@@ -49,7 +49,7 @@ There are many ways to answer this question and answers may include discussions 
 
 >To be considered a developed nation, a country generally has a per capita income around or above $12,000
 
-and other criteria can be found on [Wikipedia](https://en.wikipedia.org/wiki/Developed_country).
+This is an economic criteria.  Other criteria can be found on [Wikipedia](https://en.wikipedia.org/wiki/Developed_country).
 
 2.  What do you think made Hans Rosling's presentation so effective? What did you like about the visualizations? What are some of the design principles you learned from this video?
 
@@ -1307,6 +1307,60 @@ knitr::include_graphics("./images/Geofact.png",dpi=90)
 What are the advantages and disadvantages of each of this plot?  
 
 This plot requires the reader to know geography. It is also difficult to compare countries that are separated by distance. However, it does exhibit geographical effects along with time. It would be difficult to build a plot for the entire world.
+
+#### Clustering  
+
+We have been using visualization to find grouping of data to separate into two groups. An alternative is to use hierarchical clustering. Now apply hierarchial clustering to our data.
+
+```{r}
+gap_clus <- hclust(dist(gapminder_va_log %>% filter(year == 1950) %>% 
+              select(4:9)))
+
+plot(gap_clus,labels=(gapminder_va_log %>% filter(year == 1950) %>% 
+      select(continent)%>% mutate(continent=as.character(continent)))[[1]],
+     xlab="Continent")
+```
+
+There appear to be five strong clusters. Separate out these clusters.
+
+```{r echo=FALSE}
+clust_names<-gapminder_va_log %>% filter(year == 1950) %>% select(1,2) %>% mutate(country=as.character(country),continent=as.character(continent))
+```
+
+
+```{r}
+clus_res<-cutree(gap_clus,k=5)
+table(clust_names[[2]],clus_res)
+```
+
+Table \@ref(tab:tab-clust1) at the second cluster to find the countries in the cluster.
+
+```{r tab-clust1,echo=FALSE,warning=FALSE}
+clust_names[which(clus_res==2),] %>% arrange(continent) %>% knitr::kable(caption="Second Grouping of Countries in 1950")
+```
+
+Table \@ref(tab:tab-clust2) repeats for the first cluster.
+
+```{r tab-clust2,echo=FALSE,warning=FALSE}
+clust_names[which(clus_res==1),] %>% arrange(continent) %>% 
+  knitr::kable(caption="First Grouping of Contries in 1950")
+```
+
+```{r}
+gap_clus2 <- hclust(dist(gapminder_va_log %>% filter(year == 2015) %>% 
+              select(4:9)))
+
+plot(gap_clus2,labels=(gapminder_va_log %>% filter(year == 2015) %>% 
+      select(continent)%>% mutate(continent=as.character(continent)))[[1]],
+     xlab="Continent")
+```
+
+
+```{r}
+clus_res2<-cutree(gap_clus2,k=4)
+table(clust_names[[2]],clus_res2)
+```
+
 
 ### Conclusion from Visualization  
 

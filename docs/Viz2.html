@@ -26,7 +26,7 @@
 <meta name="author" content="Bradley Warner">
 
 
-<meta name="date" content="2018-06-25">
+<meta name="date" content="2018-06-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -911,6 +911,165 @@ my_eu_grid&lt;-eu_grid1[c(-6,-13,-14,-15,-16,-18,-25),]</code></pre>
 <h4><span class="header-section-number">2.4.2.18</span> Discussion Ideas</h4>
 <p>What are the advantages and disadvantages of each of this plot?</p>
 <p>This plot requires the reader to know geography. It is also difficult to compare countries that are separated by distance. However, it does exhibit geographical effects along with time. It would be difficult to build a plot for the entire world.</p>
+</div>
+<div id="clustering" class="section level4">
+<h4><span class="header-section-number">2.4.2.19</span> Clustering</h4>
+<p>We have been using visualization to find grouping of data to separate into two groups. An alternative is to use hierarchical clustering. Now apply hierarchial clustering to our data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_clus &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">1950</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">select</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">9</span>)))
+
+<span class="kw">plot</span>(gap_clus,<span class="dt">labels=</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">1950</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">select</span>(continent)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">continent=</span><span class="kw">as.character</span>(continent)))[[<span class="dv">1</span>]],
+     <span class="dt">xlab=</span><span class="st">&quot;Continent&quot;</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p>There appear to be five strong clusters. Separate out these clusters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clus_res&lt;-<span class="kw">cutree</span>(gap_clus,<span class="dt">k=</span><span class="dv">5</span>)
+<span class="kw">table</span>(clust_names[[<span class="dv">2</span>]],clus_res)</code></pre></div>
+<pre><code>##           clus_res
+##             1  2  3  4  5
+##   Africa    2  1 18 29  1
+##   Americas  0  5  7  3  9
+##   Asia      2  7  6 13  3
+##   Europe    0  8  0  1 23</code></pre>
+<p>Table <a href="#tab:tab-clus1"><strong>??</strong></a> at the second cluster to find the countries in the cluster.</p>
+<table>
+<caption><span id="tab:tab-clust1">Table 2.9: </span>Second Grouping of Countries in 1950</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zimbabwe</td>
+<td align="left">Africa</td>
+</tr>
+<tr class="even">
+<td align="left">Colombia</td>
+<td align="left">Americas</td>
+</tr>
+<tr class="odd">
+<td align="left">Costa Rica</td>
+<td align="left">Americas</td>
+</tr>
+<tr class="even">
+<td align="left">Dominican Republic</td>
+<td align="left">Americas</td>
+</tr>
+<tr class="odd">
+<td align="left">Jamaica</td>
+<td align="left">Americas</td>
+</tr>
+<tr class="even">
+<td align="left">Mexico</td>
+<td align="left">Americas</td>
+</tr>
+<tr class="odd">
+<td align="left">Kuwait</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="even">
+<td align="left">Lebanon</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="odd">
+<td align="left">Malaysia</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="even">
+<td align="left">Philippines</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="odd">
+<td align="left">Sri Lanka</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="even">
+<td align="left">Thailand</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="odd">
+<td align="left">Vietnam</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="even">
+<td align="left">Albania</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="odd">
+<td align="left">Bosnia and Herzegovina</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="even">
+<td align="left">Bulgaria</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="odd">
+<td align="left">Montenegro</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="even">
+<td align="left">Poland</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="odd">
+<td align="left">Portugal</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="even">
+<td align="left">Romania</td>
+<td align="left">Europe</td>
+</tr>
+<tr class="odd">
+<td align="left">Slovak Republic</td>
+<td align="left">Europe</td>
+</tr>
+</tbody>
+</table>
+<p>Table <a href="#tab:tab-clus2"><strong>??</strong></a> repeats for the first cluster.</p>
+<table>
+<caption><span id="tab:tab-clust2">Table 2.10: </span>First Grouping of Contries in 1950</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">continent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mali</td>
+<td align="left">Africa</td>
+</tr>
+<tr class="even">
+<td align="left">Sierra Leone</td>
+<td align="left">Africa</td>
+</tr>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="left">Asia</td>
+</tr>
+<tr class="even">
+<td align="left">Yemen, Rep.</td>
+<td align="left">Asia</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_clus2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">select</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">9</span>)))
+
+<span class="kw">plot</span>(gap_clus2,<span class="dt">labels=</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">select</span>(continent)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">continent=</span><span class="kw">as.character</span>(continent)))[[<span class="dv">1</span>]],
+     <span class="dt">xlab=</span><span class="st">&quot;Continent&quot;</span>)</code></pre></div>
+<p><img src="VA-Notes_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clus_res2&lt;-<span class="kw">cutree</span>(gap_clus2,<span class="dt">k=</span><span class="dv">4</span>)
+<span class="kw">table</span>(clust_names[[<span class="dv">2</span>]],clus_res2)</code></pre></div>
+<pre><code>##           clus_res2
+##             1  2  3  4
+##   Africa   13  6  4 28
+##   Americas  0 23  0  1
+##   Asia      1 26  0  4
+##   Europe    0 32  0  0</code></pre>
 </div>
 </div>
 <div id="conclusion-from-visualization" class="section level3">
