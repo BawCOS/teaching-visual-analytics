@@ -643,7 +643,7 @@ rm(temp1)
 rm(temp2)
 ```
 
-To aviod the temporary variables, use the code below in one step.
+To avoid the temporary variables, use the code below in one step.
 
 ```{r eval=FALSE}
 p+ data.frame(with(gapminder_above60 %>% 
@@ -863,7 +863,7 @@ In the next phase of our exploratory data analysis we will be visualizing the ga
 
 ### First Visualizations
 
-In the first visualization we attempt to understand the variables and thier relationship to each other. There are nine total variables. The first three variables, country, continent, and year are different from the last six and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other six variables are continuous and can be plotted against each other on a scatterplot.
+In the first visualization we attempt to understand the variables and their relationship to each other. There are nine total variables. The first three variables, country, continent, and year are different from the last six and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other six variables are continuous and can be plotted against each other on a scatterplot.
 
 #### Discussion Ideas:
 
@@ -1281,7 +1281,7 @@ gapminder_va_log %>%
 
 #### Geofacets  
 
-Another approach to summarizing the data is to use [geofaceting](http://ryanhafen.com/blog/geofacet). The plots of interest are put in geographical relationship to each other. Figure \@ref(fig:fig-ts5) is an example. Here we look only at the European continent, this is because this grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package **Bookdown** was not able to render the graphic so we had export the image from `R` and then import into this document.
+Another approach to summarizing the data is to use [geofaceting](http://ryanhafen.com/blog/geofacet). The plots of interest are put in geographical relationship to each other. Figure \@ref(fig:fig-ts5) is an example. Here we look only at the European continent as an example, this is because the European grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package **Bookdown** was not able to render the graphic so we had export the image from `R` and then import into this document.
 
 ```
 # Redefine the grid to include the countries we have in our data
@@ -1310,7 +1310,7 @@ This plot requires the reader to know geography. It is also difficult to compare
 
 #### Clustering  
 
-We have been using visualization to find grouping of data to separate into two groups. An alternative is to use hierarchical clustering. Now apply hierarchial clustering to our data.
+We have been using visualization to find groupings of data. An alternative is to use hierarchical clustering. In this section we apply hierarchical clustering to our data.
 
 ```{r}
 gap_clus <- hclust(dist(gapminder_va_log %>% filter(year == 1950) %>% 
@@ -1327,24 +1327,27 @@ There appear to be five strong clusters. Separate out these clusters.
 clust_names<-gapminder_va_log %>% filter(year == 1950) %>% select(1,2) %>% mutate(country=as.character(country),continent=as.character(continent))
 ```
 
+Plot a table of continents and cluster groups.
 
 ```{r}
 clus_res<-cutree(gap_clus,k=5)
 table(clust_names[[2]],clus_res)
 ```
 
-Table \@ref(tab:tab-clust1) at the second cluster to find the countries in the cluster.
+Table \@ref(tab:tab-clust1) are the countries in the second cluster.
 
 ```{r tab-clust1,echo=FALSE,warning=FALSE}
 clust_names[which(clus_res==2),] %>% arrange(continent) %>% knitr::kable(caption="Second Grouping of Countries in 1950")
 ```
 
-Table \@ref(tab:tab-clust2) repeats for the first cluster.
+Table \@ref(tab:tab-clust2) are the countries in the first cluster.
 
 ```{r tab-clust2,echo=FALSE,warning=FALSE}
 clust_names[which(clus_res==1),] %>% arrange(continent) %>% 
   knitr::kable(caption="First Grouping of Contries in 1950")
 ```
+
+Next examine the year 2015. 
 
 ```{r}
 gap_clus2 <- hclust(dist(gapminder_va_log %>% filter(year == 2015) %>% 
@@ -1355,18 +1358,182 @@ plot(gap_clus2,labels=(gapminder_va_log %>% filter(year == 2015) %>%
      xlab="Continent")
 ```
 
+There are now 4 distinct clusters instead of 5.  
 
 ```{r}
 clus_res2<-cutree(gap_clus2,k=4)
 table(clust_names[[2]],clus_res2)
 ```
 
+Asia, Europe, and the Americas are in a single group and Africa is split into three separate groups. Group 3 is interesting because it is only four countries. Table \@ref(tab:tab-clust3) contains the four countries.
+
+```{r tab-clust3,echo=FALSE,warning=FALSE}
+clust_names[which(clus_res2==3),] %>% arrange(continent) %>% 
+  knitr::kable(caption="Thrid Grouping of Contries in 2015")
+```
+
+Note that this analysis used an Euclidean distance to determine similarity between countries. Since the variables were an roughly similar scales, we did not scale the data. Although mortality and life expectancy were the largest in size.  Another approach is to use correlation between countries to group.
+
+
+```{r}
+dd<-as.dist(1-cor(t(gapminder_va_log %>% filter(year == 1950) %>% 
+      select(4:9))))
+
+
+gap_clus3 <- hclust(dd)
+
+plot(gap_clus3,labels=(gapminder_va_log %>% filter(year == 1950) %>% 
+      select(continent)%>% mutate(continent=as.character(continent)))[[1]],
+     xlab="Continent")
+```
+
+Now there are three or four strong groups. We will use three.
+
+```{r}
+clus_res3<-cutree(gap_clus3,k=3)
+table(clust_names[[2]],clus_res3)
+```
+
+Table \@ref(tab:tab-clust4) is a listing on the countries grouped together in group 3. 
+
+```{r tab-clust4,echo=FALSE,warning=FALSE}
+clust_names[which(clus_res3==3),] %>% arrange(continent) %>% 
+  knitr::kable(caption="Third Grouping of Contries in 2015")
+```
+
+Now repeat for 2015.
+
+```{r}
+dd<-as.dist(1-cor(t(gapminder_va_log %>% filter(year == 2015) %>% 
+      select(4:9))))
+
+
+gap_clus4 <- hclust(dd)
+
+plot(gap_clus4,labels=(gapminder_va_log %>% filter(year == 2015) %>% 
+      select(continent)%>% mutate(continent=as.character(continent)))[[1]],
+     xlab="Continent")
+```
+
+Again, there are either 3 or 4 strong groups.  
+
+```{r}
+clus_res4<-cutree(gap_clus4,k=3)
+table(clust_names[[2]],clus_res4)
+```
+
+We see that Africa is split into two groups and while Asia, Europe, and the Americas are grouped together. This is the trend we have been observing in our analysis. Table \@ref(tab:tab-clust5) is a listing on the countries grouped together in group 2. 
+
+```{r tab-clust5,echo=FALSE,warning=FALSE}
+clust_names[which(clus_res4==2),] %>% arrange(continent) %>% 
+  knitr::kable(caption="Second Grouping of Contries in 2015")
+```
+
+#### Discussion Ideas  
+
+What are the advantages and disadvantages of clustering and listing clusters?
+What are some additional things you would suggest to do with clustering?  
+
+The clustering does the grouping on all variables instead of just two as in previous plots. The difficulty is selecting the number of groups, the simularity measure, and the grouping metrics. The analysis above, using a correlation metric appears to anwer our original questions better.
+
+A good way to visualize the clusters is with a choropleth plot. 
+
+#### Choropleth Plot  
+
+The code for this section was adopted from this [website](https://rud.is/b/2015/07/09/faceted-world-population-by-income-choropleths-in-ggplot/)
+
+The following code gets the data. We have already done this and saved it in the data folder associated with this project.
+
+```
+library(httr) 
+# this ensures you only download the shapefile once and hides
+# errors and warnings. remove `try` and `invisible` to see messages
+try(invisible(GET("http://www.pewglobal.org/wp-content/lib/js/world-geo.json",
+                  write_disk("world-geo.json"))), silent=TRUE)
+# use ogrListLayers("world-geo.json") to see file type & 
+# layer info to use in the call to readOGR
+```  
+
+Load the library to read the json file.
+
+```{r}
+library(rgdal)
+```  
+
+Load the data and put it into a dataframe.
+
+```{r}
+rgdal::getGDALVersionInfo()
+world <- readOGR("data/world-geo.json", layer="world-geo")
+world_wt <- spTransform(world, CRS("+proj=robin"))
+world_map <- fortify(world_wt)
+world_map %>%
+  left_join(data_frame(id=rownames(world@data), name=world@data$name)) %>%
+  select(-id) %>%
+  rename(id=name) -> world_map
+``` 
+
+Check that the countries have the same names as those in the *gapminder* package.
+
+```{r}
+clust_data<-cbind(clust_names,as.factor(clus_res3))
+clust_data[!(clust_data[,1] %in% as.character((world_map %>% distinct(id))[,1])),1]
+``` 
+
+Save the data to a new object.  
+```{r}
+my_world_map <- world_map
+world_map_names <- world_map %>% distinct(id)
+world_map_names<-levels(world_map_names[,1])
+```
+
+Find the name in the world map dataframe. As an example, we use Yemen.
+
+```{r}
+world_map_names[grep("Yemen",world_map_names)]
+```
+
+Fix all the names.
+
+```{r}
+my_world_map$id<-gsub("North Korea","Korea, Dem. Rep.",my_world_map$id)
+my_world_map$id<-gsub("South Korea","Korea, Rep.",my_world_map$id)
+my_world_map$id<-gsub("Yemen","Yemen, Rep.",my_world_map$id)
+my_world_map$id<-gsub("Democratic Republic of the Congo","Congo, Dem. Rep.",my_world_map$id)
+my_world_map$id<-gsub("Republic of the Congo","Congo, Rep.",my_world_map$id)
+my_world_map$id<-gsub("Burma \\(Myanmar\\)","Myanmar",my_world_map$id)
+my_world_map$id<-gsub("Slovakia","Slovak Republic",my_world_map$id)
+my_world_map$id<-gsub("Ivory Coast","Cote d'Ivoire",my_world_map$id)
+my_world_map$id<-gsub("Guinea Bissau","Guinea-Bissau",my_world_map$id)
+```
+
+Figure \@ref(fig:fig-choro1) is the plot for 1950.  
+
+```{r fig-choro1, fig.cap="Choropleth for Clustering of Countries in 1950"}
+gg <-ggplot(my_world_map,aes(map_id=id)) 
+gg <- gg + geom_map(map=my_world_map,fill='white',color='black',size=0.15) +expand_limits(x=my_world_map$long,y=my_world_map$lat)
+
+gg + geom_map(map=my_world_map,data=clust_data,aes(map_id=country,fill=as.factor(clus_res3)),color="black",size=0.15) + scale_fill_manual(values=c("#fff7bc", "#fec44f","#d95f0e"),name="Cluster") + theme(legend.title=element_blank())
+```
+
+And now for 2015, Figure \@ref(fig:fig-choro2) is the choropleth. Notice that the group numbers are arbitrary.
+
+```{r echo=FALSE}
+clust_data<-cbind(clust_names,as.factor(clus_res4))
+```
+
+```{r fig-choro2, fig.cap="Choropleth for Clustering of Countries in 2015"}
+gg <-ggplot(my_world_map,aes(map_id=id)) 
+gg <- gg + geom_map(map=my_world_map,fill='white',color='black',size=0.15) +expand_limits(x=my_world_map$long,y=my_world_map$lat)
+
+gg + geom_map(map=my_world_map,data=clust_data,aes(map_id=country,fill=as.factor(clus_res4)),color="black",size=0.15) + scale_fill_manual(values=c("#fff7bc", "#fec44f","#d95f0e"),name="Cluster") + theme(legend.title=element_blank())
+```
+
 
 ### Conclusion from Visualization  
 
-Which plots worked did we can an insight into developed versus developing countries?
+From these visualizations, we can see that most of the countries in the world have over time become similar in the metrics we have selected with the expection of a large portion of Africa.  In general there is an increase in life expectancy while there is a decrease in fertility.  
 
-ADD MORE here. An increase in life expectancy and a decrease in fertility.
 
 ## Interactions with Visualizations  
 
@@ -1460,6 +1627,7 @@ The plot are not linked. When we select a country in the right panel it is not h
 One of the advantages of this plot is we have hover information although due to a limitation in the software we don't get the country name. We can also remove the lines by select the legend names.
 
 The zooming capability is not much use in this plot and it would be a benefit to interactively reorganize the variables on the x-axis.
+
 
 #### Linking Plots  
 
@@ -1599,3 +1767,5 @@ base %>%
   animation_opts(frame = 1000, transition = 0, redraw = FALSE)
 ```
 
+Choropleth map in plotly
+https://plot.ly/r/choropleth-maps/
