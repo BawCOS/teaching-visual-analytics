@@ -861,7 +861,7 @@ In the next section, we will explore the process of visualizing the data.
 
 In the next phase of our exploratory data analysis we will be visualizing the gapminder data. In Section \@ref(Viz1), we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step of the analysis.
 
-### First Visualizations
+### Summary Visualizations
 
 In the first visualization we attempt to understand the variables and their relationship to each other. There are nine total variables. The first three variables, country, continent, and year are different from the last six and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other six variables are continuous and can be plotted against each other on a scatterplot.
 
@@ -972,7 +972,7 @@ It is now easier to see that a large part of the bimodal features were due to di
 
 The next step is to bring in the variable year. We should focus on two variables. The pairs that show promise are above 60 and fertility or mortality and fertility. We can bring population or density into the plots as well.
 
-### Next Visualizations - Adding Years and Focussing  
+### Adding Time to Plots  
 
 To understand the progression of countries over time, look at different years. In the previous section we looked only at the year 1950. In this section we will address different years.
 
@@ -1098,7 +1098,7 @@ The shift from 1950 to 1982 was mostly an increase in life expectancy with a mod
 
 We could incorporate year by have a slider function to select year or another option is to animate the plot by year.
 
-#### Using the Percentage of the Population Above 60
+### Using Different Variables
 
 In our initial exploration, we also considered the variable population percentage above the age of 60.
 
@@ -1123,7 +1123,7 @@ Again, we see that in 1950 Europe is different from the other continents with a 
 
 We need the capability to brush and identify. In 2015 one Asian country has high percentage of population above 60.
 
-#### Box and Dot Plots  
+### Box and Dot Plots  
 
 An alternative way to view the data is with a dotplot and boxplot. Start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure \@ref(fig:fig-dp1) gives the result. The vertical axis is too crowded and not readable even though we reduced the default font size. Notice also how the countries within continents are arranged in decreasing life expectancy.
 
@@ -1189,7 +1189,7 @@ The side by side boxplots has done a good job of accounting for years but we may
 
 The crowded axes is difficult. We may want to sample countries from each quartile to reduce the number of countries on each axes. Another approach is to offset the labels slightly but this has a small chance of making a difference.  
 
-#### Parallel Coordinates Plot
+### Parallel Coordinates Plot
 
 Another type of plot for our data is a parallel coordinates plot. This plot scales the data first so that the size of the variables will not dominate the plot. We will also use the data with density and population on a logarithmic scale. The order of the variables is key as well. 
 
@@ -1227,7 +1227,7 @@ ggparcoord(gapminder_va_log %>% filter(year==1950 |
   labs(x="Variables",y="Scaled Values")
 ```
 
-#### Time Series  
+### Time Series Plots  
 
 Next we will plot year on the horizontal axis and one of the other variables of interest on the vertical axis. Figure \@ref(fig:fig-ts1) is an example. This has a different line for each country and as a result contains too much information. To help with this problem, could just summarize each continent instead.
 
@@ -1279,9 +1279,9 @@ gapminder_va_log %>%
   labs(x="Year",y="Median Fertility")
 ```  
 
-#### Geofacets  
+### Geofacets Plots  
 
-Another approach to summarizing the data is to use [geofaceting](http://ryanhafen.com/blog/geofacet). The plots of interest are put in geographical relationship to each other. Figure \@ref(fig:fig-ts5) is an example. Here we look only at the European continent as an example, this is because the European grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package **Bookdown** was not able to render the graphic so we had export the image from `R` and then import into this document.
+Another approach to summarizing the data is to use [geofaceting](http://ryanhafen.com/blog/geofacet). The plots of interest are put in geographical relationship to each other. Figure \@ref(fig:fig-ts5) is an example. Here we look only at the European continent as an example, this is because the European grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package **Bookdown** was not able to render the graphic so we had export the image from a local instance of `R` and then import into this document.
 
 ```
 # Redefine the grid to include the countries we have in our data
@@ -1298,7 +1298,7 @@ ggplot(gapminder_va_log, aes(year, life_exp)) +
     theme_bw()
 ```
 
-```{r fig-ts5,cap="Time Series of Life Expectancy for each European Country Plotted as Facets based on Geograph",echo=FALSE}
+```{r fig-ts5,cap="Time Series of Life Expectancy for each European Country Plotted as Facets based on Geography",echo=FALSE}
 knitr::include_graphics("./images/Geofact.png",dpi=90)
 ```
 
@@ -1308,7 +1308,7 @@ What are the advantages and disadvantages of each of this plot?
 
 This plot requires the reader to know geography. It is also difficult to compare countries that are separated by distance. However, it does exhibit geographical effects along with time. It would be difficult to build a plot for the entire world.
 
-#### Clustering  
+### Clustering  
 
 We have been using visualization to find groupings of data. An alternative is to use hierarchical clustering. In this section we apply hierarchical clustering to our data.
 
@@ -1434,7 +1434,7 @@ clust_names[which(clus_res4==2),] %>% arrange(continent) %>%
 What are the advantages and disadvantages of clustering and listing clusters?
 What are some additional things you would suggest to do with clustering?  
 
-The clustering does the grouping on all variables instead of just two as in previous plots. The difficulty is selecting the number of groups, the simularity measure, and the grouping metrics. The analysis above, using a correlation metric appears to anwer our original questions better.
+The clustering does the grouping on all variables instead of just two as in previous plots. The difficulty is selecting the number of groups, the similarity measure, and the grouping metrics. The analysis above using a correlation metric appears to answer our original questions best
 
 A good way to visualize the clusters is with a choropleth plot. 
 
@@ -1460,7 +1460,7 @@ Load the library to read the json file.
 library(rgdal)
 ```  
 
-Load the data and put it into a dataframe.
+Load the data and put it into a data frame.
 
 ```{r}
 rgdal::getGDALVersionInfo()
@@ -1487,7 +1487,7 @@ world_map_names <- world_map %>% distinct(id)
 world_map_names<-levels(world_map_names[,1])
 ```
 
-Find the name in the world map dataframe. As an example, we use Yemen.
+Find the name in the world map data frame. As an example, we use Yemen.
 
 ```{r}
 world_map_names[grep("Yemen",world_map_names)]
@@ -1528,24 +1528,32 @@ gg <- gg + geom_map(map=my_world_map,fill='white',color='black',size=0.15) +expa
 
 gg + geom_map(map=my_world_map,data=clust_data,aes(map_id=country,fill=as.factor(clus_res4)),color="black",size=0.15) + scale_fill_manual(values=c("#fff7bc", "#fec44f","#d95f0e"),name="Cluster") + theme(legend.title=element_blank())
 ```
+#### Discussion Questions  
 
+1. What are the advantages and disadvantages of this plot?  
+2. What features are apparent in these plots?  
+
+The plot makes it is easy to see the clustering of countries. However, the reader must know geography as there are no popups with country information and no ability to zoom. There is no way to interact with the maps.  
+
+It is clear that the countries are getting more similar in terms of the variables we have selected as time has progressed. However, Africa and parts on Latin America still lag.
 
 ### Conclusion from Visualization  
 
-From these visualizations, we can see that most of the countries in the world have over time become similar in the metrics we have selected with the expection of a large portion of Africa.  In general there is an increase in life expectancy while there is a decrease in fertility.  
+From these visualizations, we can see that most of the countries in the world have, over time, become similar in the metrics we selected with the exception of a large portion of Africa.  In general there is an increase in life expectancy while there is a decrease in fertility.  
 
+At this point we have only done data visualization. We next add interactivity to the plots.
 
 ## Interactions with Visualizations  
 
-In \@ref(Viz2) we explored static visualizations of our data. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration. We will make use of the `R` implementation of the plotly javascript library, **plotly** [@R-bookdown].
+In \@ref(Viz2) we explored static visualizations of our data, sometimes referred to as dataviz. This endeavor was fruitful is that we discovered some important insights. However, we did reach some limitations. Going back to \@ref(fig:fig0), the use of interaction in our visual exploration will help overcome some of these limitations. This section implements interaction as the next step in the visual exploration. We will make use of the `R` implementation of the plotly javascript library, **plotly** [@R-plotly].
 
-### First Interactive Plots  
+### Interactive Data Summaries  
 
-We will start our exploration with the plots from Section \@ref(Viz2) and data from Section \@ref(DataCol2). As a reminder, some of the shortcomings we found in our static visualizations were the inability to handle time, not being able to identify data points, and not link data points together.
+We will start our exploration with the plots from Section \@ref(Viz2) and data from Section \@ref(DataCol2). As a reminder, some of the shortcomings we found in our static visualizations were the inability to handle time, not being able to identify data points, and no ability to link data points together across different plots.
 
 #### Final Data  
 
-We presented our data in Table\@ref(tab:final-tab) but the table only presented the first several rows.  Figure \@ref(fig:tab-it1) is an interactive table, note **knitr** and **bookdown** require the use of figure instead of table in the title for items from the package **DT** [@R-DT]. In this interactive table, we can change the number of rows and scroll to see the entire table.
+We presented our data in Table\@ref(tab:final-tab) but the table only contained the first several rows.  Figure \@ref(fig:tab-it1) is an interactive table, note **knitr** and **bookdown** require the use of the label `figure` instead of `table` in the title for items from the package **DT** [@R-DT]. In this interactive table, we can change the number of rows, sort, subset, and scroll.
 
 ```{r tab-it1,fig.cap="Interactive Table of Final Data",echo=FALSE}
 DT::datatable(gapminder_va,rownames=FALSE,options=list(scrollX=TRUE))
@@ -1556,7 +1564,7 @@ DT::datatable(gapminder_va,rownames=FALSE,options=list(scrollX=TRUE))
 What is the life expectancy of the United States in 1984?  
 Which country in Europe had the highest mortality in 1984?  
 
-#### Interactive Scatterplot Matrix  
+### Interactive Scatterplot Matrix  
 
 We started our visual exploration of our data with a matrix scatterplot. Let's use this same visualization, but now we will add the ability to interact with the plot. Since the plot will be too crowded with all the variables, we will drop population and density and we will remove the density plots on the diagonal and the correlation information in the upper portion of the plot. The density plots do not work well with the interaction software.
 
@@ -1577,7 +1585,7 @@ What are the countries that have low fertility and low life expectancy?
 Using the pan and zoom features, find the the life expectancy for the country with the largest fraction of the population above the age of 60.  
 What is the country in the previous question?  
 
-#### Interactive Parallel Coordianates Plot  
+### Interactive Parallel Coordianates Plot  
 
 We also used parallel coordinates plots in our visual analysis. In Figure \@ref(fig:fig-ip2) we have added some interactivity to this plot.
 
@@ -1769,3 +1777,41 @@ base %>%
 
 Choropleth map in plotly
 https://plot.ly/r/choropleth-maps/
+
+Choropleth map in leaflet
+https://www.r-graph-gallery.com/183-choropleth-map-with-leaflet/ 
+http://www.r-graph-gallery.com/168-load-a-shape-file-into-r/
+
+# -- Step1: Download the shapefile. Here I use world countries borders, found on http://thematicmapping.org/downloads/world_borders.php
+download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" , destfile="data/world_shape_file.zip")
+ 
+# -- Step2: Unzip this file. You can do it with R (as below), or clicking on the object you downloaded.
+system("unzip data/world_shape_file.zip")
+#  -- > You now have 4 files. One of these files is a .shp file! (TM_WORLD_BORDERS_SIMPL-0.3.shp)
+ 
+# Read this shape file with the rgdal library. 
+library(rgdal)
+my_spdf=readOGR( dsn= getwd() , layer="TM_WORLD_BORDERS_SIMPL-0.3") 
+# -- > Now you have a Spdf object (spatial polygon data frame). You can start doing maps!
+ 
+# Basic plot of this shape file:
+par(mar=c(0,0,0,0))
+plot(my_spdf, col="#f2f2f2", fill=TRUE, bg="skyblue", lwd=0.25, mar=rep(0,4), border=0 )
+
+# More data 
+https://rstudio.github.io/leaflet/choropleths.html
+https://github.com/simonepri/geo-maps/blob/master/info/countries-land.md#countries-land
+world2 <- geojsonio::geojson_read("data/countries-land-10km.geo.json", what = "sp")
+> class(world2)
+
+#Leaflet on my world sp dataframe from above
+https://rstudio.github.io/leaflet/map_widget.html
+````{r}
+m <- leaflet(world)
+m %>% addTiles()
+```
+
+m <- leaflet(world2)
+m %>% addPolygons()
+names(world)
+https://rstudio.github.io/leaflet/choropleths.html Is code to help with map

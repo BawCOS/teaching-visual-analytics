@@ -26,7 +26,7 @@
 <meta name="author" content="Bradley Warner">
 
 
-<meta name="date" content="2018-07-05">
+<meta name="date" content="2018-08-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -79,6 +79,13 @@
 <link href="libs/d3scatter-0.0.0/d3scatter.css" rel="stylesheet" />
 <script src="libs/d3scatter-0.0.0/d3scatter.js"></script>
 <script src="libs/d3scatter-binding-0.1.0/d3scatter.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.1/leaflet.js"></script>
 <link href="libs/ionrangeslider-2.1.2/css/ion.rangeSlider.css" rel="stylesheet" />
 <link href="libs/ionrangeslider-2.1.2/css/ion.rangeSlider.skinShiny.css" rel="stylesheet" />
 <script src="libs/ionrangeslider-2.1.2/js/ion.rangeSlider.min.js"></script>
@@ -203,28 +210,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.10" data-path="DataCol2.html"><a href="DataCol2.html#summary-of-data-collection"><i class="fa fa-check"></i><b>2.3.10</b> Summary of Data Collection</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="Viz2.html"><a href="Viz2.html"><i class="fa fa-check"></i><b>2.4</b> Visualization of Data</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="Viz2.html"><a href="Viz2.html#first-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> First Visualizations</a></li>
-<li class="chapter" data-level="2.4.2" data-path="Viz2.html"><a href="Viz2.html#next-visualizations---adding-years-and-focussing"><i class="fa fa-check"></i><b>2.4.2</b> Next Visualizations - Adding Years and Focussing</a></li>
-<li class="chapter" data-level="2.4.3" data-path="Viz2.html"><a href="Viz2.html#conclusion-from-visualization"><i class="fa fa-check"></i><b>2.4.3</b> Conclusion from Visualization</a></li>
+<li class="chapter" data-level="2.4.1" data-path="Viz2.html"><a href="Viz2.html#summary-visualizations"><i class="fa fa-check"></i><b>2.4.1</b> Summary Visualizations</a></li>
+<li class="chapter" data-level="2.4.2" data-path="Viz2.html"><a href="Viz2.html#adding-time-to-plots"><i class="fa fa-check"></i><b>2.4.2</b> Adding Time to Plots</a></li>
+<li class="chapter" data-level="2.4.3" data-path="Viz2.html"><a href="Viz2.html#using-different-variables"><i class="fa fa-check"></i><b>2.4.3</b> Using Different Variables</a></li>
+<li class="chapter" data-level="2.4.4" data-path="Viz2.html"><a href="Viz2.html#box-and-dot-plots"><i class="fa fa-check"></i><b>2.4.4</b> Box and Dot Plots</a></li>
+<li class="chapter" data-level="2.4.5" data-path="Viz2.html"><a href="Viz2.html#parallel-coordinates-plot"><i class="fa fa-check"></i><b>2.4.5</b> Parallel Coordinates Plot</a></li>
+<li class="chapter" data-level="2.4.6" data-path="Viz2.html"><a href="Viz2.html#time-series-plots"><i class="fa fa-check"></i><b>2.4.6</b> Time Series Plots</a></li>
+<li class="chapter" data-level="2.4.7" data-path="Viz2.html"><a href="Viz2.html#geofacets-plots"><i class="fa fa-check"></i><b>2.4.7</b> Geofacets Plots</a></li>
+<li class="chapter" data-level="2.4.8" data-path="Viz2.html"><a href="Viz2.html#clustering"><i class="fa fa-check"></i><b>2.4.8</b> Clustering</a></li>
+<li class="chapter" data-level="2.4.9" data-path="Viz2.html"><a href="Viz2.html#conclusion-from-visualization"><i class="fa fa-check"></i><b>2.4.9</b> Conclusion from Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html"><i class="fa fa-check"></i><b>2.5</b> Interactions with Visualizations</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#first-interactive-plots"><i class="fa fa-check"></i><b>2.5.1</b> First Interactive Plots</a></li>
-<li class="chapter" data-level="2.5.2" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#nest-gapminder-data-by-country"><i class="fa fa-check"></i><b>2.5.2</b> nest gapminder data by country</a></li>
-<li class="chapter" data-level="2.5.3" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#add-in-a-plot-column-with-map_plot"><i class="fa fa-check"></i><b>2.5.3</b> add in a plot column with map_plot</a></li>
-<li class="chapter" data-level="2.5.4" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#plot-it"><i class="fa fa-check"></i><b>2.5.4</b> plot it</a></li>
-<li class="chapter" data-level="2.5.5" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#dt-options-httpsrstudio.github.iodtoptions.html"><i class="fa fa-check"></i><b>2.5.5</b> DT options <a href="https://rstudio.github.io/DT/options.html" class="uri">https://rstudio.github.io/DT/options.html</a></a></li>
+<li class="chapter" data-level="2.5.1" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#interactive-data-summaries"><i class="fa fa-check"></i><b>2.5.1</b> Interactive Data Summaries</a></li>
+<li class="chapter" data-level="2.5.2" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#interactive-scatterplot-matrix"><i class="fa fa-check"></i><b>2.5.2</b> Interactive Scatterplot Matrix</a></li>
+<li class="chapter" data-level="2.5.3" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#interactive-parallel-coordianates-plot"><i class="fa fa-check"></i><b>2.5.3</b> Interactive Parallel Coordianates Plot</a></li>
+<li class="chapter" data-level="2.5.4" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#nest-gapminder-data-by-country"><i class="fa fa-check"></i><b>2.5.4</b> nest gapminder data by country</a></li>
+<li class="chapter" data-level="2.5.5" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#add-in-a-plot-column-with-map_plot"><i class="fa fa-check"></i><b>2.5.5</b> add in a plot column with map_plot</a></li>
+<li class="chapter" data-level="2.5.6" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#plot-it"><i class="fa fa-check"></i><b>2.5.6</b> plot it</a></li>
+<li class="chapter" data-level="2.5.7" data-path="interactions-with-visualizations.html"><a href="interactions-with-visualizations.html#dt-options-httpsrstudio.github.iodtoptions.html"><i class="fa fa-check"></i><b>2.5.7</b> DT options <a href="https://rstudio.github.io/DT/options.html" class="uri">https://rstudio.github.io/DT/options.html</a></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>3</b> Inference in Visual Analytics</a><ul>
-<li class="chapter" data-level="3.1" data-path="lesson-preparation-differences.html"><a href="lesson-preparation-differences.html"><i class="fa fa-check"></i><b>3.1</b> Lesson Preparation Differences</a></li>
+<li class="chapter" data-level="3" data-path="step1-download-the-shapefile-here-i-use-world-countries-borders-found-on-httpthematicmapping-orgdownloadsworld-borders-php.html"><a href="step1-download-the-shapefile-here-i-use-world-countries-borders-found-on-httpthematicmapping-orgdownloadsworld-borders-php.html"><i class="fa fa-check"></i><b>3</b> – Step1: Download the shapefile. Here I use world countries borders, found on <a href="http://thematicmapping.org/downloads/world_borders.php" class="uri">http://thematicmapping.org/downloads/world_borders.php</a></a></li>
+<li class="chapter" data-level="4" data-path="step2-unzip-this-file-you-can-do-it-with-r-as-below-or-clicking-on-the-object-you-downloaded-.html"><a href="step2-unzip-this-file-you-can-do-it-with-r-as-below-or-clicking-on-the-object-you-downloaded-.html"><i class="fa fa-check"></i><b>4</b> – Step2: Unzip this file. You can do it with R (as below), or clicking on the object you downloaded.</a></li>
+<li class="chapter" data-level="5" data-path="read-this-shape-file-with-the-rgdal-library-.html"><a href="read-this-shape-file-with-the-rgdal-library-.html"><i class="fa fa-check"></i><b>5</b> Read this shape file with the rgdal library.</a></li>
+<li class="chapter" data-level="6" data-path="basic-plot-of-this-shape-file.html"><a href="basic-plot-of-this-shape-file.html"><i class="fa fa-check"></i><b>6</b> Basic plot of this shape file:</a></li>
+<li class="chapter" data-level="7" data-path="more-data.html"><a href="more-data.html"><i class="fa fa-check"></i><b>7</b> More data</a></li>
+<li class="chapter" data-level="8" data-path="leaflet-on-my-world-sp-dataframe-from-above.html"><a href="leaflet-on-my-world-sp-dataframe-from-above.html"><i class="fa fa-check"></i><b>8</b> Leaflet on my world sp dataframe from above</a></li>
+<li class="chapter" data-level="9" data-path="Chpt3.html"><a href="Chpt3.html"><i class="fa fa-check"></i><b>9</b> Inference in Visual Analytics</a><ul>
+<li class="chapter" data-level="9.1" data-path="lesson-preparation-differences.html"><a href="lesson-preparation-differences.html"><i class="fa fa-check"></i><b>9.1</b> Lesson Preparation Differences</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>4</b> Forecasting and Prediction</a><ul>
-<li class="chapter" data-level="4.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html"><i class="fa fa-check"></i><b>4.1</b> Lesson Preparation</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#objectives-2"><i class="fa fa-check"></i><b>4.1.1</b> Objectives:</a></li>
-<li class="chapter" data-level="4.1.2" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#preparation-2"><i class="fa fa-check"></i><b>4.1.2</b> Preparation</a></li>
+<li class="chapter" data-level="10" data-path="Chpt4.html"><a href="Chpt4.html"><i class="fa fa-check"></i><b>10</b> Forecasting and Prediction</a><ul>
+<li class="chapter" data-level="10.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html"><i class="fa fa-check"></i><b>10.1</b> Lesson Preparation</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#objectives-2"><i class="fa fa-check"></i><b>10.1.1</b> Objectives:</a></li>
+<li class="chapter" data-level="10.1.2" data-path="lesson-preparation-2.html"><a href="lesson-preparation-2.html#preparation-2"><i class="fa fa-check"></i><b>10.1.2</b> Preparation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>5</b> Case Study</a></li>
+<li class="chapter" data-level="11" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>11</b> Case Study</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="AppA.html"><a href="AppA.html"><i class="fa fa-check"></i><b>A</b> Lesson Handouts</a></li>
 <li class="chapter" data-level="B" data-path="AppB.html"><a href="AppB.html"><i class="fa fa-check"></i><b>B</b> Project</a><ul>
@@ -253,8 +274,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="Viz2" class="section level2">
 <h2><span class="header-section-number">2.4</span> Visualization of Data</h2>
 <p>In the next phase of our exploratory data analysis we will be visualizing the gapminder data. In Section <a href="Viz1.html#Viz1">1.4</a>, we discussed some of the ideas of visualization. As a first step, we will be generating a visualization to help us understand the content of the data. This step is important in exploration as it often leads to insights into the next step of the analysis.</p>
-<div id="first-visualizations" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> First Visualizations</h3>
+<div id="summary-visualizations" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Summary Visualizations</h3>
 <p>In the first visualization we attempt to understand the variables and their relationship to each other. There are nine total variables. The first three variables, country, continent, and year are different from the last six and will have to be dealt with in a different manner. Country and continent are label variables. Year is a discrete count variable. The other six variables are continuous and can be plotted against each other on a scatterplot.</p>
 <div id="discussion-ideas-15" class="section level4">
 <h4><span class="header-section-number">2.4.1.1</span> Discussion Ideas:</h4>
@@ -585,8 +606,8 @@ What is the next step?</p>
 <p>The next step is to bring in the variable year. We should focus on two variables. The pairs that show promise are above 60 and fertility or mortality and fertility. We can bring population or density into the plots as well.</p>
 </div>
 </div>
-<div id="next-visualizations---adding-years-and-focussing" class="section level3">
-<h3><span class="header-section-number">2.4.2</span> Next Visualizations - Adding Years and Focussing</h3>
+<div id="adding-time-to-plots" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Adding Time to Plots</h3>
 <p>To understand the progression of countries over time, look at different years. In the previous section we looked only at the year 1950. In this section we will address different years.</p>
 <div id="adding-the-year-2015" class="section level4">
 <h4><span class="header-section-number">2.4.2.1</span> Adding the Year 2015</h4>
@@ -702,8 +723,9 @@ Figure 2.8: Side by Side Scatterplots for 1950, 1982, and 2015 with Population D
 <p>The shift from 1950 to 1982 was mostly an increase in life expectancy with a moderate decrease in fertility. although for some of the African countries, the fertility increased. The period from 1982 to 2015 saw a big decrease in fertility with a minor increase in life expectancy.</p>
 <p>We could incorporate year by have a slider function to select year or another option is to animate the plot by year.</p>
 </div>
-<div id="using-the-percentage-of-the-population-above-60" class="section level4">
-<h4><span class="header-section-number">2.4.2.9</span> Using the Percentage of the Population Above 60</h4>
+</div>
+<div id="using-different-variables" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Using Different Variables</h3>
 <p>In our initial exploration, we also considered the variable population percentage above the age of 60.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1982</span> <span class="op">|</span>year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">y=</span>above_<span class="dv">60</span>,<span class="dt">x=</span>fertility,<span class="dt">color=</span>continent,<span class="dt">size=</span>density)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">7</span>) <span class="op">+</span>
@@ -718,17 +740,17 @@ Figure 2.8: Side by Side Scatterplots for 1950, 1982, and 2015 with Population D
 Figure 2.9: Side by Side Scatterplots of Fertility and Percentage of Population above 60 for 1950, 1982, and 2015 with Population Density
 </p>
 </div>
-</div>
 <div id="discusssion-ideas" class="section level4">
-<h4><span class="header-section-number">2.4.2.10</span> Discusssion Ideas</h4>
+<h4><span class="header-section-number">2.4.3.1</span> Discusssion Ideas</h4>
 <p>From Figure <a href="Viz2.html#fig:fig-sbs5">2.9</a> answer the following questions:</p>
 <p>What new insights are gained from this plot?<br />
 What are some of the trends?</p>
 <p>Again, we see that in 1950 Europe is different from the other continents with a low fertility rate and a higher percentage of the population over 60. We do not see a gain in the percentage of elderly population in Africa over the entire time span. This could be due to the high fertility rate. In some sense, the percentage of the population over 60 incorporates both life expectancy and fertility. The fertility is going down in Africa but the percentage of the population over 60 is not changing. The continent with the biggest change over the 65 years is Asia. Again, it is hard to identify individual countries but we see an increase in population density. The change in density in Europe is not significant.</p>
 <p>We need the capability to brush and identify. In 2015 one Asian country has high percentage of population above 60.</p>
 </div>
-<div id="box-and-dot-plots" class="section level4">
-<h4><span class="header-section-number">2.4.2.11</span> Box and Dot Plots</h4>
+</div>
+<div id="box-and-dot-plots" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> Box and Dot Plots</h3>
 <p>An alternative way to view the data is with a dotplot and boxplot. Start with a dotplot where the country is on the vertical axis and life expectancy is on the horizontal axis. Figure <a href="Viz2.html#fig:fig-dp1">2.10</a> gives the result. The vertical axis is too crowded and not readable even though we reduced the default font size. Notice also how the countries within continents are arranged in decreasing life expectancy.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder_va <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1982</span> <span class="op">|</span>year<span class="op">==</span><span class="dv">2015</span> <span class="op">|</span><span class="st"> </span>year<span class="op">==</span><span class="dv">1950</span>),<span class="kw">aes</span>(<span class="dt">x=</span>life_exp,<span class="dt">y=</span><span class="kw">reorder</span>(country,life_exp),<span class="dt">color=</span><span class="kw">factor</span>(year),<span class="dt">size=</span>density)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
@@ -786,9 +808,8 @@ Figure 2.12: Matrix Plot of Life Expectancy for the Years 1950, 1982, and 2015
 Figure 2.13: Boxplots of Life Expectancy for Each Continent for the Years 1950 and 2015
 </p>
 </div>
-</div>
 <div id="discussion-ideas-21" class="section level4">
-<h4><span class="header-section-number">2.4.2.12</span> Discussion Ideas</h4>
+<h4><span class="header-section-number">2.4.4.1</span> Discussion Ideas</h4>
 <p>What are the advantages of the boxplots versus the dotplots?<br />
 What trends do we see in the boxplots?<br />
 How can we deal with the variable year in a better manner?<br />
@@ -798,8 +819,9 @@ What are some ways to address the issue of the crowded vertical axes in the dotp
 <p>The side by side boxplots has done a good job of accounting for years but we may need to use an animation to explore all years.</p>
 <p>The crowded axes is difficult. We may want to sample countries from each quartile to reduce the number of countries on each axes. Another approach is to offset the labels slightly but this has a small chance of making a difference.</p>
 </div>
-<div id="parallel-coordinates-plot" class="section level4">
-<h4><span class="header-section-number">2.4.2.13</span> Parallel Coordinates Plot</h4>
+</div>
+<div id="parallel-coordinates-plot" class="section level3">
+<h3><span class="header-section-number">2.4.5</span> Parallel Coordinates Plot</h3>
 <p>Another type of plot for our data is a parallel coordinates plot. This plot scales the data first so that the size of the variables will not dominate the plot. We will also use the data with density and population on a logarithmic scale. The order of the variables is key as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggparcoord</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">1950</span> <span class="op">|</span><span class="st"> </span>
 <span class="st">  </span>year<span class="op">==</span><span class="dv">2015</span>),<span class="dt">columns=</span><span class="dv">4</span><span class="op">:</span><span class="dv">9</span>,<span class="dt">group=</span><span class="st">&#39;continent&#39;</span>,
@@ -813,9 +835,8 @@ What are some ways to address the issue of the crowded vertical axes in the dotp
 Figure 2.14: Parallel Coordinate Plot for 1950 and 2015. Population and Density are on a Log Scale.
 </p>
 </div>
-</div>
 <div id="discussion-ideas-22" class="section level4">
-<h4><span class="header-section-number">2.4.2.14</span> Discussion Ideas</h4>
+<h4><span class="header-section-number">2.4.5.1</span> Discussion Ideas</h4>
 <p>Using Figure <a href="Viz2.html#fig:fig-pc1">2.14</a> answer the following questions:</p>
 <p>Do population and population density aid? What do we observe over the two time periods? What order would you use for the variables and why?</p>
 <p>We put fertility and mortality first since Europe was lower on both of the metrics in 1950 than the other continents. We place population and population density at the end since there was no discernible pattern.</p>
@@ -835,8 +856,9 @@ Figure 2.15: Parallel Coordinate Plot for 1950 and 2015. Population and Density 
 </p>
 </div>
 </div>
-<div id="time-series" class="section level4">
-<h4><span class="header-section-number">2.4.2.15</span> Time Series</h4>
+</div>
+<div id="time-series-plots" class="section level3">
+<h3><span class="header-section-number">2.4.6</span> Time Series Plots</h3>
 <p>Next we will plot year on the horizontal axis and one of the other variables of interest on the vertical axis. Figure <a href="Viz2.html#fig:fig-ts1">2.16</a> is an example. This has a different line for each country and as a result contains too much information. To help with this problem, could just summarize each continent instead.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>fertility,<span class="dt">group=</span>country,<span class="dt">color=</span>continent)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha=</span><span class="fl">0.7</span>)</code></pre></div>
@@ -872,9 +894,8 @@ Figure 2.17: Median Fertility versus Year for each Continent
 Figure 2.18: Median Fertility and Median Life Expectancy versus Year for each Continent
 </p>
 </div>
-</div>
 <div id="discussion-ideas-23" class="section level4">
-<h4><span class="header-section-number">2.4.2.16</span> Discussion Ideas</h4>
+<h4><span class="header-section-number">2.4.6.1</span> Discussion Ideas</h4>
 <p>What are the advantages and disadvantages of each of the plots?<br />
 How can we account for country to country variation within a continent?<br />
 What are some unusual insights?</p>
@@ -894,9 +915,10 @@ Figure 2.19: Median Fertility with Standard Deviation as line width for each Con
 </p>
 </div>
 </div>
-<div id="geofacets" class="section level4">
-<h4><span class="header-section-number">2.4.2.17</span> Geofacets</h4>
-<p>Another approach to summarizing the data is to use <a href="http://ryanhafen.com/blog/geofacet">geofaceting</a>. The plots of interest are put in geographical relationship to each other. Figure <a href="#fig:fig-ts5"><strong>??</strong></a> is an example. Here we look only at the European continent as an example, this is because the European grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package <strong>Bookdown</strong> was not able to render the graphic so we had export the image from <code>R</code> and then import into this document.</p>
+</div>
+<div id="geofacets-plots" class="section level3">
+<h3><span class="header-section-number">2.4.7</span> Geofacets Plots</h3>
+<p>Another approach to summarizing the data is to use <a href="http://ryanhafen.com/blog/geofacet">geofaceting</a>. The plots of interest are put in geographical relationship to each other. Figure <a href="#fig:fig-ts5"><strong>??</strong></a> is an example. Here we look only at the European continent as an example, this is because the European grid map already exists. For each country we have a plot of life expectancy versus time. We show the code below but the package <strong>Bookdown</strong> was not able to render the graphic so we had export the image from a local instance of <code>R</code> and then import into this document.</p>
 <pre><code># Redefine the grid to include the countries we have in our data
 my_eu_grid&lt;-eu_grid1[c(-6,-13,-14,-15,-16,-18,-25),]</code></pre>
 <pre><code>ggplot(gapminder_va_log, aes(year, life_exp)) +
@@ -906,14 +928,14 @@ my_eu_grid&lt;-eu_grid1[c(-6,-13,-14,-15,-16,-18,-25),]</code></pre>
     ylab(&quot;Life Expectancy&quot;) +
     theme_bw()</code></pre>
 <p><img src="images/Geofact.png" width="706" /></p>
-</div>
 <div id="discussion-ideas-24" class="section level4">
-<h4><span class="header-section-number">2.4.2.18</span> Discussion Ideas</h4>
+<h4><span class="header-section-number">2.4.7.1</span> Discussion Ideas</h4>
 <p>What are the advantages and disadvantages of each of this plot?</p>
 <p>This plot requires the reader to know geography. It is also difficult to compare countries that are separated by distance. However, it does exhibit geographical effects along with time. It would be difficult to build a plot for the entire world.</p>
 </div>
-<div id="clustering" class="section level4">
-<h4><span class="header-section-number">2.4.2.19</span> Clustering</h4>
+</div>
+<div id="clustering" class="section level3">
+<h3><span class="header-section-number">2.4.8</span> Clustering</h3>
 <p>We have been using visualization to find groupings of data. An alternative is to use hierarchical clustering. In this section we apply hierarchical clustering to our data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_clus &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(gapminder_va_log <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">1950</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">              </span><span class="kw">select</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">9</span>)))
@@ -1593,15 +1615,14 @@ gap_clus4 &lt;-<span class="st"> </span><span class="kw">hclust</span>(dd)
 </tr>
 </tbody>
 </table>
-</div>
 <div id="discussion-ideas-25" class="section level4">
-<h4><span class="header-section-number">2.4.2.20</span> Discussion Ideas</h4>
+<h4><span class="header-section-number">2.4.8.1</span> Discussion Ideas</h4>
 <p>What are the advantages and disadvantages of clustering and listing clusters? What are some additional things you would suggest to do with clustering?</p>
-<p>The clustering does the grouping on all variables instead of just two as in previous plots. The difficulty is selecting the number of groups, the simularity measure, and the grouping metrics. The analysis above, using a correlation metric appears to anwer our original questions better.</p>
+<p>The clustering does the grouping on all variables instead of just two as in previous plots. The difficulty is selecting the number of groups, the similarity measure, and the grouping metrics. The analysis above using a correlation metric appears to answer our original questions best</p>
 <p>A good way to visualize the clusters is with a choropleth plot.</p>
 </div>
 <div id="choropleth-plot" class="section level4">
-<h4><span class="header-section-number">2.4.2.21</span> Choropleth Plot</h4>
+<h4><span class="header-section-number">2.4.8.2</span> Choropleth Plot</h4>
 <p>The code for this section was adopted from this <a href="https://rud.is/b/2015/07/09/faceted-world-population-by-income-choropleths-in-ggplot/">website</a></p>
 <p>The following code gets the data. We have already done this and saved it in the data folder associated with this project.</p>
 <pre><code>library(httr) 
@@ -1623,7 +1644,7 @@ try(invisible(GET(&quot;http://www.pewglobal.org/wp-content/lib/js/world-geo.jso
 ##  Loaded PROJ.4 runtime: Rel. 4.9.3, 15 August 2016, [PJ_VERSION: 493]
 ##  Path to PROJ.4 shared files: C:/Users/Brad.Warner/Documents/R/win-library/3.4/rgdal/proj
 ##  Linking to sp version: 1.3-1</code></pre>
-<p>Load the data and put it into a dataframe.</p>
+<p>Load the data and put it into a data frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rgdal<span class="op">::</span><span class="kw">getGDALVersionInfo</span>()</code></pre></div>
 <pre><code>## [1] &quot;GDAL 2.2.3, released 2017/11/20&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">world &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">&quot;data/world-geo.json&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;world-geo&quot;</span>)</code></pre></div>
@@ -1649,7 +1670,7 @@ clust_data[<span class="op">!</span>(clust_data[,<span class="dv">1</span>] <spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_world_map &lt;-<span class="st"> </span>world_map
 world_map_names &lt;-<span class="st"> </span>world_map <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(id)
 world_map_names&lt;-<span class="kw">levels</span>(world_map_names[,<span class="dv">1</span>])</code></pre></div>
-<p>Find the name in the world map dataframe. As an example, we use Yemen.</p>
+<p>Find the name in the world map data frame. As an example, we use Yemen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">world_map_names[<span class="kw">grep</span>(<span class="st">&quot;Yemen&quot;</span>,world_map_names)]</code></pre></div>
 <pre><code>## [1] &quot;Yemen&quot;</code></pre>
 <p>Fix all the names.</p>
@@ -1685,10 +1706,21 @@ Figure 2.21: Choropleth for Clustering of Countries in 2015
 </p>
 </div>
 </div>
+<div id="discussion-questions-2" class="section level4">
+<h4><span class="header-section-number">2.4.8.3</span> Discussion Questions</h4>
+<ol style="list-style-type: decimal">
+<li>What are the advantages and disadvantages of this plot?<br />
+</li>
+<li>What features are apparent in these plots?</li>
+</ol>
+<p>The plot makes it is easy to see the clustering of countries. However, the reader must know geography as there are no popups with country information and no ability to zoom. There is no way to interact with the maps.</p>
+<p>It is clear that the countries are getting more similar in terms of the variables we have selected as time has progressed. However, Africa and parts on Latin America still lag.</p>
+</div>
 </div>
 <div id="conclusion-from-visualization" class="section level3">
-<h3><span class="header-section-number">2.4.3</span> Conclusion from Visualization</h3>
-<p>From these visualizations, we can see that most of the countries in the world have over time become similar in the metrics we have selected with the expection of a large portion of Africa. In general there is an increase in life expectancy while there is a decrease in fertility.</p>
+<h3><span class="header-section-number">2.4.9</span> Conclusion from Visualization</h3>
+<p>From these visualizations, we can see that most of the countries in the world have, over time, become similar in the metrics we selected with the exception of a large portion of Africa. In general there is an increase in life expectancy while there is a decrease in fertility.</p>
+<p>At this point we have only done data visualization. We next add interactivity to the plots.</p>
 </div>
 </div>
             </section>
